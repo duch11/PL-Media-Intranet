@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<!--Thymeleaf xlmns-->
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Template</title>
+
+  <!--Mobil integration-->
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+  <!-- BOOTSTRAP MaxCDN Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+
+</head>
+<body>
+
+<!--Bootstrap container class er vigtig for at det virker, giver en lille margen ud til siderne
+i højre og venstre side-->
+<div class="container">
+
+  <div class="row">
+    <div th:replace="fragments/header :: header"/>
+  </div>
+
+  <!--For at Bootstrap grid system virker, her er en row.-->
+  <div class="row">
+
+    <!-- Bootstrap grid, her er det kolonner man indstiller, der kan max være 12
+    i dette eksempel er kolonnen med thymeleaf placeret i midten med 33,34% bredde (4/12)
+    col-lg-4 "kolonne-nårViewPortErStor-fylder4" -->
+    <div class="col-lg-8 col-lg-offset-2 align-middle">
+
+      <!--text statement-->
+      <h1 th:text="'Hej verden fra thymeleaf!'" class="text-center">Hej verden, uden thymeleaf!</h1>
+
+      <!--Thymeleaf tests-->
+      <!--if statements-->
+      <div th:if="test" class="text-center">
+        <h1>th:if="test" virker</h1>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!--JAVASCRIPT (skal være til sidst for gode loading tider)-->
+<!-- BOOTSTRAP MaxCDN jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- BOOTSTRAP MaxCDN Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>
