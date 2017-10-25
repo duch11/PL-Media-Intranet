@@ -1,5 +1,7 @@
 package plmedia.intranet.model;
 
-public class Employee {
+public class Employee extends User {
+
+  private int wingID;
 
 }
