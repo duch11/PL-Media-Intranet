@@ -8,10 +8,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class HomeController {
 
-  @RequestMapping(value = {"/", ""}, method = RequestMethod.GET)
+  @RequestMapping(value = {"/template"}, method = RequestMethod.GET)
   public String test(Model model) {
     model.addAttribute("test");
     return "template";
   }
+  @RequestMapping(value = {"/", ""}, method = RequestMethod.GET)
+  public String tests(Model model) {
+    return "adminpanel";
+  }
+
 
 }
