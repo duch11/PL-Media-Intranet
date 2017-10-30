@@ -13,10 +13,16 @@ public class HomeController {
     model.addAttribute("test");
     return "template";
   }
-  @RequestMapping(value = {"/", ""}, method = RequestMethod.GET)
-  public String tests(Model model) {
+  @RequestMapping(value = {"/", "","/adminpanel"}, method = RequestMethod.GET)
+  public String adminPanel(Model model) {
     return "adminpanel";
   }
+
+  @RequestMapping(value = {"/details"}, method = RequestMethod.GET)
+  public String details(Model model) {
+    return "detailsview";
+  }
+
 
 
 }
