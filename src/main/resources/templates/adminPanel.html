@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!--Thymeleaf xlmns-->
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Template</title>
+
+  <!--Mobil integration-->
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+  <!-- BOOTSTRAP MaxCDN Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+
+</head>
+<body>
+
+<!--Bootstrap container class er vigtig for at det virker, giver en lille margen ud til siderne
+i højre og venstre side-->
+<div class="container">
+
+  <div class="row">
+    <div th:replace="fragments/header :: header"/>
+  </div>
+
+  <!--For at Bootstrap grid system virker, her er en row.-->
+  <div class="row">
+    <div class="col-lg-3" style="overflow-y: auto; max-height: 200px;">
+      <ul>
+        <li>ADMIN</li>
+        <li>Medarbejder</li>
+        <li>Gæste-arbejder</li>
+        <li>Gæste-arbejder</li>
+      </ul>
+    </div>
+    <div class="col-lg-6" style="overflow-y: auto; max-height: 200px;">
+      <ul>
+        <li>Bo</li>
+        <li>Lis</li>
+        <li>Adolf</li>
+        <li>Karsten</li>
+        <li>Lisbeth</li>
+        <li>Tine</li>
+        <li>Else</li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-6">
+      <ul>
+        <li>Permission to launch</li>
+        <li>Can kill children</li>
+        <li>Can log in</li>
+        <li>Can buy candy</li>
+        <li>Can buy diamonds</li>
+        <li>Can eat fruit</li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <a class="btn , pull-right">Save</a>
+  </div>
+</div>
+
+<!--JAVASCRIPT (skal være til sidst for gode loading tider)-->
+<!-- BOOTSTRAP MaxCDN jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- BOOTSTRAP MaxCDN Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>
