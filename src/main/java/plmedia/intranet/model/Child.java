@@ -57,11 +57,11 @@ public class Child {
   }
 
   public int getchildId() {
-    return Id;
+    return childId;
   }
 
   public void setchildId(int id) {
-    Id = id;
+    childId = id;
   }
 
   public String getAddress() {
@@ -72,11 +72,11 @@ public class Child {
     this.address = address;
   }
 
-  public String getWingId() {
+  public int getWingId() {
     return wingId;
   }
 
-  public void setWingId(String wingId) {
+  public void setWingId(int wingId) {
     this.wingId = wingId;
   }
 
