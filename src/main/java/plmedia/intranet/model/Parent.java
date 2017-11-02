@@ -4,6 +4,6 @@ import java.util.ArrayList;
 
 public class Parent extends User {
 
-private ArrayList<Child> children;
+private ArrayList<String> child;
 
 }

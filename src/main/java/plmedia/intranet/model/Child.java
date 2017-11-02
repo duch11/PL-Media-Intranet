@@ -9,21 +9,21 @@ public class Child {
   private String firstName;
   private String lastName;
   private Date birthday;
-  private int Id;
+  private int childId;
   private String address;
-  private String wingId;
+  private int wingId;
   private int nap;
   private String trustedPickupPerson;
   private String otherInfo;
   private ArrayList<Parent> parents;
 
-  public Child(String firstName, String lastName, Date birthday, int id, String address,
-      String wingId, int nap, String trustedPickupPerson, String otherInfo,
+  public Child(String firstName, String lastName, Date birthday, int childId, String address,
+      int wingId, int nap, String trustedPickupPerson, String otherInfo,
       ArrayList<Parent> parents) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.birthday = birthday;
-    this.Id = id;
+    this.childId = childId;
     this.address = address;
     this.wingId = wingId;
     this.nap = nap;
@@ -56,11 +56,11 @@ public class Child {
     this.birthday = birthday;
   }
 
-  public int getId() {
+  public int getchildId() {
     return Id;
   }
 
-  public void setId(int id) {
+  public void setchildId(int id) {
     Id = id;
   }
 

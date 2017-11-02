@@ -12,20 +12,18 @@ public abstract class User {
   private String firstName;
   private String lastName;
   private ArrayList<String> permissions;
-  private String group;
 
   public User() {
   }
 
   public User(int userId, String password, String userEmail, String firstName,
-      String lastName, ArrayList<String> permissions, String group) {
+      String lastName, ArrayList<String> permissions) {
     this.userId = userId;
     this.password = password;
     this.userEmail = userEmail;
     this.firstName = firstName;
     this.lastName = lastName;
     this.permissions = permissions;
-    this.group = group;
   }
 
   public int getUserId() {
@@ -76,11 +74,4 @@ public abstract class User {
     this.permissions = permissions;
   }
 
-  public String getGroup() {
-    return group;
-  }
-
-  public void setGroup(String group) {
-    this.group = group;
-  }
 }
