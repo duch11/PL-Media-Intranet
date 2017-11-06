@@ -35,34 +35,47 @@ i højre og venstre side-->
     <br></br>
   </div>
 
+  <!-- MENUER -->
   <div class="row">
     <div class="col-md-2" style="overflow-y: auto;">
+
+      <!--Employee MENU-->
       <div class="row">
         <div class="list-group">
-          <a href="#" class="list-group-item active">Admins <span class="badge">8</span></a>
-          <a href="#" class="list-group-item">Employees <span class="badge">15</span></a>
-          <a href="#" class="list-group-item">Interns <span class="badge">2</span></a>
+          <a href="/admin/employees" class="list-group-item active">Administrator/Leder <span class="badge">8</span></a>
+          <a th:each="group : ${employeegroups}" href="/admin/employees?groupID=" th:attrappend="href=${group.getGroupID()}" class="list-group-item active">thymeleaf Employee Group <span class="badge">8</span></a>
+
+          <a href="/admin/employees?groupID=1" class="list-group-item">Ansatte <span class="badge">15</span></a>
+          <a href="/admin/employees?groupID=2" class="list-group-item">Praktikanter <span class="badge">2</span></a>
         </div>
       </div>
+
+      <!--Parent/Children MENU-->
       <div class="row">
         <div class="list-group">
-          <a href="#" class="list-group-item">Children <span class="badge">67</span></a>
-          <a href="#" class="list-group-item">Parents <span class="badge">111</span></a>
-          <a href="#" class="list-group-item">Legal Guardians <span class="badge">10</span></a>
-          <a href="#" class="list-group-item">Relatives <span class="badge">210</span></a>
+          <a href="/admin/children" class="list-group-item">Børn <span class="badge">67</span></a>
+          <a href="/admin/parents" class="list-group-item">Forældre <span class="badge">111</span></a>
         </div>
       </div>
     </div>
 
+
+    <!--USER/PARENT/CHILD LISTE-->
     <div class="col-md-10" style="overflow-y: auto; max-height: 40em;">
       <div class="list-group" style="max-height: 400px">
-        <a href="#" class="list-group-item">
-          Bo
-        </a>
-        <a href="#" class="list-group-item">Lis</a>
-        <a href="/details" class="list-group-item active">
+
+        <!-- Generering af listen, baseret på hvad templaten bliver fodret med -->
+        <a th:each="employee : ${employees}" href="/admin/details?user=" th:text="${employee.getName()}" th:attrappend="href=${employee.getUserID()}" class="list-group-item">Thymeleaf Employee</a>
+        <a th:each="parent : ${parents}"     href="/admin/details?user=" th:text="${parent.getName()}"   th:attrappend="href=${parent.getParentID()}" class="list-group-item">Thymeleaf Parent</a>
+        <a th:each="child : ${children}"     href="/admin/details?user=" th:text="${child.getName()}"    th:attrappend="href=${child.getChildID()}"   class="list-group-item">Thymeleaf Child</a>
+
+        <a href="/admin/details?user=32122" class="list-group-item active">
           Kurt (Kan klikkes på)
         </a>
+
+        <!--BOGUS USERS.. KAN SLETTES NÅR FÆRDIG-->
+        <a href="#" class="list-group-item">Bo</a>
+        <a href="#" class="list-group-item">Lis</a>
         <a href="#" class="list-group-item">Hans</a>
         <a href="#" class="list-group-item">Inge</a>
         <a href="#" class="list-group-item">Else</a>
