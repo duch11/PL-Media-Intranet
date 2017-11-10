@@ -1,9 +1,9 @@
-package plmedia.intranet.repository;
+package plmedia.intranet.dao.repository;
 
 import java.util.ArrayList;
 import plmedia.intranet.model.*;
 
-public interface IUserRepo {
+public interface IUserRepo<T> {
 
     /**
      *
@@ -20,6 +20,18 @@ public interface IUserRepo {
      * @return
      */
     public int Create(String firstName, String lastName, String password, String email, ArrayList<String> permissions[]);
+
+    /**
+     * Updates the user
+     * @return
+     */
+    public int Update(T t);
+
+    /**
+     * Deletes the user
+     * @return
+     */
+    public int Delete(T t);
 
 
     /**

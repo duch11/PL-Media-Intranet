@@ -1,4 +1,4 @@
-package plmedia.intranet.repository;
+package plmedia.intranet.dao.repository;
 
 import plmedia.intranet.model.Parent;
 
@@ -6,7 +6,7 @@ import plmedia.intranet.model.Parent;
  * @author Tobias Thomsen
  */
 
-public class ParentRepo extends UserRepo {
+public class ParentRepo<T> extends UserRepo {
 
     /**
      * Updates parent
