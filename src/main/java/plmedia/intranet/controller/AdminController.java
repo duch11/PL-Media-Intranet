@@ -1,6 +1,9 @@
 package plmedia.intranet.controller;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +23,14 @@ public class AdminController {
   */
 
   public String showAdminPanel(Model model) {
+
+    //JEG VED ENDNU IKKE, men det her giver mig nuværende loggede ind bruger, det er nok til at finde denne bruger i databasen, til at vise kun ting for ham!
+    //TODO: gør noget ved det.
+    Authentication authentication = SecurityContextHolder.getContext().
+            getAuthentication();
+    String name = authentication.getName();
+    model.addAttribute("test", name);
+
     return "adminpanel";
   }
 

@@ -63,6 +63,7 @@ i højre og venstre side-->
     <!--USER/PARENT/CHILD LISTE-->
     <div class="col-md-10" style="overflow-y: auto; max-height: 40em;">
       <div class="list-group" style="max-height: 400px">
+        <h1 th:text="${test}"></h1>
 
         <!-- Generering af listen, baseret på hvad templaten bliver fodret med -->
         <a th:each="employee : ${employees}" href="/admin/details?user=" th:text="${employee.getName()}" th:attrappend="href=${employee.getUserID()}" class="list-group-item">Thymeleaf Employee</a>
