@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<!--Thymeleaf xlmns-->
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Template</title>
+
+  <!--Mobil integration-->
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+  <!-- BOOTSTRAP MaxCDN Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+
+</head>
+<body>
+
+<!--Bootstrap container class er vigtig for at det virker, giver en lille margen ud til siderne
+i højre og venstre side-->
+<div class="container">
+
+  <div class="row">
+    <div th:replace="fragments/header :: header"/>
+  </div>
+
+  <!--For at Bootstrap grid system virker, her er en row.-->
+  <div class="row">
+
+
+
+    <!--USER/PARENT/CHILD LISTE-->
+    <div class="col-md-10" style="overflow-y: auto; max-height: 40em;">
+      <div class="list-group" style="max-height: 400px">
+
+        <!-- Generering af listen, baseret på hvad templaten bliver fodret med -->
+        <a th:each="employee : ${employees}" href="/admin/details?user=" th:text="${employee.getName()}" th:attrappend="href=${employee.getUserID()}" class="list-group-item">Thymeleaf Employee</a>
+        <a th:each="parent : ${parents}"     href="/admin/details?user=" th:text="${parent.getName()}"   th:attrappend="href=${parent.getParentID()}" class="list-group-item">Thymeleaf Parent</a>
+        <a th:each="child : ${children}"     href="/admin/details?user=" th:text="${child.getName()}"    th:attrappend="href=${child.getChildID()}"   class="list-group-item">Thymeleaf Child</a>
+
+        <a href="parent?child=32123" class="list-group-item active">
+          Oliver (Kan klikkes på)
+        </a>
+
+        <!--BOGUS USERS.. KAN SLETTES NÅR FÆRDIG-->
+        <a href="#" class="list-group-item">Karla Hansen</a>
+        <a href="#" class="list-group-item">Oscar de Fleur</a>
+        <a href="#" class="list-group-item">Alexander Lind Nissen</a>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--JAVASCRIPT (skal være til sidst for gode loading tider)-->
+<!-- BOOTSTRAP MaxCDN jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- BOOTSTRAP MaxCDN Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>

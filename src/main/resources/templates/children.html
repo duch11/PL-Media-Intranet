@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<!--Thymeleaf xlmns-->
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Template</title>
+
+  <!--Mobil integration-->
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+  <!-- BOOTSTRAP MaxCDN Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+
+</head>
+<body>
+
+<!--Bootstrap container class er vigtig for at det virker, giver en lille margen ud til siderne
+i højre og venstre side-->
+<div class="container">
+
+  <div class="row">
+    <div th:replace="fragments/header :: header"/>
+  </div>
+
+  <!--For at Bootstrap grid system virker, her er en row.-->
+  <div class="row">
+    <div class="col-md-2">
+      <a href="/parent" class="btn btn-warning btn-block">Back</a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>Beskrivelse</th>
+          <th>Information</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <th>Fornavn:</th>
+          <td>Oliver</td>
+          <td><a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#editName">Edit</a></td>
+        </tr>
+        <tr>
+          <th>Lind Nissen:</th>
+          <td>Petersen</td>
+          <td><a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#editName">Edit</a></td>
+        </tr>
+        <tr>
+          <th>Fødselsdag:</th>
+          <td>11.11-2010/td>
+          <td><a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#editEmail">Edit</a></td>
+        </tr>
+        <tr>
+          <th>Adresse:</th>
+          <td>augustvej 52/td>
+          <td><a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#editEmail">Edit</a></td>
+        </tr>
+        <tr>
+          <th>forældre:</th>
+          <td>Phillip Lind Nissen/td>
+          <td><a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#editEmail">Edit</a></td>
+        </tr>
+        <tr>
+          <th>Stue:</th>
+          <td>Lilla/td>
+          <td><a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#editEmail">Edit</a></td>
+        </tr>
+        <tr>
+          <th>Fødselsdag:</th>
+          <td>11.11-2010/td>
+          <td><a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#editEmail">Edit</a></td>
+        </tr>
+        <tr>
+          <th>Folk der må hente børnene:</th>
+          <td>Andreas Nissen/td>
+          <td><a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#editEmail">Edit</a></td>
+        </tr>
+        <tr>
+          <th>anden info:</th>
+          <td>bla bla bla/td>
+          <td><a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#editEmail">Edit</a></td>
+        </tr>
+
+
+      <div class="modal">
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Modal's -->
+
+
+
+<!--Edit Name-->
+
+<div id="editName" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <!--Kryds knap-->
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Name</h4>
+      </div>
+      <div class="modal-body">
+        <input type="text"/>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div id="editEmail" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <!--Kryds knap-->
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Email</h4>
+      </div>
+      <div class="modal-body">
+        <input type="text"/>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="editPassword" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <!--Kryds knap-->
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Password</h4>
+      </div>
+      <div class="modal-body">
+        <input type="password"/>
+        <input type="password"/>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div id="editGroups" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Permissions</h4>
+      </div>
+      <div class="modal-body">
+        <div class="checkbox">
+          <label><input type="checkbox" value=""/>Adminss</label>
+        </div>
+        <div class="checkbox">
+          <label><input type="checkbox" value=""/>Employees</label>
+        </div>
+        <div class="checkbox">
+          <label><input type="checkbox" value=""/>Interns</label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--Edit Permissions-->
+
+<div id="editPermissions" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Permissions</h4>
+      </div>
+      <div class="modal-body">
+        <div class="checkbox">
+          <label><input type="checkbox" value=""/>Tilføje Børn</label>
+        </div>
+        <div class="checkbox">
+          <label><input type="checkbox" value=""/>Redigere Børn</label>
+        </div>
+        <div class="checkbox">
+          <label><input type="checkbox" value=""/>Slette Børn</label>
+        </div>
+        <div class="checkbox">
+          <label><input type="checkbox" value=""/>Tilføje Forældre</label>
+        </div>
+        <div class="checkbox">
+          <label><input type="checkbox" value=""/>Redigere Forældre</label>
+        </div>
+        <div class="checkbox">
+          <label><input type="checkbox" value=""/>Slette Forældre</label>
+        </div>
+        <div class="checkbox">
+          <label><input type="checkbox" value=""/>Checke alle børn ind og ud</label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--JAVASCRIPT (skal være til sidst for gode loading tider)-->
+<!-- BOOTSTRAP MaxCDN jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- BOOTSTRAP MaxCDN Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>
