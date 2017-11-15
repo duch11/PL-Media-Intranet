@@ -3,6 +3,10 @@ package plmedia.intranet.model;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * @author Andreas Nissen
+ */
+
 public class Child {
 
 

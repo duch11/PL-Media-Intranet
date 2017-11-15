@@ -4,6 +4,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+/**
+ * @author Andreas Nissen
+ */
+
 public class ParentController {
 
 
@@ -12,10 +16,10 @@ public class ParentController {
     return "parentview";
   }
 
-  @RequestMapping(value = {"parent"}, method = RequestMethod.GET)
+  @RequestMapping(value = {"parents"}, method = RequestMethod.GET)
   public String parentviewEmp(Model model) {
 
-    model.addAttribute("parent");
+    model.addAttribute("parents");
     return showParentView(model);
   }
 
@@ -26,7 +30,7 @@ public class ParentController {
   public String child(Model model) {
 
 
-    model.addAttribute("test");
+    model.addAttribute("child");
 
     return "children";
   }
