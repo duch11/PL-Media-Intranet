@@ -1,6 +1,7 @@
 package plmedia.intranet.controller;
 
 
+import java.security.Principal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,18 +18,19 @@ import java.util.ArrayList;
 @Controller
 public class AdminController {
 
-  /*
+  /**
   * Base method for showing adminpanel
   * makes renaming and adding "universal" actions more sensible
   */
 
-  public String showAdminPanel(Model model) {
+  public String showAdminPanel(Model model, Principal principal) {
 
-    //JEG VED ENDNU IKKE, men det her giver mig nuværende loggede ind bruger, det er nok til at finde denne bruger i databasen, til at vise kun ting for ham!
-    //TODO: gør noget ved det.
-    Authentication authentication = SecurityContextHolder.getContext().
-            getAuthentication();
-    String name = authentication.getName();
+    /**
+     * ENG: Principal DK: "Grund-sikkerhedskonto"
+     * Spring framework injecter den selv, ligesom den gør med Model.
+     * */
+    System.out.println(principal.getClass().toString());
+    String name = principal.getName();
     model.addAttribute("test", name);
 
     return "adminpanel";
@@ -36,28 +38,28 @@ public class AdminController {
 
 
   @RequestMapping(value = {"/admin/employees", "/admin"}, method = RequestMethod.GET)
-  public String adminPanelEmp(Model model) {
+  public String adminPanelEmp(Model model, Principal principal) {
 
     model.addAttribute("employees");
-    return showAdminPanel(model);
+    return showAdminPanel(model, principal);
   }
 
   @RequestMapping(value = {"/admin/employees"}, method = RequestMethod.GET, params = {"groupID"})
-  public String adminPanelEmpGroup(Model model, @RequestParam int groupID) {
+  public String adminPanelEmpGroup(Model model, Principal principal, @RequestParam int groupID) {
     model.addAttribute("employees" + groupID);
-    return showAdminPanel(model);
+    return showAdminPanel(model, principal);
   }
 
   @RequestMapping(value = {"/admin/parents"}, method = RequestMethod.GET)
-  public String adminPanelParents(Model model) {
+  public String adminPanelParents(Model model, Principal principal) {
     model.addAttribute("parents");
-    return showAdminPanel(model);
+    return showAdminPanel(model, principal);
   }
 
   @RequestMapping(value = {"/admin/children"}, method = RequestMethod.GET)
-  public String adminPanelChildren(Model model) {
+  public String adminPanelChildren(Model model, Principal principal) {
     model.addAttribute("children");
-    return showAdminPanel(model);
+    return showAdminPanel(model, principal);
   }
 
 

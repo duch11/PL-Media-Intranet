@@ -7,29 +7,31 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.JdbcUserDetailsManager;
 
-import java.net.PasswordAuthentication;
-import java.util.ArrayList;
-import java.util.List;
-
+/**
+ * @author Jonas holm
+ * Web security config er bare en subclass af "WebSecConfigAdapter"
+ * vi har en autowired datasource der er "auto config" vha spring
+ * og vi har en metode til
+ *
+ * */
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
     @Autowired
-    private DataSource datasource;
+    private DataSource dataSource;
+
+    /**
+     * Configure metoden er der hvor vi konfigurerer hvem der må hvad, med hvilke roller
+     * fx må alle logge ud
+     * man kan også specificerer et custom login view her.
+     * */
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-
                     .anyRequest().authenticated()
                     .and()
                 .formLogin().and()
@@ -37,44 +39,27 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .permitAll();
     }
 
+    /**
+     * ConfigureGlobal hjælper os til at configurere fx hvilken SQLquery vi vil bruge til at hente
+     * et "username" ind fra vores database, og hjælper os til at gøre brug af vores egne tables.
+     *
+     * Tak til mkyong for opdateret tutorial, kig tidligere commits for den gamle tutorial
+     * den var dog udnødvendig og ufleksibel fandt vi ud af.
+     * http://www.mkyong.com/spring-security/spring-security-form-login-using-database/
+     */
+
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder myAuth) throws Exception {
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 
-        /**
-         * Tak til https://justinrodenbostel.com/2014/05/30/part-5-integrating-spring-security-with-spring-boot-web/
-         * for den gode tutorial på at gøre jdbc authentication mulig.
-         */
+        auth.jdbcAuthentication().dataSource(dataSource)
+            .usersByUsernameQuery(
+                /**Ved fejl kan det være at vi skal have en enabled coloumn i vores user table
+                 * Ellers virker det, og vi tjekker op mod user_email.
+                 * */
+                "select user_email,password, enabled from user where user_email=?")
+            .authoritiesByUsernameQuery(
+                "select user_email, type from user where user_email=?");
 
-        //laver instances af userdetailsservice og passwordencoder
-        JdbcUserDetailsManager myUserDetailsService = new JdbcUserDetailsManager();
-        PasswordEncoder myEncoder = new BCryptPasswordEncoder();
-
-        /*indstiller datasourcen til vores database via datasource (kig i vores MAIN "IntranetApplication"
-          det er der den bliver lavet ud fra vores indstillinger i application.properties)
-        */
-        myUserDetailsService.setDataSource(datasource);
-
-        //hiver fat i vores authentication manager, og tilknytter vores userdetails service og password encoder
-        myAuth.userDetailsService(myUserDetailsService).passwordEncoder(myEncoder);
-
-        //vi gør brug af jdbc authentication
-        myAuth.jdbcAuthentication().dataSource(datasource);
-
-        if(!myUserDetailsService.userExists("admin")) {
-            List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-
-            authorities.add(new SimpleGrantedAuthority("ADMIN"));
-            User myUserDetails = new User("autouser", myEncoder.encode("123"),authorities);
-            myUserDetailsService.createUser(myUserDetails);
-        }
-
-
-        myAuth
-                //.userDetailsService(userDetailsService).and()
-                .inMemoryAuthentication()
-                    .withUser("user").password("123").roles("USER")
-                    .and()
-                    .withUser("admin").password("123").roles("ADMIN");
     }
 
 }
