@@ -17,7 +17,7 @@ public class ParentController {
   }
 
   @RequestMapping(value = {"parents"}, method = RequestMethod.GET)
-  public String parentviewEmp(Model model) {
+  public String parentViewEmp(Model model) {
 
     model.addAttribute("parents");
     return showParentView(model);
