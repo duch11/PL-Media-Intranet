@@ -16,14 +16,18 @@ public class Child {
   private int childId;
   private String address;
   private int wingId;
-  private int nap;
+  private ArrayList<String> nap;
   private String trustedPickupPerson;
   private String otherInfo;
   private ArrayList<Parent> parents;
 
-  public Child(String firstName, String lastName, Date birthday, int childId, String address,
-      int wingId, int nap, String trustedPickupPerson, String otherInfo,
-      ArrayList<Parent> parents) {
+
+  public Child() {
+  }
+
+  public Child(String firstName, String lastName, Date birthday, int childId,
+      String address, int wingId, ArrayList<String> nap, String trustedPickupPerson,
+      String otherInfo, ArrayList<Parent> parents) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.birthday = birthday;
@@ -60,12 +64,12 @@ public class Child {
     this.birthday = birthday;
   }
 
-  public int getchildId() {
+  public int getChildId() {
     return childId;
   }
 
-  public void setchildId(int id) {
-    childId = id;
+  public void setChildId(int childId) {
+    this.childId = childId;
   }
 
   public String getAddress() {
@@ -84,11 +88,11 @@ public class Child {
     this.wingId = wingId;
   }
 
-  public int getNap() {
+  public ArrayList<String> getNap() {
     return nap;
   }
 
-  public void setNap(int nap) {
+  public void setNap(ArrayList<String> nap) {
     this.nap = nap;
   }
 
@@ -116,3 +120,4 @@ public class Child {
     this.parents = parents;
   }
 }
+
