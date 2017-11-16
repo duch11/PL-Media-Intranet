@@ -43,7 +43,8 @@ i højre og venstre side-->
       <div class="row">
         <div class="list-group">
           <a href="/admin/employees" class="list-group-item active">Administrator/Leder <span class="badge">8</span></a>
-          <a th:each="group : ${employeegroups}" href="/admin/employees?groupID=" th:attrappend="href=${group.getGroupID()}" class="list-group-item active">thymeleaf Employee Group <span class="badge">8</span></a>
+          <a th:each="group : ${employeegroups
+          }" href="/admin/employees?groupID=" th:attrappend="href=${group.getGroupID()}" class="list-group-item active">thymeleaf Employee Group <span class="badge">8</span></a>
 
           <a href="/admin/employees?groupID=1" class="list-group-item">Ansatte <span class="badge">15</span></a>
           <a href="/admin/employees?groupID=2" class="list-group-item">Praktikanter <span class="badge">2</span></a>
