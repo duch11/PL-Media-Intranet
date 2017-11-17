@@ -31,6 +31,7 @@ public class AdminController {
      * */
     System.out.println(principal.getClass().toString());
     String name = principal.getName();
+
     model.addAttribute("test", name);
 
     return "adminpanel";
