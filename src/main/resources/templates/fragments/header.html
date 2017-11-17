@@ -7,7 +7,10 @@
         <a class="navbar-brand" href="#">intranet - PL-Media</a>
       </div>
       <li>
-        <a href="#" style="background-color: cadetblue; color: whitesmoke">Test Link fra Header</a>
+        <form th:action="@{/logout}" class="navbar-form" method="post">
+          <input class="btn navbar-btn" type="submit" value="Sign Out"/>
+        </form>
+        <a></a>
       </li>
     </ul>
   </nav>
