@@ -1,5 +1,6 @@
 package plmedia.intranet.controller;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -7,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 /**
  * @author Andreas Nissen
  */
-
+@Controller
 public class ParentController {
 
 
@@ -16,7 +17,7 @@ public class ParentController {
     return "parentview";
   }
 
-  @RequestMapping(value = {"parents"}, method = RequestMethod.GET)
+  @RequestMapping(value = {"/parents"}, method = RequestMethod.GET)
   public String parentViewEmp(Model model) {
 
     model.addAttribute("parents");
@@ -31,7 +32,6 @@ public class ParentController {
 
 
     model.addAttribute("child");
-
     return "children";
   }
 

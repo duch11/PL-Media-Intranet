@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class AdminController {
 
   /**
-  * Base method for showing adminpanel
+   * Base method for showing adminpanel
   * makes renaming and adding "universal" actions more sensible
   */
 
