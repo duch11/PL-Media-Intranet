@@ -2,15 +2,8 @@
 <!--Thymeleaf xlmns-->
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="UTF-8"/>
-  <title>Template</title>
-
-  <!--Mobil integration-->
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-
-  <!-- BOOTSTRAP MaxCDN Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-
+  <!--Denne her normaliserer vores html siders head sektion, så vi kun skal skrive det et sted-->
+  <div th:replace="fragments/head :: head"/>
 </head>
 <body>
 

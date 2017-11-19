@@ -1,113 +1,86 @@
 <!DOCTYPE html>
-<!--Thymeleaf xlmns-->
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-  <meta charset="UTF-8"/>
-  <title>Template</title>
+  <head>
+    <!--Denne her normaliserer vores html siders head sektion, så vi kun skal skrive det et sted-->
+    <div th:replace="fragments/head :: head"/>
+  </head>
 
-  <!--Mobil integration-->
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <body>
 
-  <!-- BOOTSTRAP MaxCDN Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-
-</head>
-<body>
-
-<!--Bootstrap container class er vigtig for at det virker, giver en lille margen ud til siderne
-i højre og venstre side-->
-<div class="container">
-
-  <div class="row">
     <div th:replace="fragments/header :: header"/>
-  </div>
 
-  <!--For at Bootstrap grid system virker, her er en row.-->
-  <div class="row">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li>
+              <a th:each="group : ${employeegroups}" href="/admin/employees?groupID=" th:attrappend="href=${group.getGroupID()}" >Thymeleaf Employee Group <span class="badge pull-right">8</span></a>
+            </li>
+            <li class="active"><a href="/admin/employees" >Administrator/Leder <span class="badge pull-right">8</span></a></li>
+            <li><a href="/admin/employees?groupID=1" >Ansatte <span class="badge pull-right">15</span></a></li>
+            <li><a href="/admin/employees?groupID=2" >Praktikanter <span class="badge pull-right">2</span></a></li>
+          </ul>
+          <ul class="nav nav-sidebar">
+            <li><a href="/admin/children" >Børn <span class="badge pull-right">67</span></a></li>
+            <li><a href="/admin/parents" >Forældre <span class="badge pull-right">111</span></a></li>
+          </ul>
+          
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <div class="row">
+            <div class="col-sm-3">
+              <h1 th:text="${test}">UserEmailTest</h1> 
+            </div>
+            <div class="col-sm-3">
+              
+            </div>
+          </div>
+          <div class="row">
+            <a class="btn btn-success" style="">+ New User</a>
+            <div class="list-group" style="max-height: 400px; border-radius: 0">
+              <!-- Generering af listen, baseret på hvad templaten bliver fodret med -->
+              <a style="border-radius: 0" th:each="employee : ${employees}" href="/admin/details?user=" th:text="${employee.getName()}" th:attrappend="href=${employee.getUserID()}" class="list-group-item">Thymeleaf Employee</a>
+              <a th:each="parent : ${parents}"     href="/admin/details?user=" th:text="${parent.getName()}"   th:attrappend="href=${parent.getParentID()}" class="list-group-item">Thymeleaf Parent</a>
+              <a th:each="child : ${children}"     href="/admin/details?user=" th:text="${child.getName()}"    th:attrappend="href=${child.getChildID()}"   class="list-group-item">Thymeleaf Child</a>
 
+              <a href="/admin/details?user=32122" class="list-group-item active">
+                Kurt (Kan klikkes på)
+              </a>
+
+              <!--BOGUS USERS.. KAN SLETTES NÅR FÆRDIG-->
+              <a href="#" class="list-group-item" >Bo</a>
+              <a href="#" class="list-group-item">Lis</a>
+              <a href="#" class="list-group-item">Hans</a>
+              <a href="#" class="list-group-item">Inge</a>
+              <a href="#" class="list-group-item">Else</a>
+              <a href="#" class="list-group-item">Rebekka</a>
+              <a href="#" class="list-group-item">Karsten</a>
+              <a href="#" class="list-group-item">Bo</a>
+              <a href="#" class="list-group-item">Lis</a>
+              <a href="#" class="list-group-item">Kurt</a>
+              <a href="#" class="list-group-item">Hans</a>
+              <a href="#" class="list-group-item">Inge</a>
+              <a href="#" class="list-group-item">Else</a>
+              <a href="#" class="list-group-item">Rebekka</a>
+              <a href="#" class="list-group-item">Karsten</a>
+              <a href="#" class="list-group-item">Bo</a>
+              <a href="#" class="list-group-item">Lis</a>
+              <a href="#" class="list-group-item">Kurt</a>
+              <a href="#" class="list-group-item">Hans</a>
+              <a href="#" class="list-group-item">Inge</a>
+              <a href="#" class="list-group-item">Else</a>
+              <a href="#" class="list-group-item">Rebekka</a>
+              <a href="#" class="list-group-item">Karsten</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     
-    <div style="padding: 0" class="col-md-3">
-        <a class="btn btn-block btn-success">+ New User</a>
-    </div>
-    <div class="pull-right" style="width: 300px"><input class="form-control" id="myInput" type="text" placeholder="Search.."/>
-    </div>
-    <br></br>
-    <br></br>
-  </div>
-
-  <!-- MENUER -->
-  <div class="row">
-    <div class="col-md-2" style="overflow-y: auto;">
-
-      <!--Employee MENU-->
-      <div class="row">
-        <div class="list-group">
-          <a href="/admin/employees" class="list-group-item active">Administrator/Leder <span class="badge">8</span></a>
-          <a th:each="group : ${employeegroups
-          }" href="/admin/employees?groupID=" th:attrappend="href=${group.getGroupID()}" class="list-group-item active">thymeleaf Employee Group <span class="badge">8</span></a>
-
-          <a href="/admin/employees?groupID=1" class="list-group-item">Ansatte <span class="badge">15</span></a>
-          <a href="/admin/employees?groupID=2" class="list-group-item">Praktikanter <span class="badge">2</span></a>
-        </div>
-      </div>
-
-      <!--Parent/Children MENU-->
-      <div class="row">
-        <div class="list-group">
-          <a href="/admin/children" class="list-group-item">Børn <span class="badge">67</span></a>
-          <a href="/admin/parents" class="list-group-item">Forældre <span class="badge">111</span></a>
-        </div>
-      </div>
-    </div>
-
-
-    <!--USER/PARENT/CHILD LISTE-->
-    <div class="col-md-10" style="overflow-y: auto; max-height: 40em;">
-      <div class="list-group" style="max-height: 400px">
-        <h1 th:text="${test}"></h1>
-
-        <!-- Generering af listen, baseret på hvad templaten bliver fodret med -->
-        <a th:each="employee : ${employees}" href="/admin/details?user=" th:text="${employee.getName()}" th:attrappend="href=${employee.getUserID()}" class="list-group-item">Thymeleaf Employee</a>
-        <a th:each="parent : ${parents}"     href="/admin/details?user=" th:text="${parent.getName()}"   th:attrappend="href=${parent.getParentID()}" class="list-group-item">Thymeleaf Parent</a>
-        <a th:each="child : ${children}"     href="/admin/details?user=" th:text="${child.getName()}"    th:attrappend="href=${child.getChildID()}"   class="list-group-item">Thymeleaf Child</a>
-
-        <a href="/admin/details?user=32122" class="list-group-item active">
-          Kurt (Kan klikkes på)
-        </a>
-
-        <!--BOGUS USERS.. KAN SLETTES NÅR FÆRDIG-->
-        <a href="#" class="list-group-item">Bo</a>
-        <a href="#" class="list-group-item">Lis</a>
-        <a href="#" class="list-group-item">Hans</a>
-        <a href="#" class="list-group-item">Inge</a>
-        <a href="#" class="list-group-item">Else</a>
-        <a href="#" class="list-group-item">Rebekka</a>
-        <a href="#" class="list-group-item">Karsten</a>
-        <a href="#" class="list-group-item">Bo</a>
-        <a href="#" class="list-group-item">Lis</a>
-        <a href="#" class="list-group-item">Kurt</a>
-        <a href="#" class="list-group-item">Hans</a>
-        <a href="#" class="list-group-item">Inge</a>
-        <a href="#" class="list-group-item">Else</a>
-        <a href="#" class="list-group-item">Rebekka</a>
-        <a href="#" class="list-group-item">Karsten</a>
-        <a href="#" class="list-group-item">Bo</a>
-        <a href="#" class="list-group-item">Lis</a>
-        <a href="#" class="list-group-item">Kurt</a>
-        <a href="#" class="list-group-item">Hans</a>
-        <a href="#" class="list-group-item">Inge</a>
-        <a href="#" class="list-group-item">Else</a>
-        <a href="#" class="list-group-item">Rebekka</a>
-        <a href="#" class="list-group-item">Karsten</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!--JAVASCRIPT (skal være til sidst for gode loading tider)-->
-<!-- BOOTSTRAP MaxCDN jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!-- BOOTSTRAP MaxCDN Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</body>
+    <!--JAVASCRIPT (skal være til sidst for gode loading tider)-->
+    <!-- BOOTSTRAP MaxCDN jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- BOOTSTRAP MaxCDN Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </body>
 </html>

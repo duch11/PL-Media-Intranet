@@ -51,11 +51,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 
+        /**Ved fejl kan det være at vi skal have en enabled coloumn i vores user table
+         * Ellers virker det, og vi tjekker op mod user_email.
+         * */
         auth.jdbcAuthentication().dataSource(dataSource)
             .usersByUsernameQuery(
-                /**Ved fejl kan det være at vi skal have en enabled coloumn i vores user table
-                 * Ellers virker det, og vi tjekker op mod user_email.
-                 * */
                 "select user_email,password, enabled from user where user_email=?")
             .authoritiesByUsernameQuery(
                 "select user_email, type from user where user_email=?");
