@@ -6,9 +6,14 @@
       <div class="navbar-header">
         <a class="navbar-brand" href="#">intranet - PL-Media</a>
       </div>
+
     </ul>
     <form th:action="@{/logout}" class="navbar-form navbar-right logout-btn" method="post">
-      <button type="submit" class="btn btn-danger" value="Sign Out">Log ud</button>
+      <button type="submit" class="btn" value="Sign Out">Log ud</button>
     </form>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="#" th:text="${test}">UserEmailTest</a></li>
+    </ul>
+
   </nav>
 </div>

@@ -3,7 +3,13 @@
  * 
  */
 
-.btn, .list-group-item {
+p, a, h1, h2, h3, h4, h5, h6, div {
+  font-family: 'Patrick Hand SC', cursive;
+
+
+}
+
+.btn, .list-group-item, .list-group-item.active {
   border-radius: 0;
 }
 
@@ -15,11 +21,40 @@
 .logout-btn button {
   height: 50px;
   width: 80px;
+  color: #fff;
+  background-color: #df1d3b;
 }
 
-/*
- * Base structure
- */
+.logout-btn button:hover {
+  color: #fff;
+  background-color: #ff2244;
+
+}
+
+ul.nav.nav-sidebar > li > a
+{
+  color: #06a3b9;
+}
+
+ul.nav.nav-sidebar > li.active > a
+{
+  color: #FFF;
+}
+
+.btn-success, .btn-success:hover{
+  background-color: #4ac439;
+  border-color: transparent;
+}
+
+.btn-success:hover{
+  background-color: #49d338;
+}
+
+
+
+  /*
+   * Base structure
+   */
 
 /* Move down content because we have a fixed navbar that is 50px tall */
 body {
@@ -81,10 +116,23 @@ body {
 }
 .nav-sidebar > .active > a,
 .nav-sidebar > .active > a:hover,
-.nav-sidebar > .active > a:focus {
+.nav-sidebar > .active > a:focus,
+a.list-group-item.active,
+a.list-group-item.active:focus,
+a.list-group-item.active:hover
+
+{
   color: #fff;
-  background-color: #428bca;
+  border-color: transparent;
+  background-color: #46b0cc;
 }
+
+.nav-sidebar > .active > a:hover,
+a.list-group-item.active:hover
+{
+  background-color: #52bcd8;
+}
+
 
 
 /*
