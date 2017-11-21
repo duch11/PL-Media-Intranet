@@ -24,10 +24,8 @@ public class AdminController {
      * ENG: Principal DK: "Grund-sikkerhedskonto"
      * Spring framework injecter den selv, ligesom den gør med Model.
      * */
-    System.out.println(principal.getClass().toString());
-    String name = principal.getName();
 
-    model.addAttribute("test", name);
+    model.addAttribute("test", principal.getName());
 
     return "adminpanel";
   }
@@ -62,8 +60,9 @@ public class AdminController {
 
 
   @RequestMapping(value = {"/admin/details"}, method = RequestMethod.GET, params = {"user"})
-  public String userDetails(Model model, @RequestParam int user) {
+  public String userDetails(Model model,Principal principal, @RequestParam int user) {
     model.addAttribute("user", "repo.getUser()" + user);
+    model.addAttribute("test", principal.getName());
     return "detailsview";
   }
 

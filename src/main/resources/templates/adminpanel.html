@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!--Thymeleaf xlmns-->
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
   <head>
     <!--Denne her normaliserer vores html siders head sektion, så vi kun skal skrive det et sted-->
@@ -12,38 +13,38 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
+          <!--<ul class="nav nav-sidebar">
+            <li><a class="newuserbtn" style="" href="#">+ Ny Bruger</a></li>
+          </ul>-->
           <ul class="nav nav-sidebar">
             <li>
               <a th:each="group : ${employeegroups}" href="/admin/employees?groupID=" th:attrappend="href=${group.getGroupID()}" >Thymeleaf Employee Group <span class="badge pull-right">8</span></a>
             </li>
-            <li class="active"><a href="/admin/employees" >Administrator/Leder <span class="badge pull-right">8</span></a></li>
-            <li><a href="/admin/employees?groupID=1" >Ansatte <span class="badge pull-right">15</span></a></li>
-            <li><a href="/admin/employees?groupID=2" >Praktikanter <span class="badge pull-right">2</span></a></li>
+
+
+            <li class="active"><a href="/admin/employees" >Admin/Leder</a></li>
+            <li><a href="/admin/employees?groupID=1" >Ansatte</a></li>
+            <li><a href="/admin/employees?groupID=2" >Praktikanter</a></li>
           </ul>
           <ul class="nav nav-sidebar">
-            <li><a href="/admin/children" >Børn <span class="badge pull-right">67</span></a></li>
-            <li><a href="/admin/parents" >Forældre <span class="badge pull-right">111</span></a></li>
+            <li><a href="/admin/children">Børn</a></li>
+            <li><a href="/admin/parents">Forældre</a></li>
           </ul>
           
         </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-3 main">
           <div class="row">
-            <div class="col-sm-3">
-              <h1 th:text="${test}">UserEmailTest</h1>
-            </div>
-            <div class="col-sm-3">
-              
-            </div>
+            <h1>Admins/Ledere</h1>
           </div>
+          <!--LIST of users/parents etc-->
           <div class="row">
-            <a class="btn btn-success" style="">+ New User</a>
             <div class="list-group" style="max-height: 400px; border-radius: 0">
               <!-- Generering af listen, baseret på hvad templaten bliver fodret med -->
               <a style="border-radius: 0" th:each="employee : ${employees}" href="/admin/details?user=" th:text="${employee.getName()}" th:attrappend="href=${employee.getUserID()}" class="list-group-item">Thymeleaf Employee</a>
               <a th:each="parent : ${parents}"     href="/admin/details?user=" th:text="${parent.getName()}"   th:attrappend="href=${parent.getParentID()}" class="list-group-item">Thymeleaf Parent</a>
               <a th:each="child : ${children}"     href="/admin/details?user=" th:text="${child.getName()}"    th:attrappend="href=${child.getChildID()}"   class="list-group-item">Thymeleaf Child</a>
 
-              <a href="/admin/details?user=32122" class="list-group-item active">
+              <a href="/admin/details?user=32122" class="list-group-item">
                 Kurt (Kan klikkes på)
               </a>
 

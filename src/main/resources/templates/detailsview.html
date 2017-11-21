@@ -1,218 +1,234 @@
 <!DOCTYPE html>
 <!--Thymeleaf xlmns-->
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-  <!--Denne her normaliserer vores html siders head sektion, så vi kun skal skrive det et sted-->
-  <div th:replace="fragments/head :: head"/>
-</head>
-<body>
+  <head>
+    <!--Denne her normaliserer vores html siders head sektion, så vi kun skal skrive det et sted-->
+    <div th:replace="fragments/head :: head"/>
+  </head>
+  <body>
 
-<!--Bootstrap container class er vigtig for at det virker, giver en lille margen ud til siderne
-i højre og venstre side-->
-<div class="container">
 
-  <div class="row">
-    <div th:replace="fragments/header :: header"/>
-  </div>
 
-  <!--For at Bootstrap grid system virker, her er en row.-->
-  <div class="row" style="margin-top: 70px">
-    <div class="col-md-2">
-      <a href="/admin/employees" class="btn btn-warning btn-block">Back</a>
+    <!--Bootstrap container class er vigtig for at det virker, giver en lille margen ud til siderne
+    i højre og venstre side-->
+    <div class="container-fluid">
+
+      <div class="row">
+        <div th:replace="fragments/header :: header"/>
+      </div>
+
+
+        <div class="row">
+          <div class="col-sm-3 col-md-2 sidebar">
+            <!--<ul class="nav nav-sidebar">
+              <li><a class="newuserbtn" style="" href="#">+ Ny Bruger</a></li>
+            </ul>-->
+            <ul class="nav nav-sidebar">
+              <li>
+                <a th:each="group : ${employeegroups}" href="/admin/employees?groupID=" th:attrappend="href=${group.getGroupID()}" >Thymeleaf Employee Group <span class="badge pull-right">8</span></a>
+              </li>
+
+
+              <li class="active"><a href="/admin/employees" >Admin/Leder</a></li>
+              <li><a href="/admin/employees?groupID=1" >Ansatte</a></li>
+              <li><a href="/admin/employees?groupID=2" >Praktikanter</a></li>
+            </ul>
+            <ul class="nav nav-sidebar">
+              <li><a href="/admin/children">Børn</a></li>
+              <li><a href="/admin/parents">Forældre</a></li>
+            </ul>
+
+          </div>
+          <div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-3 main">
+            <div class="row">
+              <ul class="list-inline">
+                <li><a href="/admin/employees"><h1>Admins/Ledere</h1></a></li>
+                <li><h1> > </h1></li>
+                <li><h1>Kurt Klausen</h1></li>
+              </ul>
+
+            </div>
+
+            <table class="table">
+              <tbody>
+              <tr>
+                <th>Navn:</th>
+                <td>Kurt Klausen</td>
+                <td><a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#editName">Edit</a></td>
+              </tr>
+              <tr>
+                <th>Email:</th>
+                <td>kurt@klausen.dk</td>
+                <td><a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#editEmail">Edit</a></td>
+              </tr><tr>
+                <th>Password:</th>
+                <td>[Hidden]</td>
+                <td><a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#editPassword">Edit</a></td>
+              </tr><tr>
+                <th>Type:</th>
+                <td>Leder, Ansat</td>
+                <td><a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#editGroups">Edit</a></td>
+              </tr>
+              </tbody>
+            </table>
+
+
+            <h3>Permissions: <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#editPermissions">Edit</a></h3>
+            <ul class="list-group">
+              <li class="list-group-item">Tilføje Børn</li>
+              <li class="list-group-item">Redigere Børn</li>
+              <li class="list-group-item">Slette Børn</li>
+              <li class="list-group-item">Tilføje Forældre</li>
+              <li class="list-group-item">Redigere Forældre</li>
+              <li class="list-group-item">Slette Forældre</li>
+              <li class="list-group-item">Checke Alle børn ind og ud</li>
+            </ul>
+
+          </div>
+        </div>
+
     </div>
-  </div>
-  <div class="row">   
-    <div class="col-md-12">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-          <th>Beskrivelse</th>
-          <th>Nuværende værdi</th>
-          <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th>Navn:</th>
-            <td>Kurt Klausen</td>
-            <td><a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#editName">Edit</a></td>
-          </tr>
-          <tr>
-            <th>Email:</th>
-            <td>kurt@klausen.dk</td>
-            <td><a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#editEmail">Edit</a></td>
-          </tr><tr>
-            <th>Password:</th>
-            <td>[Hidden]</td>
-            <td><a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#editPassword">Edit</a></td>
-          </tr><tr>
-            <th>Groups:</th>
-            <td>Admin, Employee</td>
-            <td><a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#editGroups">Edit</a></td>
-          </tr>
-        </tbody>
-      </table>
-      <h3>Permissions: <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#editPermissions">Edit</a></h3>
-      <ul class="list-group">
-        <li class="list-group-item">Tilføje Børn</li>
-        <li class="list-group-item">Redigere Børn</li>
-        <li class="list-group-item">Slette Børn</li>
-        <li class="list-group-item">Tilføje Forældre</li>
-        <li class="list-group-item">Redigere Forældre</li>
-        <li class="list-group-item">Slette Forældre</li>
-        <li class="list-group-item">Checke Alle børn ind og ud</li>
-      </ul>
-      
-      <div class="modal">
-      </div>
-    </div>
-  </div>
-</div>
-  
-  
-  
-<!-- Modal's -->
 
 
-  
-<!--Edit Name-->  
 
-<div id="editName" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <!--Kryds knap-->
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Name</h4>
-      </div>
-      <div class="modal-body">
-        <input type="text"/>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
-      </div>
-    </div>
-  </div>
-</div>
-  
+    <!-- Modal's -->
 
-<div id="editEmail" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <!--Kryds knap-->
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Email</h4>
-      </div>
-      <div class="modal-body">
-        <input type="text"/>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
+    <div id="editName" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <!--Kryds knap-->
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Name</h4>
+          </div>
+          <div class="modal-body">
+            <input type="text"/>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
 
-<div id="editPassword" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <!--Kryds knap-->
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Password</h4>
-      </div>
-      <div class="modal-body">
-        <input type="password"/>
-        <input type="password"/>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
-      </div>
-    </div>
-  </div>
-</div>
-  
-  
-<div id="editGroups" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Permissions</h4>
-      </div>
-      <div class="modal-body">
-        <div class="checkbox">
-          <label><input type="checkbox" value=""/>Adminss</label>
-        </div>
-        <div class="checkbox">
-          <label><input type="checkbox" value=""/>Employees</label>
-        </div>
-        <div class="checkbox">
-          <label><input type="checkbox" value=""/>Interns</label>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
-      </div>
-    </div>
-  </div>
-</div>
-  
-  
-<!--Edit Permissions-->  
-  
-<div id="editPermissions" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Permissions</h4>
-      </div>
-      <div class="modal-body">
-        <div class="checkbox">
-          <label><input type="checkbox" value=""/>Tilføje Børn</label>
-        </div>
-        <div class="checkbox">
-          <label><input type="checkbox" value=""/>Redigere Børn</label>
-        </div>
-        <div class="checkbox">
-          <label><input type="checkbox" value=""/>Slette Børn</label>
-        </div>
-        <div class="checkbox">
-          <label><input type="checkbox" value=""/>Tilføje Forældre</label>
-        </div>
-        <div class="checkbox">
-          <label><input type="checkbox" value=""/>Redigere Forældre</label>
-        </div>
-        <div class="checkbox">
-          <label><input type="checkbox" value=""/>Slette Forældre</label>
-        </div>
-        <div class="checkbox">
-          <label><input type="checkbox" value=""/>Checke alle børn ind og ud</label>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
-      </div>
-    </div>
-  </div>
-</div>
 
-<!--JAVASCRIPT (skal være til sidst for gode loading tider)-->
-<!-- BOOTSTRAP MaxCDN jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!-- BOOTSTRAP MaxCDN Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</body>
+    <div id="editEmail" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <!--Kryds knap-->
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Email</h4>
+          </div>
+          <div class="modal-body">
+            <input type="text"/>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="editPassword" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <!--Kryds knap-->
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Password</h4>
+          </div>
+          <div class="modal-body">
+            <input type="password"/>
+            <input type="password"/>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div id="editGroups" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Permissions</h4>
+          </div>
+          <div class="modal-body">
+            <div class="checkbox">
+              <label><input type="checkbox" value=""/>Adminss</label>
+            </div>
+            <div class="checkbox">
+              <label><input type="checkbox" value=""/>Employees</label>
+            </div>
+            <div class="checkbox">
+              <label><input type="checkbox" value=""/>Interns</label>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!--Edit Permissions-->
+
+    <div id="editPermissions" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Permissions</h4>
+          </div>
+          <div class="modal-body">
+            <div class="checkbox">
+              <label><input type="checkbox" value=""/>Tilføje Børn</label>
+            </div>
+            <div class="checkbox">
+              <label><input type="checkbox" value=""/>Redigere Børn</label>
+            </div>
+            <div class="checkbox">
+              <label><input type="checkbox" value=""/>Slette Børn</label>
+            </div>
+            <div class="checkbox">
+              <label><input type="checkbox" value=""/>Tilføje Forældre</label>
+            </div>
+            <div class="checkbox">
+              <label><input type="checkbox" value=""/>Redigere Forældre</label>
+            </div>
+            <div class="checkbox">
+              <label><input type="checkbox" value=""/>Slette Forældre</label>
+            </div>
+            <div class="checkbox">
+              <label><input type="checkbox" value=""/>Checke alle børn ind og ud</label>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--JAVASCRIPT (skal være til sidst for gode loading tider)-->
+    <!-- BOOTSTRAP MaxCDN jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- BOOTSTRAP MaxCDN Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </body>
 </html>

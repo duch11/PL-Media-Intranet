@@ -1,38 +1,35 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head>
-  <!--Denne her normaliserer vores html siders head sektion, så vi kun skal skrive det et sted-->
-  <div th:replace="fragments/head :: head"/>
-  <title>Login </title>
-  <div th:replace="fragments/header :: header-css"/>
-  <div th:replace="fragments/footer :: footer-css"/>
-</head>
-<body>
-<div th:replace="fragments/header :: header"/>
+  <head>
+    <!--Denne her normaliserer vores html siders head sektion, så vi kun skal skrive det et sted-->
+    <div th:replace="fragments/head :: head"/>
 
-<div>
-  <form th:action="@{/login}" method="post">
+    <title>Login </title>
+  </head>
+  <body>
 
-    <h4>Login</h4>
+    <div class="container">
 
-    <div>
-      <input type="text" name="username" id="username" placeholder="Username" required="true" autofocus="true"/>
-    </div>
-    <div>
-      <input type="password" name="password" id="password" placeholder="Password" required="true"/>
-    </div>
+      <form class="form-signin" name='f' th:action="@{/login}" method="POST">
+        <h2 class="form-signin-heading">LOGIN FOR:</h2>
+        <img class="login-img" src="http://www.klokkerholmbornehave.dk/platforme/bronderslev_kommune/userfiles/editor_forsidden.jpg"/>
 
-    <div>
-      <div>
-        <input type="submit"  value="SIGN IN"/>
-      </div>
-    </div>
-    <br/>
+        <label for="inputEmail" class="sr-only">Email addresse</label>
+        <input type="text" name='username' id="inputEmail" class="form-control" placeholder="Email address" required="true" autofocus="true"/>
 
-  </form>
-</div>
+        <label for="inputPassword" class="sr-only">Adgangskode</label>
+        <input type="password" name='password' id="inputPassword" class="form-control" placeholder="Password" required="true"/>
 
-<div th:replace="fragments/footer :: footer"/>
+        <button class="btn btn-lg btn-success btn-block" name='submit' type="submit">Log på</button>
+        <div th:if="${param.error}" class="alert alert-error">
+          Der var noget galt med dine login-oplysninger :-(
+        </div>
+        <div th:if="${param.logout}" class="alert alert-success">
+          Du er blevet logget ud :-)
+        </div>
+      </form>
 
-</body>
+    </div> <!-- /container -->
+
+  </body>
 </html>

@@ -22,6 +22,10 @@ public class HomeController {
       return new AdminController().showAdminPanel(model, principal);
   }
 
+  @RequestMapping(value = {"/login"}, method = RequestMethod.GET)
+  public String login(Model model){
+    return "login";
+  }
 
   /**
   * Template tester

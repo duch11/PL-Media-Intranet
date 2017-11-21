@@ -16,7 +16,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
  *
  * */
 @Configuration
-@EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -34,9 +33,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                     .anyRequest().authenticated()
                     .and()
-                .formLogin().and()
+                .formLogin()
+                    .loginPage("/login")
+                    .permitAll()
+                .and()
                 .logout()
                     .permitAll();
+
     }
 
     /**
