@@ -1,13 +1,10 @@
 package plmedia.intranet.dao;
 
 import org.springframework.jdbc.core.PreparedStatementSetter;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
+import plmedia.intranet.model.Wing;
 
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 /**
  * DBUtil extends JdbcUserDetailsManager.
@@ -15,19 +12,23 @@ import java.sql.SQLException;
  * @author Tobias Thomsen
  */
 
-public class DBUtil extends JdbcUserDetailsManager {
+public class DBUtil extends JdbcUserDetailsManager  {
 
     // SQL's
     public static final String DEF_CREATE_ALLERGEN_SQL = "insert into allergen (allergen_name, allergen_description) values (?,?)";
     public static final String DEF_ADD_ALLERGEN_SQL = "insert into child_allergen (fk_child_id, fk_allergen_id) values (?,?)";
+/* test */ public static final String TEST_STRING_SQL = "SELECT * FROM wing";
+/* test */ public static final String SECOND_TEST_STRING_SQL = "SELECT first_name FROM user";
 
-    public static final String CALL_TEST = "{CALL test_sp(?)}";
 
     // Fields
     private String createAllergenSql = DEF_CREATE_ALLERGEN_SQL;
     private String addAllergenSql = DEF_ADD_ALLERGEN_SQL;
 
-    private String test = CALL_TEST;
+
+
+/* test */ private String test = TEST_STRING_SQL;
+/* test */ private String second_test = SECOND_TEST_STRING_SQL;
 
     // Methods
 
@@ -63,16 +64,34 @@ public class DBUtil extends JdbcUserDetailsManager {
     }
 
     /**
-     * Why Doesn't Glue Stick To The Inside Of The Glue Bottle?
-     * @param id
+     * 'test' works by knowing how many much data it get and with which datatype and then feeds them to a constructor (The wing constructor isn't commited - was only used for testing).
      */
-    public void test(String id){
+    public void test(){
         try(
-            Connection conn = ConnectionManager.getConnection();
-            CallableStatement statement = conn.prepareCall(test);
+                Connection conn = ConMan.getConnection();
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(test)
         ) {
-            statement.execute();
-            statement.close();
+            int i = 1;
+            while (rs.next()) {
+                Wing wing = new Wing(rs.getInt("wing_id"), rs.getString("wing_name"), rs.getString("wing_description"));
+                System.out.println(wing.getWingName());
+                i++;
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void bruh(){
+        try(
+                Connection conn = ConMan.getConnection();
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(second_test);
+        ) {
+            while(rs.next()){
+            System.out.println(rs.getString(1));
+            }
         } catch (SQLException e){
             e.printStackTrace();
         }
