@@ -22,7 +22,7 @@ public class AdminController {
 
     /**
      * ENG: Principal DK: "Grund-sikkerhedskonto"
-     * Spring framework injecter den selv, ligesom den gør med Model.
+     * Spring framework injecter den selv, ligesom den goer med Model.
      * */
 
     model.addAttribute("test", principal.getName());
