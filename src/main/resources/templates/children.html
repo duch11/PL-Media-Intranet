@@ -5,6 +5,9 @@
   <!--Denne her normaliserer vores html siders head sektion, så vi kun skal skrive det et sted-->
   <div th:replace="fragments/head :: head"/>
 </head>
+
+
+
 <body>
 
 <!--Bootstrap container class er vigtig for at det virker, giver en lille margen ud til siderne
@@ -23,8 +26,9 @@ i højre og venstre side-->
   </div>
   <div class="row">
     <div class="col-md-12">
-      <table class="table table-striped">
+      <table class="table table-striped table-bordered">
         <thead>
+        <h1>Dit Barn</h1>
         <tr>
           <th>Beskrivelse</th>
           <th>Information</th>
@@ -57,28 +61,9 @@ i højre og venstre side-->
           <td>Phillip Lind Nissen</td>
           <td><a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#editEmail">Edit</a></td>
         </tr>
-        <tr>
-          <th>Stue:</th>
-          <td>Lilla</td>
-          <td><a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#editEmail">Edit</a></td>
-        </tr>
-        <tr>
-          <th>sovetider:</th>
-          <td>kl 11 - 13</td>
-          <td><a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#editEmail">Edit</a></td>
-        </tr>
-        <tr>
-          <th>Folk der må hente børnene:</th>
-          <td>Andreas Nissen</td>
-          <td><a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#editEmail">Edit</a></td>
-        </tr>
-        <tr>
-          <th>anden info:</th>
-          <td>bla bla bla</td>
-          <td><a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#editEmail">Edit</a></td>
-          </tr>
+
         </tbody>
-      </table>
+        </table>
       <div class="modal">
       </div>
 
@@ -86,6 +71,78 @@ i højre og venstre side-->
     </div>
   </div>
 </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 ">
+      <div class="center">
+
+      <table class="table-condensed table-bordered ">
+      <tr>
+        <th>Stue:</th>
+        <td>Lilla</td>
+        <td><a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#editEmail">Edit</a></td>
+      </tr>
+      <tr>
+        <th>sovetider:</th>
+        <td>kl 11 - 13</td>
+        <td><a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#editEmail">Edit</a></td>
+      </tr>
+      </table>
+    </div>
+  </div>
+
+    <div class="col-md-6 ">
+      <div align="center-right">
+      <table class="table-condensed table-bordered ">
+      <tr>
+        <th>Folk der må hente børnene:</th>
+        <td>Andreas Nissen</td>
+        <td><a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#editEmail">Edit</a></td>
+      </tr>
+
+      </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+
+     <table class="table-bordered">
+      <ul class="list-inline">
+        <li><h1> Allergener: </h1></li>
+        <li><h3>nøddeallergi</h3></li>
+        <li><h3>parfumeallergi</h3></li>
+        <li><h3>lactoseintolerent</h3></li>
+        <td><a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#editName">Edit</a></td>
+      </ul>
+     </table>
+    </div>
+  </div>
+</div>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+
+      <table class="table-bordered">
+<tr>
+  <th>anden info:</th>
+  <td>bla bla bla</td>
+  <td><a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#editEmail">Edit</a></td>
+</tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+
+
 
 
 
