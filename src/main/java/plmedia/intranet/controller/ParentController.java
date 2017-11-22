@@ -26,14 +26,17 @@ public class ParentController {
 
 
 
-
+  public String showChildren(Model model) {
+    return "children";
+  }
   @RequestMapping(value = {"/children"}, method = RequestMethod.GET)
   public String child(Model model) {
 
 
-    model.addAttribute("child");
-    return "children";
+    model.addAttribute("children");
+    return showChildren(model);
   }
+
 
 
 

@@ -29,7 +29,7 @@ i højre og venstre side-->
         <a th:each="parent : ${parents}"     href="/parent/details?user=" th:text="${parent.getName()}"   th:attrappend="href=${parent.getParentID()}" class="list-group-item">Thymeleaf Parent</a>
         <a th:each="child : ${children}"     href="/admin/details?user=" th:text="${child.getName()}"    th:attrappend="href=${child.getChildID()}"   class="list-group-item">Thymeleaf Child</a>
 
-        <a href="parent?child=32123" class="list-group-item active">
+        <a href="parents?children=32123" class="list-group-item active">
           Oliver (Kan klikkes på)
         </a>
 
