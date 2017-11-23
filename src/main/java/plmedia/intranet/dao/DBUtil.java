@@ -74,8 +74,9 @@ public class DBUtil extends JdbcUserDetailsManager  {
         ) {
             int i = 1;
             while (rs.next()) {
-                Wing wing = new Wing(rs.getInt("wing_id"), rs.getString("wing_name"), rs.getString("wing_description"));
-                System.out.println(wing.getWingName());
+                //KOMMENTERET UD INDTIL KONSTRUKTOR I WING ER LAVET
+                //Wing wing = new Wing(rs.getInt("wing_id"), rs.getString("wing_name"), rs.getString("wing_description"));
+                //System.out.println(wing.getWingName());
                 i++;
             }
         } catch (SQLException e){

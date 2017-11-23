@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * @author Andreas Nissen
+ * @author Jonas Holm
  */
 @Controller
 public class ParentController {
@@ -37,7 +38,7 @@ public class ParentController {
     model.addAttribute("test", principal.getName());
     return "children";
   }
-  @RequestMapping(value = {"/children"}, method = RequestMethod.GET)
+  @RequestMapping(value = {"/parents/children"}, method = RequestMethod.GET)
   public String child(Model model, Principal principal) {
 
 
