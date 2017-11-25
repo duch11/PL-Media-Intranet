@@ -2,99 +2,125 @@ package plmedia.intranet.dao;
 
 import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
-import plmedia.intranet.model.Wing;
+import plmedia.intranet.model.Employee;
+import plmedia.intranet.model.Parent;
+import plmedia.intranet.model.User;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 /**
  * DBUtil extends JdbcUserDetailsManager.
- * Adds own prepared statements and methods.
+ * Adds custom SQL statements and methods using those statements.
  * @author Tobias Thomsen
  */
 
 public class DBUtil extends JdbcUserDetailsManager  {
 
-    // SQL's
-    public static final String DEF_CREATE_ALLERGEN_SQL = "insert into allergen (allergen_name, allergen_description) values (?,?)";
-    public static final String DEF_ADD_ALLERGEN_SQL = "insert into child_allergen (fk_child_id, fk_allergen_id) values (?,?)";
-/* test */ public static final String TEST_STRING_SQL = "SELECT * FROM wing";
-/* test */ public static final String SECOND_TEST_STRING_SQL = "SELECT first_name FROM user";
+  // SQL's
+  public static final String DEF_GET_ALL_PARENTS_SQL = "SELECT * FROM user WHERE type=\"par\"";
+  public static final String DEF_GET_PERMISSIONS_BY_ID_SQL = "SELECT fk_permission_id FROM user_permission WHERE fk_user_id = ?";
+  public static final String DEF_GET_CHILDREN_BY_PARENT_ID_SQL = "{CALL GetChildrenByParentID(?)}";
 
+  // Fields
+  private String getAllParentsSql = DEF_GET_ALL_PARENTS_SQL;
+  private String getPermissionsByIdSql = DEF_GET_PERMISSIONS_BY_ID_SQL;
+  private String getChildrenByParentIdSql = DEF_GET_CHILDREN_BY_PARENT_ID_SQL;
 
-    // Fields
-    private String createAllergenSql = DEF_CREATE_ALLERGEN_SQL;
-    private String addAllergenSql = DEF_ADD_ALLERGEN_SQL;
+  // Methods
+  // "Rent" SQL kald
+  /**
+   * Returns all users with parent type as Parent objects
+   * with permissions and children as Strings, in an ArrayList.
+   * @return
+   */
+  public ArrayList<Parent> getAllParents() {
+    try(
+      Connection conn = ConMan.getConnection();
+      Statement stmt = conn.createStatement();
+      ResultSet rs = stmt.executeQuery(getAllParentsSql);
+    ) {
+      ArrayList<Parent> parents = new ArrayList<>();
+      ArrayList<String> permissions;
+      ArrayList<String> children;
 
+      while(rs.next()){
+        permissions = getPermissions(rs.getInt("user_id"));
+        children = GetChildrenByParentID(rs.getInt("user_id"));
+        Parent parent = new Parent(
+          rs.getInt("user_id"),
+          rs.getString("password"),
+          rs.getString("user_email"),
+          rs.getString("first_name"),
+          rs.getString("last_name"),
+          permissions);
+          parent.addChildren(children);
+        parents.add(parent);
+      }
 
+      return parents;
 
-/* test */ private String test = TEST_STRING_SQL;
-/* test */ private String second_test = SECOND_TEST_STRING_SQL;
-
-    // Methods
-
-    /**
-     * Creates a new allergen, adding it to the database
-     * @param name
-     * @param description
-     */
-    public void createAllergen(String name, String description) {
-
-        getJdbcTemplate().update(createAllergenSql, new PreparedStatementSetter() {
-            // Anonymous method
-            public void setValues(PreparedStatement ps) throws SQLException {
-                ps.setString(1, name);
-                ps.setString(2, description);
-            }
-        });
+    } catch (SQLException e){
+      e.printStackTrace();
     }
+    return null; // Error code?
+  }
 
-    /**
-     * Adds an existing allergen to a child
-     * @param child_id
-     * @param allergen_id
-     */
-    public void addAllergen(int child_id, int allergen_id){
-        getJdbcTemplate().update(addAllergenSql, new PreparedStatementSetter() {
-            // Anonymous method
-            public void setValues(PreparedStatement ps) throws SQLException {
-                ps.setInt(1, child_id);
-                ps.setInt(2, allergen_id);
-            }
-        });
-    }
+  // Method for prepared statements
+  /**
+   * Returns all permissions belonging to a user id as an ArrayList of Strings.
+   * @param id
+   * @return
+   */
+  public ArrayList<String> getPermissions(int id){
+    try(
+      Connection conn = ConMan.getConnection();
+      PreparedStatement stmt = conn.prepareStatement(
+        getPermissionsByIdSql,
+        ResultSet.TYPE_SCROLL_INSENSITIVE,
+        ResultSet.CONCUR_READ_ONLY);
+    ) {
+      stmt.setInt(1, id);
+      ResultSet rs = stmt.executeQuery();
 
-    /**
-     * 'test' works by knowing how many much data it get and with which datatype and then feeds them to a constructor (The wing constructor isn't commited - was only used for testing).
-     */
-    public void test(){
-        try(
-                Connection conn = ConMan.getConnection();
-                Statement stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery(test)
-        ) {
-            int i = 1;
-            while (rs.next()) {
-                //KOMMENTERET UD INDTIL KONSTRUKTOR I WING ER LAVET
-                //Wing wing = new Wing(rs.getInt("wing_id"), rs.getString("wing_name"), rs.getString("wing_description"));
-                //System.out.println(wing.getWingName());
-                i++;
-            }
-        } catch (SQLException e){
-            e.printStackTrace();
-        }
-    }
+      ArrayList<String> permissions = new ArrayList<>();
 
-    public void bruh(){
-        try(
-                Connection conn = ConMan.getConnection();
-                Statement stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery(second_test);
-        ) {
-            while(rs.next()){
-            System.out.println(rs.getString(1));
-            }
-        } catch (SQLException e){
-            e.printStackTrace();
-        }
+      while (rs.next()) {
+        permissions.add(rs.getString("fk_permission_id"));
+      }
+
+      return permissions;
+
+    } catch (SQLException e){
+      e.printStackTrace();
     }
+    return null; // Error code?
+  }
+
+  // Method for CallableStatements / Stores procedures
+  /**
+   * Returns all the children of a Parent as an ArrayList of Strings
+   * @param id
+   * @return
+   */
+  public ArrayList<String> GetChildrenByParentID(int id){
+    try(
+      Connection conn = ConMan.getConnection();
+      CallableStatement stmt = conn.prepareCall(
+        getChildrenByParentIdSql,
+        ResultSet.TYPE_SCROLL_INSENSITIVE,
+        ResultSet.CONCUR_READ_ONLY);
+    ) {
+      stmt.setInt(1, id);
+      ResultSet rs = stmt.executeQuery();
+      ArrayList<String> children = new ArrayList<>();
+      while (rs.next()) {
+        children.add(rs.getString("fk_child_id"));
+      }
+      return children;
+    } catch (SQLException e){
+      e.printStackTrace();
+    }
+    return null; // Error code?
+  }
 }
