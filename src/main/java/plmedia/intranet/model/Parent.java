@@ -1,13 +1,32 @@
 package plmedia.intranet.model;
 
+import java.util.ArrayList;
+
 /**
  * @author Andreas Nissen
+ * @author Tobias Thomsen
  */
-
-import java.util.ArrayList;
 
 public class Parent extends User {
 
-private ArrayList<String> child;
+  private ArrayList<String> children;
 
+  public Parent(int userId, String password, String userEmail, String firstName, String lastName, ArrayList<String> permissions) {
+    super(userId, password, userEmail, firstName, lastName, permissions);
+  }
+
+  public void addChildren(ArrayList<String> children){
+    this.children = children;
+  }
+
+  public void familyPhoto(){
+    if(children != null){
+      for (String s :
+          children) {
+        System.out.println(s);
+      }
+    } else {
+      System.out.println("Kids are dead or never born!");
+    }
+  }
 }
