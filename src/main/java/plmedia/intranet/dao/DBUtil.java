@@ -1,10 +1,8 @@
 package plmedia.intranet.dao;
 
-import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
-import plmedia.intranet.model.Employee;
+import plmedia.intranet.model.Child;
 import plmedia.intranet.model.Parent;
-import plmedia.intranet.model.User;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -15,17 +13,19 @@ import java.util.ArrayList;
  * @author Tobias Thomsen
  */
 
-public class DBUtil extends JdbcUserDetailsManager  {
+public class DBUtil extends JdbcUserDetailsManager {
 
   // SQL's
   public static final String DEF_GET_ALL_PARENTS_SQL = "SELECT * FROM user WHERE type=\"par\"";
   public static final String DEF_GET_PERMISSIONS_BY_ID_SQL = "SELECT fk_permission_id FROM user_permission WHERE fk_user_id = ?";
-  public static final String DEF_GET_CHILDREN_BY_PARENT_ID_SQL = "{CALL GetChildrenByParentID(?)}";
+  public static final String DEF_GET_CHILDREN_ID_BY_PARENT_ID_SQL = "{CALL GetChildrenByParentID(?)}";
+  public static final String DEF_GET_CHILD_BY_ID_SQL = "SELECT * FROM child WHERE child_id = ?";
 
   // Fields
   private String getAllParentsSql = DEF_GET_ALL_PARENTS_SQL;
   private String getPermissionsByIdSql = DEF_GET_PERMISSIONS_BY_ID_SQL;
-  private String getChildrenByParentIdSql = DEF_GET_CHILDREN_BY_PARENT_ID_SQL;
+  private String getChildrenIDByParentIdSql = DEF_GET_CHILDREN_ID_BY_PARENT_ID_SQL;
+  private String getChildByIDSql = DEF_GET_CHILD_BY_ID_SQL;
 
   // Methods
   // "Rent" SQL kald
@@ -42,11 +42,11 @@ public class DBUtil extends JdbcUserDetailsManager  {
     ) {
       ArrayList<Parent> parents = new ArrayList<>();
       ArrayList<String> permissions;
-      ArrayList<String> children;
+      ArrayList<Integer> children;
 
       while(rs.next()){
         permissions = getPermissions(rs.getInt("user_id"));
-        children = GetChildrenByParentID(rs.getInt("user_id"));
+        children = GetChildrenIDByParentID(rs.getInt("user_id"));
         Parent parent = new Parent(
           rs.getInt("user_id"),
           rs.getString("password"),
@@ -103,21 +103,63 @@ public class DBUtil extends JdbcUserDetailsManager  {
    * @param id
    * @return
    */
-  public ArrayList<String> GetChildrenByParentID(int id){
+  public ArrayList<Integer> GetChildrenIDByParentID(int id){
     try(
       Connection conn = ConMan.getConnection();
       CallableStatement stmt = conn.prepareCall(
-        getChildrenByParentIdSql,
+        getChildrenIDByParentIdSql,
         ResultSet.TYPE_SCROLL_INSENSITIVE,
         ResultSet.CONCUR_READ_ONLY);
     ) {
       stmt.setInt(1, id);
       ResultSet rs = stmt.executeQuery();
-      ArrayList<String> children = new ArrayList<>();
+      ArrayList<Integer> children = new ArrayList<>();
       while (rs.next()) {
-        children.add(rs.getString("fk_child_id"));
+        children.add(rs.getInt("fk_child_id"));
       }
       return children;
+    } catch (SQLException e){
+      e.printStackTrace();
+    }
+    return null; // Error code?
+  }
+
+  /**
+   * Returns child object by child id.
+   * @param id
+   * @return
+   */
+  public Child getChildObject(int id) {
+    try(
+        Connection conn = ConMan.getConnection();
+        PreparedStatement stmt = conn.prepareStatement(
+            getChildByIDSql,
+            ResultSet.TYPE_SCROLL_INSENSITIVE,
+            ResultSet.CONCUR_READ_ONLY);
+    ) {
+      stmt.setInt(1, id);
+      ResultSet rs = stmt.executeQuery();
+
+      ArrayList<String> nap = new ArrayList<>();
+      Child child = null;
+      while(rs.next()){
+
+        child = new Child(
+          rs.getInt("child_id"),
+          rs.getString("first_name"),
+          rs.getString("last_name"),
+          rs.getDate("birthday"),
+          rs.getString("address"),
+          rs.getInt("fk_wing_id"),
+          nap,
+          null,
+          null,
+          null
+        );
+
+      }
+      return child;
+
     } catch (SQLException e){
       e.printStackTrace();
     }
