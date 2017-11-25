@@ -9,19 +9,23 @@ import java.util.ArrayList;
 
 public class Parent extends User {
 
-  private ArrayList<String> children;
+  private ArrayList<Integer> children;
 
   public Parent(int userId, String password, String userEmail, String firstName, String lastName, ArrayList<String> permissions) {
     super(userId, password, userEmail, firstName, lastName, permissions);
   }
 
-  public void addChildren(ArrayList<String> children){
+  public void addChildren(ArrayList<Integer> children){
     this.children = children;
+  }
+
+  public ArrayList<Integer> getChildren() {
+    return children;
   }
 
   public void familyPhoto(){
     if(children != null){
-      for (String s :
+      for (Integer s :
           children) {
         System.out.println(s);
       }

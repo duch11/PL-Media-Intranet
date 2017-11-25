@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * @author Tobias Thomsen
  */
 
-public class DBUtil extends JdbcUserDetailsManager {
+public class DBUtil extends JdbcUserDetailsManager implements DBUtilInterface {
 
   // SQL's
   public static final String DEF_GET_ALL_PARENTS_SQL = "SELECT * FROM user WHERE type=\"par\"";
@@ -34,6 +34,7 @@ public class DBUtil extends JdbcUserDetailsManager {
    * with permissions and children as Strings, in an ArrayList.
    * @return
    */
+  @Override
   public ArrayList<Parent> getAllParents() {
     try(
       Connection conn = ConMan.getConnection();
@@ -72,6 +73,7 @@ public class DBUtil extends JdbcUserDetailsManager {
    * @param id
    * @return
    */
+  @Override
   public ArrayList<String> getPermissions(int id){
     try(
       Connection conn = ConMan.getConnection();
@@ -103,6 +105,7 @@ public class DBUtil extends JdbcUserDetailsManager {
    * @param id
    * @return
    */
+  @Override
   public ArrayList<Integer> GetChildrenIDByParentID(int id){
     try(
       Connection conn = ConMan.getConnection();
@@ -129,6 +132,7 @@ public class DBUtil extends JdbcUserDetailsManager {
    * @param id
    * @return
    */
+  @Override
   public Child getChildObject(int id) {
     try(
         Connection conn = ConMan.getConnection();

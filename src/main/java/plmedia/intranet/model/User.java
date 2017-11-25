@@ -8,8 +8,6 @@ import java.util.ArrayList;
 
 public abstract class User {
 
-
-
   private int userId;
   private String password;
   private String userEmail;
@@ -76,6 +74,13 @@ public abstract class User {
 
   public void setPermissions(ArrayList<String> permissions) {
     this.permissions = permissions;
+  }
+
+
+  // To test populating results
+  @Override
+  public String toString(){
+    return userId + ": " + firstName + " " + lastName + " has email: "+ userEmail + "and password: \"" + password + "\" with permissions: " + permissions;
   }
 
 }
