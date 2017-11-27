@@ -80,7 +80,7 @@ public abstract class User {
   // To test populating results
   @Override
   public String toString(){
-    return userId + ": " + firstName + " " + lastName + " has email: "+ userEmail + "and password: \"" + password + "\" with permissions: " + permissions;
+    return userId + ": " + firstName + " " + lastName + " has email: "+ userEmail + " and password: \"" + password + "\" with permissions: " + permissions;
   }
 
 }
