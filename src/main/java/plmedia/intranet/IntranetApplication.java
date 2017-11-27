@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import plmedia.intranet.dao.DBUtil;
 
 import java.util.ArrayList;
-import plmedia.intranet.dao.DBUtilInterface;
+/*import plmedia.intranet.dao.DBUtilInterface;*/
 import plmedia.intranet.model.Parent;
 
 @SpringBootApplication
@@ -14,7 +14,7 @@ public class IntranetApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(IntranetApplication.class, args);
 
-		DBUtilInterface db = new DBUtil();
+		/*DBUtilInterface db = new DBUtil();
 
 		ArrayList<Parent> parents = db.getAllParents();
 
@@ -25,7 +25,7 @@ public class IntranetApplication {
 					p.getChildren()) {
 				System.out.println(db.getChildObject(s));
 			}
-		}
+		}*/
 
 	}
 }
