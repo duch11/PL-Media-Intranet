@@ -13,33 +13,20 @@ import java.util.ArrayList;
  * @author Tobias Thomsen
  */
 
-public class DBUtil extends JdbcUserDetailsManager implements DBUtilInterface {
+public class DBUtil extends JdbcUserDetailsManager {
 
-  // SQL's
-  public static final String DEF_GET_ALL_PARENTS_SQL = "SELECT * FROM user WHERE type=\"par\"";
-  public static final String DEF_GET_PERMISSIONS_BY_ID_SQL = "SELECT fk_permission_id FROM user_permission WHERE fk_user_id = ?";
-  public static final String DEF_GET_CHILDREN_ID_BY_PARENT_ID_SQL = "{CALL GetChildrenByParentID(?)}";
-  public static final String DEF_GET_CHILD_BY_ID_SQL = "SELECT * FROM child WHERE child_id = ?";
-
-  // Fields
-  private String getAllParentsSql = DEF_GET_ALL_PARENTS_SQL;
-  private String getPermissionsByIdSql = DEF_GET_PERMISSIONS_BY_ID_SQL;
-  private String getChildrenIDByParentIdSql = DEF_GET_CHILDREN_ID_BY_PARENT_ID_SQL;
-  private String getChildByIDSql = DEF_GET_CHILD_BY_ID_SQL;
-
-  // Methods
   // "Rent" SQL kald
   /**
    * Returns all users with parent type as Parent objects
    * with permissions and children as Strings, in an ArrayList.
    * @return
    */
-  @Override
+
   public ArrayList<Parent> getAllParents() {
     try(
       Connection conn = ConMan.getConnection();
       Statement stmt = conn.createStatement();
-      ResultSet rs = stmt.executeQuery(getAllParentsSql);
+      ResultSet rs = stmt.executeQuery(Statements.DEF_GET_ALL_PARENTS_SQL);
     ) {
       ArrayList<Parent> parents = new ArrayList<>();
       ArrayList<String> permissions;
@@ -73,12 +60,12 @@ public class DBUtil extends JdbcUserDetailsManager implements DBUtilInterface {
    * @param id
    * @return
    */
-  @Override
+
   public ArrayList<String> getPermissions(int id){
     try(
       Connection conn = ConMan.getConnection();
       PreparedStatement stmt = conn.prepareStatement(
-        getPermissionsByIdSql,
+        Statements.DEF_GET_PERMISSIONS_BY_ID_SQL,
         ResultSet.TYPE_SCROLL_INSENSITIVE,
         ResultSet.CONCUR_READ_ONLY);
     ) {
@@ -105,12 +92,12 @@ public class DBUtil extends JdbcUserDetailsManager implements DBUtilInterface {
    * @param id
    * @return
    */
-  @Override
+
   public ArrayList<Integer> GetChildrenIDByParentID(int id){
     try(
       Connection conn = ConMan.getConnection();
       CallableStatement stmt = conn.prepareCall(
-        getChildrenIDByParentIdSql,
+        Statements.DEF_GET_CHILDREN_ID_BY_PARENT_ID_SQL,
         ResultSet.TYPE_SCROLL_INSENSITIVE,
         ResultSet.CONCUR_READ_ONLY);
     ) {
@@ -132,12 +119,11 @@ public class DBUtil extends JdbcUserDetailsManager implements DBUtilInterface {
    * @param id
    * @return
    */
-  @Override
   public Child getChildObject(int id) {
     try(
         Connection conn = ConMan.getConnection();
         PreparedStatement stmt = conn.prepareStatement(
-            getChildByIDSql,
+            Statements.DEF_GET_CHILD_BY_ID_SQL,
             ResultSet.TYPE_SCROLL_INSENSITIVE,
             ResultSet.CONCUR_READ_ONLY);
     ) {
