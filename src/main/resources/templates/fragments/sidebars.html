@@ -1,0 +1,42 @@
+<div th:fragment="admin">
+  <!-- this is header -->
+
+  <div class="col-sm-3 col-lg-2 sidebar">
+    <!--<ul class="nav nav-sidebar">
+      <li><a class="newuserbtn" style="" href="#">+ Ny Bruger</a></li>
+    </ul>-->
+    <ul class="nav nav-sidebar">
+      <li>
+        <a th:each="group : ${employeegroups}" href="/admin/employees?groupID=" th:attrappend="href=${group.getGroupID()}" >Thymeleaf Employee Group <span class="badge pull-right">8</span></a>
+      </li>
+
+
+      <li class="active"><a href="/admin/employees" >Admin/Leder</a></li>
+      <li><a href="/admin/employees?groupID=1" >Ansatte</a></li>
+      <li><a href="/admin/employees?groupID=2" >Praktikanter</a></li>
+    </ul>
+    <ul class="nav nav-sidebar">
+      <li><a href="/children">Børn</a></li>
+      <li><a href="/parents">Forældre</a></li>
+    </ul>
+
+  </div>
+
+</div>
+
+<div th:fragment="parent">
+  <!-- this is header -->
+
+  <div class="col-sm-3 col-md-2 sidebar">
+    <!--<ul class="nav nav-sidebar">
+      <li><a class="newuserbtn" style="" href="#">+ Ny Bruger</a></li>
+    </ul>-->
+    <ul class="nav nav-sidebar">
+      <li class="active"><a href="#">Overblik</a></li>
+      <li><a href="#">Bette Søren</a></li>
+      <li><a href="#">Lille Lise</a></li>
+    </ul>
+
+  </div>
+</div>
+
