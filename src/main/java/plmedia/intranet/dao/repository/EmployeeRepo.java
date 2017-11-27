@@ -1,32 +1,55 @@
 package plmedia.intranet.dao.repository;
 
 import java.util.ArrayList;
+import plmedia.intranet.model.Employee;
+import plmedia.intranet.model.Parent;
+import plmedia.intranet.model.User;
 
 /**
  * @author Tobias Thomsen
  */
 
-public class EmployeeRepo extends UserRepo {
-
-    private ArrayList<String> Groups = new ArrayList<>();
+public class EmployeeRepo implements IRepo<Employee>, IUserRepo<Employee>  {
 
 
 
 
-    /**
-     *
-     * @return
-     */
-    public ArrayList<String> getGroups(){
-        return Groups;
-    }
+  @Override
+  public int Create(Employee employee) {
+    return 0;
+  }
 
-    /**
-     *
-     * @param s
-     */
-    public void addGroup(String s){
+  @Override
+  public Employee Read(int i) {
+    return null;
+  }
 
-    }
+  @Override
+  public int Update(Employee employee) {
+    return 0;
+  }
 
+  @Override
+  public int Delete(Employee employee) {
+    return 0;
+  }
+
+  @Override
+  public ArrayList<Employee> ReadAll() {
+    return null;
+  }
+
+  @Override
+  public boolean CheckEmail(String email) {
+    return false;
+  }
+
+  /**
+   *
+   * @param group
+   * @return
+   */
+  public ArrayList<User> ReadGroup(String group) {
+    return null;
+  }
 }
