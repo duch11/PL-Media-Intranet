@@ -10,10 +10,10 @@ import java.util.Date;
 public class Child {
 
 
+  private int childId;
   private String firstName;
   private String lastName;
   private Date birthday;
-  private int childId;
   private String address;
   private int wingId;
   private ArrayList<String> nap;
@@ -25,13 +25,13 @@ public class Child {
   public Child() {
   }
 
-  public Child(String firstName, String lastName, Date birthday, int childId,
+  public Child(int childId, String firstName, String lastName, Date birthday,
       String address, int wingId, ArrayList<String> nap, String trustedPickupPerson,
       String otherInfo, ArrayList<Parent> parents) {
+    this.childId = childId;
     this.firstName = firstName;
     this.lastName = lastName;
     this.birthday = birthday;
-    this.childId = childId;
     this.address = address;
     this.wingId = wingId;
     this.nap = nap;
@@ -118,6 +118,11 @@ public class Child {
 
   public void setParents(ArrayList<Parent> parents) {
     this.parents = parents;
+  }
+
+  @Override
+  public String toString(){
+    return childId + ": " + firstName + " " + lastName + " - " + birthday;
   }
 }
 
