@@ -159,7 +159,7 @@ public class DBUtil {
     return null; // Error code?
   }
 
-  public int createParent(String password, String user_email, String first_name, String last_name, String type) {
+  public int createParent(Parent parent) {
     try(
       Connection conn = ConMan.getConnection();
       PreparedStatement stmt = conn.prepareStatement(
@@ -168,12 +168,12 @@ public class DBUtil {
         ResultSet.CONCUR_READ_ONLY);
     ) {
 
-      if (CheckEmail(user_email) != 10){
-        stmt.setString(1, password);
-        stmt.setString(2, user_email);
-        stmt.setString(3, first_name);
-        stmt.setString(4, last_name);
-        stmt.setString(5, type);
+      if (CheckEmail(parent.getUserEmail()) != 10){
+        stmt.setString(1, parent.getPassword());
+        stmt.setString(2, parent.getUserEmail());
+        stmt.setString(3, parent.getFirstName());
+        stmt.setString(4, parent.getLastName());
+        stmt.setString(5, "ROLE_PAR");
         stmt.setInt(6, 1);
 
         stmt.executeUpdate();
