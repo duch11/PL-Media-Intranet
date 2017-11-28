@@ -1,6 +1,7 @@
 package plmedia.intranet.dao.repository;
 
 import java.util.ArrayList;
+import plmedia.intranet.dao.DBUtil.DBcreate;
 import plmedia.intranet.model.Employee;
 import plmedia.intranet.model.Parent;
 import plmedia.intranet.model.User;
@@ -13,11 +14,11 @@ import plmedia.intranet.model.User;
 public class EmployeeRepo implements IRepo<Employee>, IUserRepo<Employee>  {
 
 
-
+  DBcreate dbc = new DBcreate();
 
   @Override
   public int Create(Employee employee) {
-    return 0;
+    return dbc.createEmployee(employee);
   }
 
   @Override
