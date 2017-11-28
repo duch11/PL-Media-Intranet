@@ -39,11 +39,6 @@ public class EmployeeRepo implements IRepo<Employee>, IUserRepo<Employee>  {
     return null;
   }
 
-  @Override
-  public boolean CheckEmail(String email) {
-    return false;
-  }
-
   /**
    *
    * @param group

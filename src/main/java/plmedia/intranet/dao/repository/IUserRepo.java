@@ -9,12 +9,5 @@ public interface IUserRepo<T> {
 
 
 
-  /**
-   * Checks the database for an existing email
-   * @param email
-   * @return
-   */
-  public boolean CheckEmail(String email);
-
 
 }

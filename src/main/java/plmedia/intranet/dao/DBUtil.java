@@ -36,7 +36,6 @@ public class DBUtil {
       ArrayList<Parent> parents = new ArrayList<>();
       ArrayList<String> permissions;
 
-
       while(rs.next()){
         permissions = getPermissions(rs.getInt("user_id"));
 
@@ -126,11 +125,11 @@ public class DBUtil {
    */
   public Child getChildObject(int id) {
     try(
-        Connection conn = ConMan.getConnection();
-        PreparedStatement stmt = conn.prepareStatement(
-            Statements.DEF_GET_CHILD_BY_ID_SQL,
-            ResultSet.TYPE_SCROLL_INSENSITIVE,
-            ResultSet.CONCUR_READ_ONLY);
+      Connection conn = ConMan.getConnection();
+      PreparedStatement stmt = conn.prepareStatement(
+        Statements.DEF_GET_CHILD_BY_ID_SQL,
+        ResultSet.TYPE_SCROLL_INSENSITIVE,
+        ResultSet.CONCUR_READ_ONLY);
     ) {
       stmt.setInt(1, id);
       ResultSet rs = stmt.executeQuery();
@@ -151,7 +150,6 @@ public class DBUtil {
           null,
           null
         );
-
       }
       return child;
 
@@ -161,18 +159,16 @@ public class DBUtil {
     return null; // Error code?
   }
 
-
   public int createParent(String password, String user_email, String first_name, String last_name, String type) {
     try(
-        Connection conn = ConMan.getConnection();
-        PreparedStatement stmt = conn.prepareStatement(
-            Statements.DEF_CREATE_PARENT_USER_SQL,
-            ResultSet.TYPE_SCROLL_INSENSITIVE,
-            ResultSet.CONCUR_READ_ONLY);
+      Connection conn = ConMan.getConnection();
+      PreparedStatement stmt = conn.prepareStatement(
+        Statements.DEF_CREATE_PARENT_USER_SQL,
+        ResultSet.TYPE_SCROLL_INSENSITIVE,
+        ResultSet.CONCUR_READ_ONLY);
     ) {
 
       if (CheckEmail(user_email) != 10){
-
         stmt.setString(1, password);
         stmt.setString(2, user_email);
         stmt.setString(3, first_name);
@@ -181,18 +177,14 @@ public class DBUtil {
         stmt.setInt(6, 1);
 
         stmt.executeUpdate();
-        System.out.println("success");
-
+        System.out.println("Bruger oprettet");
         return 1; // Error codes?
-
       }
-        System.out.println("Fejl");
+        System.out.println("Bruger ikke oprettet");
     } catch (SQLException e){
       e.printStackTrace();
     }
-
     return -1; // Error codes?
-
   }
 
   public int CheckEmail(String email) {
@@ -205,15 +197,10 @@ public class DBUtil {
         if (rs.getString("user_email").equals(email)){
           return 10;
         }
-
-
       }
     } catch (SQLException e){
       e.printStackTrace();
     }
     return -1; // Error code?
   }
-
-
-
 }

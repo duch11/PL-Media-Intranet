@@ -15,7 +15,7 @@ public class IntranetApplication {
 
 		DBUtil db = new DBUtil();
 
-		db.createParent("123456", "Andreas@rednex.dk", "Andreas", "Nissmand", "ROLE_PAR");
+		db.createParent("123456", "Jonas@rednex.dk", "Andreas", "Nissmand", "ROLE_PAR");
 
 
 		ArrayList<Parent> parents = db.getAllParents();
@@ -23,10 +23,10 @@ public class IntranetApplication {
 		for (Parent p :
 				parents) {
 			System.out.println(p);
-/*			for (int s :
+			for (int s :
 					db.GetChildrenIDByParentID(p.getUserId())) {
 				System.out.println(db.getChildObject(s));
-			}*/
+			}
 		}
 
 	}

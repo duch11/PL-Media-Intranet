@@ -34,10 +34,6 @@ public class ParentRepo<T> implements IRepo<Parent>, IUserRepo<Parent> {
     return null;
   }
 
-  @Override
-  public boolean CheckEmail(String email) {
-    return false;
-  }
 
 
 
