@@ -1,8 +1,9 @@
 package plmedia.intranet.dao.repository;
 
+import ch.qos.logback.core.db.dialect.DBUtil;
 import java.util.ArrayList;
 import org.springframework.stereotype.Repository;
-import plmedia.intranet.dao.DBUtil;
+import plmedia.intranet.dao.DBUtil.DBcreate;
 import plmedia.intranet.model.Parent;
 
 
@@ -14,11 +15,11 @@ import plmedia.intranet.model.Parent;
 @Repository
 public class ParentRepo<T> implements IRepo<Parent>, IUserRepo<Parent> {
 
-  DBUtil db = new DBUtil();
+  DBcreate dbc = new DBcreate();
 
   @Override
   public int Create(Parent parent) {
-    return db.createParent(parent);
+    return dbc.createParent(parent);
   }
 
   @Override
