@@ -5,7 +5,7 @@
 
 /*Set the font-sizes*/
 a, .btn {
-  font-size: 20px;
+  font-size: 18px;
 }
 
 a.navbar-brand {
@@ -43,8 +43,15 @@ p, a, div, h6, .getSerious {
 /*Square all the things!*/
 input.form-control, button.navbar-toggle,
 .btn, a.list-group-item, a.list-group-item.active,
-a.list-group-item:first-child, a.list-group-item:last-child{
+a.list-group-item:first-child, a.list-group-item:last-child, div.modal-content{
   border-radius: 0;
+}
+
+/*Pencil no button*/
+.btn-edit {
+  color: #06a3b9;
+  background-color: transparent;
+  border-color: transparent;
 }
 
 /*NAVBAR TOGGLE in mobile mode, tilpasning*/
@@ -86,7 +93,7 @@ a.list-group-item:first-child, a.list-group-item:last-child{
 }
 
 
-ul.nav.nav-sidebar > li > a
+a > h1 , ul.nav.nav-sidebar > li > a
 {
   color: #06a3b9;
 }

@@ -35,7 +35,7 @@ public class AdminController {
      * */
 
     model.addAttribute("test", principal.getName());
-    model.addAttribute("parent", new Parent("hej1","hej2","hej3","hej4"));
+    model.addAttribute("parent", new Parent());
     return "adminpanel";
   }
 

@@ -26,3 +26,4 @@ nbdist/
 ## Egne regler ##
 application.properties
 *.class
+IntranetApplication.java
