@@ -117,7 +117,7 @@ i højre og venstre side-->
         <li><h3>nøddeallergi</h3></li>
         <li><h3>parfumeallergi</h3></li>
         <li><h3>lactoseintolerent</h3></li>
-        <td><a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#editName">Edit</a></td>
+        <li><a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#editAllergier">Edit</a></li>
       </ul>
      </table>
     </div>
@@ -175,6 +175,8 @@ i højre og venstre side-->
 
 <div id="editEmail" class="modal fade" role="dialog">
   <div class="modal-dialog">
+
+
 
     <!-- Modal content-->
     <div class="modal-content">
@@ -245,37 +247,26 @@ i højre og venstre side-->
 
 <!--Edit Permissions-->
 
-<div id="editPermissions" class="modal fade" role="dialog">
+<div id="editAllergier" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Permissions</h4>
+        <h4 class="modal-title">Allergier</h4>
       </div>
       <div class="modal-body">
         <div class="checkbox">
-          <label><input type="checkbox" value=""/>Tilføje Børn</label>
+          <label><input type="checkbox" value=""/>Nøddeallergi</label>
         </div>
         <div class="checkbox">
-          <label><input type="checkbox" value=""/>Redigere Børn</label>
+          <label><input type="checkbox" value=""/>Parfumeallergi</label>
         </div>
         <div class="checkbox">
-          <label><input type="checkbox" value=""/>Slette Børn</label>
+          <label><input type="checkbox" value=""/>Lactoseintolerent</label>
         </div>
-        <div class="checkbox">
-          <label><input type="checkbox" value=""/>Tilføje Forældre</label>
-        </div>
-        <div class="checkbox">
-          <label><input type="checkbox" value=""/>Redigere Forældre</label>
-        </div>
-        <div class="checkbox">
-          <label><input type="checkbox" value=""/>Slette Forældre</label>
-        </div>
-        <div class="checkbox">
-          <label><input type="checkbox" value=""/>Checke alle børn ind og ud</label>
-        </div>
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
