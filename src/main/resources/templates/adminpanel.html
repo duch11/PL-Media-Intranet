@@ -18,6 +18,20 @@
         <div class="col-sm-9 col-sm-offset-3 col-lg-8 col-lg-offset-3 main">
           <div class="row">
             <h1>Admins/Ledere</h1>
+            <form class="" th:action="@{/admin/createparent}" method="post" th:object="${parent}">
+              <label for="email">email:</label>
+              <input type="text" id="email" name="userEmail" th:field="*{userEmail}"/>
+              <br/>
+              <label for="fname">first name:</label>
+              <input type="text" id="fname" name="firstName" th:field="*{firstName}"/>
+              <br/>
+              <label for="lname">last name:</label>
+              <input type="text" id="lname" name="lastName" th:field="*{lastName}"/>
+              <br/>
+              <label for="pw">password:</label>
+              <input type="password" id="pw" name="password" th:field="*{password}"/>
+              <button type="submit">OK</button>
+            </form>
           </div>
           <!--LIST of users/parents etc-->
           <div class="row">

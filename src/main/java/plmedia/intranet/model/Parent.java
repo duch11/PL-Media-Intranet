@@ -9,6 +9,10 @@ import java.util.ArrayList;
 
 public class Parent extends User {
 
+  public Parent() {
+
+  }
+
   public Parent(int userId, String password, String userEmail, String firstName, String lastName, ArrayList<String> permissions) {
     super(userId, password, userEmail, firstName, lastName, permissions);
   }

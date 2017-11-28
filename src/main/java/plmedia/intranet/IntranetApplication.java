@@ -13,7 +13,7 @@ public class IntranetApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(IntranetApplication.class, args);
 
-		DBUtil db = new DBUtil();
+		/*DBUtil db = new DBUtil();
 
 		db.createParent("123456", "Jonas@rednex.dk", "Andreas", "Nissmand", "ROLE_PAR");
 
@@ -27,7 +27,7 @@ public class IntranetApplication {
 					db.GetChildrenIDByParentID(p.getUserId())) {
 				System.out.println(db.getChildObject(s));
 			}
-		}
+		}*/
 
 	}
 }

@@ -1,6 +1,7 @@
 package plmedia.intranet.dao.repository;
 
 import java.util.ArrayList;
+import org.springframework.stereotype.Repository;
 import plmedia.intranet.dao.DBUtil;
 import plmedia.intranet.model.Parent;
 
@@ -10,6 +11,7 @@ import plmedia.intranet.model.Parent;
  * @author Simon le Févre Ryom
  */
 
+@Repository
 public class ParentRepo<T> implements IRepo<Parent>, IUserRepo<Parent> {
 
   DBUtil db = new DBUtil();

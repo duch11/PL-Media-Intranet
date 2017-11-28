@@ -1,10 +1,16 @@
 package plmedia.intranet.controller;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import java.security.Principal;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import plmedia.intranet.dao.repository.IUserRepo;
+import plmedia.intranet.dao.repository.ParentRepo;
+import plmedia.intranet.model.Parent;
 
 /**
  * @author Jonas Holm
@@ -12,6 +18,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class AdminController {
+
+  @Autowired
+  ParentRepo pRepo;
 
   /**
    * Base method for showing adminpanel
@@ -26,7 +35,7 @@ public class AdminController {
      * */
 
     model.addAttribute("test", principal.getName());
-
+    model.addAttribute("parent", new Parent("hej1","hej2","hej3","hej4"));
     return "adminpanel";
   }
 
@@ -76,6 +85,15 @@ public class AdminController {
   public String parentDetails(Model model, @RequestParam int parent) {
     model.addAttribute("parent", "repo.getParent()" + parent);
     return "detailsview";
+  }
+
+  @RequestMapping(value = {"/admin/createparent"}, method = RequestMethod.POST)
+  public String createParent(Model model, @ModelAttribute Parent newParent){
+    System.out.println("går igennem");
+    System.out.println(newParent.getFirstName() + newParent.getLastName() + newParent.getPassword() + newParent.getUserEmail() );
+    pRepo.Create(newParent);
+
+    return "adminpanel";
   }
 
 
