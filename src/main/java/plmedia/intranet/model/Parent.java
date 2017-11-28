@@ -5,6 +5,7 @@ import java.util.ArrayList;
 /**
  * @author Andreas Nissen
  * @author Tobias Thomsen
+ * @author Simon le Févre Ryom
  */
 
 public class Parent extends User {

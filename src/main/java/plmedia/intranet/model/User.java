@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 /**
  * @author Andreas Nissen
+ * @author Simon le Févre Ryom
  */
 
 public abstract class User {

@@ -2,6 +2,11 @@ package plmedia.intranet.dao.repository;
 
 import java.util.ArrayList;
 
+/**
+ *
+ * @author Simon le Févre Ryom
+ * @author Tobias Thomsen
+ */
 public interface IRepo<T> {
 
   /**
