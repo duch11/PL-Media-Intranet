@@ -30,10 +30,16 @@ p, a, h1, h2, h3, h4, h5, h6, div {
 }
 
 /*Square all the things!*/
-input.form-control ,
+input.form-control, button.navbar-toggle,
 .btn, a.list-group-item, a.list-group-item.active,
 a.list-group-item:first-child, a.list-group-item:last-child{
   border-radius: 0;
+}
+
+/*NAVBAR TOGGLE in mobile mode, tilpasning*/
+.navbar-toggle {
+  margin: 0;
+  padding: 17px 19px;
 }
 
 /*Make logout button fill out the top bar
@@ -43,6 +49,17 @@ a.list-group-item:first-child, a.list-group-item:last-child{
   margin: 0;
   padding: 0;
 }
+@media (max-width: 767px) {
+  .logout-btn, .logout-btn > button.btn {
+    width: 100%;
+    border-bottom: 0;
+  }
+
+  .navbar-nav {
+    margin-bottom: 0;
+  }
+}
+
 
 .logout-btn button {
   height: 50px;
@@ -239,9 +256,11 @@ a.list-group-item.active:hover
 
 .main {
   padding: 20px;
+  padding-top: 0px;
 }
 @media (min-width: 768px) {
   .main {
+    padding-top: 0;
     padding-right: 40px;
     padding-left: 40px;
   }

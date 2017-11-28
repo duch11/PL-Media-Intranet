@@ -1,19 +1,29 @@
 <div th:fragment="header">
   <!-- this is header -->
 
+
   <nav class="navbar navbar-inverse navbar-fixed-top">
-    <ul class="nav navbar-nav navbar-left">
+    <div class="container-fluid">
       <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#brugerInfo">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
         <a class="navbar-brand" href="#">intranet - PL-Media</a>
       </div>
 
-    </ul>
-    <form th:action="@{/logout}" class="navbar-form navbar-right logout-btn" method="post">
-      <button type="submit" class="btn" value="Sign Out">Log ud</button>
-    </form>
-    <ul class="nav navbar-nav navbar-right">
-      <li><a href="#" th:text="${test}">UserEmailTest</a></li>
-    </ul>
-
+      <div class="collapse navbar-collapse" id="brugerInfo">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#" th:text="${test}">UserEmailTest</a></li>
+          <li>
+            <form th:action="@{/logout}" class="navbar-form logout-btn" method="post">
+              <button type="submit" class="btn" value="Sign Out">Log ud</button>
+            </form>
+          </li>
+        </ul>
+      </div>
+    </div>
   </nav>
 </div>
+
