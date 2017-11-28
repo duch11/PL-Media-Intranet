@@ -24,11 +24,19 @@ a.list-group-item {
 
 
 /*Set the font*/
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5 {
   font-family: 'Chewy', cursive;
 }
 
-p, a, div, .getSerious {
+h5{
+  font-size:26px ;
+}
+
+h6{
+  font-size: 20px;
+}
+
+p, a, div, h6, .getSerious {
   font-family: 'Open Sans', sans-serif;
 }
 
