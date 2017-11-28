@@ -47,11 +47,21 @@ a.list-group-item:first-child, a.list-group-item:last-child, div.modal-content{
   border-radius: 0;
 }
 
-/*Pencil no button*/
+/*Pencil edit button changes*/
 .btn-edit {
   color: #06a3b9;
   background-color: transparent;
   border-color: transparent;
+}
+
+/*New xxx button*/
+.btn-new {
+  width: 100%;
+}
+
+/*Navbar child icon*/
+i.fa.fa-child {
+  line-height: inherit;
 }
 
 /*NAVBAR TOGGLE in mobile mode, tilpasning*/
