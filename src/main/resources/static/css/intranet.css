@@ -24,9 +24,12 @@ a.list-group-item {
 
 
 /*Set the font*/
-p, a, h1, h2, h3, h4, h5, h6, div {
-  font-family: 'Patrick Hand SC', cursive;
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Chewy', cursive;
+}
 
+p, a, div, .getSerious {
+  font-family: 'Open Sans', sans-serif;
 }
 
 /*Square all the things!*/
