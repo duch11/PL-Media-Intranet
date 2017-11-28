@@ -19,13 +19,13 @@ i højre og venstre side-->
   </div>
 
   <!--For at Bootstrap grid system virker, her er en row.-->
-  <div class="row">
-    <div class="col-md-2">
-      <a href="/parents" class="btn btn-warning btn-block">Back</a>
-    </div>
+
+  <div th:replace="fragments/sidebars :: parent"/>
+
+
   </div>
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-sm-9 col-sm-offset-3 col-lg-8 col-lg-offset-3 main">
       <table class="table table-striped table-bordered">
         <thead>
         <h1>Dit Barn</h1>
@@ -49,17 +49,17 @@ i højre og venstre side-->
         <tr>
           <th>Fødselsdag:</th>
           <td>11.11-2010</td>
-          <td><a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#editEmail">Edit</a></td>
+          <td><a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#editBirthday">Edit</a></td>
         </tr>
         <tr>
           <th>Adresse:</th>
           <td>augustvej 52</td>
-          <td><a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#editEmail">Edit</a></td>
+          <td><a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#editAddress">Edit</a></td>
         </tr>
         <tr>
           <th>forældre:</th>
           <td>Phillip Lind Nissen</td>
-          <td><a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#editEmail">Edit</a></td>
+          <td><a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#editParents">Edit</a></td>
         </tr>
 
         </tbody>
@@ -70,46 +70,46 @@ i højre og venstre side-->
 
     </div>
   </div>
-</div>
+
 
 <div class="container">
   <div class="row">
-    <div class="col-md-6 ">
-      <div class="center">
+    <div class="col-sm-9 col-sm-offset-3 col-lg-8 col-lg-offset-3 main">
+
 
       <table class="table table-condensed table-bordered ">
       <tr>
         <th>Stue:</th>
         <td>Lilla</td>
-        <td><a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#editEmail">Edit</a></td>
+        <td><a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#editWing">Edit</a></td>
       </tr>
       <tr>
         <th>sovetider:</th>
         <td>kl 11 - 13</td>
-        <td><a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#editEmail">Edit</a></td>
+        <td><a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#editNaptime">Edit</a></td>
       </tr>
       </table>
     </div>
   </div>
 
-    <div class="col-md-6 ">
+    <div class="col-sm-9 col-sm-offset-3 col-lg-8 col-lg-offset-3 main ">
       <div align="center-right">
       <table class="table table-condensed table-bordered ">
       <tr>
         <th>Folk der må hente børnene:</th>
         <td>Andreas Nissen</td>
-        <td><a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#editEmail">Edit</a></td>
+        <td><a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#editGetters">Edit</a></td>
       </tr>
 
       </table>
       </div>
     </div>
   </div>
-</div>
+
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-sm-9 col-sm-offset-3 col-lg-8 col-lg-offset-3 main">
 
      <table class="table-bordered">
       <ul class="list-inline">
@@ -127,13 +127,13 @@ i højre og venstre side-->
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-sm-9 col-sm-offset-3 col-lg-8 col-lg-offset-3 main">
 
       <table class="table table-bordered">
 <tr>
   <th>anden info:</th>
   <td>bla bla bla</td>
-  <td><a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#editEmail">Edit</a></td>
+  <td><a href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#editInfo">Edit</a></td>
 </tr>
       </table>
     </div>
@@ -195,6 +195,161 @@ i højre og venstre side-->
   </div>
 </div>
 
+<div id="editBirthday" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <!--Kryds knap-->
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Fødselsdag</h4>
+      <div class="modal-body">
+        <input type="text"/>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div id="editAddress" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <!--Kryds knap-->
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Adresse</h4>
+        <div class="modal-body">
+          <input type="text"/>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div id="editParents" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <!--Kryds knap-->
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Forældre</h4>
+        <div class="modal-body">
+          <input type="text"/>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="editWing" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <!--Kryds knap-->
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Stue</h4>
+        <div class="modal-body">
+          <input type="text"/>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="editNaptime" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <!--Kryds knap-->
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Sovetider</h4>
+        <div class="modal-body">
+          <input type="text"/>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="editGetters" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <!--Kryds knap-->
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Hentere</h4>
+        <div class="modal-body">
+          <input type="text"/>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="editInfo" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <!--Kryds knap-->
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Information</h4>
+        <div class="modal-body">
+          <input type="text"/>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div id="editPassword" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
@@ -215,6 +370,8 @@ i højre og venstre side-->
     </div>
   </div>
 </div>
+
+
 
 
 <div id="editGroups" class="modal fade" role="dialog">
