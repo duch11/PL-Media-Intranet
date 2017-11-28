@@ -15,11 +15,7 @@ public class DBcreate {
 
   public int createParent(Parent parent) {
     try(
-        Connection conn = ConMan.getConnection();
-        PreparedStatement stmt = conn.prepareStatement(
-            Statements.DEF_CREATE_PARENT_USER_SQL,
-            ResultSet.TYPE_SCROLL_INSENSITIVE,
-            ResultSet.CONCUR_READ_ONLY);
+        PreparedStatement stmt = ConMan.prepStat(Statements.DEF_CREATE_PARENT_USER_SQL);
     ) {
 
       if (util.CheckEmail(parent.getUserEmail()) != 10){

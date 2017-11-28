@@ -15,9 +15,7 @@ public class DBread {
 
   public ArrayList<Parent> readAllParents() {
     try(
-        Connection conn = ConMan.getConnection();
-        PreparedStatement stmt = conn.prepareStatement(Statements.DEF_GET_ALL_USERS_BY_TYPE_SQL);
-
+        PreparedStatement stmt = ConMan.prepStat(Statements.DEF_GET_ALL_USERS_BY_TYPE_SQL);
     ) {
       stmt.setString(1, "ROLE_PAR");
       ResultSet rs = stmt.executeQuery();
@@ -48,11 +46,7 @@ public class DBread {
 
   public ArrayList<String> readPermissions(int id){
     try(
-        Connection conn = ConMan.getConnection();
-        PreparedStatement stmt = conn.prepareStatement(
-            Statements.DEF_GET_PERMISSIONS_BY_ID_SQL,
-            ResultSet.TYPE_SCROLL_INSENSITIVE,
-            ResultSet.CONCUR_READ_ONLY);
+        PreparedStatement stmt = ConMan.prepStat(Statements.DEF_GET_PERMISSIONS_BY_ID_SQL);
     ) {
       stmt.setInt(1, id);
       ResultSet rs = stmt.executeQuery();
@@ -73,11 +67,7 @@ public class DBread {
 
   public ArrayList<Integer> readChildrenIDByParentID(int id){
     try(
-        Connection conn = ConMan.getConnection();
-        CallableStatement stmt = conn.prepareCall(
-            Statements.DEF_GET_CHILDREN_ID_BY_PARENT_ID_SQL,
-            ResultSet.TYPE_SCROLL_INSENSITIVE,
-            ResultSet.CONCUR_READ_ONLY);
+      CallableStatement stmt = ConMan.callStat(Statements.DEF_GET_CHILDREN_ID_BY_PARENT_ID_SQL)
     ) {
       stmt.setInt(1, id);
       ResultSet rs = stmt.executeQuery();
@@ -94,11 +84,7 @@ public class DBread {
 
   public Child readChildObject(int id) {
     try(
-        Connection conn = ConMan.getConnection();
-        PreparedStatement stmt = conn.prepareStatement(
-            Statements.DEF_GET_CHILD_BY_ID_SQL,
-            ResultSet.TYPE_SCROLL_INSENSITIVE,
-            ResultSet.CONCUR_READ_ONLY);
+        PreparedStatement stmt = ConMan.prepStat(Statements.DEF_GET_CHILD_BY_ID_SQL);
     ) {
       stmt.setInt(1, id);
       ResultSet rs = stmt.executeQuery();
