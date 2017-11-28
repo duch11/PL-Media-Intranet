@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
 * @author Jonas Holm
+ *@author Andreas Nissen
 * */
 
 @Controller
