@@ -28,6 +28,13 @@ public abstract class User {
     this.permissions = permissions;
   }
 
+  public User(String password, String userEmail, String firstName, String lastName) {
+    this.password = password;
+    this.userEmail = userEmail;
+    this.firstName = firstName;
+    this.lastName = lastName;
+  }
+
   public int getUserId() {
     return userId;
   }
@@ -82,5 +89,6 @@ public abstract class User {
   public String toString(){
     return userId + ": " + firstName + " " + lastName + " has email: "+ userEmail + " and password: \"" + password + "\" with permissions: " + permissions;
   }
+
 
 }
