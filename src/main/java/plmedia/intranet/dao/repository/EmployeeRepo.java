@@ -7,6 +7,7 @@ import plmedia.intranet.model.User;
 
 /**
  * @author Tobias Thomsen
+ * @author Simon le Févre Ryom
  */
 
 public class EmployeeRepo implements IRepo<Employee>, IUserRepo<Employee>  {
