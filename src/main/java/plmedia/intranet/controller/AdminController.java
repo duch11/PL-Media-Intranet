@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import plmedia.intranet.dao.repository.EmployeeRepo;
 import plmedia.intranet.dao.repository.IUserRepo;
 import plmedia.intranet.dao.repository.ParentRepo;
 import plmedia.intranet.model.Employee;
@@ -24,6 +25,9 @@ public class AdminController {
   @Autowired
   ParentRepo parentRepo;
 
+  @Autowired
+  EmployeeRepo employeeRepo;
+
   /**
    * Base method for showing adminpanel
   * makes renaming and adding "universal" actions more sensible
@@ -38,6 +42,7 @@ public class AdminController {
 
     model.addAttribute("test", principal.getName());
     model.addAttribute("parent", new Parent());
+    model.addAttribute("employee", new Employee());
     return "adminpanel";
   }
 
@@ -94,9 +99,9 @@ public class AdminController {
 
     System.out.println(newEmployee);
 
-    //pRepo.Create(newParent);
+    employeeRepo.Create(newEmployee);
 
-    return "adminpanel";
+    return "redirect:/admin/employees";
   }
 
   @RequestMapping(value = {"/admin/create/parent"}, method = RequestMethod.POST)
@@ -106,7 +111,7 @@ public class AdminController {
 
     parentRepo.Create(newParent);
 
-    return "adminpanel";
+    return "redirect:/admin/parents";
   }
 
 
