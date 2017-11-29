@@ -11,11 +11,13 @@ import plmedia.intranet.model.Child;
 import plmedia.intranet.model.Employee;
 import plmedia.intranet.model.Parent;
 import plmedia.intranet.model.Wing;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 
 public class DBcreate {
 
   Util util = new Util();
+  BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
   public int createParent(Parent parent) {
     try(
@@ -23,7 +25,10 @@ public class DBcreate {
     ) {
 
       if (util.CheckEmail(parent.getUserEmail()) != 10){
-        stmt.setString(1, parent.getPassword());
+        String parentPass = parent.getPassword();
+        String hashedPassword = passwordEncoder.encode(parentPass);
+
+        stmt.setString(1, hashedPassword);
         stmt.setString(2, parent.getUserEmail());
         stmt.setString(3, parent.getFirstName());
         stmt.setString(4, parent.getLastName());
@@ -47,7 +52,10 @@ public class DBcreate {
     ) {
 
       if (util.CheckEmail(employee.getUserEmail()) != 10){
-        stmt.setString(1, employee.getPassword());
+        String employeePass = employee.getPassword();
+        String hashedPassword = passwordEncoder.encode(employeePass);
+
+        stmt.setString(1, hashedPassword);
         stmt.setString(2, employee.getUserEmail());
         stmt.setString(3, employee.getFirstName());
         stmt.setString(4, employee.getLastName());
