@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
  * @author Jonas holm
@@ -59,6 +60,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
          * Ellers virker det, og vi tjekker op mod user_email.
          * */
         auth.jdbcAuthentication().dataSource(dataSource)
+                /*.passwordEncoder(new BCryptPasswordEncoder())*/
             .usersByUsernameQuery(
                 "select user_email,password, enabled from user where user_email=?")
             .authoritiesByUsernameQuery(

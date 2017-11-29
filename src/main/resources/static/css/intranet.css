@@ -89,41 +89,47 @@ i.fa.fa-child {
 }
 
 
+
+/*LOG OUT BUTTON*/
 .logout-btn button {
   height: 50px;
   width: 80px;
-  color: #fff;
-  background-color: #df1d3b;
 }
 
-/*Make it change color on hover*/
-.logout-btn button:hover {
-  color: #fff;
-  background-color: #ff2244;
-}
+/* -- COLOR OVERRIDES -- */
+/* -- COLOR OVERRIDES -- */
+/* -- COLOR OVERRIDES -- */
 
-
+/*LINKS in sidebar*/
 a > h1 , ul.nav.nav-sidebar > li > a
 {
-  color: #06a3b9;
+  color: #46b0cc;
 }
 
+/*Tekst i aktivt link i sidebar*/
 ul.nav.nav-sidebar > li.active > a
 {
   color: #FFF;
 }
 
-.btn-success, .btn-success:hover,
-ul.nav.nav-sidebar > li > a.newuserbtn,
-ul.nav.nav-sidebar > li > a.newuserbtn:hover{
+.btn-success, .btn-success:hover{
   background-color: #4ac439;
   color: #fff;
   border-color: #4ac439;
 }
 
-.btn-success:hover,
-ul.nav.nav-sidebar > li > a.newuserbtn:hover{
+.btn-success:hover{
   background-color: #49d338;
+}
+
+.btn-danger, .btn-danger:hover {
+  color: #fff;
+  background-color: #df1d3b;
+}
+
+.btn-danger:hover,
+.logout-btn button:hover {
+  background-color: #ff2244;
 }
 
 /*
