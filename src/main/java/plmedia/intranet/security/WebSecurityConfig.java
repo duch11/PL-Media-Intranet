@@ -60,7 +60,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
          * Ellers virker det, og vi tjekker op mod user_email.
          * */
         auth.jdbcAuthentication().dataSource(dataSource)
-                /*.passwordEncoder(new BCryptPasswordEncoder())*/
+                .passwordEncoder(new BCryptPasswordEncoder())
             .usersByUsernameQuery(
                 "select user_email,password, enabled from user where user_email=?")
             .authoritiesByUsernameQuery(

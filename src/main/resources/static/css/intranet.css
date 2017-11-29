@@ -112,23 +112,23 @@ ul.nav.nav-sidebar > li.active > a
   color: #FFF;
 }
 
-.btn-success, .btn-success:hover{
+.btn-success, .btn-success:hover, .btn-success:focus{
   background-color: #4ac439;
   color: #fff;
   border-color: #4ac439;
 }
 
-.btn-success:hover{
+.btn-success:hover, .btn-success:focus{
   background-color: #49d338;
 }
 
-.btn-danger, .btn-danger:hover {
+.btn-danger, .btn-danger:hover, .btn-danger:focus{
   color: #fff;
   background-color: #df1d3b;
 }
 
 .btn-danger:hover,
-.logout-btn button:hover {
+.btn-danger:focus{
   background-color: #ff2244;
 }
 

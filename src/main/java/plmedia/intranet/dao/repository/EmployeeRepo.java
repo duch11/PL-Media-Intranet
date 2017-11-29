@@ -1,6 +1,8 @@
 package plmedia.intranet.dao.repository;
 
 import java.util.ArrayList;
+
+import org.springframework.stereotype.Repository;
 import plmedia.intranet.dao.DBUtil.DBcreate;
 import plmedia.intranet.model.Employee;
 import plmedia.intranet.model.Parent;
@@ -11,6 +13,7 @@ import plmedia.intranet.model.User;
  * @author Simon le Févre Ryom
  */
 
+@Repository
 public class EmployeeRepo implements IRepo<Employee>, IUserRepo<Employee>  {
 
 
