@@ -7,6 +7,7 @@ import plmedia.intranet.model.Parent;
 import plmedia.intranet.model.User;
 
 /**
+ * A repository for Employee objects.
  * @author Tobias Thomsen
  * @author Simon le Févre Ryom
  */
@@ -16,6 +17,11 @@ public class EmployeeRepo implements IRepo<Employee>, IUserRepo<Employee>  {
 
   DBcreate dbc = new DBcreate();
 
+  /**
+   * Creates Employee object. Takes logic from DBcreate.
+   * @param employee
+   * @return int
+   */
   @Override
   public int Create(Employee employee) {
     return dbc.createEmployee(employee);

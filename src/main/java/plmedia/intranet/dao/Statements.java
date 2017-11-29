@@ -1,5 +1,7 @@
 package plmedia.intranet.dao;
 
+import org.omg.PortableInterceptor.ServerRequestInfo;
+
 /**
  * @author Tobias Thomsen
  * @author Simon le Févre Ryom
@@ -25,6 +27,7 @@ public class Statements {
   public static final String DEF_CREATE_PARENT_USER_SQL = "INSERT INTO user (password, user_email, first_name, last_name, type, enabled) VALUES(?,?,?,?,?,?)";
   public static final String DEF_CREATE_EMPLOYEE_USER_SQL = "INSERT INTO user (password, user_email, first_name, last_name, type, enabled) VALUES(?,?,?,?,?,?)";
   public static final String DEF_CREATE_CHILD_SQL = "INSERT INTO child (first_name, last_name, birthday, address) VALUES(?,?,?,?)";
+  public static final String DEF_CREATE_WING_SQL = "INSERT INTO wing (wing_name, wing_description) VALUES (?,?)";
 
   // Deletes
 

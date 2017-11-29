@@ -26,4 +26,12 @@ public class Wing {
     this.wingName = wingName;
     this.wingDescription = wingDescription;
   }
+
+  public String getWingName() {
+    return wingName;
+  }
+
+  public String getWingDescription() {
+    return wingDescription;
+  }
 }
