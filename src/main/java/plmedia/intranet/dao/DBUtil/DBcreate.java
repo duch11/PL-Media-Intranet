@@ -1,9 +1,7 @@
 package plmedia.intranet.dao.DBUtil;
 
-import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import plmedia.intranet.dao.ConMan;
 import plmedia.intranet.dao.Statements;
@@ -13,12 +11,22 @@ import plmedia.intranet.model.Parent;
 import plmedia.intranet.model.Wing;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-
+/**
+ *
+ * @author Simon le Févre Ryom
+ * @author Tobias Thomsen
+ */
 public class DBcreate {
 
   Util util = new Util();
   BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
+
+  /**
+   * Creates Parent object.
+   * @param parent
+   * @return int
+   */
   public int createParent(Parent parent) {
     try(
         PreparedStatement stmt = ConMan.prepStat(Statements.DEF_CREATE_PARENT_USER_SQL);
@@ -46,6 +54,11 @@ public class DBcreate {
     return -1; // Error codes?
   }
 
+  /**
+   * Creates Employee object.
+   * @param employee
+   * @return int
+   */
   public int createEmployee(Employee employee) {
     try(
         PreparedStatement stmt = ConMan.prepStat(Statements.DEF_CREATE_EMPLOYEE_USER_SQL);
@@ -75,8 +88,8 @@ public class DBcreate {
   }
 
   /**
-   * Creates an initial child object using simplified constructor.
-   * Maybe test for already existing children.
+   * Creates an initial child object using simplified constructor. not finished!!!
+   * Maybe test for already existing children. needs readChild()
    * @param child
    * @return int
    */
@@ -90,7 +103,7 @@ public class DBcreate {
       stmt.setString(4, child.getAddress());
 
       stmt.executeUpdate();
-      System.out.println("Child created");
+      System.out.println("Child" +" "+ child.getFirstName() +" "+ child.getLastName() +" "+ "created");
       return 1; // Error codes?
     } catch (SQLException e) {
       e.printStackTrace();
@@ -99,7 +112,24 @@ public class DBcreate {
     return -1; // Error codes?
   }
 
-  public int createWing(Wing wing) {
-    return 0;
+  /**
+   * Creates Wing object.
+   * @param wing
+   * @return int
+   */
+  public int createWing(Wing wing) { // maybe needs check for already existing wing name.
+    try(
+        PreparedStatement stmt = ConMan.prepStat(Statements.DEF_CREATE_WING_SQL);
+    ) {
+       stmt.setString(1, wing.getWingName());
+       stmt.setString(2, wing.getWingDescription());
+
+       stmt.executeUpdate();
+      System.out.println("Wing" +" "+ wing.getWingName() +" "+ "created!");
+      return 1;
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return -1;
   }
 }
