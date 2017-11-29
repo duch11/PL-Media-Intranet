@@ -24,7 +24,7 @@ public class DBcreate {
         PreparedStatement stmt = ConMan.prepStat(Statements.DEF_CREATE_PARENT_USER_SQL);
     ) {
 
-      if (util.CheckEmail(parent.getUserEmail()) != 10){
+      if (util.checkEmail(parent.getUserEmail()) != 10){
         String parentPass = parent.getPassword();
         String hashedPassword = passwordEncoder.encode(parentPass);
 
@@ -51,7 +51,7 @@ public class DBcreate {
         PreparedStatement stmt = ConMan.prepStat(Statements.DEF_CREATE_EMPLOYEE_USER_SQL);
     ) {
 
-      if (util.CheckEmail(employee.getUserEmail()) != 10){
+      if (util.checkEmail(employee.getUserEmail()) != 10){
         String employeePass = employee.getPassword();
         String hashedPassword = passwordEncoder.encode(employeePass);
 
