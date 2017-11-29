@@ -24,6 +24,6 @@ nbdist/
 .nb-gradle/
 
 ## Egne regler ##
-application.properties
 *.class
+application.properties
 IntranetApplication.java

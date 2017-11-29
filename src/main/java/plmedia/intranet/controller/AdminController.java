@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import plmedia.intranet.dao.repository.IUserRepo;
 import plmedia.intranet.dao.repository.ParentRepo;
+import plmedia.intranet.model.Employee;
 import plmedia.intranet.model.Parent;
 
 /**
@@ -88,11 +89,22 @@ public class AdminController {
     return "detailsview";
   }
 
-  @RequestMapping(value = {"/admin/createparent"}, method = RequestMethod.POST)
+  @RequestMapping(value = {"/admin/create/employee"}, method = RequestMethod.POST)
+  public String createUser(Model model, @ModelAttribute Employee newEmployee){
+
+    System.out.println(newEmployee);
+
+    //pRepo.Create(newParent);
+
+    return "adminpanel";
+  }
+
+  @RequestMapping(value = {"/admin/create/parent"}, method = RequestMethod.POST)
   public String createParent(Model model, @ModelAttribute Parent newParent){
-    System.out.println("går igennem");
-    System.out.println(newParent.getFirstName() + newParent.getLastName() + newParent.getPassword() + newParent.getUserEmail() );
-    pRepo.Create(newParent);
+
+    System.out.println(newParent);
+
+    //pRepo.Create(newParent);
 
     return "adminpanel";
   }

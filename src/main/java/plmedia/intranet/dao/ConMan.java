@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class ConMan {
   private static String USERNAME = "PLintra-dev";
@@ -32,6 +33,13 @@ public class ConMan {
     return stmt;
   }
 
+  public static ResultSet regStat(String SQL) throws SQLException {
+    Statement stmt = getConnection().createStatement(
+        ResultSet.TYPE_SCROLL_INSENSITIVE,
+        ResultSet.CONCUR_READ_ONLY);
+      return stmt.executeQuery(SQL);
+  }
+
 
   public static void processException(SQLException e){
     System.err.println("Error message: " + e.getMessage());
@@ -39,3 +47,4 @@ public class ConMan {
     System.err.println("SQL state: " + e.getSQLState());
   }
 }
+
