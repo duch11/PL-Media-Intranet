@@ -22,7 +22,7 @@ import plmedia.intranet.model.Parent;
 public class AdminController {
 
   @Autowired
-  ParentRepo pRepo;
+  ParentRepo parentRepo;
 
   /**
    * Base method for showing adminpanel
@@ -104,7 +104,7 @@ public class AdminController {
 
     System.out.println(newParent);
 
-    //pRepo.Create(newParent);
+    parentRepo.Create(newParent);
 
     return "adminpanel";
   }
