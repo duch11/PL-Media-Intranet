@@ -5,6 +5,7 @@ import java.util.Date;
 
 /**
  * @author Andreas Nissen
+ * @author Simon le Févre Ryom
  */
 
 public class Child {
@@ -38,6 +39,13 @@ public class Child {
     this.trustedPickupPerson = trustedPickupPerson;
     this.otherInfo = otherInfo;
     this.parents = parents;
+  }
+
+  public Child(String firstName, String lastName, Date birthday, String address) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.birthday = birthday;
+    this.address = address;
   }
 
   public String getFirstName() {

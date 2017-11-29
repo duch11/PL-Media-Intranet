@@ -1,13 +1,16 @@
 package plmedia.intranet.dao.DBUtil;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import plmedia.intranet.dao.ConMan;
 import plmedia.intranet.dao.Statements;
+import plmedia.intranet.model.Child;
 import plmedia.intranet.model.Employee;
 import plmedia.intranet.model.Parent;
+import plmedia.intranet.model.Wing;
 
 
 public class DBcreate {
@@ -61,5 +64,34 @@ public class DBcreate {
       e.printStackTrace();
     }
     return -1; // Error codes?
+  }
+
+  /**
+   * Creates an initial child object using simplified constructor.
+   * Maybe test for already existing children.
+   * @param child
+   * @return int
+   */
+  public int createChild(Child child) {
+    try (
+        PreparedStatement stmt = ConMan.prepStat(Statements.DEF_CREATE_CHILD_SQL);
+    ) {
+      stmt.setString(1, child.getFirstName());
+      stmt.setString(2, child.getLastName());
+      stmt.setDate(3, (Date) child.getBirthday());
+      stmt.setString(4, child.getAddress());
+
+      stmt.executeUpdate();
+      System.out.println("Child created");
+      return 1; // Error codes?
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    System.out.println("Child NOT created");
+    return -1; // Error codes?
+  }
+
+  public int createWing(Wing wing) {
+    return 0;
   }
 }
