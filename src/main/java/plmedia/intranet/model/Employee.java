@@ -17,7 +17,7 @@ public class Employee extends User {
   public Employee() {
   }
 
-  public Employee(int userId, String password, String userEmail, String firstName, String lastName, ArrayList<String> permissions) {
+  public Employee(int userId, String password, String userEmail, String firstName, String lastName, ArrayList<Permission> permissions) {
     super(userId, password, userEmail, firstName, lastName, permissions);
   }
 

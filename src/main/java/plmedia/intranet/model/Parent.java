@@ -14,7 +14,7 @@ public class Parent extends User {
 
   }
 
-  public Parent(int userId, String password, String userEmail, String firstName, String lastName, ArrayList<String> permissions) {
+  public Parent(int userId, String password, String userEmail, String firstName, String lastName, ArrayList<Permission> permissions) {
     super(userId, password, userEmail, firstName, lastName, permissions);
   }
 
