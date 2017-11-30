@@ -10,7 +10,6 @@ import plmedia.intranet.dao.Statements;
 
 public class Util {
 
-
   public int checkEmail(String email) {
     try(
         ResultSet rs = ConMan.regStat(Statements.DEF_GET_ALL_EMAIL);

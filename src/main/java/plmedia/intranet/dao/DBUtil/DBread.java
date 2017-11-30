@@ -1,17 +1,20 @@
 package plmedia.intranet.dao.DBUtil;
 
 import java.sql.CallableStatement;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import plmedia.intranet.dao.ConMan;
 import plmedia.intranet.dao.Statements;
+import plmedia.intranet.dao.repository.PermissionRepo;
 import plmedia.intranet.model.Child;
 import plmedia.intranet.model.Parent;
+import plmedia.intranet.model.Permission;
 
 public class DBread {
+
+  PermissionRepo permissionRepo = new PermissionRepo();
 
   public ArrayList<Parent> readAllParents() {
     try(
@@ -21,10 +24,10 @@ public class DBread {
       ResultSet rs = stmt.executeQuery();
 
       ArrayList<Parent> parents = new ArrayList<>();
-      ArrayList<String> permissions;
+      ArrayList<Permission> permissions;
 
       while(rs.next()){
-        permissions = readPermissions(rs.getInt("user_id"));
+        permissions = permissionRepo.readPermissionsByUserID((rs.getInt("user_id")));
 
         Parent parent = new Parent(
             rs.getInt("user_id"),
@@ -37,27 +40,6 @@ public class DBread {
       }
 
       return parents;
-
-    } catch (SQLException e){
-      e.printStackTrace();
-    }
-    return null; // Error code?
-  }
-
-  public ArrayList<String> readPermissions(int id){
-    try(
-        PreparedStatement stmt = ConMan.prepStat(Statements.DEF_GET_PERMISSIONS_BY_ID_SQL);
-    ) {
-      stmt.setInt(1, id);
-      ResultSet rs = stmt.executeQuery();
-
-      ArrayList<String> permissions = new ArrayList<>();
-
-      while (rs.next()) {
-        permissions.add(rs.getString("fk_permission_id"));
-      }
-
-      return permissions;
 
     } catch (SQLException e){
       e.printStackTrace();

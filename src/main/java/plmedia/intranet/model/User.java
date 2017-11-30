@@ -14,13 +14,13 @@ public abstract class User {
   private String userEmail;
   private String firstName;
   private String lastName;
-  private ArrayList<String> permissions;
+  private ArrayList<Permission> permissions;
 
   public User() {
   }
 
   public User(int userId, String password, String userEmail, String firstName,
-      String lastName, ArrayList<String> permissions) {
+      String lastName, ArrayList<Permission> permissions) {
     this.userId = userId;
     this.password = password;
     this.userEmail = userEmail;
@@ -76,11 +76,11 @@ public abstract class User {
     this.lastName = lastName;
   }
 
-  public ArrayList<String> getPermissions() {
+  public ArrayList<Permission> getPermissions() {
     return permissions;
   }
 
-  public void setPermissions(ArrayList<String> permissions) {
+  public void setPermissions(ArrayList<Permission> permissions) {
     this.permissions = permissions;
   }
 
