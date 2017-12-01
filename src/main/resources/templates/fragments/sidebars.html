@@ -6,18 +6,25 @@
     <li><a class="newuserbtn" style="" href="#">+ Ny Bruger</a></li>
   </ul>-->
   <ul class="nav nav-sidebar">
-    <li>
-      <a th:each="group : ${employeegroups}" href="/admin/employees?groupID=" th:attrappend="href=${group.getGroupID()}" >Thymeleaf Employee Group <span class="badge pull-right">8</span></a>
+    <li th:class="(${allUsers} or ${user}) ? 'active'">
+      <a href="/admin">Personale</a>
+      <li th:if="${user}" class=" profile">
+        <a><i  class="fa fa-user" aria-hidden="true"></i></a>
+      </li>
+    </li>
+
+    <li th:each="group : ${employeeGroups}" th:class="${currentGroup} ? ((${group.getId()} == ${currentGroup.getId()}) ? 'active')">
+      <a th:attrappend="href=${group.getId()}" th:text="'- ' + ${group.getGroupName()}" href="/admin/employees?groupID=" >Thymeleaf Employee Group</a>
     </li>
 
 
-    <li class="active"><a href="/admin/employees" >Admin/Leder</a></li>
+    <!--<li class="active"><a href="/admin/employees" >Admin/Leder</a></li>
     <li><a href="/admin/employees?groupID=1" >Ansatte</a></li>
-    <li><a href="/admin/employees?groupID=2" >Praktikanter</a></li>
+    <li><a href="/admin/employees?groupID=2" >Praktikanter</a></li>-->
   </ul>
   <ul class="nav nav-sidebar">
-    <li><a href="/children">Børn</a></li>
-    <li><a href="/parents">Forældre</a></li>
+    <li th:class="${children} ? 'active'"><a href="/admin/children">Børn</a></li>
+    <li th:class="${parents} ? 'active'"><a href="/admin/parents">Forældre</a></li>
   </ul>
 
 </div>

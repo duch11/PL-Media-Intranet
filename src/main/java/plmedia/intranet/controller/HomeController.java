@@ -31,7 +31,7 @@ public class HomeController {
      * Her er det vigtigt at type har enten værdien ROLE_EMP eller ROLE_PAR
      * */
     if(SecurityContextHolder.getContext().getAuthentication().getAuthorities().contains(new SimpleGrantedAuthority("ROLE_EMP"))){
-      return new AdminController().showAdminPanel(model, principal);
+      return "redirect:/admin";
     }
     return new ParentController().showParentView(model, principal);
   }
@@ -41,7 +41,7 @@ public class HomeController {
     return "login";
   }
 
-  
+
 
 
 
