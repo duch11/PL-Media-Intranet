@@ -2,6 +2,8 @@ package plmedia.intranet.dao.DBUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import plmedia.intranet.dao.repository.PermissionRepo;
 import plmedia.intranet.model.Child;
 import plmedia.intranet.model.Employee;
 import plmedia.intranet.model.Group;
@@ -11,14 +13,30 @@ import plmedia.intranet.model.Wing;
 
 public class ObjectFactory  {
 
-  public Parent makeParent(ResultSet rs){
+  PermissionRepo permissionRepo = new PermissionRepo();
 
-    return null;
+  public Parent makeParent(ResultSet rs) throws SQLException{
+    ArrayList<Permission> permissions;
+    permissions = permissionRepo.readPermissionsByUserID((rs.getInt("user_id")));
+    return new Parent(
+        rs.getInt("user_id"),
+        rs.getString("password"),
+        rs.getString("user_email"),
+        rs.getString("first_name"),
+        rs.getString("last_name"),
+        permissions);
   }
 
-  public Employee makeEmployee(ResultSet rs){
-
-    return null;
+  public Employee makeEmployee(ResultSet rs) throws SQLException{
+    ArrayList<Permission> permissions;
+    permissions = permissionRepo.readPermissionsByUserID((rs.getInt("user_id")));
+    return new Employee(
+        rs.getInt("user_id"),
+        rs.getString("password"),
+        rs.getString("user_email"),
+        rs.getString("first_name"),
+        rs.getString("last_name"),
+        permissions);
   }
 
   public Child makeChild(ResultSet rs) throws SQLException {
