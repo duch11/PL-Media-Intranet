@@ -60,7 +60,8 @@ a.list-group-item:first-child, a.list-group-item:last-child, div.modal-content{
 }
 
 /*Navbar child icon*/
-i.fa.fa-child {
+i.fa.fa-child,
+i.fa.fa-user{
   line-height: inherit;
 }
 
@@ -107,10 +108,22 @@ a > h1 , ul.nav.nav-sidebar > li > a
 }
 
 /*Tekst i aktivt link i sidebar*/
-ul.nav.nav-sidebar > li.active > a
+ul.nav.nav-sidebar > li.active > a,
+ul.nav.nav-sidebar > li > a.active
 {
-  color: #FFF;
+  color: #fff;
+  border-width: 0;
+  background-color: #46b0cc;
 }
+
+
+
+ul.nav.nav-sidebar > li > a.semiActive {
+  border-right: solid 40px;
+  border-bottom: solid 1px;
+  border-top: solid 1px;
+}
+
 
 .btn-success, .btn-success:hover, .btn-success:focus{
   background-color: #4ac439;
@@ -269,10 +282,9 @@ body {
 a.list-group-item.active,
 a.list-group-item.active:focus,
 a.list-group-item.active:hover
-
 {
   color: #fff;
-  border-color: transparent;
+  border-width: 0;
   background-color: #46b0cc;
 }
 
