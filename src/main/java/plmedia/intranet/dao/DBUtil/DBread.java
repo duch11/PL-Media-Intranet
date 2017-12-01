@@ -11,7 +11,6 @@ import plmedia.intranet.dao.repository.PermissionRepo;
 import plmedia.intranet.model.Child;
 import plmedia.intranet.model.Employee;
 import plmedia.intranet.model.Parent;
-import plmedia.intranet.model.Permission;
 
 public class DBread {
 
@@ -43,19 +42,9 @@ public class DBread {
       ResultSet rs = stmt.executeQuery();
 
       ArrayList<Parent> parents = new ArrayList<>();
-      ArrayList<Permission> permissions;
 
       while(rs.next()){
-        permissions = permissionRepo.readPermissionsByUserID((rs.getInt("user_id")));
-
-        Parent parent = new Parent(
-            rs.getInt("user_id"),
-            rs.getString("password"),
-            rs.getString("user_email"),
-            rs.getString("first_name"),
-            rs.getString("last_name"),
-            permissions);
-        parents.add(parent);
+        parents.add(ObjFac.makeParent(rs));
       }
 
       return parents;
