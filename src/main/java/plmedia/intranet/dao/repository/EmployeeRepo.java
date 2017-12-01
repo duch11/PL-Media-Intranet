@@ -50,12 +50,11 @@ public class EmployeeRepo implements IRepo<Employee>, IUserRepo<Employee>  {
     return null;
   }
 
-  /**
-   *
-   * @param group
-   * @return
-   */
-  public ArrayList<User> ReadGroup(String group) {
+
+  public ArrayList<Employee> readAllEmployeesInGroup(int id){
+
+
     return null;
   }
+
 }

@@ -9,12 +9,13 @@ import java.util.ArrayList;
 
 public class Wing {
 
+  private int wingID;
   private String wingName;
   private String wingDescription;
   private ArrayList<String> child;
   private ArrayList<String> employee;
 
-  public Wing(String wingName, String wingDescription, ArrayList<String> child,
+  public Wing(int wingID, String wingName, String wingDescription, ArrayList<String> child,
       ArrayList<String> employee) {
     this.wingName = wingName;
     this.wingDescription = wingDescription;
@@ -22,7 +23,7 @@ public class Wing {
     this.employee = employee;
   }
 
-  public Wing(String wingName, String wingDescription) {
+  public Wing(int wingID, String wingName, String wingDescription) {
     this.wingName = wingName;
     this.wingDescription = wingDescription;
   }
