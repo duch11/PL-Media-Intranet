@@ -6,11 +6,8 @@
     <li><a class="newuserbtn" style="" href="#">+ Ny Bruger</a></li>
   </ul>-->
   <ul class="nav nav-sidebar">
-    <li th:class="(${allUsers} or ${user}) ? 'active'">
-      <a href="/admin">Personale</a>
-      <li th:if="${user}" class=" profile">
-        <a><i  class="fa fa-user" aria-hidden="true"></i></a>
-      </li>
+    <li>
+      <a th:class="(${allUsers}) ? 'active' : (${user} ? 'semiActive')" href="/admin">Personale <i th:if="${user}" class="fa fa-user pull-right" aria-hidden="true"></i></a>
     </li>
 
     <li th:each="group : ${employeeGroups}" th:class="${currentGroup} ? ((${group.getId()} == ${currentGroup.getId()}) ? 'active')">
