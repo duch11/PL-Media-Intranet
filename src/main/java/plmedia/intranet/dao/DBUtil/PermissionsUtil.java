@@ -10,6 +10,8 @@ import plmedia.intranet.model.Permission;
 
 public class PermissionsUtil {
 
+  ObjectFactory ObjFac = new ObjectFactory();
+
   public Permission readPermissionByID(int id){
     try(
         PreparedStatement stmt = ConMan.prepStat(Statements.DEF_GET_PERMISSIONS_BY_ID_SQL);
@@ -18,10 +20,7 @@ public class PermissionsUtil {
       ResultSet rs = stmt.executeQuery();
       rs.first();
 
-      return new Permission(
-          rs.getInt(1),
-          rs.getString(2),
-          rs.getString(3));
+      return ObjFac.makePermission(rs);
 
     } catch (SQLException e){
       e.printStackTrace();

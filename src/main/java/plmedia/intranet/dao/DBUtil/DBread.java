@@ -9,12 +9,31 @@ import plmedia.intranet.dao.ConMan;
 import plmedia.intranet.dao.Statements;
 import plmedia.intranet.dao.repository.PermissionRepo;
 import plmedia.intranet.model.Child;
+import plmedia.intranet.model.Employee;
 import plmedia.intranet.model.Parent;
 import plmedia.intranet.model.Permission;
 
 public class DBread {
 
+  ObjectFactory ObjFac = new ObjectFactory();
   PermissionRepo permissionRepo = new PermissionRepo();
+
+  public Parent readParentByID(int id){
+    try(
+        PreparedStatement stmt = ConMan.prepStat(Statements.DEF_GET_PARENT_BY_ID_SQL);
+    ) {
+      stmt.setInt(1, id);
+      ResultSet rs = stmt.executeQuery();
+
+
+
+    } catch (SQLException e){
+      e.printStackTrace();
+    }
+
+
+    return null;
+  }
 
   public ArrayList<Parent> readAllParents() {
     try(
@@ -47,6 +66,14 @@ public class DBread {
     return null; // Error code?
   }
 
+  public Employee readEmployeeByID(int id){
+    return null;
+  }
+
+  public ArrayList<Employee> readAllEmployees(){
+    return null;
+  }
+
   public ArrayList<Integer> readChildrenIDByParentID(int id){
     try(
       CallableStatement stmt = ConMan.callStat(Statements.DEF_GET_CHILDREN_ID_BY_PARENT_ID_SQL)
@@ -64,35 +91,20 @@ public class DBread {
     return null; // Error code?
   }
 
-  public Child readChildObject(int id) {
+  public Child readChild(int id) {
     try(
         PreparedStatement stmt = ConMan.prepStat(Statements.DEF_GET_CHILD_BY_ID_SQL);
     ) {
       stmt.setInt(1, id);
       ResultSet rs = stmt.executeQuery();
 
-      ArrayList<String> nap = new ArrayList<>();
-      Child child = null;
-      while(rs.next()){
+      return ObjFac.makeChild(rs);
 
-        child = new Child(
-            rs.getInt("child_id"),
-            rs.getString("first_name"),
-            rs.getString("last_name"),
-            rs.getDate("birthday"),
-            rs.getString("address"),
-            rs.getInt("fk_wing_id"),
-            nap,
-            null,
-            null,
-            null
-        );
-      }
-      return child;
-
-    } catch (SQLException e){
+      } catch (SQLException e) {
       e.printStackTrace();
     }
     return null; // Error code?
   }
+
+
 }

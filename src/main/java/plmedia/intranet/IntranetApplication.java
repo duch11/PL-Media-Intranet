@@ -12,5 +12,7 @@ public class IntranetApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(IntranetApplication.class, args);
 
-	}
+
+
+  }
 }
