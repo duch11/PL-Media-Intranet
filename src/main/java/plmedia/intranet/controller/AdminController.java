@@ -79,7 +79,7 @@ public class AdminController {
 
   @RequestMapping(value = {"/admin/employees", "/admin"}, method = RequestMethod.GET)
   public String adminPanelEmp(Model model, Principal principal) {
-    model.addAttribute("currentGroup", employeeGroups.get(0));
+    model.addAttribute("allUsers", employeeGroups.get(0));
     model.addAttribute("employees");
     return showAdminPanel(model, principal);
   }
