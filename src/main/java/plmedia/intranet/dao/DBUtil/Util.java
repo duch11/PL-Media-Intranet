@@ -1,10 +1,7 @@
 package plmedia.intranet.dao.DBUtil;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import plmedia.intranet.dao.ConMan;
 import plmedia.intranet.dao.Statements;
 
@@ -16,6 +13,7 @@ public class Util {
     ){
       while(rs.next()) {
         if (rs.getString("user_email").equals(email)){
+
           return 10;
         }
       }

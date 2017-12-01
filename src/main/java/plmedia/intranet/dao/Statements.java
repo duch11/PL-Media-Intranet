@@ -9,19 +9,32 @@ import org.omg.PortableInterceptor.ServerRequestInfo;
 
 public class Statements {
 
-  // Getters
+  /*
+   Getters
+    */
   public static final String DEF_GET_ALL_USERS_BY_TYPE_SQL = "SELECT * FROM user WHERE type=?";
+
   public static final String DEF_GET_USERS_BY_TYPE_AND_ID_SQL = "SELECT * FROM user WHERE type=? AND user_id=?";
   public static final String DEF_GET_ALL_CHILDREN_SQL = "SELECT * FROM child";
   public static final String DEF_GET_PARENT_BY_ID_SQL = "SELECT * FROM user WHERE type=\"par\" AND user_id=\"?\"";
-  public static final String DEF_GET_EMPLOYEE_BY_ID_SQL = "SELECT * FROM user WHERE type=\"emp\" AND user_id=\"?\" ";
   public static final String DEF_GET_CHILD_BY_ID_SQL = "SELECT * FROM child WHERE child_id = ?";
   public static final String DEF_GET_CHILDREN_ID_BY_PARENT_ID_SQL = "{CALL GetChildrenByParentID(?)}";
   public static final String DEF_GET_ALL_EMAIL = "SELECT user_email FROM user";
 
+  // EMPLOYEE
+  public static final String DEF_GET_EMPLOYEE_BY_ID_SQL = "SELECT * FROM user WHERE type=\"emp\" AND user_id=\"?\" ";
+
+
+
+  // Permissions
   public static final String DEF_GET_PERMISSION_ID_BY_USER_ID_SQL = "SELECT fk_permission_id FROM user_permission WHERE fk_user_id = ?";
   public static final String DEF_GET_PERMISSIONS_BY_ID_SQL = "SELECT * FROM permission WHERE permission_id = ?";
   public static final String DEF_GET_ALL_PERMISSIONS_SQL = "SELECT * FROM permission";
+
+  // Groups
+  public static final String DEF_GET_ALL_EMPLOYEES_BY_GROUP_ID = "SELECT * FROM employee WHERE ";
+
+
   // Updates
 
 

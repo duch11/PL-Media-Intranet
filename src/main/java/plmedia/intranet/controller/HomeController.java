@@ -6,8 +6,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 /**
 * @author Jonas Holm
@@ -38,13 +37,12 @@ public class HomeController {
   }
 
   @RequestMapping(value = {"/login"}, method = RequestMethod.GET)
-  public String login(Model model){
+  public String login(){
     return "login";
   }
 
-  /**
-  * Template tester
-  * */
+  
+
 
 
 }
