@@ -3,8 +3,9 @@ package plmedia.intranet.model;
 import java.util.ArrayList;
 
 /**
- * @author Simon le Févre Ryom
  * @author Andreas Nissen
+ * @author Simon le Févre Ryom
+ *
  */
 
 public class Wing {
