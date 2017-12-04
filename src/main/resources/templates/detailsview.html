@@ -22,27 +22,27 @@
 
           <div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-3 main">
             <div class="row">
-              <h1>Kurt Klausen</h1>
+              <h1 th:text="${user.getFirstName()} + ' ' + ${user.getLastName()}" class="text-capitalize">Kurt Klausen</h1>
             </div>
 
             <table class="table">
               <tbody>
               <tr>
                 <th>Navn:</th>
-                <td>Kurt Klausen</td>
+                <td th:text="${user.getFirstName()} + ' ' + ${user.getLastName()}"  class="text-capitalize">Kurt Klausen</td>
                 <td><a href="#" class="btn btn-edit pull-right" data-toggle="modal" data-target="#editName"><i class="fa fa-pencil"></i></a></td>
               </tr>
               <tr>
                 <th>Email:</th>
-                <td>kurt@klausen.dk</td>
+                <td th:text="${user.getUserEmail()}">kurt@klausen.dk</td>
                 <td><a href="#" class="btn btn-edit pull-right" data-toggle="modal" data-target="#editEmail"><i class="fa fa-pencil"></i></a></td>
               </tr><tr>
                 <th>Password:</th>
-                <td>[Hidden]</td>
+                <td>*********</td>
                 <td><a href="#" class="btn btn-edit pull-right" data-toggle="modal" data-target="#editPassword"><i class="fa fa-pencil"></i></a></td>
               </tr><tr>
-                <th>Type:</th>
-                <td>Leder, Ansat</td>
+                <th>Groups:</th>
+                <td>Ledelsen, Ansatte</td>
                 <td><a href="#" class="btn btn-edit pull-right" data-toggle="modal" data-target="#editGroups"><i class="fa fa-pencil"></i></a></td>
               </tr>
               </tbody>
@@ -51,13 +51,7 @@
 
             <h3>Permissions: <a href="#" class="btn btn-edit" data-toggle="modal" data-target="#editPermissions"><i class="fa fa-pencil"></i></a></h3>
             <ul class="list-group">
-              <li class="list-group-item">Tilføje Børn</li>
-              <li class="list-group-item">Redigere Børn</li>
-              <li class="list-group-item">Slette Børn</li>
-              <li class="list-group-item">Tilføje Forældre</li>
-              <li class="list-group-item">Redigere Forældre</li>
-              <li class="list-group-item">Slette Forældre</li>
-              <li class="list-group-item">Checke Alle børn ind og ud</li>
+              <li th:each="permission : ${user.getPermissions()}" th:text="${permission.getPermissionName()}" class="list-group-item">Tilføje Børn</li>
             </ul>
 
           </div>
@@ -76,13 +70,21 @@
           <div class="modal-header">
             <!--Kryds knap-->
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Name</h4>
+            <h4 class="modal-title">Navn</h4>
           </div>
           <div class="modal-body">
-            <input type="text"/>
+            <div class="form-group">
+              <label for="firstName">Fornavn:</label>
+            <input type="text" th:value="${user.getFirstName()}" id="firstName" class="form-control"/>
+            </div>
+            <div class="form-group">
+              <label for="lastName">Efternavn:</label>
+            <input type="text" th:value="${user.getLastName()}" id="lastName" class="form-control"/>
+            </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
+            <button type="button" class="btn btn-success" data-dismiss="modal">Gem</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Annuller</button>
           </div>
         </div>
       </div>
@@ -100,10 +102,14 @@
             <h4 class="modal-title">Email</h4>
           </div>
           <div class="modal-body">
-            <input type="text"/>
+            <div class="form-group">
+              <label for="email">Email:</label>
+            <input type="text" th:value="${user.getUserEmail()}" id="email" class="form-control"/>
+            </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
+            <button type="button" class="btn btn-success" data-dismiss="modal">Gem</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Annuller</button>
           </div>
         </div>
       </div>
@@ -120,11 +126,22 @@
             <h4 class="modal-title">Password</h4>
           </div>
           <div class="modal-body">
-            <input type="password"/>
-            <input type="password"/>
+            <div class="form-group">
+              <label for="oldPass">Gammel adgangskode:</label>
+            <input type="password" id="oldPass" class="form-control"/>
+            </div>
+            <div class="form-group">
+              <label for="newPass">Ny adgangskode:</label>
+            <input type="password" id="newPass" class="form-control"/>
+            </div>
+            <div class="form-group">
+              <label for="repeatPass">Gentag ny adgangskode</label>
+            <input type="password" id="repeatPass" class="form-control"/>
+            </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
+            <button type="button" class="btn btn-success" data-dismiss="modal">Gem</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Annuller</button>
           </div>
         </div>
       </div>
@@ -142,17 +159,18 @@
           </div>
           <div class="modal-body">
             <div class="checkbox">
-              <label><input type="checkbox" value=""/>Adminss</label>
+              <label><input type="checkbox" value=""/>Ledelsen</label>
             </div>
             <div class="checkbox">
-              <label><input type="checkbox" value=""/>Employees</label>
+              <label><input type="checkbox" value=""/>Ansatte</label>
             </div>
             <div class="checkbox">
-              <label><input type="checkbox" value=""/>Interns</label>
+              <label><input type="checkbox" value=""/>Praktikanter</label>
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
+            <button type="button" class="btn btn-success" data-dismiss="modal">Gem</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Annuller</button>
           </div>
         </div>
       </div>
@@ -171,30 +189,13 @@
             <h4 class="modal-title">Permissions</h4>
           </div>
           <div class="modal-body">
-            <div class="checkbox">
-              <label><input type="checkbox" value=""/>Tilføje Børn</label>
-            </div>
-            <div class="checkbox">
-              <label><input type="checkbox" value=""/>Redigere Børn</label>
-            </div>
-            <div class="checkbox">
-              <label><input type="checkbox" value=""/>Slette Børn</label>
-            </div>
-            <div class="checkbox">
-              <label><input type="checkbox" value=""/>Tilføje Forældre</label>
-            </div>
-            <div class="checkbox">
-              <label><input type="checkbox" value=""/>Redigere Forældre</label>
-            </div>
-            <div class="checkbox">
-              <label><input type="checkbox" value=""/>Slette Forældre</label>
-            </div>
-            <div class="checkbox">
-              <label><input type="checkbox" value=""/>Checke alle børn ind og ud</label>
+            <div th:each="globalPermission : ${globalPermissions}" class="checkbox">
+              <label><input type="checkbox" th:checked="${user.hasPermission(globalPermission)}"/><span th:text="${globalPermission.getPermissionName()}">Redigere Børn</span></label>
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
+            <button type="button" class="btn btn-success" data-dismiss="modal">Gem</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Annuller</button>
           </div>
         </div>
       </div>

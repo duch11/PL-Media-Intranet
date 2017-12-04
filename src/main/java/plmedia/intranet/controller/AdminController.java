@@ -13,10 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import plmedia.intranet.dao.repository.EmployeeRepo;
 import plmedia.intranet.dao.repository.IUserRepo;
 import plmedia.intranet.dao.repository.ParentRepo;
-import plmedia.intranet.model.Child;
-import plmedia.intranet.model.Employee;
-import plmedia.intranet.model.Group;
-import plmedia.intranet.model.Parent;
+import plmedia.intranet.model.*;
+
 import java.util.Date;
 
 /**
@@ -36,10 +34,17 @@ public class AdminController {
   //TEST KODE
   //TODO: SLET MIG TESTKODE TIL GRUPPER
   ArrayList<Group> employeeGroups = new ArrayList<>();
+  ArrayList<User> employees = new ArrayList<>();
   ArrayList<Parent> parents = new ArrayList<>();
   ArrayList<Child> children = new ArrayList<>();
+  ArrayList<Permission> globalPermissions = new ArrayList<>();
 
   public AdminController() {
+    globalPermissions.add(new Permission(1, "Kill hitler", "allows something"));
+    globalPermissions.add(new Permission(2, "Kill stalin", "allows something"));
+    globalPermissions.add(new Permission(3, "Kill bush", "allows something"));
+    globalPermissions.add(new Permission(4, "Kill spongebob", "allows something"));
+
     employeeGroups.add(new Group(1,"Ledelsen", "beskrivelse"));
     employeeGroups.add(new Group(2,"Ansatte", "beskrivelse"));
     employeeGroups.add(new Group(3,"Praktikanter", "beskrivelse"));
@@ -53,6 +58,43 @@ public class AdminController {
     children.add(new Child("Silas","Sørensen", new Date(),"hejvej 123"));
     children.add(new Child("Rui","LactoseFri", new Date(),"hejvej 123"));
 
+    Employee hej = new Employee("123", "jonas.dk", "jonas", "Holm");
+    hej.setUserId(1);
+    ArrayList<Permission> perm1 = new ArrayList<>();
+    perm1.add(globalPermissions.get(0));
+    perm1.add(globalPermissions.get(1));
+    perm1.add(globalPermissions.get(2));
+    perm1.add(globalPermissions.get(3));
+    hej.setPermissions(perm1);
+
+    Employee hej2 = new Employee("123", "ssa.dk", "Andreas", "Nissen");
+    hej2.setUserId(2);
+    ArrayList<Permission> perm2 = new ArrayList<>();
+    perm2.add(globalPermissions.get(0));
+    perm2.add(globalPermissions.get(2));
+    perm2.add(globalPermissions.get(3));
+    hej2.setPermissions(perm2);
+
+    Employee hej3 = new Employee("123", "pid.ss", "Toby", "Thomsen");
+    hej3.setUserId(3);
+    ArrayList<Permission> perm3 = new ArrayList<>();
+    perm3.add(globalPermissions.get(0));
+    perm3.add(globalPermissions.get(1));
+    perm3.add(globalPermissions.get(3));
+    hej3.setPermissions(perm3);
+
+    Employee hej4 = new Employee("123", "jggonas.dk", "Simon", "BOOIII");
+    hej4.setUserId(4);
+    ArrayList<Permission> perm4 = new ArrayList<>();
+    perm4.add(globalPermissions.get(1));
+    perm4.add(globalPermissions.get(2));
+    perm4.add(globalPermissions.get(3));
+    hej4.setPermissions(perm4);
+
+    employees.add(hej);
+    employees.add(hej2);
+    employees.add(hej3);
+    employees.add(hej4);
   }
 
   //TEST KODESLUT
@@ -80,7 +122,7 @@ public class AdminController {
   @RequestMapping(value = {"/admin/employees", "/admin"}, method = RequestMethod.GET)
   public String adminPanelEmp(Model model, Principal principal) {
     model.addAttribute("allUsers", employeeGroups.get(0));
-    model.addAttribute("employees");
+    model.addAttribute("employees", employees);
     return showAdminPanel(model, principal);
   }
 
@@ -98,9 +140,6 @@ public class AdminController {
 
   @RequestMapping(value = {"/admin/parents"}, method = RequestMethod.GET)
   public String adminPanelParents(Model model, Principal principal) {
-
-
-
     model.addAttribute("parents", parents);
     return showAdminPanel(model, principal);
   }
@@ -116,7 +155,12 @@ public class AdminController {
 
   @RequestMapping(value = {"/admin/details"}, method = RequestMethod.GET, params = {"user"})
   public String userDetails(Model model,Principal principal, @RequestParam int user) {
-    model.addAttribute("user", "Kurt Klausen");
+    for(User u : employees){
+      if(user == u.getUserId()){
+        model.addAttribute("user", u);
+      }
+    }
+    model.addAttribute("globalPermissions", globalPermissions);
     showAdminPanel(model, principal);
     return "detailsview";
   }

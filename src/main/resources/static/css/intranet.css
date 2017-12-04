@@ -48,10 +48,17 @@ a.list-group-item:first-child, a.list-group-item:last-child, div.modal-content{
 }
 
 /*Pencil edit button changes*/
-.btn-edit {
+.btn-edit,
+.btn-edit:focus,
+.btn-edit:hover{
   color: #06a3b9;
   background-color: transparent;
   border-color: transparent;
+}
+
+.btn-edit:hover,
+.btn-edit:focus {
+  color: #06cde3;
 }
 
 /*New xxx button*/

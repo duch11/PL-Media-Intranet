@@ -24,7 +24,7 @@
             <div class="list-group" style="max-height: 400px; border-radius: 0">
               <button th:if="${currentGroup} or ${allUsers}" class="btn btn-success btn-new" data-toggle="modal" data-target="#new">NY MEDARBEJDER</button>
               <!-- Generering af listen, baseret på hvad templaten bliver fodret med -->
-              <a th:each="employee : ${employees}" href="/admin/details?user=" th:text="${employee.getName()}" th:attrappend="href=${employee.getUserID()}" class="list-group-item">Thymeleaf Employee</a>
+              <a th:each="employee : ${employees}" href="/admin/details?user=" th:text="${employee.getFirstName()}" th:attrappend="href=${employee.getUserId()}" class="list-group-item">Thymeleaf Employee</a>
               <a th:each="parent : ${parents}"     href="#" th:text="${parent.getFirstName()}" class="list-group-item">Thymeleaf Parent</a>
               <a th:each="child : ${children}"     href="#" th:text="${child.getFirstName()}"  class="list-group-item">Thymeleaf Child</a>
 
