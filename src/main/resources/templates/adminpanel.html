@@ -26,9 +26,9 @@
               <button th:if="${parents}" class="btn btn-success btn-new" data-toggle="modal" data-target="#newPar">Ny Forældre</button>
               <button th:if="${children}" class="btn btn-success btn-new" data-toggle="modal" data-target="#newChild">Nyt Barn</button>
               <!-- Generering af listen, baseret på hvad templaten bliver fodret med -->
-              <a th:each="employee : ${employees}" href="/admin/details?user=" th:text="${employee.getFirstName()}" th:attrappend="href=${employee.getUserId()}" class="list-group-item">Thymeleaf Employee</a>
-              <a th:each="parent : ${parents}"     href="#" th:text="${parent.getFirstName()}" class="list-group-item">Thymeleaf Parent</a>
-              <a th:each="child : ${children}"     href="#" th:text="${child.getFirstName()}"  class="list-group-item">Thymeleaf Child</a>
+              <a th:each="employee : ${employees}" href="/admin/details?employee=" th:text="${employee.getFirstName()}" th:attrappend="href=${employee.getUserId()}" class="list-group-item">Thymeleaf Employee</a>
+              <a th:each="parent : ${parents}"     href="/admin/details?parent=" th:text="${parent.getFirstName()}" th:attrappend="href=${parent.getUserId()}" class="list-group-item">Thymeleaf Parent</a>
+              <a th:each="child : ${children}"     href="/admin/details?child=" th:text="${child.getFirstName()}" th:attrappend="href=${child.getChildId()}" class="list-group-item">Thymeleaf Child</a>
 
               <!--<a href="/admin/details?user=32122" class="list-group-item">
                 Kurt (Kan klikkes på)
@@ -40,11 +40,11 @@
       </div>
     </div>
 
-    <div id="newEmp" class="modal fade" role="dialog">
+    <div th:if="${newEmployee}" id="newEmp" class="modal fade" role="dialog">
       <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
-          <form class="" th:action="@{/admin/create/employee}" method="post" th:object="${employee}">
+          <form class="" th:action="@{/admin/create/employee}" method="post" th:object="${newEmployee}">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
               <h4 class="modal-title">Opret ny Ansat</h4>
@@ -92,11 +92,11 @@
       </div>
     </div>
 
-    <div id="newPar" class="modal fade" role="dialog">
+    <div th:if="${newParent}" id="newPar" class="modal fade" role="dialog">
       <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
-          <form class="" th:action="@{/admin/create/parent}" method="post" th:object="${parent}">
+          <form class="" th:action="@{/admin/create/parent}" method="post" th:object="${newParent}">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
               <h4 class="modal-title">Opret ny Forælder</h4>
@@ -144,11 +144,11 @@
       </div>
     </div>
 
-    <div id="newChild" class="modal fade" role="dialog">
+    <div th:if="${newChild}" id="newChild" class="modal fade" role="dialog">
       <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
-          <form class="" th:action="@{/admin/create/child}" method="post" th:object="${child}">
+          <form class="" th:action="@{/admin/create/child}" method="post" th:object="${newChild}">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
               <h4 class="modal-title">Opret nyt Barn</h4>

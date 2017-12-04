@@ -49,14 +49,9 @@ public class AdminController {
     employeeGroups.add(new Group(2,"Ansatte", "beskrivelse"));
     employeeGroups.add(new Group(3,"Praktikanter", "beskrivelse"));
 
-    parents.add(new Parent("123","jonas@sss.dk", "Sten","Hansen"));
-    parents.add(new Parent("123","jonas@sss.dk", "Argild","Gertsen"));
-    parents.add(new Parent("123","jonas@sss.dk", "Jullebejler","Kanstrup"));
 
-    children.add(new Child("Alma","Sørensen", new Date(),"hejvej 123"));
-    children.add(new Child("Carlo","Grimladen", new Date(),"hejvej 123"));
-    children.add(new Child("Silas","Sørensen", new Date(),"hejvej 123"));
-    children.add(new Child("Rui","LactoseFri", new Date(),"hejvej 123"));
+
+
 
     Employee hej = new Employee("123", "jonas.dk", "jonas", "Holm");
     hej.setUserId(1);
@@ -95,6 +90,15 @@ public class AdminController {
     employees.add(hej2);
     employees.add(hej3);
     employees.add(hej4);
+
+    parents.add(new Parent(0,"123","jonas@sss.dk", "Sten","Hansen", perm1));
+    parents.add(new Parent(1, "123","jonas@sss.dk", "Argild","Gertsen",perm2));
+    parents.add(new Parent(2,"123","jonas@sss.dk", "Jullebejler","Kanstrup",perm3));
+
+    children.add(new Child("Alma","Sørensen", new Date(),"hejvej 123"));
+    children.add(new Child("Carlo","Grimladen", new Date(),"hejvej 123"));
+    children.add(new Child("Silas","Sørensen", new Date(),"hejvej 123"));
+    children.add(new Child("Rui","LactoseFri", new Date(),"hejvej 123"));
   }
 
   //TEST KODESLUT
@@ -111,9 +115,6 @@ public class AdminController {
      * Spring framework injecter den selv, ligesom den goer med Model.
      * */
     model.addAttribute("test", principal.getName());
-    model.addAttribute("parent", new Parent());
-    model.addAttribute("employee", new Employee());
-    model.addAttribute("child", new Child());
     model.addAttribute("employeeGroups", employeeGroups);
     return "adminpanel";
   }
@@ -122,6 +123,7 @@ public class AdminController {
   @RequestMapping(value = {"/admin/employees", "/admin"}, method = RequestMethod.GET)
   public String adminPanelEmp(Model model, Principal principal) {
     model.addAttribute("allUsers", employeeGroups.get(0));
+    model.addAttribute("newEmployee", new Employee());
     model.addAttribute("employees", employees);
     return showAdminPanel(model, principal);
   }
@@ -134,6 +136,7 @@ public class AdminController {
         model.addAttribute("currentGroup", g);
       }
     }
+    model.addAttribute("newEmployee", new Employee());
 
     return showAdminPanel(model, principal);
   }
@@ -141,23 +144,39 @@ public class AdminController {
   @RequestMapping(value = {"/admin/parents"}, method = RequestMethod.GET)
   public String adminPanelParents(Model model, Principal principal) {
     model.addAttribute("parents", parents);
+    model.addAttribute("newParent", new Parent());
     return showAdminPanel(model, principal);
   }
 
   @RequestMapping(value = {"/admin/children"}, method = RequestMethod.GET)
   public String adminPanelChildren(Model model, Principal principal) {
     model.addAttribute("children", children);
+    model.addAttribute("newChild", new Child());
     return showAdminPanel(model, principal);
   }
 
 
 
 
-  @RequestMapping(value = {"/admin/details"}, method = RequestMethod.GET, params = {"user"})
-  public String userDetails(Model model,Principal principal, @RequestParam int user) {
-    for(User u : employees){
-      if(user == u.getUserId()){
-        model.addAttribute("user", u);
+  @RequestMapping(value = {"/admin/details"}, method = RequestMethod.GET, params = {"employee"})
+  public String userDetails(Model model,Principal principal, @RequestParam int employee) {
+    for(User user : employees){
+      if(employee == user.getUserId()){
+        model.addAttribute("user", user);
+        model.addAttribute("employeeDetails", true);
+      }
+    }
+    model.addAttribute("globalPermissions", globalPermissions);
+    showAdminPanel(model, principal);
+    return "detailsview";
+  }
+
+  @RequestMapping(value = {"/admin/details"}, method = RequestMethod.GET, params = {"parent"})
+  public String parentDetails(Model model, Principal principal, @RequestParam int parent) {
+    for(User user : parents){
+      if(parent == user.getUserId()){
+        model.addAttribute("user", user);
+        model.addAttribute("parentDetails", true);
       }
     }
     model.addAttribute("globalPermissions", globalPermissions);
@@ -166,15 +185,11 @@ public class AdminController {
   }
 
   @RequestMapping(value = {"/admin/details"}, method = RequestMethod.GET, params = {"child"})
-  public String childDetails(Model model, @RequestParam int child) {
+  public String childDetails(Model model, Principal principal, @RequestParam int child) {
     model.addAttribute("child", "repo.getChild()" + child);
-    return "detailsview";
-  }
 
-  @RequestMapping(value = {"/admin/details"}, method = RequestMethod.GET, params = {"parent"})
-  public String parentDetails(Model model, @RequestParam int parent) {
-    model.addAttribute("parent", "repo.getParent()" + parent);
-    return "detailsview";
+    showAdminPanel(model,principal);
+    return "children";
   }
 
 

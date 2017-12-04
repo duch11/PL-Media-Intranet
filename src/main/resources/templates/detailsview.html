@@ -6,8 +6,6 @@
   </head>
   <body>
 
-
-
     <!--Bootstrap container class er vigtig for at det virker, giver en lille margen ud til siderne
     i højre og venstre side-->
     <div class="container-fluid">
@@ -16,14 +14,14 @@
         <div th:replace="fragments/header :: header"/>
       </div>
 
-
         <div class="row">
           <div th:replace="fragments/sidebars :: admin"/>
-
           <div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-3 main">
+
             <div class="row">
               <h1 th:text="${user.getFirstName()} + ' ' + ${user.getLastName()}" class="text-capitalize">Kurt Klausen</h1>
             </div>
+
 
             <table class="table">
               <tbody>
@@ -36,11 +34,13 @@
                 <th>Email:</th>
                 <td th:text="${user.getUserEmail()}">kurt@klausen.dk</td>
                 <td><a href="#" class="btn btn-edit pull-right" data-toggle="modal" data-target="#editEmail"><i class="fa fa-pencil"></i></a></td>
-              </tr><tr>
+              </tr>
+              <tr>
                 <th>Password:</th>
                 <td>*********</td>
                 <td><a href="#" class="btn btn-edit pull-right" data-toggle="modal" data-target="#editPassword"><i class="fa fa-pencil"></i></a></td>
-              </tr><tr>
+              </tr>
+              <tr th:if="${employeeDetails}">
                 <th>Groups:</th>
                 <td>Ledelsen, Ansatte</td>
                 <td><a href="#" class="btn btn-edit pull-right" data-toggle="modal" data-target="#editGroups"><i class="fa fa-pencil"></i></a></td>
@@ -54,10 +54,9 @@
               <li th:each="permission : ${user.getPermissions()}" th:text="${permission.getPermissionName()}" class="list-group-item">Tilføje Børn</li>
             </ul>
 
+            </div>
           </div>
-        </div>
     </div>
-
 
 
     <!-- Modal's -->
