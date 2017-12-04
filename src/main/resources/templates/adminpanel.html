@@ -22,15 +22,17 @@
           <!--LIST of users/parents etc-->
           <div class="row">
             <div class="list-group" style="max-height: 400px; border-radius: 0">
-              <button th:if="${currentGroup} or ${allUsers}" class="btn btn-success btn-new" data-toggle="modal" data-target="#new">NY MEDARBEJDER</button>
+              <button th:if="${currentGroup} or ${allUsers}" class="btn btn-success btn-new" data-toggle="modal" data-target="#newEmp">Ny Medarbejder</button>
+              <button th:if="${parents}" class="btn btn-success btn-new" data-toggle="modal" data-target="#newPar">Ny Forældre</button>
+              <button th:if="${children}" class="btn btn-success btn-new" data-toggle="modal" data-target="#newChild">Nyt Barn</button>
               <!-- Generering af listen, baseret på hvad templaten bliver fodret med -->
               <a th:each="employee : ${employees}" href="/admin/details?user=" th:text="${employee.getFirstName()}" th:attrappend="href=${employee.getUserId()}" class="list-group-item">Thymeleaf Employee</a>
               <a th:each="parent : ${parents}"     href="#" th:text="${parent.getFirstName()}" class="list-group-item">Thymeleaf Parent</a>
               <a th:each="child : ${children}"     href="#" th:text="${child.getFirstName()}"  class="list-group-item">Thymeleaf Child</a>
 
-              <a href="/admin/details?user=32122" class="list-group-item">
+              <!--<a href="/admin/details?user=32122" class="list-group-item">
                 Kurt (Kan klikkes på)
-              </a>
+              </a>-->
 
             </div>
           </div>
@@ -38,7 +40,7 @@
       </div>
     </div>
 
-    <div id="new" class="modal fade" role="dialog">
+    <div id="newEmp" class="modal fade" role="dialog">
       <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
@@ -70,13 +72,109 @@
               <div class="checkbox">
                 <div class="row">
                   <div class="col-sm-4">
-                    <label><input type="checkbox" id="check1" value="1" th:field="*{permissions}"/> Permission 1</label>
+                    <label><input type="checkbox" value="1" th:field="*{permissions}"/> Permission 1</label>
                   </div>
                   <div class="col-sm-4">
-                    <label><input type="checkbox" id="check2" value="2" th:field="*{permissions}"/> Permission 2</label>
+                    <label><input type="checkbox" value="2" th:field="*{permissions}"/> Permission 2</label>
                   </div>
                   <div class="col-sm-4">
-                    <label><input type="checkbox" id="check3" value="3" th:field="*{permissions}"/> Permission 3</label>
+                    <label><input type="checkbox" value="3" th:field="*{permissions}"/> Permission 3</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-success">Gem</button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Annuller</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div id="newPar" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <form class="" th:action="@{/admin/create/parent}" method="post" th:object="${parent}">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Opret ny Forælder</h4>
+            </div>
+            <div class="modal-body">
+
+              <div class="form-group">
+                <label for="parentFName">Fornavn:</label>
+                <input type="text" class="form-control" id="parentFName" name="firstName" th:field="*{firstName}"/>
+              </div>
+              <div class="form-group">
+                <label for="parentLName">Efternavn:</label>
+                <input type="text" class="form-control" id="parentLName" name="lastName" th:field="*{lastName}"/>
+              </div>
+              <div class="form-group">
+                <label for="parentEmail">Email:</label>
+                <input type="text" class="form-control" id="parentEmail" name="userEmail" th:field="*{userEmail}"/>
+              </div>
+              <div class="form-group">
+                <label for="parentPassword">Adgangskode:</label>
+                <input type="password" class="form-control" id="parentPassword" name="password" th:field="*{password}"/>
+              </div>
+
+
+              <div class="checkbox">
+                <div class="row">
+                  <div class="col-sm-4">
+                    <label><input type="checkbox" value="1" th:field="*{permissions}"/> Parent Permission 1</label>
+                  </div>
+                  <div class="col-sm-4">
+                    <label><input type="checkbox" value="2" th:field="*{permissions}"/> Parent Permission 2</label>
+                  </div>
+                  <div class="col-sm-4">
+                    <label><input type="checkbox" value="3" th:field="*{permissions}"/> Parent Permission 3</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-success">Gem</button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Annuller</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div id="newChild" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <form class="" th:action="@{/admin/create/child}" method="post" th:object="${child}">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Opret nyt Barn</h4>
+            </div>
+            <div class="modal-body">
+
+              <div class="form-group">
+                <label for="childFName">Fornavn:</label>
+                <input type="text" class="form-control" id="childFName" name="firstName" th:field="*{firstName}"/>
+              </div>
+              <div class="form-group">
+                <label for="childLName">Efternavn:</label>
+                <input type="text" class="form-control" id="childLName" name="lastName" th:field="*{lastName}"/>
+              </div>
+
+
+              <div class="checkbox">
+                <div class="row">
+                  <div class="col-sm-4">
+                    <label><input type="checkbox" value="1"/> Allergen 1</label>
+                  </div>
+                  <div class="col-sm-4">
+                    <label><input type="checkbox" value="2"/> Allergen 2</label>
+                  </div>
+                  <div class="col-sm-4">
+                    <label><input type="checkbox" value="3"/> Allergen 3</label>
                   </div>
                 </div>
               </div>
