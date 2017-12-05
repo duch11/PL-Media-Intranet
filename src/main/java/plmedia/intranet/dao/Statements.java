@@ -33,6 +33,14 @@ public class Statements {
 
   // Groups
   public static final String DEF_GET_ALL_EMPLOYEES_BY_GROUP_ID = "SELECT * FROM employee WHERE ";
+  public static final String DEF_GET_GROUP_BY_ID = "SELECT * FROM group WHERE group_id = ?";
+  public static final String DEF_GET_ALL_GROUPS = "SELECT * FROM group";
+
+
+  // Wings
+  public static final String DEF_GET_WING_BY_ID = "SELECT * FROM wing WHERE wing id = ?";
+  public static final String DEF_GET_ALL_WINGS = "SELECT * FROM wing";
+
 
 
   // Updates

@@ -1,23 +1,23 @@
 package plmedia.intranet.dao.repository;
 
 import java.util.ArrayList;
-import plmedia.intranet.dao.DBUtil.PermissionsUtil;
+import plmedia.intranet.dao.DBUtil.DBread;
 import plmedia.intranet.model.Permission;
 
 public class PermissionRepo {
 
-  PermissionsUtil putil = new PermissionsUtil();
+  DBread dbr = new DBread();
 
   public Permission readPermissionByID(int id){
-    return putil.readPermissionByID(id);
+    return dbr.readPermissionByID(id);
   }
 
   public ArrayList<Permission> readAllPermissions(){
-    return putil.readAllPermissions();
+    return dbr.readAllPermissions();
   }
 
   public ArrayList<Permission> readPermissionsByUserID(int id){
-    return putil.readPermissionsByUserID(id);
+    return dbr.readPermissionsByUserID(id);
   }
 
 }
