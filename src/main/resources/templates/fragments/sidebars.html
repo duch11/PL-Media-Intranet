@@ -1,7 +1,7 @@
 
 <!-- this is header -->
 
-<div th:fragment="admin" class="col-sm-3 col-lg-2 sidebar">
+<div th:fragment="admin" th:if="${employeeGroups}" class="col-sm-3 col-lg-2 sidebar">
   <!--<ul class="nav nav-sidebar">
     <li><a class="newuserbtn" style="" href="#">+ Ny Bruger</a></li>
   </ul>-->
@@ -32,7 +32,7 @@
 
 <!-- this is header -->
 
-<div th:fragment="parent" class="col-sm-3 col-md-2 sidebar">
+<div th:fragment="parent" th:if="!${employeeGroups}" class="col-sm-3 col-md-2 sidebar">
   <!--<ul class="nav nav-sidebar">
     <li><a class="newuserbtn" style="" href="#">+ Ny Bruger</a></li>
   </ul>-->

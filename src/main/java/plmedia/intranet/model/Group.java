@@ -1,5 +1,10 @@
 package plmedia.intranet.model;
 
+/**
+ * @author Tobias Thomsen
+ */
+
+
 public class Group {
 
   private int id;
