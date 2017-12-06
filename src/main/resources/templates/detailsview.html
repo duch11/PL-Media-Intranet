@@ -188,8 +188,8 @@
             <h4 class="modal-title">Permissions</h4>
           </div>
           <div class="modal-body">
-            <div th:each="globalPermission : ${globalPermissions}" class="checkbox">
-              <label><input type="checkbox" th:checked="${user.hasPermission(globalPermission)}"/><span th:text="${globalPermission.getPermissionName()}">Redigere Børn</span></label>
+            <div th:each="generalPermission : ${allPermissions}" class="checkbox">
+              <label><input type="checkbox" th:checked="${user.hasPermission(generalPermission)}"/><span th:text="${globalPermission.getPermissionName()}">Redigere Børn</span></label>
             </div>
           </div>
           <div class="modal-footer">
