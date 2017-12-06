@@ -14,7 +14,7 @@ public class Child {
   private int childId;
   private String firstName;
   private String lastName;
-  private Date birthday;
+  private java.sql.Date birthday;
   private String address;
   private int wingId;
   private ArrayList<String> nap;
@@ -26,7 +26,7 @@ public class Child {
   public Child() {
   }
 
-  public Child(int childId, String firstName, String lastName, Date birthday,
+  public Child(int childId, String firstName, String lastName, java.sql.Date birthday,
       String address, int wingId, ArrayList<String> nap, String trustedPickupPerson,
       String otherInfo, ArrayList<Parent> parents) {
     this.childId = childId;
@@ -41,11 +41,12 @@ public class Child {
     this.parents = parents;
   }
 
-  public Child(String firstName, String lastName, Date birthday, String address) {
+  public Child(String firstName, String lastName, java.sql.Date birthday, String address, int wingId) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.birthday = birthday;
     this.address = address;
+    this.wingId = wingId;
   }
 
   public String getFirstName() {
@@ -68,7 +69,7 @@ public class Child {
     return birthday;
   }
 
-  public void setBirthday(Date birthday) {
+  public void setBirthday(java.sql.Date birthday) {
     this.birthday = birthday;
   }
 

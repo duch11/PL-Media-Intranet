@@ -22,4 +22,6 @@ public class Util {
     }
     return -1; // Error code?
   }
+
+  public void addChildToParent() {}
 }

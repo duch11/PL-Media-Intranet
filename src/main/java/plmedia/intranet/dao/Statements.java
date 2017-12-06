@@ -49,8 +49,9 @@ public class Statements {
   // Setters / Creates
   public static final String DEF_CREATE_PARENT_USER_SQL = "INSERT INTO user (password, user_email, first_name, last_name, type, enabled) VALUES(?,?,?,?,?,?)";
   public static final String DEF_CREATE_EMPLOYEE_USER_SQL = "INSERT INTO user (password, user_email, first_name, last_name, type, enabled) VALUES(?,?,?,?,?,?)";
-  public static final String DEF_CREATE_CHILD_SQL = "INSERT INTO child (first_name, last_name, birthday, address) VALUES(?,?,?,?)";
+  public static final String DEF_CREATE_CHILD_SQL = "INSERT INTO child (first_name, last_name, birthday, address, fk_wing_id) VALUES(?,?,?,?,?)";
   public static final String DEF_CREATE_WING_SQL = "INSERT INTO wing (wing_name, wing_description) VALUES (?,?)";
+  public static final String DEF_CREATE_GROUP_SQL = "INSERT INTO group (group_name, group_description) VALUES (?,?)";
 
   // Deletes
 
