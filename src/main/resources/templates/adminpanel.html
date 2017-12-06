@@ -16,7 +16,11 @@
 
         <div class="col-sm-9 col-sm-offset-3 col-lg-8 col-lg-offset-3 main">
           <div class="row">
-            <h1 th:text="${currentGroup} ? ${currentGroup.getGroupName()} : (${parents} ? 'Forældre' : (${children} ? 'Børn' : (${allUsers} ? 'Personale')))">Admins/Ledere</h1>
+            <ul class="list-inline">
+              <li><h1 th:text="${currentGroup} ? ${currentGroup.getGroupName()} : (${parents} ? 'Forældre' : (${children} ? 'Børn' : (${allUsers} ? 'Personale')))">Admins/Ledere</h1></li>
+              <li th:if="${currentGroup}"><h3 th:text="'(' + ${currentGroup.getGroupDescription()} + ')'"></h3></li>
+            </ul>
+
 
           </div>
           <!--LIST of users/parents etc-->

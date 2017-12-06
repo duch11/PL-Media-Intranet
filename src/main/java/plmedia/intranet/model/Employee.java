@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class Employee extends User {
 
   private int wingID;
-  private int group;
+  private Group group;
 
   public Employee() {
   }
@@ -23,5 +23,14 @@ public class Employee extends User {
 
   public Employee(String password, String userEmail, String firstName, String lastName) {
     super(password, userEmail, firstName, lastName);
+  }
+
+
+  public Group getGroup() {
+    return group;
+  }
+
+  public void setGroup(Group group) {
+    this.group = group;
   }
 }
