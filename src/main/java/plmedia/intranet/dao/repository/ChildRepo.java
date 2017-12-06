@@ -1,16 +1,22 @@
 package plmedia.intranet.dao.repository;
 
 import java.util.ArrayList;
+import org.springframework.stereotype.Repository;
 import plmedia.intranet.dao.DBUtil.DBcreate;
+import plmedia.intranet.dao.DBUtil.DBread;
 import plmedia.intranet.model.Child;
 
 /**
  * A repository for child objects.
  * @author Simon le Févre Ryom
+ * @author Tobias Thomsen
  */
+
+@Repository
 public class ChildRepo implements IRepo<Child> {
 
   DBcreate dbc = new DBcreate();
+  DBread dbr = new DBread();
 
   /**
    * Creates initial child object.
@@ -23,8 +29,8 @@ public class ChildRepo implements IRepo<Child> {
   }
 
   @Override
-  public Child Read(int i) {
-    return null;
+  public Child Read(int id) {
+    return dbr.readChildById(id);
   }
 
   @Override
@@ -39,6 +45,6 @@ public class ChildRepo implements IRepo<Child> {
 
   @Override
   public ArrayList<Child> ReadAll() {
-    return null;
+    return dbr.readAllChildren();
   }
 }

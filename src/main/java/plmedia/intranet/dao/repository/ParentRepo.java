@@ -1,9 +1,9 @@
 package plmedia.intranet.dao.repository;
 
-import ch.qos.logback.core.db.dialect.DBUtil;
 import java.util.ArrayList;
 import org.springframework.stereotype.Repository;
 import plmedia.intranet.dao.DBUtil.DBcreate;
+import plmedia.intranet.dao.DBUtil.DBread;
 import plmedia.intranet.model.Parent;
 
 
@@ -16,6 +16,7 @@ import plmedia.intranet.model.Parent;
 public class ParentRepo<T> implements IRepo<Parent>, IUserRepo<Parent> {
 
   DBcreate dbc = new DBcreate();
+  DBread dbr = new DBread();
 
   @Override
   public int Create(Parent parent) {
@@ -23,8 +24,8 @@ public class ParentRepo<T> implements IRepo<Parent>, IUserRepo<Parent> {
   }
 
   @Override
-  public Parent Read(int i) {
-    return null;
+  public Parent Read(int id) {
+    return dbr.readParentByID(id);
   }
 
   @Override
@@ -39,7 +40,7 @@ public class ParentRepo<T> implements IRepo<Parent>, IUserRepo<Parent> {
 
   @Override
   public ArrayList<Parent> ReadAll() {
-    return null;
+    return dbr.readAllParents();
   }
 
 

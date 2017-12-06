@@ -17,10 +17,10 @@ public interface IRepo<T> {
 
   /**
    *
-   * @param i
+   * @param id
    * @return
    */
-  public T Read(int i);
+  public T Read(int id);
 
   /**
    * Updates the user

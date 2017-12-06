@@ -1,16 +1,22 @@
 package plmedia.intranet.dao.repository;
 
 import java.util.ArrayList;
+import org.springframework.stereotype.Repository;
 import plmedia.intranet.dao.DBUtil.DBcreate;
+import plmedia.intranet.dao.DBUtil.DBread;
 import plmedia.intranet.model.Wing;
 
 /**
  * A repository for Wings
  * @author Simon le Févre Ryom
+ * @author Tobias Thomsen
  */
+
+@Repository
 public class WingRepo implements IRepo<Wing>{
 
   DBcreate dbc = new DBcreate();
+  DBread dbr = new DBread();
 
   /**
    * Creates Wing object. Takes logic from DBcreate.
@@ -23,8 +29,8 @@ public class WingRepo implements IRepo<Wing>{
   }
 
   @Override
-  public Wing Read(int i) {
-    return null;
+  public Wing Read(int id) {
+    return dbr.readWingByID(id);
   }
 
   @Override
@@ -39,6 +45,6 @@ public class WingRepo implements IRepo<Wing>{
 
   @Override
   public ArrayList<Wing> ReadAll() {
-    return null;
+    return dbr.readAllWings();
   }
 }

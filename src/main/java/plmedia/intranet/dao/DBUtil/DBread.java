@@ -29,12 +29,12 @@ public class DBread {
       ArrayList<Permission> permissions = readPermissionsByUserID((rs.getInt("user_id")));
 
       return new Parent(
-        rs.getInt("user_id"),
-        rs.getString("password"),
-        rs.getString("user_email"),
-        rs.getString("first_name"),
-        rs.getString("last_name"),
-        permissions);
+          rs.getInt("user_id"),
+          rs.getString("password"),
+          rs.getString("user_email"),
+          rs.getString("first_name"),
+          rs.getString("last_name"),
+          permissions);
 
 
     } catch (SQLException e) {
@@ -74,7 +74,7 @@ public class DBread {
 
   // Employees
 
-  public Employee readEmployeeByID(int id) throws SQLException{
+  public Employee readEmployeeByID(int id) {
     try (
         PreparedStatement stmt = ConMan.prepStat(Statements.DEF_GET_EMPLOYEE_BY_ID_SQL);
     ) {
@@ -89,7 +89,10 @@ public class DBread {
           rs.getString("first_name"),
           rs.getString("last_name"),
           permissions);
+    } catch (SQLException e) {
+      e.printStackTrace();
     }
+    return null;
   }
 
   public ArrayList<Employee> readAllEmployees()  {
@@ -100,8 +103,41 @@ public class DBread {
         ArrayList<Employee> employees = new ArrayList<>();
         while (rs.next()) {
           ArrayList<Permission> permissions = readPermissionsByUserID((rs.getInt("user_id")));
-
+          employees.add(new Employee(
+              rs.getInt("user_id"),
+              rs.getString("password"),
+              rs.getString("user_email"),
+              rs.getString("first_name"),
+              rs.getString("last_name"),
+              permissions));
         }
+        return employees;
+
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
+      return null;
+    }
+
+    public ArrayList<Employee> readAllEmployeesByGroup(int id)  {
+      try (
+          PreparedStatement stmt = ConMan.prepStat(Statements.DEF_GET_ALL_EMPLOYEES_BY_GROUP_ID);
+      ) {
+        stmt.setInt(1, id);
+        ResultSet rs = stmt.executeQuery();
+        ArrayList<Employee> employees = new ArrayList<>();
+
+        while (rs.next()) {
+          ArrayList<Permission> permissions = readPermissionsByUserID((rs.getInt("user_id")));
+          employees.add(new Employee(
+              rs.getInt("user_id"),
+              rs.getString("password"),
+              rs.getString("user_email"),
+              rs.getString("first_name"),
+              rs.getString("last_name"),
+              permissions));
+        }
+        return employees;
 
       } catch (SQLException e) {
         e.printStackTrace();
@@ -128,7 +164,7 @@ public class DBread {
     return null; // Error code?
   }
 
-  public Child readChild(int id) {
+  public Child readChildById(int id) {
     try (
         PreparedStatement stmt = ConMan.prepStat(Statements.DEF_GET_CHILD_BY_ID_SQL);
     ) {
@@ -151,6 +187,34 @@ public class DBread {
       e.printStackTrace();
     }
     return null; // Error code?
+  }
+
+  public ArrayList<Child> readAllChildren()  {
+    try (
+        PreparedStatement stmt = ConMan.prepStat(Statements.DEF_GET_ALL_CHILDREN_SQL);
+    ) {
+      ResultSet rs = stmt.executeQuery();
+      ArrayList<Child> children = new ArrayList<>();
+      while (rs.next()) {
+
+        children.add(new Child(
+            rs.getInt("child_id"),
+            rs.getString("first_name"),
+            rs.getString("last_name"),
+            rs.getDate("birthday"),
+            rs.getString("address"),
+            rs.getInt("fk_wing_id"),
+            null,
+            null,
+            null,
+            null));
+      }
+      return children;
+
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return null;
   }
 
   // Permissions
@@ -216,7 +280,7 @@ public class DBread {
 
   // Wing
 
-  public Wing readWingByID(int id) throws SQLException {
+  public Wing readWingByID(int id)  {
     try (
         PreparedStatement stmt = ConMan.prepStat(Statements.DEF_GET_WING_BY_ID);
     ) {
@@ -227,11 +291,13 @@ public class DBread {
           rs.getInt(1),
           rs.getString(2),
           rs.getString(3));
+    } catch (SQLException e){
+      e.printStackTrace();
     }
-
+    return null;
   }
 
-  public ArrayList<Wing> readAllWings() throws SQLException {
+  public ArrayList<Wing> readAllWings()  {
     try (
         PreparedStatement stmt = ConMan.prepStat(Statements.DEF_GET_ALL_WINGS);
     ) {
@@ -248,12 +314,15 @@ public class DBread {
 
       }
       return wings;
-      }
+      } catch (SQLException e){
+      e.printStackTrace();
+    }
+    return null;
   }
 
   // Group
 
-  public Group readGroupByID(int id) throws SQLException {
+  public Group readGroupByID(int id)  {
     try (
         PreparedStatement stmt = ConMan.prepStat(Statements.DEF_GET_GROUP_BY_ID);
     ) {
@@ -264,11 +333,13 @@ public class DBread {
           rs.getInt(1),
           rs.getString(2),
           rs.getString(3));
+    } catch (SQLException e){
+      e.printStackTrace();
     }
-
+    return null;
   }
 
-  public ArrayList<Group> readAllGroups(int id) throws SQLException {
+  public ArrayList<Group> readAllGroups()  {
     try (
         PreparedStatement stmt = ConMan.prepStat(Statements.DEF_GET_ALL_GROUPS);
     ) {
@@ -281,8 +352,10 @@ public class DBread {
             rs.getString(3)));
       }
       return groups;
+    } catch (SQLException e){
+      e.printStackTrace();
     }
-
+    return null;
   }
 
 

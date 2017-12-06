@@ -3,10 +3,12 @@ package plmedia.intranet.dao.repository;
 import java.util.ArrayList;
 
 import org.springframework.stereotype.Repository;
-import plmedia.intranet.dao.DBUtil.DBcreate;
+import plmedia.intranet.dao.DBUtil.*;
 import plmedia.intranet.model.Employee;
 import plmedia.intranet.model.Parent;
 import plmedia.intranet.model.User;
+
+
 
 /**
  * A repository for Employee objects.
@@ -19,6 +21,8 @@ public class EmployeeRepo implements IRepo<Employee>, IUserRepo<Employee>  {
 
 
   DBcreate dbc = new DBcreate();
+  DBread dbr = new DBread();
+
 
   /**
    * Creates Employee object. Takes logic from DBcreate.
@@ -31,8 +35,8 @@ public class EmployeeRepo implements IRepo<Employee>, IUserRepo<Employee>  {
   }
 
   @Override
-  public Employee Read(int i) {
-    return null;
+  public Employee Read(int id) {
+    return dbr.readEmployeeByID(id);
   }
 
   @Override
@@ -47,14 +51,11 @@ public class EmployeeRepo implements IRepo<Employee>, IUserRepo<Employee>  {
 
   @Override
   public ArrayList<Employee> ReadAll() {
-    return null;
+    return dbr.readAllEmployees();
   }
 
-
-  public ArrayList<Employee> readAllEmployeesInGroup(int id){
-
-
-    return null;
+  public ArrayList<Employee> readAllEmployeesByGroup(int id){
+    return dbr.readAllEmployeesByGroup(id);
   }
 
 }

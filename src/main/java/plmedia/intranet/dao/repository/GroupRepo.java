@@ -1,25 +1,31 @@
 package plmedia.intranet.dao.repository;
 
 import java.util.ArrayList;
+import org.springframework.stereotype.Repository;
 import plmedia.intranet.dao.DBUtil.DBcreate;
+import plmedia.intranet.dao.DBUtil.DBread;
 import plmedia.intranet.model.Group;
 
 /**
  * A repository for user groups.
  * @author Simon le Févre Ryom
+ * @author Tobias Thomsen
  */
+
+@Repository
 public class GroupRepo implements IRepo<Group> {
 
-   DBcreate db = new DBcreate();
+   DBcreate dbc = new DBcreate();
+   DBread dbr = new DBread();
 
   @Override
   public int Create(Group group) {
-    return db.createGroup(group);
+    return dbc.createGroup(group);
   }
 
   @Override
-  public Group Read(int i) {
-    return null;
+  public Group Read(int id) {
+    return dbr.readGroupByID(id);
   }
 
   @Override
@@ -34,7 +40,7 @@ public class GroupRepo implements IRepo<Group> {
 
   @Override
   public ArrayList<Group> ReadAll() {
-    return null;
+    return dbr.readAllGroups();
   }
 }
 
