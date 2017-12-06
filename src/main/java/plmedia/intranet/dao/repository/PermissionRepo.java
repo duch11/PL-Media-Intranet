@@ -1,9 +1,12 @@
 package plmedia.intranet.dao.repository;
 
 import java.util.ArrayList;
+
+import org.springframework.stereotype.Repository;
 import plmedia.intranet.dao.DBUtil.DBread;
 import plmedia.intranet.model.Permission;
 
+@Repository
 public class PermissionRepo {
 
   DBread dbr = new DBread();

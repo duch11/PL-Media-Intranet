@@ -6,13 +6,11 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import plmedia.intranet.dao.repository.EmployeeRepo;
 import plmedia.intranet.dao.repository.IUserRepo;
 import plmedia.intranet.dao.repository.ParentRepo;
+import plmedia.intranet.dao.repository.PermissionRepo;
 import plmedia.intranet.model.*;
 
 import java.util.Date;
@@ -30,6 +28,9 @@ public class AdminController {
 
   @Autowired
   EmployeeRepo employeeRepo;
+
+  @Autowired
+  PermissionRepo permissionRepo;
 
   //TEST KODE
   //TODO: SLET MIG TESTKODE TIL GRUPPER
@@ -166,7 +167,8 @@ public class AdminController {
         model.addAttribute("employeeDetails", true);
       }
     }
-    model.addAttribute("globalPermissions", globalPermissions);
+    System.out.println(permissionRepo.readAllPermissions());
+    model.addAttribute("generalPermissions", permissionRepo.readAllPermissions());
     showAdminPanel(model, principal);
     return "detailsview";
   }
@@ -207,13 +209,25 @@ public class AdminController {
   }
 
   @RequestMapping(value = {"/admin/create/parent"}, method = RequestMethod.POST)
-  public String createParent(Model model, @ModelAttribute Parent newParent){
+  public String createParent(@ModelAttribute Parent newParent){
 
     System.out.println(newParent);
 
     parentRepo.Create(newParent);
 
     return "redirect:/admin/parents";
+  }
+
+  @RequestMapping(value = {"/admin/update/employee"}, method = RequestMethod.POST, params = {"permissionIDs"})
+  public String updatePermission(@RequestParam ArrayList<Integer> permissionIDs){
+    ArrayList<Permission> permissions = new ArrayList<>();
+    for (Integer i : permissionIDs){
+      permissions.add(permissionRepo.readPermissionByID(i));
+    }
+    //TODO: impl update
+    System.out.println(permissionIDs);
+    System.out.println(permissions);
+    return "redirect:/admin/employees";
   }
 
 
