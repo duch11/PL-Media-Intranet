@@ -43,6 +43,7 @@ public class AdminController {
   ArrayList<Permission> globalPermissions = new ArrayList<>();
 
   public AdminController() {
+    java.sql.Date dato = new java.sql.Date(2);
     globalPermissions.add(new Permission(1, "Kill hitler", "allows something"));
     globalPermissions.add(new Permission(2, "Kill stalin", "allows something"));
     globalPermissions.add(new Permission(3, "Kill bush", "allows something"));
@@ -112,10 +113,10 @@ public class AdminController {
     parents.add(new Parent(1, "123","jonas@sss.dk", "Argild","Gertsen",perm2));
     parents.add(new Parent(2,"123","jonas@sss.dk", "Jullebejler","Kanstrup",perm3));
 
-    children.add(new Child("Alma","Sørensen", new Date(),"hejvej 123"));
-    children.add(new Child("Carlo","Grimladen", new Date(),"hejvej 123"));
-    children.add(new Child("Silas","Sørensen", new Date(),"hejvej 123"));
-    children.add(new Child("Rui","LactoseFri", new Date(),"hejvej 123"));
+    children.add(new Child("Alma","Sørensen", new java.sql.Date(2),"hejvej 123", 1));
+    children.add(new Child("Carlo","Grimladen", new java.sql.Date(2),"hejvej 123", 1));
+    children.add(new Child("Silas","Sørensen", new java.sql.Date(2),"hejvej 123", 1));
+    children.add(new Child("Rui","LactoseFri", new java.sql.Date(2),"hejvej 123", 1));
   }
 
   //TEST KODESLUT
