@@ -7,6 +7,7 @@ import plmedia.intranet.dao.ConMan;
 import plmedia.intranet.dao.Statements;
 import plmedia.intranet.model.Child;
 import plmedia.intranet.model.Employee;
+import plmedia.intranet.model.Group;
 import plmedia.intranet.model.Parent;
 import plmedia.intranet.model.Wing;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -119,13 +120,33 @@ public class DBcreate {
    */
   public int createWing(Wing wing) { // maybe needs check for already existing wing name.
     try(
-        PreparedStatement stmt = ConMan.prepStat(Statements.DEF_CREATE_WING_SQL);
+        PreparedStatement stmt = ConMan.prepStat(Statements.DEF_CREATE_WING_SQL)
     ) {
        stmt.setString(1, wing.getWingName());
        stmt.setString(2, wing.getWingDescription());
 
        stmt.executeUpdate();
       System.out.println("Wing" +" "+ wing.getWingName() +" "+ "created!");
+      return 1;
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return -1;
+  }
+
+  /**
+   * Logic for creating groups.
+   * @param group
+   * @return int
+   */
+  public int createGroup(Group group) {
+    try(
+         PreparedStatement stmt = ConMan.prepStat(Statements.DEF_CREATE_GROUP_SQL)
+    ) {
+        stmt.setString(1, group.getGroupName());
+        stmt.setString(2, group.getGroupDescription());
+        stmt.executeUpdate();
+      System.out.println("Group" +" "+ group.getGroupName() +" "+ "created!");
       return 1;
     } catch (SQLException e) {
       e.printStackTrace();
