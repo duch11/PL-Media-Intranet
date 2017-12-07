@@ -82,13 +82,14 @@ public class DBread {
       stmt.setInt(1, id);
       ResultSet rs = stmt.executeQuery();
       ArrayList<Permission> permissions = readPermissionsByUserID((rs.getInt("user_id")));
-
+      Group group = readGroupByID((rs.getInt("user_id")));
       return new Employee(
           rs.getInt("user_id"),
           rs.getString("password"),
           rs.getString("user_email"),
           rs.getString("first_name"),
           rs.getString("last_name"),
+          group,
           permissions);
     } catch (SQLException e) {
       e.printStackTrace();
@@ -105,12 +106,14 @@ public class DBread {
         ArrayList<Employee> employees = new ArrayList<>();
         while (rs.next()) {
           ArrayList<Permission> permissions = readPermissionsByUserID((rs.getInt("user_id")));
+          Group group = readGroupByID((rs.getInt("user_id")));
           employees.add(new Employee(
               rs.getInt("user_id"),
               rs.getString("password"),
               rs.getString("user_email"),
               rs.getString("first_name"),
               rs.getString("last_name"),
+              group,
               permissions));
         }
         return employees;
@@ -131,12 +134,14 @@ public class DBread {
 
         while (rs.next()) {
           ArrayList<Permission> permissions = readPermissionsByUserID((rs.getInt("user_id")));
+          Group group = readGroupByID((rs.getInt("user_id")));
           employees.add(new Employee(
               rs.getInt("user_id"),
               rs.getString("password"),
               rs.getString("user_email"),
               rs.getString("first_name"),
               rs.getString("last_name"),
+              group,
               permissions));
         }
         return employees;

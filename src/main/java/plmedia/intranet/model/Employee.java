@@ -17,12 +17,14 @@ public class Employee extends User {
   public Employee() {
   }
 
-  public Employee(int userId, String password, String userEmail, String firstName, String lastName, ArrayList<Permission> permissions) {
+  public Employee(int userId, String password, String userEmail, String firstName, String lastName, Group group, ArrayList<Permission> permissions) {
     super(userId, password, userEmail, firstName, lastName, permissions);
+    this.group = group;
   }
 
-  public Employee(String password, String userEmail, String firstName, String lastName) {
+  public Employee(String password, String userEmail, String firstName, String lastName, Group group) {
     super(password, userEmail, firstName, lastName);
+    this.group = group;
   }
 
 
