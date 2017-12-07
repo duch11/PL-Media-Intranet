@@ -81,6 +81,7 @@ public class DBread {
     ) {
       stmt.setInt(1, id);
       ResultSet rs = stmt.executeQuery();
+      rs.first();
       ArrayList<Permission> permissions = readPermissionsByUserID((rs.getInt("user_id")));
 
       return new Employee(

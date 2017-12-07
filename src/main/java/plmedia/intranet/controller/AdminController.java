@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import plmedia.intranet.dao.repository.EmployeeRepo;
 import plmedia.intranet.dao.repository.GroupRepo;
-import plmedia.intranet.dao.repository.IUserRepo;
 import plmedia.intranet.dao.repository.ParentRepo;
 import plmedia.intranet.dao.repository.PermissionRepo;
 import plmedia.intranet.model.*;
@@ -47,7 +46,7 @@ public class AdminController {
   ArrayList<Permission> globalPermissions = new ArrayList<>();
 
   public AdminController() {
-    java.sql.Date dato = new java.sql.Date(2);
+    /*java.sql.Date dato = new java.sql.Date(2);
     globalPermissions.add(new Permission(1, "Kill hitler", "allows something"));
     globalPermissions.add(new Permission(2, "Kill stalin", "allows something"));
     globalPermissions.add(new Permission(3, "Kill bush", "allows something"));
@@ -121,6 +120,7 @@ public class AdminController {
     children.add(new Child("Carlo","Grimladen", new java.sql.Date(2),"hejvej 123", 1));
     children.add(new Child("Silas","Sørensen", new java.sql.Date(2),"hejvej 123", 1));
     children.add(new Child("Rui","LactoseFri", new java.sql.Date(2),"hejvej 123", 1));
+  */
   }
 
   //TEST KODESLUT
@@ -130,12 +130,10 @@ public class AdminController {
   * makes renaming and adding "universal" actions more sensible
   */
 
+
   public String showAdminPanel(Model model, Principal principal) {
 
-    /**
-     * ENG: Principal DK: "Grund-sikkerhedskonto"
-     * Spring framework injecter den selv, ligesom den goer med Model.
-     * */
+    /** ENG: Principal DK: "Grund-sikkerhedskonto" * */
     model.addAttribute("test", principal.getName());
     model.addAttribute("employeeGroups", groupRepo.ReadAll());
     return "adminpanel";
@@ -152,18 +150,6 @@ public class AdminController {
 
   @RequestMapping(value = {"/admin/employees"}, method = RequestMethod.GET, params = {"groupID"})
   public String adminPanelEmpGroup(Model model, Principal principal, @RequestParam int groupID) {
-
-    /*for (Group g : employeeGroups){
-      if(g.getId() == groupID){
-        model.addAttribute("currentGroup", g);
-        employeesSorted = new ArrayList<>();
-        for (Employee emp : employees){
-          if(emp.getGroup().getId() == groupID){
-            employeesSorted.add(emp);
-          }
-        }
-      }
-    }*/
     model.addAttribute("currentGroup", groupRepo.Read(groupID));
     model.addAttribute("employees", employeeRepo.readAllEmployeesByGroup(groupID));
     model.addAttribute("newEmployee", new Employee());
@@ -187,17 +173,16 @@ public class AdminController {
 
   @RequestMapping(value = {"/admin/details"}, method = RequestMethod.GET, params = {"employee"})
   public String empDetails(Model model,Principal principal, @RequestParam int employee) {
-    for(User user : employees){
-      if(user.getUserId() == employee){
-        model.addAttribute("user", user);
-        model.addAttribute("employeeDetails", true);
-        model.addAttribute("generalPermissions", permissionRepo.readAllPermissions());
-        model.addAttribute("allGroups", employeeGroups);
-        showAdminPanel(model, principal);
-        return "detailsview";
-      }
-    }
-    return "redirect:/admin/employees";
+
+
+    model.addAttribute("user", employeeRepo.Read(employee));
+    model.addAttribute("employeeDetails", true);
+
+    model.addAttribute("generalPermissions", permissionRepo.readAllPermissions());
+
+    showAdminPanel(model, principal);
+
+    return "detailsview";
   }
 
   @RequestMapping(value = {"/admin/details"}, method = RequestMethod.GET, params = {"parent"})

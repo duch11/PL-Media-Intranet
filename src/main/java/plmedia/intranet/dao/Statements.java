@@ -22,7 +22,7 @@ public class Statements {
   public static final String DEF_GET_ALL_EMAIL = "SELECT user_email FROM user";
 
   // EMPLOYEE
-  public static final String DEF_GET_EMPLOYEE_BY_ID_SQL = "SELECT * FROM user WHERE type=\"emp\" AND user_id=\"?\" ";
+  public static final String DEF_GET_EMPLOYEE_BY_ID_SQL = "SELECT * FROM user WHERE type=\"ROLE_EMP\" AND user_id= ? ";
 
 
 

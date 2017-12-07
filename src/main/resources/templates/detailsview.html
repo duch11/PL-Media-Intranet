@@ -42,7 +42,8 @@
               </tr>
               <tr th:if="${employeeDetails}">
                 <th>Group:</th>
-                <td th:text="${user.getGroup().getGroupName()}">Ledelsen</td>
+                <!--${user.getGroup().getGroupName()}-->
+                <td >Ledelsen</td>
                 <td><a href="#" class="btn btn-edit pull-right" data-toggle="modal" data-target="#editGroups"><i class="fa fa-pencil"></i></a></td>
               </tr>
               </tbody>
@@ -175,7 +176,8 @@
             <div class="modal-body">
               <div class="form-group">
                 <select name="groupID" required="true" class="form-control">
-                  <option th:each="group : ${allGroups}" th:value="${group.getId()}" th:text="${group.getGroupName()}" th:selected="${user.getGroup().getId()} == ${group.getId()} ? 'selected'">
+
+                  <option th:each="group : ${employeeGroups}" th:value="${group.getId()}" th:text="${group.getGroupName()}" th:selected="${user.getUserId()} == ${group.getId()} ? 'selected'">
                     nope
                   </option>
                 </select>

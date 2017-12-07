@@ -25,7 +25,6 @@ public class Employee extends User {
     super(password, userEmail, firstName, lastName);
   }
 
-
   public Group getGroup() {
     return group;
   }
