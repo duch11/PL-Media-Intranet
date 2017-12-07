@@ -13,7 +13,7 @@ import plmedia.intranet.model.Parent;
  */
 
 @Repository
-public class ParentRepo<T> implements IRepo<Parent>, IUserRepo<Parent> {
+public class ParentRepo<T> implements IRepo<Parent> {
 
   DBcreate dbc = new DBcreate();
   DBread dbr = new DBread();

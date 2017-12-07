@@ -5,9 +5,6 @@ import java.util.ArrayList;
 import org.springframework.stereotype.Repository;
 import plmedia.intranet.dao.DBUtil.*;
 import plmedia.intranet.model.Employee;
-import plmedia.intranet.model.Parent;
-import plmedia.intranet.model.User;
-
 
 
 /**
@@ -17,7 +14,7 @@ import plmedia.intranet.model.User;
  */
 
 @Repository
-public class EmployeeRepo implements IRepo<Employee>, IUserRepo<Employee>  {
+public class EmployeeRepo implements IRepo<Employee> {
 
 
   DBcreate dbc = new DBcreate();
