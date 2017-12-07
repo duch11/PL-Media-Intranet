@@ -52,6 +52,10 @@ public class Statements {
 
 
 
+  //FK add and delete
+  public static final String DEF_ADD_CHILD_TO_PARENT = "INSERT INTO parent_user_child (fk_parent_user_id, fk_child_id) VALUES (?,?)";
+
+  public static final String DEF_DELETE_CHILD_FROM_PARENT = "DELETE FROM parent_user_child WHERE (fk_parent_user_id, fk_child_id) = (?,?)";
 
   // Setters / Creates
   public static final String DEF_CREATE_PARENT_USER_SQL = "INSERT INTO user (password, user_email, first_name, last_name, type, enabled) VALUES(?,?,?,?,?,?)";
@@ -61,5 +65,6 @@ public class Statements {
   public static final String DEF_CREATE_GROUP_SQL = "INSERT INTO group (group_name, group_description) VALUES (?,?)";
 
   // Deletes
+
 
 }
