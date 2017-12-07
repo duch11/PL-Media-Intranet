@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import plmedia.intranet.dao.DBUtil.DBread;
 import plmedia.intranet.dao.repository.EmployeeRepo;
 import plmedia.intranet.model.Employee;
+import plmedia.intranet.model.Group;
 
 @SpringBootApplication
 public class IntranetApplication {
@@ -12,12 +13,12 @@ public class IntranetApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(IntranetApplication.class, args);
 
-		EmployeeRepo empRepo = new EmployeeRepo();
+		DBread dbr = new DBread();
 
-		for (Employee e :
-				empRepo.readAllEmployeesByGroup(1)) {
-			System.out.println(e);
+		for (Group g : dbr.readAllGroups()) {
+			System.out.println(g.getGroupName());
 		}
+
 
 
   }

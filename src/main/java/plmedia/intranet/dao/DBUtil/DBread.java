@@ -4,6 +4,7 @@ import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import plmedia.intranet.dao.ConMan;
 import plmedia.intranet.dao.Statements;
@@ -341,9 +342,9 @@ public class DBread {
 
   public ArrayList<Group> readAllGroups()  {
     try (
-        PreparedStatement stmt = ConMan.prepStat(Statements.DEF_GET_ALL_GROUPS);
+        ResultSet rs = ConMan.regStat(Statements.DEF_GET_ALL_GROUPS);
     ) {
-      ResultSet rs = stmt.executeQuery();
+
       ArrayList<Group> groups = new ArrayList<>();
       while (rs.next()){
         groups.add(new Group(
@@ -353,7 +354,7 @@ public class DBread {
       }
       return groups;
     } catch (SQLException e){
-      e.printStackTrace();
+      ConMan.processException(e);
     }
     return null;
   }

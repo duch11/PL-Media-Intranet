@@ -34,7 +34,7 @@ public class Statements {
   // Groups
   public static final String DEF_GET_ALL_EMPLOYEES_BY_GROUP_ID = "SELECT * FROM user WHERE user_id = ANY (SELECT fk_employee_user_id FROM employee_user_group WHERE fk_group_id = ?)";
   public static final String DEF_GET_GROUP_BY_ID = "SELECT * FROM group WHERE group_id = ?";
-  public static final String DEF_GET_ALL_GROUPS = "SELECT * FROM group";
+  public static final String DEF_GET_ALL_GROUPS = "SELECT * FROM intranetdb.group";
 
 
   // Wings
@@ -44,6 +44,13 @@ public class Statements {
 
 
   // Updates
+  public static final String DEF_UPDATE_USER = "UPDATE user SET password = ?, user_email = ?, first_name = ?, last_name = ? where user_id = ?";
+  public static final String DEF_UPDATE_CHILD = "UPDATE child SET ";
+
+  public static final String DEF_UPDATE_PERMISSION_BY_ID = "UPDATE user_permission SET ";
+
+
+
 
 
   // Setters / Creates
