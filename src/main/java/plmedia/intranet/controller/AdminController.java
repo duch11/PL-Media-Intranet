@@ -144,9 +144,11 @@ public class AdminController {
 
   @RequestMapping(value = {"/admin/employees", "/admin"}, method = RequestMethod.GET)
   public String adminPanelEmp(Model model, Principal principal) {
-    model.addAttribute("allUsers", employeeGroups.get(0));
+    model.addAttribute("allUsers", true);
     model.addAttribute("newEmployee", new Employee());
+
     model.addAttribute("employees", employees);
+    model.addAttribute("employees", employeeRepo.ReadAll());
     return showAdminPanel(model, principal);
   }
 
