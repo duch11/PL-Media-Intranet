@@ -98,8 +98,9 @@ public class DBread {
 
   public ArrayList<Employee> readAllEmployees()  {
       try (
-          PreparedStatement stmt = ConMan.prepStat(Statements.DEF_GET_EMPLOYEE_BY_ID_SQL);
+          PreparedStatement stmt = ConMan.prepStat(Statements.DEF_GET_ALL_USERS_BY_TYPE_SQL);
       ) {
+        stmt.setString(1, "ROLE_EMP");
         ResultSet rs = stmt.executeQuery();
         ArrayList<Employee> employees = new ArrayList<>();
         while (rs.next()) {
@@ -329,7 +330,7 @@ public class DBread {
     ) {
       stmt.setInt(1, id);
       ResultSet rs = stmt.executeQuery();
-
+      rs.first();
       return new Group(
           rs.getInt(1),
           rs.getString(2),

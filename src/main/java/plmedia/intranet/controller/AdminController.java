@@ -137,7 +137,7 @@ public class AdminController {
      * Spring framework injecter den selv, ligesom den goer med Model.
      * */
     model.addAttribute("test", principal.getName());
-    model.addAttribute("employeeGroups", employeeGroups);
+    model.addAttribute("employeeGroups", groupRepo.ReadAll());
     return "adminpanel";
   }
 
@@ -146,8 +146,6 @@ public class AdminController {
   public String adminPanelEmp(Model model, Principal principal) {
     model.addAttribute("allUsers", true);
     model.addAttribute("newEmployee", new Employee());
-
-    model.addAttribute("employees", employees);
     model.addAttribute("employees", employeeRepo.ReadAll());
     return showAdminPanel(model, principal);
   }
@@ -155,7 +153,7 @@ public class AdminController {
   @RequestMapping(value = {"/admin/employees"}, method = RequestMethod.GET, params = {"groupID"})
   public String adminPanelEmpGroup(Model model, Principal principal, @RequestParam int groupID) {
 
-    for (Group g : employeeGroups){
+    /*for (Group g : employeeGroups){
       if(g.getId() == groupID){
         model.addAttribute("currentGroup", g);
         employeesSorted = new ArrayList<>();
@@ -165,8 +163,9 @@ public class AdminController {
           }
         }
       }
-    }
-    model.addAttribute("employees", employeesSorted);
+    }*/
+    model.addAttribute("currentGroup", groupRepo.Read(groupID));
+    model.addAttribute("employees", employeeRepo.readAllEmployeesByGroup(groupID));
     model.addAttribute("newEmployee", new Employee());
 
     return showAdminPanel(model, principal);

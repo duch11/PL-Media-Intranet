@@ -33,7 +33,7 @@ public class Statements {
 
   // Groups
   public static final String DEF_GET_ALL_EMPLOYEES_BY_GROUP_ID = "SELECT * FROM user WHERE user_id = ANY (SELECT fk_employee_user_id FROM employee_user_group WHERE fk_group_id = ?)";
-  public static final String DEF_GET_GROUP_BY_ID = "SELECT * FROM group WHERE group_id = ?";
+  public static final String DEF_GET_GROUP_BY_ID = "SELECT * FROM intranetdb.group WHERE group_id = ?";
   public static final String DEF_GET_ALL_GROUPS = "SELECT * FROM intranetdb.group";
 
 
