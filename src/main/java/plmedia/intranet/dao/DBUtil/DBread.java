@@ -107,7 +107,7 @@ public class DBread {
         ArrayList<Employee> employees = new ArrayList<>();
         while (rs.next()) {
           ArrayList<Permission> permissions = readPermissionsByUserID((rs.getInt("user_id")));
-          Group group = readGroupByID((rs.getInt("user_id")));
+          Group group = readGroupByID((rs.getInt("")));
           employees.add(new Employee(
               rs.getInt("user_id"),
               rs.getString("password"),
@@ -366,5 +366,20 @@ public class DBread {
     return null;
   }
 
+  public Group readGroupByUserID(int id){
+    try (
+    PreparedStatement stmt = ConMan.prepStat(Statements.DEF_GET_GROUP_BY_USER_ID);
+    ) {
+      stmt.setInt(1, id);
+      ResultSet rs = stmt.executeQuery();
+      return new Group(
+          rs.getInt(1),
+          rs.getString(2),
+          rs.getString(3));
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return null;
+  }
 
 }

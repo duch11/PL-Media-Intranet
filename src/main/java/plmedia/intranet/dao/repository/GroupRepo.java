@@ -42,6 +42,10 @@ public class GroupRepo implements IRepo<Group> {
   public ArrayList<Group> ReadAll() {
     return dbr.readAllGroups();
   }
+
+  public Group readGroupByUserID(int id){
+    return dbr.readGroupByUserID(id);
+  }
 }
 
 
