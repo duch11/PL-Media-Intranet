@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import plmedia.intranet.dao.repository.EmployeeRepo;
+import plmedia.intranet.dao.repository.GroupRepo;
 import plmedia.intranet.dao.repository.IUserRepo;
 import plmedia.intranet.dao.repository.ParentRepo;
 import plmedia.intranet.dao.repository.PermissionRepo;
@@ -28,6 +29,9 @@ public class AdminController {
 
   @Autowired
   EmployeeRepo employeeRepo;
+
+  @Autowired
+  GroupRepo groupRepo;
 
   @Autowired
   PermissionRepo permissionRepo;
