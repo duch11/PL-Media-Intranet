@@ -83,7 +83,7 @@ public class DBread {
       ResultSet rs = stmt.executeQuery();
       rs.first();
       ArrayList<Permission> permissions = readPermissionsByUserID((rs.getInt("user_id")));
-      Group group = readGroupByID((rs.getInt("user_id")));
+      Group group = readGroupByUserID((rs.getInt("user_id")));
       return new Employee(
           rs.getInt("user_id"),
           rs.getString("password"),
@@ -107,7 +107,7 @@ public class DBread {
         ArrayList<Employee> employees = new ArrayList<>();
         while (rs.next()) {
           ArrayList<Permission> permissions = readPermissionsByUserID((rs.getInt("user_id")));
-          Group group = readGroupByID((rs.getInt("")));
+          Group group = readGroupByUserID((rs.getInt("user_id")));
           employees.add(new Employee(
               rs.getInt("user_id"),
               rs.getString("password"),
