@@ -24,7 +24,6 @@ i højre og venstre side-->
       <div class="list-group" style="max-height: 400px">
 
         <!-- Generering af listen, baseret på hvad templaten bliver fodret med -->
-        <a th:each="employee : ${employees}" href="/parent/child?user=" th:text="${employee.getName()}" th:attrappend="href=${employee.getUserID()}" class="list-group-item">Thymeleaf Employee</a>
         <a th:each="parent : ${parents}"     href="/parent/details?user=" th:text="${parent.getName()}"   th:attrappend="href=${parent.getParentID()}" class="list-group-item">Thymeleaf Parent</a>
         <a th:each="child : ${children}"     href="/admin/details?user=" th:text="${child.getName()}"    th:attrappend="href=${child.getChildID()}"   class="list-group-item">Thymeleaf Child</a>
 
@@ -111,6 +110,7 @@ i højre og venstre side-->
     </div>
   </div>
 </div>
+
 
 <div id="editPassword" class="modal fade" role="dialog">
   <div class="modal-dialog">
