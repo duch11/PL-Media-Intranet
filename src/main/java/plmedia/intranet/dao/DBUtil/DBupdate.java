@@ -86,5 +86,7 @@ public class DBupdate {
     return -1;
   }
 
-  public int updateChildAllergens(Child child, ArrayList<Integer>)
+  public int updateChildAllergens(Child child, ArrayList<Integer> something){
+    return 0;
+  }
 }
