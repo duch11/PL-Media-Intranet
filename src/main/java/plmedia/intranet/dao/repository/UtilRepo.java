@@ -3,6 +3,7 @@ package plmedia.intranet.dao.repository;
 import ch.qos.logback.core.db.dialect.DBUtil;
 import java.util.ArrayList;
 import org.springframework.stereotype.Repository;
+import plmedia.intranet.dao.DBUtil.DBupdate;
 import plmedia.intranet.dao.DBUtil.Util;
 import plmedia.intranet.dao.DBUtil.DBcreate;
 import plmedia.intranet.model.Child;
@@ -19,17 +20,17 @@ public class UtilRepo {
 
   Util util = new Util();
   DBcreate dbc = new DBcreate();
+  DBupdate dbu = new DBupdate();
 
   public int checkEmail(String email){
     return util.checkEmail(email);
   }
 
-  public int addChildrenToParent(Parent parent, ArrayList<Child> childList) {
-    return util.addChildrenToParent(parent, childList);
+  public int updateChildToParent(Parent parent, ArrayList<Integer> newChildren) {
+    return dbu.updateChildToParent(parent, newChildren);
   }
-
-  public int deleteChildrenFromParent(Parent parent, ArrayList<Child> childList) {
-    return util.deleteChildrenFromParent(parent, childList);
-  }
-  
 }
+
+
+
+
