@@ -451,7 +451,7 @@ public class DBread {
     return null;
   }
 
-  public Allergen readAllergenByUserID(int id){
+  public Allergen readAllergenByChildID(int id){
     try (
         PreparedStatement stmt = ConMan.prepStat(Statements.DEF_GET_ALLERGEN_BY_CHILD_ID);
     ) {
