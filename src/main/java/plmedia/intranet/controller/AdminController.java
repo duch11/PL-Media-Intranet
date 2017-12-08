@@ -230,18 +230,8 @@ public class AdminController {
    * */
   @RequestMapping(value = {"/admin/update/employee"}, method = RequestMethod.POST, params = {"permissionIDs", "ID"})
   public String updatePermission(@RequestParam ArrayList<Integer> permissionIDs, @RequestParam int ID ){
-    ArrayList<Permission> permissions = new ArrayList<>();
 
-    for (Integer i : permissionIDs){
-      if(i.intValue() != -1){
-        permissions.add(permissionRepo.readPermissionByID(i));
-      }
-    }
-
-    //TODO: impl update permissions with repo
-    System.out.println(ID);
     permissionRepo.updatePermissionByID(employeeRepo.Read(ID),permissionIDs);
-    System.out.println(permissions);
     return "redirect:/admin/details?employee=" + ID;
   }
 

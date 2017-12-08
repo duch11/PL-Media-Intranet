@@ -210,7 +210,7 @@
               <div th:each="generalPermission : ${generalPermissions}" class="checkbox">
                 <label><input type="checkbox" name="permissionIDs" th:value="${generalPermission.getPermissionID()}" th:checked="${user.hasPermission(generalPermission)}"/><span th:text="${generalPermission.getPermissionName()}">Redigere Børn</span></label>
               </div>
-              <!--<input type="hidden" name="permissionIDs" value="-1"/>-->
+              <input type="hidden" name="permissionIDs" value=""/>
             </div>
             <div class="modal-footer">
               <button type="submit" class="btn btn-success">Gem</button>
