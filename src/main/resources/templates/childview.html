@@ -30,7 +30,7 @@ i højre og venstre side-->
     <div class="col-sm-9 col-sm-offset-3 col-lg-8 col-lg-offset-3 main">
       <table class="table">
         <thead>
-        <h1>Dit Barn</h1>
+        <h1 th:text="${child.getFirstName()} + ' ' + ${child.getLastName()}">Dit Barn</h1>
         <tr>
           <th>Beskrivelse</th>
           <th>Information</th>

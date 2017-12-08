@@ -21,7 +21,7 @@
   </ul>
   <ul class="nav nav-sidebar">
     <li>
-      <a th:class="${children} ? 'active' : (${childDetails} ? 'semiActive')" href="/admin/children">Børn <i th:if="${childDetails}" class="fa fa-user pull-right" aria-hidden="true"></i></a>
+      <a th:class="${children} ? 'active' : (${child} ? 'semiActive')" href="/admin/children">Børn <i th:if="${child}" class="fa fa-user pull-right" aria-hidden="true"></i></a>
     </li>
     <li>
       <a th:class="${parents} ? 'active' : (${parentDetails} ? 'semiActive')" href="/admin/parents">Forældre <i th:if="${parentDetails}" class="fa fa-user pull-right" aria-hidden="true"></i></a>

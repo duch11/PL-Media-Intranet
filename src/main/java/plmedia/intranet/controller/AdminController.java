@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import plmedia.intranet.dao.repository.ChildRepo;
 import plmedia.intranet.dao.repository.EmployeeRepo;
 import plmedia.intranet.dao.repository.GroupRepo;
 import plmedia.intranet.dao.repository.ParentRepo;
@@ -19,6 +20,9 @@ import plmedia.intranet.model.*;
 
 @Controller
 public class AdminController {
+
+  @Autowired
+  ChildRepo childRepo;
 
   @Autowired
   ParentRepo parentRepo;
@@ -120,7 +124,6 @@ public class AdminController {
   */
   }
 
-  //TEST KODESLUT
 
   /**
    * Base method for showing adminpanel
@@ -156,14 +159,14 @@ public class AdminController {
 
   @RequestMapping(value = {"/admin/parents"}, method = RequestMethod.GET)
   public String adminPanelParents(Model model, Principal principal) {
-    model.addAttribute("parents", parents);
+    model.addAttribute("parents", parentRepo.ReadAll());
     model.addAttribute("newParent", new Parent());
     return showAdminPanel(model, principal);
   }
 
   @RequestMapping(value = {"/admin/children"}, method = RequestMethod.GET)
   public String adminPanelChildren(Model model, Principal principal) {
-    model.addAttribute("children", children);
+    model.addAttribute("children", childRepo.ReadAll());
     model.addAttribute("newChild", new Child());
     return showAdminPanel(model, principal);
   }
@@ -171,7 +174,7 @@ public class AdminController {
   @RequestMapping(value = {"/admin/details"}, method = RequestMethod.GET, params = {"employee"})
   public String empDetails(Model model,Principal principal, @RequestParam int employee) {
 
-    System.out.println(employeeRepo.Read(employee));
+
     model.addAttribute("user", employeeRepo.Read(employee));
     model.addAttribute("employeeDetails", true);
 
@@ -184,21 +187,16 @@ public class AdminController {
 
   @RequestMapping(value = {"/admin/details"}, method = RequestMethod.GET, params = {"parent"})
   public String parentDetails(Model model, Principal principal, @RequestParam int parent) {
-    for(User user : parents){
-      if(user.getUserId() == parent){
-        model.addAttribute("user", user);
-        model.addAttribute("parentDetails", true);
-        showAdminPanel(model, principal);
-        return "detailsview";
-      }
-    }
-    return "redirect:/admin/parents";
+
+    model.addAttribute("user", parentRepo.Read(parent));
+    model.addAttribute("parentDetails", true);
+    showAdminPanel(model, principal);
+    return "detailsview";
   }
 
   @RequestMapping(value = {"/admin/details"}, method = RequestMethod.GET, params = {"child"})
   public String childDetails(Model model, Principal principal, @RequestParam int child) {
-    model.addAttribute("child", "repo.getChild()" + child);
-
+    model.addAttribute("child", childRepo.Read(child));
     showAdminPanel(model,principal);
     return "childview";
   }
