@@ -232,6 +232,7 @@ public class DBread {
         PreparedStatement stmt = ConMan.prepStat(Statements.DEF_GET_PERMISSIONS_BY_ID_SQL);
 
     ) {
+      stmt.setInt(1, id);
       ResultSet rs = stmt.executeQuery();
       rs.first();
 
