@@ -7,6 +7,7 @@ import plmedia.intranet.dao.DBUtil.DBupdate;
 import plmedia.intranet.dao.DBUtil.Util;
 import plmedia.intranet.dao.DBUtil.DBcreate;
 import plmedia.intranet.model.Child;
+import plmedia.intranet.model.Employee;
 import plmedia.intranet.model.Parent;
 import plmedia.intranet.model.Wing;
 
@@ -28,6 +29,10 @@ public class UtilRepo {
 
   public int updateChildToParent(Parent parent, ArrayList<Integer> newChildren) {
     return dbu.updateChildToParent(parent, newChildren);
+  }
+
+  public int updatePermissionByID(Employee employee, ArrayList<Integer> newPermission) {
+    return dbu.updatePermissionByID(employee, newPermission);
   }
 }
 

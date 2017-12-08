@@ -43,6 +43,10 @@ public class ParentRepo<T> implements IRepo<Parent> {
     return dbr.readAllParents();
   }
 
+  public Parent readParentByEmail(String userEmail) {
+    return dbr.readParentByEmail(userEmail);
+  }
+
 
 
 

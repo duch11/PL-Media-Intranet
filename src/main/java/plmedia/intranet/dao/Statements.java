@@ -16,7 +16,8 @@ public class Statements {
 
   public static final String DEF_GET_USERS_BY_TYPE_AND_ID_SQL = "SELECT * FROM user WHERE type=? AND user_id=?";
   public static final String DEF_GET_ALL_CHILDREN_SQL = "SELECT * FROM child";
-  public static final String DEF_GET_PARENT_BY_ID_SQL = "SELECT * FROM user WHERE type=\"par\" AND user_id=\"?\"";
+  public static final String DEF_GET_PARENT_BY_ID_SQL = "SELECT * FROM user WHERE type=\"ROLE_PAR\" AND user_id=\"?\"";
+  public static final String DEF_GET_PARENT_BY_EMAIL_SQL = "SELECT * FROM user WHERE type=\"ROLE_PAR\" AND user_email=\"?\"";
   public static final String DEF_GET_CHILD_BY_ID_SQL = "SELECT * FROM child WHERE child_id = ?";
   public static final String DEF_GET_CHILDREN_ID_BY_PARENT_ID_SQL = "{CALL GetChildrenByParentID(?)}";
   public static final String DEF_GET_ALL_EMAIL = "SELECT user_email FROM user";
@@ -49,13 +50,14 @@ public class Statements {
   // Updates
   public static final String DEF_UPDATE_USER = "UPDATE user SET password = ?, user_email = ?, first_name = ?, last_name = ? where user_id = ?";
   public static final String DEF_UPDATE_CHILD = "UPDATE child SET ";
-  
+
 
   //FK add and delete
   public static final String DEF_ADD_CHILD_TO_PARENT = "INSERT INTO parent_user_child (fk_parent_user_id, fk_child_id) VALUES (?,?)";
-  public static final String DEF_ADD_PERMISSION_TO_USER = "INSERT INTO ";
+  public static final String DEF_ADD_PERMISSION_TO_USER = "INSERT INTO user_permission (fk_user_id, fk_permission_id) VALUE (?,?)";
 
   public static final String DEF_DELETE_CHILD_FROM_PARENT = "DELETE FROM parent_user_child WHERE (fk_parent_user_id, fk_child_id) = (?,?)";
+  public static final String DEF_DELETE_PERMISSION_FROM_USER = "DELETE FROM user_permission WHERE (fk_user_id, fk_permission_id) = (?,?)";
 
   // Setters / Creates
   public static final String DEF_CREATE_PARENT_USER_SQL = "INSERT INTO user (password, user_email, first_name, last_name, type, enabled) VALUES(?,?,?,?,?,?)";
