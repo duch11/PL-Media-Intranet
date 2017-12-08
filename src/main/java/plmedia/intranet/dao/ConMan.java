@@ -12,8 +12,10 @@ public class ConMan {
   private static String USERNAME = "PLintra-dev";
   private static String PASSWORD = "MoreMoneyToFaisal";
   private static String CONN_STRING = "jdbc:mysql://localhost/intranetdb";
-
+  private static int count = 0;
   public static Connection getConnection() throws SQLException {
+    count++;
+    System.out.println("get connection called "+ count + " no of times.");
     return DriverManager.getConnection(CONN_STRING, USERNAME, PASSWORD);
   }
 
