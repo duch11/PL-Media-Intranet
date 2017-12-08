@@ -9,6 +9,7 @@ import java.util.List;
 import plmedia.intranet.dao.ConMan;
 import plmedia.intranet.dao.Statements;
 import plmedia.intranet.model.Child;
+import plmedia.intranet.model.Employee;
 import plmedia.intranet.model.Parent;
 import plmedia.intranet.model.Permission;
 
@@ -18,7 +19,7 @@ public class DBupdate {
 
   public int updateChildToParent(Parent parent, ArrayList<Integer> newChildren) {
     try (
-        PreparedStatement addStmt = ConMan.prepStat(Statements.DEF_ADD_CHILD_TO_PARENT);
+        PreparedStatement writeStmt = ConMan.prepStat(Statements.DEF_ADD_CHILD_TO_PARENT);
         PreparedStatement deleteStmt = ConMan.prepStat(Statements.DEF_DELETE_CHILD_FROM_PARENT);
     ) {
 
@@ -31,9 +32,9 @@ public class DBupdate {
       toDelete.removeAll(newChildren);
 
       for (Integer i : toWrite) {
-        addStmt.setInt(1, parent.getUserId());
-        addStmt.setInt(2, toWrite.get(i));
-        addStmt.executeUpdate();
+        writeStmt.setInt(1, parent.getUserId());
+        writeStmt.setInt(2, toWrite.get(i));
+        writeStmt.executeUpdate();
       }
 
       for (Integer i: toDelete) {
@@ -48,16 +49,42 @@ public class DBupdate {
     return -1;
   }
 
-  public void updatePermissionByID(int id) {
+  public int updatePermissionByID(Employee employee, ArrayList<Integer> newPermission) {
     try (
-        PreparedStatement stmt = ConMan.prepStat(Statements.DEF_UPDATE_PERMISSION_BY_ID);
+        PreparedStatement writeStmt = ConMan.prepStat(Statements.DEF_ADD_PERMISSION_TO_USER);
+        PreparedStatement deleteStmt = ConMan.prepStat(Statements.DEF_DELETE_PERMISSION_FROM_USER)
     ) {
-      stmt.setInt(1, id);
-      ResultSet rs = stmt.executeQuery();
-      rs.first();
+      ArrayList<Permission> temp = dbr.readPermissionsByUserID(employee.getUserId());
+      ArrayList<Integer> orgPermission = new ArrayList<>();
 
+      for (Permission p: temp) {
+        orgPermission.add(p.getPermissionID());
+      }
+
+      List<Integer> toWrite = new ArrayList<>(newPermission);
+      List<Integer> toDelete = new ArrayList<>(orgPermission);
+
+      toWrite.removeAll(orgPermission);
+      toDelete.removeAll(newPermission);
+
+      for (Integer i : toWrite) {
+        writeStmt.setInt(1, employee.getUserId());
+        writeStmt.setInt(2, toWrite.get(i));
+        writeStmt.executeUpdate();
+      }
+
+      for (Integer i: toDelete) {
+        deleteStmt.setInt(1, employee.getUserId());
+        deleteStmt.setInt(2, toDelete.get(i));
+        deleteStmt.executeUpdate();
+      }
+
+      return 1;
     } catch (SQLException e) {
       e.printStackTrace();
     }
+    return -1;
   }
+
+  public int updateChildAllergens(Child child, ArrayList<Integer>)
 }

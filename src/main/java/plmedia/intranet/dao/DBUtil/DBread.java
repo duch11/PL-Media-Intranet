@@ -19,6 +19,28 @@ import plmedia.intranet.model.Wing;
 public class DBread {
 
   // Parents
+  public Parent readParentByEmail(String userEmail) {
+    try (
+        PreparedStatement stmt = ConMan.prepStat(Statements.DEF_GET_PARENT_BY_EMAIL_SQL);
+    ) {
+      stmt.setString(1, userEmail);
+      ResultSet rs = stmt.executeQuery();
+
+      ArrayList<Permission> permissions = readPermissionsByUserID((rs.getInt("user_email")));
+
+      return new Parent(
+          rs.getInt("user_id"),
+          rs.getString("password"),
+          rs.getString("user_email"),
+          rs.getString("first_name"),
+          rs.getString("last_name"),
+          permissions);
+
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return null;
+  }
 
   public Parent readParentByID(int id) {
     try (
