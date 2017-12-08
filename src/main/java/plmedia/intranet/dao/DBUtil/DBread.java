@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import plmedia.intranet.dao.ConMan;
 import plmedia.intranet.dao.Statements;
 import plmedia.intranet.dao.repository.PermissionRepo;
+import plmedia.intranet.model.Allergen;
 import plmedia.intranet.model.Child;
 import plmedia.intranet.model.Employee;
 import plmedia.intranet.model.Group;
@@ -405,5 +406,63 @@ public class DBread {
     }
     return null;
   }
+
+  //Allergen
+
+  public Allergen readAllergenByID(int id)  {
+    try (
+        PreparedStatement stmt = ConMan.prepStat(Statements.DEF_GET_ALLERGEN_BY_ID);
+    ) {
+      stmt.setInt(1, id);
+      ResultSet rs = stmt.executeQuery();
+      rs.first();
+      return new Allergen(
+          rs.getInt(1),
+          rs.getString(2),
+          rs.getString(3));
+
+    } catch (SQLException e){
+      e.printStackTrace();
+    }
+    return null;
+  }
+
+  public ArrayList<Allergen> readAllAllergens()  {
+    try (
+        ResultSet rs = ConMan.regStat(Statements.DEF_GET_ALL_ALLERGENS);
+    ) {
+
+      ArrayList<Allergen> allergens = new ArrayList<>();
+      rs.first();
+      while (rs.next()){
+        allergens.add(new Allergen(
+            rs.getInt(1),
+            rs.getString(2),
+            rs.getString(3)));
+      }
+      return allergens;
+    } catch (SQLException e){
+      ConMan.processException(e);
+    }
+    return null;
+  }
+
+  public Allergen readAllergenByUserID(int id){
+    try (
+        PreparedStatement stmt = ConMan.prepStat(Statements.DEF_GET_ALLERGEN_BY_CHILD_ID);
+    ) {
+      stmt.setInt(1, id);
+      ResultSet rs = stmt.executeQuery();
+      rs.first();
+      return new Allergen(
+          rs.getInt(1),
+          rs.getString(2),
+          rs.getString(3));
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return null;
+  }
+
 
 }

@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import plmedia.intranet.dao.ConMan;
 import plmedia.intranet.dao.Statements;
+import plmedia.intranet.model.Allergen;
 import plmedia.intranet.model.Child;
 import plmedia.intranet.model.Employee;
 import plmedia.intranet.model.Group;
@@ -150,6 +151,26 @@ public class DBcreate {
         stmt.setString(2, group.getGroupDescription());
         stmt.executeUpdate();
       System.out.println("Group" +" "+ group.getGroupName() +" "+ "created!");
+      return 1;
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return -1;
+  }
+
+  /**
+   * Logic for creating allergens.
+   * @param allergen
+   * @return int
+   */
+  public int createAllergen(Allergen allergen) {
+    try(
+        PreparedStatement stmt = ConMan.prepStat(Statements.DEF_CREATE_ALLERGEN_SQL)
+    ) {
+      stmt.setString(1, allergen.getAllergenName());
+      stmt.setString(2, allergen.getAllergenDescription());
+      stmt.executeUpdate();
+      System.out.println("Allergen" +" "+ allergen.getAllergenName() +" "+ "created!");
       return 1;
     } catch (SQLException e) {
       e.printStackTrace();

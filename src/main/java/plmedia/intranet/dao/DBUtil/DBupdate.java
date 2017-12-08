@@ -86,7 +86,16 @@ public class DBupdate {
     return -1;
   }
 
-  public int updateChildAllergens(Child child, ArrayList<Integer> something){
-    return 0;
+  public int updateChildAllergens(Child child, ArrayList<Integer> newAllergen){
+    try(
+        PreparedStatement writeStmt = ConMan.prepStat(Statements.DEF_ADD_ALLERGEN_TO_CHILD);
+        PreparedStatement deleteStmt = ConMan.prepStat(Statements.DEF_DELETE_ALLERGEN_FROM_CHILD)
+    ) {
+
+
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return -1;
   }
 }
