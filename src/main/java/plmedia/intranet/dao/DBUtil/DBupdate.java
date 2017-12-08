@@ -47,7 +47,7 @@ public class DBupdate {
     }
     return -1;
   }
-
+/*
   public void updatePermissionByID(int id) {
     try (
         PreparedStatement stmt = ConMan.prepStat(Statements.DEF_UPDATE_PERMISSION_BY_ID);
@@ -60,4 +60,5 @@ public class DBupdate {
       e.printStackTrace();
     }
   }
+  */
 }
