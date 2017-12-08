@@ -55,6 +55,7 @@ public class DBupdate {
         PreparedStatement writeStmt = ConMan.prepStat(Statements.DEF_ADD_PERMISSION_TO_USER);
         PreparedStatement deleteStmt = ConMan.prepStat(Statements.DEF_DELETE_PERMISSION_FROM_USER)
     ) {
+      /**Get original permissions and get their ID values*/
       ArrayList<Permission> temp = dbr.readPermissionsByUserID(employee.getUserId());
       ArrayList<Integer> orgPermission = new ArrayList<>();
 
@@ -64,19 +65,18 @@ public class DBupdate {
 
       List<Integer> toWrite = new ArrayList<>(newPermission);
       List<Integer> toDelete = new ArrayList<>(orgPermission);
-
       toWrite.removeAll(orgPermission);
       toDelete.removeAll(newPermission);
 
       for (Integer i : toWrite) {
         writeStmt.setInt(1, employee.getUserId());
-        writeStmt.setInt(2, toWrite.get(i));
+        writeStmt.setInt(2, i);
         writeStmt.executeUpdate();
       }
 
       for (Integer i: toDelete) {
         deleteStmt.setInt(1, employee.getUserId());
-        deleteStmt.setInt(2, toDelete.get(i));
+        deleteStmt.setInt(2, i);
         deleteStmt.executeUpdate();
       }
 
