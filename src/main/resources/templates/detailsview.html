@@ -54,7 +54,7 @@
             <h3>Permissions: <a href="#" class="btn btn-edit" data-toggle="modal" data-target="#editPermissions"><i class="fa fa-pencil"></i></a></h3>
 
             <ul class="list-group">
-              <li th:each="permission : ${user.getPermissions()}" th:text="${permission.getPermissionName()}" class="list-group-item">Tilføje Børn</li>
+              <li th:each="permission : ${user.getPermissions()}" class="list-group-item"><h1 th:text="${permission.getPermissionName()}"></h1>Tilføje Børn</li>
             </ul>
           </div>
 

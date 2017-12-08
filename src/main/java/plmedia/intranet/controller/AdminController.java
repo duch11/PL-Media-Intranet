@@ -225,12 +225,26 @@ public class AdminController {
     return "redirect:/admin/parents";
   }
 
+  @RequestMapping(value = {"/admin/create/child"}, method = RequestMethod.POST)
+  public String createParent(@ModelAttribute Child newChild){
+
+    System.out.println(newChild);
+
+    childRepo.Create(newChild);
+
+    return "redirect:/admin/children";
+  }
+
   /**
    * Employee only update methods
    * */
   @RequestMapping(value = {"/admin/update/employee"}, method = RequestMethod.POST, params = {"permissionIDs", "ID"})
   public String updatePermission(@RequestParam ArrayList<Integer> permissionIDs, @RequestParam int ID ){
 
+    /** Remove the null value if there's no need for it (to avoid less 'pretty' occurencess with null and all)*/
+    if(permissionIDs.size() > 1){
+      permissionIDs.remove(1);
+    }
     permissionRepo.updatePermissionByID(employeeRepo.Read(ID),permissionIDs);
     return "redirect:/admin/details?employee=" + ID;
   }
