@@ -49,14 +49,11 @@ public class Statements {
   // Updates
   public static final String DEF_UPDATE_USER = "UPDATE user SET password = ?, user_email = ?, first_name = ?, last_name = ? where user_id = ?";
   public static final String DEF_UPDATE_CHILD = "UPDATE child SET ";
-
-  public static final String DEF_UPDATE_PERMISSION_BY_ID = "UPDATE user_permission SET ";
-
-
-
+  
 
   //FK add and delete
   public static final String DEF_ADD_CHILD_TO_PARENT = "INSERT INTO parent_user_child (fk_parent_user_id, fk_child_id) VALUES (?,?)";
+  public static final String DEF_ADD_PERMISSION_TO_USER = "INSERT INTO ";
 
   public static final String DEF_DELETE_CHILD_FROM_PARENT = "DELETE FROM parent_user_child WHERE (fk_parent_user_id, fk_child_id) = (?,?)";
 

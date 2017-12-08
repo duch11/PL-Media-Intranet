@@ -51,7 +51,6 @@ public class Util {
     }
     return -1;
   }
-
   public int deleteChildrenFromParent(Parent parent, ArrayList<Child> childList) {
     try (
         PreparedStatement stmt = ConMan.prepStat(Statements.DEF_DELETE_CHILD_FROM_PARENT)
