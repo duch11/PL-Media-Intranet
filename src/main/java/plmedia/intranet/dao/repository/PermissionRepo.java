@@ -4,12 +4,16 @@ import java.util.ArrayList;
 
 import org.springframework.stereotype.Repository;
 import plmedia.intranet.dao.DBUtil.DBread;
+import plmedia.intranet.dao.DBUtil.DBupdate;
+import plmedia.intranet.model.Employee;
 import plmedia.intranet.model.Permission;
 
 @Repository
 public class PermissionRepo {
 
+
   DBread dbr = new DBread();
+  DBupdate dbu = new DBupdate();
 
   public Permission readPermissionByID(int id){
     return dbr.readPermissionByID(id);
@@ -23,4 +27,7 @@ public class PermissionRepo {
     return dbr.readPermissionsByUserID(id);
   }
 
+  public int updatePermissionByID(Employee employee, ArrayList<Integer> newPermission){
+    return dbu.updatePermissionByID(employee, newPermission);
+  }
 }

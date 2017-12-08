@@ -237,8 +237,10 @@ public class AdminController {
         permissions.add(permissionRepo.readPermissionByID(i));
       }
     }
+
     //TODO: impl update permissions with repo
     System.out.println(ID);
+    permissionRepo.updatePermissionByID(employeeRepo.Read(ID),permissionIDs);
     System.out.println(permissions);
     return "redirect:/admin/details?employee=" + ID;
   }
