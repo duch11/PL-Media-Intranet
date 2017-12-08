@@ -8,6 +8,7 @@ import java.util.Collection;
 import java.util.List;
 import plmedia.intranet.dao.ConMan;
 import plmedia.intranet.dao.Statements;
+import plmedia.intranet.model.Allergen;
 import plmedia.intranet.model.Child;
 import plmedia.intranet.model.Employee;
 import plmedia.intranet.model.Parent;
@@ -91,8 +92,32 @@ public class DBupdate {
         PreparedStatement writeStmt = ConMan.prepStat(Statements.DEF_ADD_ALLERGEN_TO_CHILD);
         PreparedStatement deleteStmt = ConMan.prepStat(Statements.DEF_DELETE_ALLERGEN_FROM_CHILD)
     ) {
+      ArrayList<Allergen> temp = dbr.readAllergenByChildID(child.getChildId());
+      ArrayList<Integer> orgAllergen = new ArrayList<>();
 
+      for (Allergen a: temp) {
+        orgAllergen.add(a.getAllergenID());
+      }
 
+      List<Integer> toWrite = new ArrayList<>(newAllergen);
+      List<Integer> toDelete = new ArrayList<>(orgAllergen);
+
+      toWrite.removeAll(orgAllergen);
+      toDelete.removeAll(newAllergen);
+
+      for (Integer i : toWrite) {
+        writeStmt.setInt(1, child.getChildId());
+        writeStmt.setInt(2, toWrite.get(i));
+        writeStmt.executeUpdate();
+      }
+
+      for (Integer i: toDelete) {
+        deleteStmt.setInt(1, child.getChildId());
+        deleteStmt.setInt(2, toDelete.get(i));
+        deleteStmt.executeUpdate();
+      }
+
+      return 1;
     } catch (SQLException e) {
       e.printStackTrace();
     }

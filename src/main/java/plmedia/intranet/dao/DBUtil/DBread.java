@@ -451,17 +451,20 @@ public class DBread {
     return null;
   }
 
-  public Allergen readAllergenByChildID(int id){
+  public ArrayList<Allergen> readAllergenByChildID(int id){
     try (
         PreparedStatement stmt = ConMan.prepStat(Statements.DEF_GET_ALLERGEN_BY_CHILD_ID);
     ) {
       stmt.setInt(1, id);
       ResultSet rs = stmt.executeQuery();
       rs.first();
-      return new Allergen(
-          rs.getInt(1),
-          rs.getString(2),
-          rs.getString(3));
+      ArrayList<Allergen> allergens = new ArrayList<>();
+
+      while (rs.next()) {
+        allergens.add(readAllergenByID(rs.getInt("fk_allergen_id")));
+      }
+
+      return allergens;
     } catch (SQLException e) {
       e.printStackTrace();
     }

@@ -39,7 +39,7 @@ public class AllergenRepo implements IRepo<Allergen> {
     return dbr.readAllAllergens();
   }
 
-  public Allergen readAllergenByUserID(int id){
+  public ArrayList<Allergen> readAllergenByChildID(int id){
     return dbr.readAllergenByChildID(id);
   }
 }

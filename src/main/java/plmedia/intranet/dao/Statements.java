@@ -46,7 +46,7 @@ public class Statements {
   // Allergen
   public static final String DEF_GET_ALLERGEN_BY_ID = "SELECT * FROM allergen WHERE allergen_id = ?";
   public static final String DEF_GET_ALL_ALLERGENS = "SELECT * FROM intranetdb.allergen";
-  public static final String DEF_GET_ALLERGEN_BY_CHILD_ID = "SELECT * FROM intranetdb.allergen where allergen_id = (SELECT fk_allergen_id FROM child_allergen WHERE fk_child_id = ?)";
+  public static final String DEF_GET_ALLERGEN_BY_CHILD_ID = "SELECT fk_allergen_id FROM child_allergen WHERE fk_child_id = ?";
 
 
 

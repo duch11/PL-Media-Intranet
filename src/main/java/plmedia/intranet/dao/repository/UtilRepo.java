@@ -20,7 +20,6 @@ import plmedia.intranet.model.Wing;
 public class UtilRepo {
 
   Util util = new Util();
-  DBcreate dbc = new DBcreate();
   DBupdate dbu = new DBupdate();
 
   public int checkEmail(String email){
@@ -33,6 +32,10 @@ public class UtilRepo {
 
   public int updatePermissionByID(Employee employee, ArrayList<Integer> newPermission) {
     return dbu.updatePermissionByID(employee, newPermission);
+  }
+
+  public int updateChildAllergens(Child child, ArrayList<Integer> newAllergen) {
+    return dbu.updateChildAllergens(child, newAllergen);
   }
 }
 
