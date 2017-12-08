@@ -27,13 +27,25 @@ public class ParentController {
 
   // lists
   ArrayList<Parent> parents = new ArrayList<>();
-  ArrayList<Child> children = new ArrayList<>();
 
+private void showPanals(Model model, Principal principal) {
+  System.out.println("hejsa med dig");
+  ArrayList<Child> children = new ArrayList<>();
+  System.out.println(childRepo);
+  for(Integer i : childRepo.ReadChildrenIDbyParentID
+      (parentRepo.readParentByEmail(
+          principal.getName()).getUserId())){
+    children.add(childRepo.Read(i.intValue()));
+  }
+  model.addAttribute("children",children);
+  model.addAttribute("test", principal.getName());
+}
 
   public String showParentView(Model model, Principal principal) {
 
-
-    model.addAttribute("test", principal.getName());
+    System.out.println("før showpanels");
+    showPanals(model, principal);
+    System.out.println("før parent view");
     return "parentview";
   }
 
@@ -41,8 +53,10 @@ public class ParentController {
 
   @RequestMapping(value = {"/parents"}, method = RequestMethod.GET)
   public String parentViewEmp(Model model, Principal principal) {
+
     model.addAttribute("allUsers", true);
     model.addAttribute("employees", parentRepo.ReadAll());
+
 
     model.addAttribute("parents", parents);
     return showParentView(model, principal);
@@ -52,17 +66,19 @@ public class ParentController {
 
 
 
-  public String showChildren(Model model, Principal principal) {
+  public String showChildView(Model model, Principal principal) {
 
-    model.addAttribute("test", principal.getName());
-    return "children";
+    showPanals(model, principal);
+    return "childview";
   }
+
+
   @RequestMapping(value = {"/parents/children"}, method = RequestMethod.GET)
   public String child(Model model, Principal principal) {
 
 
-    model.addAttribute("children", children);
-    return showChildren(model, principal);
+
+    return showChildView(model, principal);
   }
 
 

@@ -38,16 +38,18 @@
   </ul>-->
   <ul class="nav nav-sidebar">
     <li>
-         <a class="semiActive " href="/parents">Overblik  <a/>
+         <a th:class="${overblik} ? 'active' " href="/parents">Overblik  </a>
 
-         </a>
+
     </li>
   </ul>
 
     <ul class="nav nav-sidebar">
     <li>
-      <a><h1>Børn</h1></a>
-      <a href="/parents/children" class="list-group-item active">
+      <h1>Børn</h1>
+    </li>
+    <li th:each="child : ${children}">
+      <a th:attrappend="href=${child.getChildId()}" href="/parents/children?childId=" class="list-group-item active">
         Oliver (Kan klikkes på)
       </a>
     </li>

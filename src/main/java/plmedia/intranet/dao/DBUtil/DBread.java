@@ -27,7 +27,8 @@ public class DBread {
       stmt.setString(1, userEmail);
       ResultSet rs = stmt.executeQuery();
 
-      ArrayList<Permission> permissions = readPermissionsByUserID((rs.getInt("user_email")));
+      rs.first();
+      ArrayList<Permission> permissions = readPermissionsByUserID((rs.getInt("user_id")));
 
       return new Parent(
           rs.getInt("user_id"),
@@ -179,8 +180,10 @@ public class DBread {
   // Children
 
   public ArrayList<Integer> readChildrenIDByParentID(int id) {
+    System.out.println("hej");
     try (
-        CallableStatement stmt = ConMan.callStat(Statements.DEF_GET_CHILDREN_ID_BY_PARENT_ID_SQL)
+
+        PreparedStatement stmt = ConMan.prepStat(Statements.DEF_GET_CHILDREN_ID_BY_PARENT_ID_SQL)
     ) {
       stmt.setInt(1, id);
       ResultSet rs = stmt.executeQuery();
@@ -192,6 +195,7 @@ public class DBread {
     } catch (SQLException e) {
       e.printStackTrace();
     }
+    System.out.println("nej");
     return null; // Error code?
   }
 
@@ -201,7 +205,7 @@ public class DBread {
     ) {
       stmt.setInt(1, id);
       ResultSet rs = stmt.executeQuery();
-
+      rs.first();
       return new Child(
           rs.getInt("child_id"),
           rs.getString("first_name"),

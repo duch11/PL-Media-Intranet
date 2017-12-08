@@ -19,11 +19,7 @@ public class IntranetApplication {
 		DBread dbr = new DBread();
 
 
-		EmployeeRepo emp = new EmployeeRepo();
 
-		for (int i = 0; i < 52; i++) {
-			System.out.println("Forsøg "+i+": " + emp.Read(322));
-		}
 
 
 

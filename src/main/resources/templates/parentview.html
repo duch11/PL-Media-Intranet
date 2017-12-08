@@ -23,11 +23,6 @@ i højre og venstre side-->
     <div class="col-sm-9 col-sm-offset-3 col-lg-8 col-lg-offset-3 main" style="overflow-y: auto; max-height: 40em;">
       <div class="list-group" style="max-height: 400px">
 
-        <!-- Generering af listen, baseret på hvad templaten bliver fodret med -->
-        <a th:each="parent : ${parents}"     href="/parent/details?user=" th:text="${parent.getName()}"   th:attrappend="href=${parent.getParentID()}" class="list-group-item">Thymeleaf Parent</a>
-        <a th:each="child : ${children}"     href="/admin/details?user=" th:text="${child.getName()}"    th:attrappend="href=${child.getChildID()}"   class="list-group-item">Thymeleaf Child</a>
-
-
 
 
         <div class="row">

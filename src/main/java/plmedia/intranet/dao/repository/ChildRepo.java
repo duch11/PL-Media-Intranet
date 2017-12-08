@@ -10,6 +10,7 @@ import plmedia.intranet.model.Child;
  * A repository for child objects.
  * @author Simon le Févre Ryom
  * @author Tobias Thomsen
+ * @author Andreas Nissen
  */
 
 @Repository
@@ -32,6 +33,11 @@ public class ChildRepo implements IRepo<Child> {
   public Child Read(int id) {
     return dbr.readChildById(id);
   }
+
+
+  public ArrayList<Integer> ReadChildrenIDbyParentID(int id) {
+    System.out.println("hej fra children");
+     return dbr.readChildrenIDByParentID(id);}
 
   @Override
   public int Update(Child child) {

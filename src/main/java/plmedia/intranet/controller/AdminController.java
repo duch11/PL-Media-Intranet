@@ -1,5 +1,4 @@
 package plmedia.intranet.controller;
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import java.security.Principal;
 import java.util.ArrayList;
 
@@ -12,8 +11,6 @@ import plmedia.intranet.dao.repository.GroupRepo;
 import plmedia.intranet.dao.repository.ParentRepo;
 import plmedia.intranet.dao.repository.PermissionRepo;
 import plmedia.intranet.model.*;
-
-import java.util.Date;
 
 /**
  * @author Jonas Holm
@@ -203,7 +200,7 @@ public class AdminController {
     model.addAttribute("child", "repo.getChild()" + child);
 
     showAdminPanel(model,principal);
-    return "children";
+    return "childview";
   }
 
 

@@ -33,7 +33,7 @@ public class HomeController {
     if(SecurityContextHolder.getContext().getAuthentication().getAuthorities().contains(new SimpleGrantedAuthority("ROLE_EMP"))){
       return "redirect:/admin";
     }
-    return new ParentController().showParentView(model, principal);
+    return "redirect:/parents";
   }
 
   @RequestMapping(value = {"/login"}, method = RequestMethod.GET)
