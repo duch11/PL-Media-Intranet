@@ -11,6 +11,7 @@ import plmedia.intranet.dao.Statements;
 import plmedia.intranet.model.Allergen;
 import plmedia.intranet.model.Child;
 import plmedia.intranet.model.Employee;
+import plmedia.intranet.model.Group;
 import plmedia.intranet.model.Parent;
 import plmedia.intranet.model.Permission;
 
@@ -18,6 +19,8 @@ public class DBupdate {
 
   DBread dbr = new DBread();
 
+
+  // FK updates
   public int updateChildToParent(Parent parent, ArrayList<Integer> newChildren) {
     try (
         PreparedStatement writeStmt = ConMan.prepStat(Statements.DEF_ADD_CHILD_TO_PARENT);
@@ -87,7 +90,7 @@ public class DBupdate {
     return -1;
   }
 
-  public int updateChildAllergens(Child child, ArrayList<Integer> newAllergen){
+  public int updateChildAllergens(Child child, ArrayList<Integer> newAllergen) {
     try(
         PreparedStatement writeStmt = ConMan.prepStat(Statements.DEF_ADD_ALLERGEN_TO_CHILD);
         PreparedStatement deleteStmt = ConMan.prepStat(Statements.DEF_DELETE_ALLERGEN_FROM_CHILD)
@@ -113,6 +116,43 @@ public class DBupdate {
 
       for (Integer i: toDelete) {
         deleteStmt.setInt(1, child.getChildId());
+        deleteStmt.setInt(2, toDelete.get(i));
+        deleteStmt.executeUpdate();
+      }
+
+      return 1;
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return -1;
+  }
+
+  public int updateEmployeeGroup(Employee employee, ArrayList<Integer> newGroup) {
+    try(
+        PreparedStatement writeStmt = ConMan.prepStat(Statements.DEF_ADD_GROUP_TO_EMPLOYEE);
+        PreparedStatement deleteStmt = ConMan.prepStat(Statements.DEF_DELETE_GROUP_FROM_EMPLOYEE)
+    ) {
+      ArrayList<Group> temp = dbr.readGroupIDsByUserID(employee.getUserId());
+      ArrayList<Integer> orgGroup = new ArrayList<>();
+
+      for (Group g: temp) {
+        orgGroup.add(g.getId());
+      }
+
+      List<Integer> toWrite = new ArrayList<>(newGroup);
+      List<Integer> toDelete = new ArrayList<>(orgGroup);
+
+      toWrite.removeAll(orgGroup);
+      toDelete.removeAll(newGroup);
+
+      for (Integer i : toWrite) {
+        writeStmt.setInt(1, employee.getUserId());
+        writeStmt.setInt(2, toWrite.get(i));
+        writeStmt.executeUpdate();
+      }
+
+      for (Integer i : toDelete) {
+        deleteStmt.setInt(1, employee.getUserId());
         deleteStmt.setInt(2, toDelete.get(i));
         deleteStmt.executeUpdate();
       }

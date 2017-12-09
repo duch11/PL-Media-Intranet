@@ -181,13 +181,13 @@ public class DBread {
   // Children
 
   public ArrayList<Integer> readChildrenIDByParentID(int id) {
-    System.out.println("hej");
     try (
 
         PreparedStatement stmt = ConMan.prepStat(Statements.DEF_GET_CHILDREN_ID_BY_PARENT_ID_SQL)
     ) {
       stmt.setInt(1, id);
       ResultSet rs = stmt.executeQuery();
+      rs.first();
       ArrayList<Integer> children = new ArrayList<>();
       while (rs.next()) {
         children.add(rs.getInt("fk_child_id"));
@@ -196,7 +196,6 @@ public class DBread {
     } catch (SQLException e) {
       e.printStackTrace();
     }
-    System.out.println("nej");
     return null; // Error code?
   }
 
@@ -406,6 +405,25 @@ public class DBread {
           rs.getInt(1),
           rs.getString(2),
           rs.getString(3));
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return null;
+  }
+
+  public ArrayList<Group> readGroupIDsByUserID(int id) {
+    try(
+        PreparedStatement stmt = ConMan.prepStat(Statements.DEF_GET_GROUPS_IDS_BY_USER_ID)
+    ) {
+      ArrayList<Group> groups = new ArrayList<>();
+      stmt.setInt(1, id);
+      ResultSet rs = stmt.executeQuery();
+      rs.first();
+      while (rs.next()) {
+        groups.add(readGroupByID(rs.getInt("fk_group_id")));
+      }
+
+      return groups;
     } catch (SQLException e) {
       e.printStackTrace();
     }

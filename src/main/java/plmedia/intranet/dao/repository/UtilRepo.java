@@ -37,6 +37,10 @@ public class UtilRepo {
   public int updateChildAllergens(Child child, ArrayList<Integer> newAllergen) {
     return dbu.updateChildAllergens(child, newAllergen);
   }
+
+  public int updateEmployeeGroup(Employee employee, ArrayList<Integer> newGroup) {
+    return dbu.updateEmployeeGroup(employee, newGroup);
+  }
 }
 
 
