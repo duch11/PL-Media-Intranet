@@ -25,6 +25,7 @@ public class Wing {
   }
 
   public Wing(int wingID, String wingName, String wingDescription) {
+    this.wingID = wingID;
     this.wingName = wingName;
     this.wingDescription = wingDescription;
   }
@@ -36,4 +37,9 @@ public class Wing {
   public String getWingDescription() {
     return wingDescription;
   }
+
+  public int getWingID() {
+    return wingID;
+  }
+
 }

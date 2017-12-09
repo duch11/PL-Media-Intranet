@@ -11,6 +11,7 @@ import plmedia.intranet.dao.repository.EmployeeRepo;
 import plmedia.intranet.dao.repository.GroupRepo;
 import plmedia.intranet.dao.repository.ParentRepo;
 import plmedia.intranet.dao.repository.PermissionRepo;
+import plmedia.intranet.dao.repository.WingRepo;
 import plmedia.intranet.model.*;
 
 /**
@@ -35,6 +36,9 @@ public class AdminController {
 
   @Autowired
   PermissionRepo permissionRepo;
+
+  @Autowired
+  WingRepo wingRepo;
 
   //TEST KODE
   //TODO: SLET MIG TESTKODE TIL GRUPPER
@@ -136,6 +140,7 @@ public class AdminController {
     /** ENG: Principal DK: "Grund-sikkerhedskonto" * */
     model.addAttribute("test", principal.getName());
     model.addAttribute("employeeGroups", groupRepo.ReadAll());
+    model.addAttribute("allWings", wingRepo.ReadAll());
     return "adminpanel";
   }
 

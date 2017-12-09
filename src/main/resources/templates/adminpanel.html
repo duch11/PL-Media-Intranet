@@ -168,20 +168,19 @@
                 <input type="text" class="form-control" id="childLName" name="lastName" th:field="*{lastName}"/>
               </div>
 
-
-              <div class="checkbox">
-                <div class="row">
-                  <div class="col-sm-4">
-                    <label><input type="checkbox" value="1"/> Allergen 1</label>
-                  </div>
-                  <div class="col-sm-4">
-                    <label><input type="checkbox" value="2"/> Allergen 2</label>
-                  </div>
-                  <div class="col-sm-4">
-                    <label><input type="checkbox" value="3"/> Allergen 3</label>
-                  </div>
-                </div>
+              <div class="form-group">
+                <label for="address">Adresse:</label>
+                <input type="text" class="form-control" id="address" name="address" th:field="*{address}"/>
               </div>
+
+              <div class="form-group">
+                <label for="address">Adresse:</label>
+                <input type="date" class="form-control" id="birthday" name="birthday" th:field="*{birthday}"/>
+              </div>
+
+              <select th:field="*{wingId}" name="wingId" required="true" class="form-control">
+                <option th:each="wing : ${allWings}" th:value="${wing.getWingID()}" th:text="${wing.getWingName()}"></option>
+              </select>
             </div>
             <div class="modal-footer">
               <button type="submit" class="btn btn-success">Gem</button>
