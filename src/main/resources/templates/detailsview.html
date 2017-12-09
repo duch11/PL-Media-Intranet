@@ -3,6 +3,9 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
   <head th:replace="fragments/head :: head">
     <!--Denne her normaliserer vores html siders head sektion, så vi kun skal skrive det et sted-->
+    <!--Variabler der skal være til stede:
+        user
+    -->
   </head>
   <body>
 
@@ -16,6 +19,7 @@
 
       <div class="row">
         <div th:replace="fragments/sidebars :: admin"/>
+        <div th:replace="fragments/sidebars :: parent"/>
         <div class="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-3 main">
 
           <div class="row">

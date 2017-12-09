@@ -226,7 +226,7 @@ public class AdminController {
   }
 
   @RequestMapping(value = {"/admin/create/child"}, method = RequestMethod.POST)
-  public String createParent(@ModelAttribute Child newChild){
+  public String createChild(@ModelAttribute Child newChild){
 
     System.out.println(newChild);
 
@@ -243,7 +243,7 @@ public class AdminController {
 
     /** Remove the null value if there's no need for it (to avoid less 'pretty' occurencess with null and all)*/
     if(permissionIDs.size() > 1){
-      permissionIDs.remove(1);
+      permissionIDs.remove(null);
     }
     permissionRepo.updatePermissionByID(employeeRepo.Read(ID),permissionIDs);
     return "redirect:/admin/details?employee=" + ID;

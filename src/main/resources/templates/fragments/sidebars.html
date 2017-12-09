@@ -1,10 +1,16 @@
 
-<!-- this is header -->
+<!-- EMPLOYEE SIDEBAR
+     Model variable Requirements:
+     - employeeGroups (Arraylist<Group>)
+     - a current menu variable:
+       - allUsers (Arraylist<Employee>) OR employeeDetails
+         OR currentGroup (Group object)
+         OR parents (Arraylist<Parent>) OR parentDetails
+         OR children (Arraylist<Child>) OR child
+-->
+
 
 <div th:fragment="admin" th:if="${employeeGroups}" class="col-sm-3 col-lg-2 sidebar">
-  <!--<ul class="nav nav-sidebar">
-    <li><a class="newuserbtn" style="" href="#">+ Ny Bruger</a></li>
-  </ul>-->
   <ul class="nav nav-sidebar">
     <li>
       <a th:class="(${allUsers}) ? 'active' : (${employeeDetails} ? 'semiActive')" href="/admin">Personale <i th:if="${employeeDetails}" class="fa fa-user pull-right" aria-hidden="true"></i></a>
@@ -13,12 +19,8 @@
     <li th:each="group : ${employeeGroups}" th:class="${currentGroup} ? ((${group.getId()} == ${currentGroup.getId()}) ? 'active')">
       <a th:attrappend="href=${group.getId()}" th:text="'- ' + ${group.getGroupName()}" href="/admin/employees?groupID=" >Thymeleaf Employee Group</a>
     </li>
-
-
-    <!--<li class="active"><a href="/admin/employees" >Admin/Leder</a></li>
-    <li><a href="/admin/employees?groupID=1" >Ansatte</a></li>
-    <li><a href="/admin/employees?groupID=2" >Praktikanter</a></li>-->
   </ul>
+
   <ul class="nav nav-sidebar">
     <li>
       <a th:class="${children} ? 'active' : (${child} ? 'semiActive')" href="/admin/children">Børn <i th:if="${child}" class="fa fa-user pull-right" aria-hidden="true"></i></a>
@@ -27,10 +29,9 @@
       <a th:class="${parents} ? 'active' : (${parentDetails} ? 'semiActive')" href="/admin/parents">Forældre <i th:if="${parentDetails}" class="fa fa-user pull-right" aria-hidden="true"></i></a>
     </li>
   </ul>
-
 </div>
 
-<!-- this is header -->
+<!-- PARENT SIDEBAR -->
 
 <div th:fragment="parent" th:if="!${employeeGroups}" class="col-sm-3 col-md-2 sidebar">
   <!--<ul class="nav nav-sidebar">
