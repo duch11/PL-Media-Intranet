@@ -100,7 +100,7 @@ private void showPanals(Model model, Principal principal) {
     model.addAttribute("child", childRepo.Read(child));
     model.addAttribute("allergen", allergenRepo.readAllergenByChildID(child));
 
-    model.addAttribute("wing", wingRepo.Read(childRepo.Read(child));
+    model.addAttribute("wing", wingRepo.Read(childRepo.Read(child).getWingId()));
     showChildView(model,principal);
     return "childview";
   }

@@ -80,8 +80,9 @@ i højre og venstre side-->
       <table class="table ">
         <tr>
           <th>Stue:</th>
-          <!--<td th:${child.getWingId()}"/>-->
-          <!--<h4 th:text="${wing.getWingName()}"/>-->
+        <td>
+          <h4 th:text="${wing.getWingName()}"/>
+        </td>
           <td><a href="#" class="btn btn-edit pull-right" data-toggle="modal" data-target="#editWing"><i class="fa fa-pencil"></i></a></td>
         </tr>
       </table>
@@ -113,7 +114,7 @@ i højre og venstre side-->
         <li th:each="allergen : ${allergen}" class="list-group-item">
         <h6 th:text="${allergen.getAllergenName()}"></h6>
         </li>
-        <li><h6>nøddeallergi</h6></li>
+
       </ul>
      </table>
     </div>
