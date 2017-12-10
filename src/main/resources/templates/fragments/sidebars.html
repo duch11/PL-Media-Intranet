@@ -56,7 +56,7 @@
       <h1>Børn</h1>
     </li>
     <li th:each="child : ${children}">
-      <a th:attrappend="href=${child.getChildId()}" th:text="${child.getFirstName()} + ' ' + ${child.getLastName()}" href="/parents/children?child=" class="list-group-item ">
+      <a th:attrappend="href=${child.getChildId()}" th:text="${child.getFirstName()} + ' ' + ${child.getLastName()}" href="/parents/children?child=">
 
       </a>
     </li>
