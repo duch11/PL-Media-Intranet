@@ -40,12 +40,16 @@ public class ParentController {
 private void showPanals(Model model, Principal principal) {
 
   ArrayList<Child> children = new ArrayList<>();
-  for(Integer i : childRepo.ReadChildrenIDbyParentID( parentRepo.readParentByEmail( principal.getName() ).getUserId() ) ){
+  for(Integer i : childRepo.ReadChildrenIDbyParentID
+      (parentRepo.readParentByEmail(
+          principal.getName()).getUserId())){
     children.add(childRepo.Read(i.intValue()));
   }
 
   model.addAttribute("children",children);
   model.addAttribute("test", principal.getName());
+  System.out.println();
+
 }
 
   public String showParentView(Model model, Principal principal) {
@@ -59,10 +63,9 @@ private void showPanals(Model model, Principal principal) {
 
 
   @RequestMapping(value = {"/parents"}, method = RequestMethod.GET)
-  public String parentViewEmp(Model model, Principal principal) {
+  public String parentView(Model model, Principal principal) {
 
-    model.addAttribute("allUsers", true);
-    model.addAttribute("parents", parentRepo.ReadAll());
+
     model.addAttribute("children" , childRepo.ReadAll());
 
 
