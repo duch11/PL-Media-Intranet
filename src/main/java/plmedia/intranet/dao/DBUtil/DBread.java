@@ -249,18 +249,28 @@ public class DBread {
     return null;
   }
 
-  public ArrayList<Integer> readChildrenIDsByWingID(int id) {
+  public ArrayList<Child> readChildrenByWingID(int id) {
     try (
 
-        PreparedStatement stmt = ConMan.prepStat(Statements.DEF_GET_CHILDREN_ID_BY_WING_ID_SQL)
+        PreparedStatement stmt = ConMan.prepStat(Statements.DEF_GET_CHILDREN_BY_WING_ID_SQL)
     ) {
       stmt.setInt(1, id);
       ResultSet rs = stmt.executeQuery();
       rs.first();
+      ArrayList<Child> children = new ArrayList<>();
 
-      ArrayList<Integer> children = new ArrayList<>();
       while (rs.next()) {
-        children.add(rs.getInt("fk_child_id"));
+        children.add( new Child(
+            rs.getInt("child_id"),
+            rs.getString("first_name"),
+            rs.getString("last_name"),
+            rs.getDate("birthday"),
+            rs.getString("address"),
+            rs.getInt("fk_wing_id"),
+            null,
+            null,
+            null,
+            null));
       }
 
       return children;
