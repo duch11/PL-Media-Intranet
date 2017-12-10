@@ -1,7 +1,9 @@
 package plmedia.intranet.dao.DBUtil;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import plmedia.intranet.dao.ConMan;
 import plmedia.intranet.dao.Statements;
 
@@ -11,6 +13,9 @@ import plmedia.intranet.dao.Statements;
  * @author Tobias Thomsen
  */
 public class Util {
+
+  BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
 
   public int checkEmail(String email) {
     try(
@@ -26,6 +31,25 @@ public class Util {
       e.printStackTrace();
     }
     return -1; // Error code?
+  }
+
+  public int checkPassword(int id, String password) {
+    try(
+        PreparedStatement stmt = ConMan.prepStat(Statements.DEF_GET_PASSWORD_BY_USER_ID)
+    ) {
+      stmt.setInt(1, id);
+      ResultSet rs = stmt.executeQuery();
+      rs.first();
+      String userDBPass = rs.getString("password");
+
+      if(encoder.matches(password, userDBPass)) {
+        return 1;
+      }
+
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return -1;
   }
 
 }

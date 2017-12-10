@@ -26,6 +26,10 @@ public class UtilRepo {
     return util.checkEmail(email);
   }
 
+  public int checkPassword(int id, String password) {
+    return util.checkPassword(id, password);
+  }
+
   public int updateChildToParent(Parent parent, ArrayList<Integer> newChildren) {
     return dbu.updateChildToParent(parent, newChildren);
   }
