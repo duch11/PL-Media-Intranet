@@ -11,6 +11,7 @@ import plmedia.intranet.dao.repository.EmployeeRepo;
 import plmedia.intranet.dao.repository.GroupRepo;
 import plmedia.intranet.dao.repository.ParentRepo;
 import plmedia.intranet.dao.repository.PermissionRepo;
+import plmedia.intranet.dao.repository.UtilRepo;
 import plmedia.intranet.dao.repository.WingRepo;
 import plmedia.intranet.model.*;
 
@@ -36,6 +37,9 @@ public class AdminController {
 
   @Autowired
   PermissionRepo permissionRepo;
+
+  @Autowired
+  UtilRepo utilRepo;
 
   @Autowired
   WingRepo wingRepo;
@@ -290,14 +294,9 @@ public class AdminController {
 
   @RequestMapping(value = {"/admin/update/employee"}, method = RequestMethod.POST, params = {"groupID", "ID"})
   public String updateGroup(@RequestParam int groupID, @RequestParam int ID ){
-    Group newGroup;
-    for (Group g : employeeGroups){
-      if(g.getId() == groupID){
-        //TODO: impl update group with repo
-        newGroup = g;
-        System.out.println(newGroup.getGroupName() + " " + ID);
-      }
-    }
+    ArrayList<Integer> groupIdConversion = new ArrayList<>();
+    groupIdConversion.add(new Integer(groupID));
+    utilRepo.updateEmployeeGroup(employeeRepo.Read(ID), groupIdConversion);
     return "redirect:/admin/details?employee=" + ID;
   }
 
