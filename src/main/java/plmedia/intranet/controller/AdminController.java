@@ -176,6 +176,15 @@ public class AdminController {
     return showAdminPanel(model, principal);
   }
 
+  @RequestMapping(value = {"/admin/settings"}, method = RequestMethod.GET)
+  public String showAdminPanelSettings(Model model, Principal principal) {
+    model.addAttribute("newGroup", new Group());
+    model.addAttribute("newWing", new Wing());
+    showAdminPanel(model, principal);
+    return "settingsview";
+  }
+
+
   @RequestMapping(value = {"/admin/details"}, method = RequestMethod.GET, params = {"employee"})
   public String empDetails(Model model,Principal principal, @RequestParam int employee) {
 
@@ -238,6 +247,22 @@ public class AdminController {
     childRepo.Create(newChild);
 
     return "redirect:/admin/children";
+  }
+
+  /**
+   * Update methods from here on
+   * */
+
+  @RequestMapping(value = {"/admin/update/group"}, method = RequestMethod.POST, params = {"groupName", "groupDescription", "ID"})
+  public String updateGroupDetails(@RequestParam String groupName, @RequestParam String groupDescription, @RequestParam int ID) {
+    System.out.println("updateGroupDetails modtager: " + groupName+ " " + groupDescription + " " + ID);
+    return "redirect:/admin/settings";
+  }
+
+  @RequestMapping(value = {"/admin/update/wing"}, method = RequestMethod.POST, params = {"wingName", "wingDescription", "ID"})
+  public String updateWingDetails(@RequestParam String wingName, @RequestParam String wingDescription, @RequestParam int ID) {
+    System.out.println("updateWingDetails modtager: " + wingName + " " + wingDescription + " " + ID);
+    return "redirect:/admin/settings";
   }
 
   /**

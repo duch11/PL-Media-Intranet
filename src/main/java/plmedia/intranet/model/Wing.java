@@ -16,6 +16,9 @@ public class Wing {
   private ArrayList<String> child;
   private ArrayList<String> employee;
 
+  public Wing() {
+  }
+
   public Wing(int wingID, String wingName, String wingDescription, ArrayList<String> child,
       ArrayList<String> employee) {
     this.wingName = wingName;
@@ -29,6 +32,8 @@ public class Wing {
     this.wingName = wingName;
     this.wingDescription = wingDescription;
   }
+
+
 
   public String getWingName() {
     return wingName;
