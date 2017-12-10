@@ -3,6 +3,7 @@ package plmedia.intranet.dao.repository;
 import java.util.ArrayList;
 import org.springframework.stereotype.Repository;
 import plmedia.intranet.dao.DBUtil.DBcreate;
+import plmedia.intranet.dao.DBUtil.DBdelete;
 import plmedia.intranet.dao.DBUtil.DBread;
 import plmedia.intranet.dao.DBUtil.DBupdate;
 import plmedia.intranet.model.Child;
@@ -20,6 +21,7 @@ public class ChildRepo implements IRepo<Child> {
   DBcreate dbc = new DBcreate();
   DBread dbr = new DBread();
   DBupdate dbu = new DBupdate();
+  DBdelete dbd = new DBdelete();
 
   /**
    * Creates initial child object.
@@ -43,7 +45,7 @@ public class ChildRepo implements IRepo<Child> {
 
   @Override
   public int Delete(Child child) {
-    return 0;
+    return dbd.deleteChild(child);
   }
 
   @Override

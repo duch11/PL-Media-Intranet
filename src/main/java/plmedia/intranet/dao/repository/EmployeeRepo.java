@@ -20,6 +20,7 @@ public class EmployeeRepo implements IRepo<Employee> {
   DBcreate dbc = new DBcreate();
   DBread dbr = new DBread();
   DBupdate dbu = new DBupdate();
+  DBdelete dbd = new DBdelete();
 
   /**
    * Creates Employee object. Takes logic from DBcreate.
@@ -43,7 +44,7 @@ public class EmployeeRepo implements IRepo<Employee> {
 
   @Override
   public int Delete(Employee employee) {
-    return 0;
+    return dbd.deleteEmployee(employee);
   }
 
   @Override
