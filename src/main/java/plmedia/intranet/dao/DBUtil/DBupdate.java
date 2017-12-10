@@ -18,6 +18,10 @@ import plmedia.intranet.model.Parent;
 import plmedia.intranet.model.Permission;
 import plmedia.intranet.model.Wing;
 
+/**
+ * a class for all the logic for updating objects and foreign connections.
+ * @author Simon le Févre Ryom
+ */
 public class DBupdate {
 
   DBread dbr = new DBread();
