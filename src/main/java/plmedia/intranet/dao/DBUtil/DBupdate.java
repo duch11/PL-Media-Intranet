@@ -260,7 +260,7 @@ public class DBupdate {
 
       for (Integer i : toWrite) {
         writeStmt.setInt(1, employee.getUserId());
-        writeStmt.setInt(2, toWrite.get(i));
+        writeStmt.setInt(2, i);
         writeStmt.executeUpdate();
       }
 
