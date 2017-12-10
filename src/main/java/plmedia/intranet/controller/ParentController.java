@@ -99,7 +99,8 @@ private void showPanals(Model model, Principal principal) {
   public String childDetails(Model model, Principal principal, @RequestParam int child) {
     model.addAttribute("child", childRepo.Read(child));
     model.addAttribute("allergen", allergenRepo.readAllergenByChildID(child));
-    //model.addAttribute("wing", wingRepo.getWing);
+
+    model.addAttribute("wing", wingRepo.Read(childRepo.Read(child));
     showChildView(model,principal);
     return "childview";
   }
