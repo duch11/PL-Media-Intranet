@@ -73,6 +73,15 @@ private void showPanals(Model model, Principal principal) {
     return showParentView(model, principal);
   }
 
+  @RequestMapping(value = {"/parent/details"}, method = RequestMethod.GET, params = {"parent"})
+  public String parentDetails(Model model, Principal principal, @RequestParam int parent) {
+
+    model.addAttribute("user", parentRepo.Read(parent));
+    model.addAttribute("parentDetails", true);
+    showParentView(model, principal);
+    return "parentview";
+  }
+
 
 
 
@@ -90,6 +99,7 @@ private void showPanals(Model model, Principal principal) {
   public String childDetails(Model model, Principal principal, @RequestParam int child) {
     model.addAttribute("child", childRepo.Read(child));
     model.addAttribute("allergen", allergenRepo.readAllergenByChildID(child));
+    //model.addAttribute("wing", wingRepo.getWing);
     showChildView(model,principal);
     return "childview";
   }
@@ -98,8 +108,11 @@ private void showPanals(Model model, Principal principal) {
    * update
    */
 
+  /**
+   * update first and last name
+   */
   @RequestMapping(value = {"/parent/update/child"}, method = RequestMethod.POST, params = {"firstName", "ID"})
-  public String updateEmpFirstName(@RequestParam String firstName, @RequestParam int ID){
+  public String updateChildFirstName(@RequestParam String firstName, @RequestParam int ID){
     updateFirstName(firstName,ID);
     return "redirect:/parent/details?child=" + ID;
   }
@@ -110,7 +123,7 @@ private void showPanals(Model model, Principal principal) {
   }
 
   @RequestMapping(value = {"/parent/update/child"}, method = RequestMethod.POST, params = {"lastName", "ID"})
-  public String updateEmpLastName(@RequestParam String lastName, @RequestParam int ID){
+  public String updateChildLastName(@RequestParam String lastName, @RequestParam int ID){
     updateLastName(lastName,ID);
     return "redirect:/parent/details?child=" + ID;
   }
@@ -119,5 +132,43 @@ private void showPanals(Model model, Principal principal) {
   public void updateLastName(String lastName, int ID){
     System.out.println(lastName + "  " + ID);
   }
+
+  /**
+   * update birthday
+   */
+
+
+
+
+  @RequestMapping(value = {"/parent/update/child"}, method = RequestMethod.POST, params = {"birthday", "ID"})
+  public String updateChildbirthday(@RequestParam java.sql.Date birthday, @RequestParam int ID) {
+    updateBirthday(birthday, ID);
+    return "redirect:/parent/details?child=" + ID;
+  }
+
+    public void updateBirthday(java.sql.Date birthday , int ID){
+      System.out.println(birthday + "  " + ID);
+  }
+
+
+  /**
+   * update address
+   */
+  @RequestMapping(value = {"/parent/update/child"}, method = RequestMethod.POST, params = {"address", "ID"})
+  public String updateChildAddress(@RequestParam String address, @RequestParam int ID){
+    updateAddress(address,ID);
+    return "redirect:/parent/details?child=" + ID;
+  }
+
+
+  public void updateAddress(String address, int ID) {
+    System.out.println(address + "  " + ID);
+
+  }
+
+
+
+
+
 
 }

@@ -82,8 +82,8 @@ i højre og venstre side-->
       <table class="table ">
         <tr>
           <th>Stue:</th>
-          <td th:="${child.getWingId}"/>
-          <td th:="${wing.getWingName}"/>
+          <!--<td th:each:="wing : ${child.getWingId()}"/>-->
+          <!--<h4 th:text="${wing.getWingName()}"/>-->
           <td><a href="#" class="btn btn-edit pull-right" data-toggle="modal" data-target="#editWing"><i class="fa fa-pencil"></i></a></td>
         </tr>
       </table>
@@ -112,7 +112,7 @@ i højre og venstre side-->
      <table class="table-bordered">
       <ul class="list-inline">
         <h5> Allergener: <a href="#" class="btn btn-edit " data-toggle="modal" data-target="#editAllergier"><i class="fa fa-pencil"></i></a> </h5>
-        <li th:each="allergen : ${child.getAllergens()}" class="list-group-item">
+        <li th:each="allergen : ${allergen.readAllergenByChildID()}" class="list-group-item">
         <h6 th:text="${allergen.getAllergenName()}"></h6>
         </li>
         <li><h6>nøddeallergi</h6></li>
