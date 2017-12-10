@@ -16,7 +16,7 @@
       <a th:class="(${allUsers}) ? 'active' : (${employeeDetails} ? 'semiActive')" href="/admin">Personale <i th:if="${employeeDetails}" class="fa fa-user pull-right" aria-hidden="true"></i></a>
     </li>
 
-    <li th:each="group : ${employeeGroups}" th:class="${currentGroup} ? ((${group.getId()} == ${currentGroup.getId()}) ? 'active')">
+    <li th:each="group : ${employeeGroups}" th:class="${currentGroup} ? ( (${group.getId()} == ${currentGroup.getId()}) ? 'active')">
       <a th:attrappend="href=${group.getId()}" th:text="'- ' + ${group.getGroupName()}" href="/admin/employees?groupID=" >Thymeleaf Employee Group</a>
     </li>
   </ul>
@@ -56,7 +56,7 @@
       <h1>Børn</h1>
     </li>
     <li th:each="child : ${children}">
-      <a th:attrappend="href=${child.getChildId()}" th:text="${child.getFirstName()} + ' ' + ${child.getLastName()}" href="/parents/children?child=" class="list-group-item ">
+      <a th:attrappend="href=${child.getChildId()}" th:text="${child.getFirstName()} + ' ' + ${child.getLastName()}" href="/parents/children?child=">
 
       </a>
     </li>

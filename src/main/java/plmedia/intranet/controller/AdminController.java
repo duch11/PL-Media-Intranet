@@ -44,15 +44,14 @@ public class AdminController {
   @Autowired
   WingRepo wingRepo;
 
-  //TEST KODE
-  //TODO: SLET MIG TESTKODE TIL GRUPPER
+  /*
   ArrayList<Group> employeeGroups = new ArrayList<>();
   ArrayList<Employee> employees = new ArrayList<>();
   ArrayList<Employee> employeesSorted;
 
   ArrayList<Parent> parents = new ArrayList<>();
   ArrayList<Child> children = new ArrayList<>();
-  ArrayList<Permission> globalPermissions = new ArrayList<>();
+  ArrayList<Permission> globalPermissions = new ArrayList<>();*/
 
   public AdminController() {
     /*java.sql.Date dato = new java.sql.Date(2);
