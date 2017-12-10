@@ -21,9 +21,27 @@ public class Child {
   private String trustedPickupPerson;
   private String otherInfo;
   private ArrayList<Parent> parents;
+  private ArrayList<Allergen> allergens;
 
 
   public Child() {
+  }
+
+  public Child(int childId, String firstName, String lastName, java.sql.Date birthday,
+      String address, int wingId, ArrayList<String> nap, String trustedPickupPerson,
+      String otherInfo, ArrayList<Parent> parents,
+      ArrayList<Allergen> allergens) {
+    this.childId = childId;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.birthday = birthday;
+    this.address = address;
+    this.wingId = wingId;
+    this.nap = nap;
+    this.trustedPickupPerson = trustedPickupPerson;
+    this.otherInfo = otherInfo;
+    this.parents = parents;
+    this.allergens = allergens;
   }
 
   public Child(int childId, String firstName, String lastName, java.sql.Date birthday,
@@ -128,6 +146,15 @@ public class Child {
   public void setParents(ArrayList<Parent> parents) {
     this.parents = parents;
   }
+
+  public ArrayList<Allergen> getAllergens() {
+    return allergens;
+  }
+
+  public void setAllergens(ArrayList<Allergen> allergens) {
+    this.allergens = allergens;
+  }
+
 
   @Override
   public String toString(){

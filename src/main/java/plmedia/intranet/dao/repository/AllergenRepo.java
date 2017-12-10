@@ -1,6 +1,7 @@
 package plmedia.intranet.dao.repository;
 
 import java.util.ArrayList;
+import org.springframework.stereotype.Repository;
 import plmedia.intranet.dao.DBUtil.DBcreate;
 import plmedia.intranet.dao.DBUtil.DBread;
 import plmedia.intranet.model.Allergen;
@@ -8,7 +9,9 @@ import plmedia.intranet.model.Allergen;
 /**
  * A repository for Allergens. Takes in logic from DBUtil package.
  * @author Simon le Févre Ryom
+ * @author Andreas Nissen
  */
+@Repository
 public class AllergenRepo implements IRepo<Allergen> {
 
   DBcreate dbc = new DBcreate();
