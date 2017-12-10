@@ -249,6 +249,28 @@ public class DBread {
     return null;
   }
 
+  public ArrayList<Integer> readChildrenIDsByWingID(int id) {
+    try (
+
+        PreparedStatement stmt = ConMan.prepStat(Statements.DEF_GET_CHILDREN_ID_BY_WING_ID_SQL)
+    ) {
+      stmt.setInt(1, id);
+      ResultSet rs = stmt.executeQuery();
+      rs.first();
+
+      ArrayList<Integer> children = new ArrayList<>();
+      while (rs.next()) {
+        children.add(rs.getInt("fk_child_id"));
+      }
+
+      return children;
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return null; // Error code?
+  }
+
+
   // Permissions
 
   public Permission readPermissionByID(int id) {

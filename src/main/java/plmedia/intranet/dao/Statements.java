@@ -17,6 +17,7 @@ public class Statements {
   public static final String DEF_GET_CHILD_BY_ID_SQL = "SELECT * FROM child WHERE child_id = ?";
   public static final String DEF_GET_CHILDREN_ID_BY_PARENT_ID_SQL = "SELECT fk_child_id FROM parent_user_child WHERE fk_parent_user_id=?";
   public static final String DEF_GET_ALL_EMAIL = "SELECT user_email FROM user";
+  public static final String DEF_GET_CHILDREN_ID_BY_WING_ID_SQL = "SELECT child_id FROM child WHERE fk_wing_id=?";
 
   // EMPLOYEE
   public static final String DEF_GET_EMPLOYEE_BY_ID_SQL = "SELECT * FROM user WHERE type=\"ROLE_EMP\" AND user_id= ? ";
@@ -54,6 +55,7 @@ public class Statements {
   public static final String DEF_UPDATE_WING = "UPDATE wing SET wing_name = ?, wing_description = ? WHERE wing_id = ?";
   public static final String DEF_UPDATE_GROUP = "UPDATE group SET group_name = ?, group_description = ? WHERE group_id = ?";
 
+  public static final String DEF_SET_CHILD_WING_TO_DEFAULT = "";
 
 
   //FK add and delete
@@ -63,11 +65,25 @@ public class Statements {
   public static final String DEF_ADD_GROUP_TO_EMPLOYEE = "INSERT INTO employee_user_group (fk_employee_user_id, fk_group_id) VALUES (?,?)";
   public static final String DEF_ADD_WING_TO_EMPLOYEE = "INSERT INTO employee_user_wing (fk_employee_user_id, fk_wing_id) VALUES (?,?)";
 
+
   public static final String DEF_DELETE_CHILD_FROM_PARENT = "DELETE FROM parent_user_child WHERE (fk_parent_user_id, fk_child_id) = (?,?)";
+  public static final String DEF_DELETE_ALL_CHILD_FROM_PARENT = "DELETE FROM parent_user_child WHERE (fk_parent_user_id) = (?)";
+  public static final String DEF_DELETE_ALL_PARENT_FROM_CHILD = "DELETE FROM parent_user_child WHERE (fk_child_id) = (?)";
+
   public static final String DEF_DELETE_PERMISSION_FROM_USER = "DELETE FROM user_permission WHERE (fk_user_id, fk_permission_id) = (?,?)";
+  public static final String DEF_DELETE_ALL_PERMISSION_FROM_USER = "DELETE FROM user_permission WHERE (fk_user_id) = (?)";
+
   public static final String DEF_DELETE_ALLERGEN_FROM_CHILD = "DELETE FROM child_allergen WHERE (fk_child_id, fk_allergen_id) = (?,?)";
+  public static final String DEF_DELETE_ALL_ALLERGEN_FROM_CHILD = "DELETE FROM child_allergen WHERE (fk_child_id) = (?)";
+
   public static final String DEF_DELETE_GROUP_FROM_EMPLOYEE = "DELETE FROM employee_user_group WHERE (fk_employee_user_id, fk_group_id) = (?,?)";
+  public static final String DEF_DELETE_ALL_GROUP_FROM_EMPLOYEE = "DELETE FROM employee_user_group WHERE (fk_employee_user_id) = (?)";
+
   public static final String DEF_DELETE_WING_FROM_EMPLOYEE = "DELETE FROM employee_user_wing WHERE (fk_user_id, fk_wing_id) = (?,?)";
+  public static final String DEF_DELETE_ALL_WING_FROM_EMPLOYEE = "DELETE FROM employee_user_wing WHERE (fk_user_id) = (?)";
+  public static final String DEF_DELETE_ALL_EMPLOYEE_FROM_WING = "DELETE FROM employee_user_wing WHERE (fk_wing_id) = (?)";
+
+
 
   // Setters / Creates
   public static final String DEF_CREATE_PARENT_USER_SQL = "INSERT INTO user (password, user_email, first_name, last_name, type, enabled) VALUES(?,?,?,?,?,?)";
@@ -78,6 +94,9 @@ public class Statements {
   public static final String DEF_CREATE_ALLERGEN_SQL = "INSERT INTO allergen (allergen_name, allergen_description) VALUES (?,?)";
 
   // Deletes
-
+  public static final String DEF_DELETE_USER_BY_ID = "DELETE FROM user WHERE user_id = ?";
+  public static final String DEF_DELETE_CHILD_BY_ID = "DELETE FROM child WHERE child_id = ?";
+  public static final String DEF_DELETE_WING_BY_ID = "DELETE FROM wing WHERE wing_id = ?";
+  public static final String DEF_DELETE_GROUP_BY_ID = "DELETE FROM group WHERE group_id = ?";
 
 }
