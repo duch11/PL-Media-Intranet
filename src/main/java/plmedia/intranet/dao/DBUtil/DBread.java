@@ -372,6 +372,7 @@ public class DBread {
       PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_WING_BY_ID);
       stmt.setInt(1, id);
       ResultSet rs = stmt.executeQuery();
+      rs.first();
 
       return new Wing(
           rs.getInt(1),

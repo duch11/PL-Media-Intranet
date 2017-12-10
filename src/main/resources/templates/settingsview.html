@@ -29,13 +29,19 @@ i højre og venstre side-->
         <div class="col-sm-4 col-sm-offset-3">
           <h3>Grupper:</h3>
           <ul class="list-group">
-            <a th:each="group : ${employeeGroups}" th:attrappend="data-target=${group.getId()}" href="#" class="list-group-item" data-toggle="modal" data-target="#editGroup" th:text="${group.getGroupName()}">Gruppe navn</a>
+            <a th:each="group : ${employeeGroups}" th:attrappend="data-target=${group.getId()}" href="#" class="list-group-item" data-toggle="modal" data-target="#editGroup">
+              <h4 th:text="${group.getGroupName()}">group name</h4>
+              <p th:text="${group.getGroupDescription()}">group description</p>
+            </a>
           </ul>
         </div>
         <div class="col-sm-4">
           <h3>Stuer:</h3>
           <ul class="list-group">
-            <a th:each="wing : ${allWings}" th:attrappend="data-target=${wing.getWingID()}" href="#" class="list-group-item" data-toggle="modal" data-target="#editWing" th:text="${wing.getWingName()}">Stue navn</a>
+            <a th:each="wing : ${allWings}" th:attrappend="data-target=${wing.getWingID()}" href="#" class="list-group-item" data-toggle="modal" data-target="#editWing" >
+              <h4 th:text="${wing.getWingName()}">wing name</h4>
+              <p th:text="${wing.getWingDescription()}">wing description</p>
+            </a>
           </ul>
         </div>
       </div>

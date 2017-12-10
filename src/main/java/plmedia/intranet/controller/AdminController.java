@@ -255,13 +255,22 @@ public class AdminController {
 
   @RequestMapping(value = {"/admin/update/group"}, method = RequestMethod.POST, params = {"groupName", "groupDescription", "ID"})
   public String updateGroupDetails(@RequestParam String groupName, @RequestParam String groupDescription, @RequestParam int ID) {
-    System.out.println("updateGroupDetails modtager: " + groupName+ " " + groupDescription + " " + ID);
+
+    Group updatedGroup = groupRepo.Read(ID);
+    updatedGroup.setGroupName(groupName);
+    updatedGroup.setGroupDescription(groupDescription);
+    System.out.println("Update group returned code<" + groupRepo.Update(updatedGroup) + "> object: " + updatedGroup);
+
     return "redirect:/admin/settings";
   }
 
   @RequestMapping(value = {"/admin/update/wing"}, method = RequestMethod.POST, params = {"wingName", "wingDescription", "ID"})
   public String updateWingDetails(@RequestParam String wingName, @RequestParam String wingDescription, @RequestParam int ID) {
-    System.out.println("updateWingDetails modtager: " + wingName + " " + wingDescription + " " + ID);
+
+    Wing updatedWing = wingRepo.Read(ID);
+    updatedWing.setWingName(wingName);
+    updatedWing.setWingDescription(wingDescription);
+    System.out.println("Update wing returned code<" + wingRepo.Update(updatedWing) + "> object: " + updatedWing);
     return "redirect:/admin/settings";
   }
 

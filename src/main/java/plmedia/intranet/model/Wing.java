@@ -47,4 +47,24 @@ public class Wing {
     return wingID;
   }
 
+  public void setWingID(int wingID) {
+    this.wingID = wingID;
+  }
+
+  public void setWingName(String wingName) {
+    this.wingName = wingName;
+  }
+
+  public void setWingDescription(String wingDescription) {
+    this.wingDescription = wingDescription;
+  }
+
+  @Override
+  public String toString() {
+    return "Wing{" +
+        "wingID=" + wingID +
+        ", wingName='" + wingName + '\'' +
+        ", wingDescription='" + wingDescription + '\'' +
+        '}';
+  }
 }

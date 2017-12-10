@@ -54,7 +54,7 @@ public class Statements {
   public static final String DEF_UPDATE_USER = "UPDATE user SET password = ?, user_email = ?, first_name = ?, last_name = ? WHERE user_id = ?";
   public static final String DEF_UPDATE_CHILD = "UPDATE child SET first_name = ?, last_name = ?, birthday = ?, address = ?, fk_wing_id = ? WHERE child_id = ?";
   public static final String DEF_UPDATE_WING = "UPDATE wing SET wing_name = ?, wing_description = ? WHERE wing_id = ?";
-  public static final String DEF_UPDATE_GROUP = "UPDATE group SET group_name = ?, group_description = ? WHERE group_id = ?";
+  public static final String DEF_UPDATE_GROUP = "UPDATE intranetdb.group SET group_name = ?, group_description = ? WHERE group_id = ?";
 
   public static final String DEF_SET_CHILD_WING_TO_DEFAULT = "";
 

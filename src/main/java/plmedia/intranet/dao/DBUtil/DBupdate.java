@@ -100,7 +100,7 @@ public class DBupdate {
       PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_UPDATE_WING);
       stmt.setString(1, wing.getWingName());
       stmt.setString(2, wing.getWingDescription());
-
+      stmt.setInt(3, wing.getWingID());
       stmt.executeUpdate();
       return 1;
     } catch (SQLException e) {
@@ -116,6 +116,7 @@ public class DBupdate {
       PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_UPDATE_GROUP);
       stmt.setString(1, group.getGroupName());
       stmt.setString(2, group.getGroupDescription());
+      stmt.setInt(3, group.getId());
 
       stmt.executeUpdate();
       return 1;
