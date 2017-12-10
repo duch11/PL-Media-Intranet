@@ -79,6 +79,7 @@ public class Statements {
 
   public static final String DEF_DELETE_GROUP_FROM_EMPLOYEE = "DELETE FROM employee_user_group WHERE (fk_employee_user_id, fk_group_id) = (?,?)";
   public static final String DEF_DELETE_ALL_GROUP_FROM_EMPLOYEE = "DELETE FROM employee_user_group WHERE (fk_employee_user_id) = (?)";
+  public static final String DEF_DELETE_ALL_EMPLOYEE_FROM_GROUP = "DELETE FROM employee_user_group WHERE (fk_group_id) = (?)";
 
   public static final String DEF_DELETE_WING_FROM_EMPLOYEE = "DELETE FROM employee_user_wing WHERE (fk_user_id, fk_wing_id) = (?,?)";
   public static final String DEF_DELETE_ALL_WING_FROM_EMPLOYEE = "DELETE FROM employee_user_wing WHERE (fk_user_id) = (?)";

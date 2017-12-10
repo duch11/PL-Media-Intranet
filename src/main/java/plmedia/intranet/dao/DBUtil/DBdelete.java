@@ -98,6 +98,21 @@ public class DBdelete {
   }
 
   public int deleteGroup(Group group) {
+    try(
+        PreparedStatement dGroupStmt = ConMan.prepStat(Statements.DEF_DELETE_GROUP_BY_ID);
+        PreparedStatement dGroupToEmp = ConMan.prepStat(Statements.DEF_DELETE_ALL_EMPLOYEE_FROM_GROUP)
+    ) {
+
+      dGroupToEmp.setInt(1, group.getId());
+      dGroupToEmp.executeUpdate();
+
+      dGroupStmt.setInt(1, group.getId());
+      dGroupStmt.executeUpdate();
+
+      return 1;
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
     return 0;
   }
 
