@@ -7,8 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import plmedia.intranet.dao.repository.AllergenRepo;
 import plmedia.intranet.dao.repository.ChildRepo;
 import plmedia.intranet.dao.repository.ParentRepo;
+import plmedia.intranet.dao.repository.WingRepo;
 import plmedia.intranet.model.Child;
 import plmedia.intranet.model.Parent;
 
@@ -25,11 +28,17 @@ public class ParentController {
   @Autowired
   ChildRepo childRepo;
 
+  @Autowired
+  AllergenRepo allergenRepo;
+
+  @Autowired
+  WingRepo wingRepo;
+
   // lists
   ArrayList<Parent> parents = new ArrayList<>();
 
 private void showPanals(Model model, Principal principal) {
-  System.out.println("hejsa med dig");
+
   ArrayList<Child> children = new ArrayList<>();
   System.out.println(childRepo);
   for(Integer i : childRepo.ReadChildrenIDbyParentID
@@ -39,13 +48,14 @@ private void showPanals(Model model, Principal principal) {
   }
   model.addAttribute("children",children);
   model.addAttribute("test", principal.getName());
+  model.addAttribute("children" , childRepo.ReadAll());
 }
 
   public String showParentView(Model model, Principal principal) {
 
-    System.out.println("før showpanels");
+
     showPanals(model, principal);
-    System.out.println("før parent view");
+
     return "parentview";
   }
 
@@ -55,7 +65,8 @@ private void showPanals(Model model, Principal principal) {
   public String parentViewEmp(Model model, Principal principal) {
 
     model.addAttribute("allUsers", true);
-    model.addAttribute("employees", parentRepo.ReadAll());
+    model.addAttribute("parents", parentRepo.ReadAll());
+    model.addAttribute("children" , childRepo.ReadAll());
 
 
     model.addAttribute("parents", parents);
@@ -73,15 +84,41 @@ private void showPanals(Model model, Principal principal) {
   }
 
 
-  @RequestMapping(value = {"/parents/children"}, method = RequestMethod.GET)
-  public String child(Model model, Principal principal) {
 
 
+  @RequestMapping(value = {"/parents/children"}, method = RequestMethod.GET, params = {"child" , "allergen"})
+  public String childDetails(Model model, Principal principal, @RequestParam int child, @RequestParam int allergen, @RequestParam int wing) {
+    model.addAttribute("child", childRepo.Read(child));
+    model.addAttribute("allergen", allergenRepo.Read(allergen));
+    model.addAttribute("wing" , wingRepo.Read(wing));
+    showChildView(model,principal);
+    return "childview";
+  }
 
-    return showChildView(model, principal);
+  /**
+   * update
+   */
+
+  @RequestMapping(value = {"/parent/update/child"}, method = RequestMethod.POST, params = {"firstName", "ID"})
+  public String updateEmpFirstName(@RequestParam String firstName, @RequestParam int ID){
+    updateFirstName(firstName,ID);
+    return "redirect:/parent/details?child=" + ID;
   }
 
 
+  public void updateFirstName(String firstName, int ID){
+    System.out.println(firstName + "  " + ID);
+  }
 
+  @RequestMapping(value = {"/parent/update/child"}, method = RequestMethod.POST, params = {"lastName", "ID"})
+  public String updateEmpLastName(@RequestParam String lastName, @RequestParam int ID){
+    updateLastName(lastName,ID);
+    return "redirect:/parent/details?child=" + ID;
+  }
+
+
+  public void updateLastName(String lastName, int ID){
+    System.out.println(lastName + "  " + ID);
+  }
 
 }
