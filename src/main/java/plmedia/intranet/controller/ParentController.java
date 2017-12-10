@@ -86,11 +86,10 @@ private void showPanals(Model model, Principal principal) {
 
 
 
-  @RequestMapping(value = {"/parents/children"}, method = RequestMethod.GET, params = {"child" , "allergen"})
-  public String childDetails(Model model, Principal principal, @RequestParam int child, @RequestParam int allergen, @RequestParam int wing) {
+  @RequestMapping(value = {"/parents/children"}, method = RequestMethod.GET, params = {"child"})
+  public String childDetails(Model model, Principal principal, @RequestParam int child) {
     model.addAttribute("child", childRepo.Read(child));
-    model.addAttribute("allergen", allergenRepo.Read(allergen));
-    model.addAttribute("wing" , wingRepo.Read(wing));
+    model.addAttribute("allergen", allergenRepo.readAllergenByChildID(child));
     showChildView(model,principal);
     return "childview";
   }
