@@ -45,7 +45,7 @@
   </ul>-->
   <ul class="nav nav-sidebar">
     <li>
-         <a th:class="${overblik} ? 'active' " href="/parents">Overblik  </a>
+         <a th:if="Overblik ? 'active' " href="/parents">Overblik <i th:if="Overblik" class="fa fa-user pull-right" aria-hidden="true"></i>  </a>
 
 
     </li>
@@ -56,8 +56,8 @@
       <h1>Børn</h1>
     </li>
     <li th:each="child : ${children}">
-      <a th:attrappend="href=${child.getChildId()}" href="/parents/children?childId=" class="list-group-item active">
-        Oliver (Kan klikkes på)
+      <a th:attrappend="href=${child.getChildId()}" th:text="${child.getFirstName()} + ' ' + ${child.getLastName()}" href="/parents/children?child=" class="list-group-item ">
+
       </a>
     </li>
   </ul>
