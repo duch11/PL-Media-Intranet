@@ -19,7 +19,7 @@ public class EmployeeRepo implements IRepo<Employee> {
 
   DBcreate dbc = new DBcreate();
   DBread dbr = new DBread();
-
+  DBupdate dbu = new DBupdate();
 
   /**
    * Creates Employee object. Takes logic from DBcreate.
@@ -38,7 +38,7 @@ public class EmployeeRepo implements IRepo<Employee> {
 
   @Override
   public int Update(Employee employee) {
-    return 0;
+    return dbu.updateEmployee(employee);
   }
 
   @Override

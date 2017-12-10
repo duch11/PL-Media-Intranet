@@ -1,14 +1,11 @@
 package plmedia.intranet.dao.DBUtil;
 
-import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import plmedia.intranet.dao.ConMan;
 import plmedia.intranet.dao.Statements;
-import plmedia.intranet.dao.repository.PermissionRepo;
 import plmedia.intranet.model.Allergen;
 import plmedia.intranet.model.Child;
 import plmedia.intranet.model.Employee;
@@ -150,7 +147,7 @@ public class DBread {
       return null;
     }
 
-    public ArrayList<Employee> readAllEmployeesByGroup(int id)  {
+  public ArrayList<Employee> readAllEmployeesByGroup(int id)  {
       try (
           PreparedStatement stmt = ConMan.prepStat(Statements.DEF_GET_ALL_EMPLOYEES_BY_GROUP_ID);
       ) {
@@ -525,6 +522,5 @@ public class DBread {
     }
     return null;
   }
-
 
 }

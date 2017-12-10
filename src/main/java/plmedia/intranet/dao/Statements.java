@@ -1,19 +1,15 @@
 package plmedia.intranet.dao;
 
-import org.omg.PortableInterceptor.ServerRequestInfo;
-
 /**
  * @author Tobias Thomsen
  * @author Simon le Févre Ryom
  */
-
 public class Statements {
 
   /*
    Getters
     */
   public static final String DEF_GET_ALL_USERS_BY_TYPE_SQL = "SELECT * FROM user WHERE type=?";
-
   public static final String DEF_GET_USERS_BY_TYPE_AND_ID_SQL = "SELECT * FROM user WHERE type=? AND user_id=?";
   public static final String DEF_GET_ALL_CHILDREN_SQL = "SELECT * FROM child";
   public static final String DEF_GET_PARENT_BY_ID_SQL = "SELECT * FROM user WHERE type=\"ROLE_PAR\" AND user_id=?";
@@ -53,8 +49,11 @@ public class Statements {
 
 
   // Updates
-  public static final String DEF_UPDATE_USER = "UPDATE user SET password = ?, user_email = ?, first_name = ?, last_name = ? where user_id = ?";
-  public static final String DEF_UPDATE_CHILD = "UPDATE child SET ";
+  public static final String DEF_UPDATE_USER = "UPDATE user SET password = ?, user_email = ?, first_name = ?, last_name = ? WHERE user_id = ?";
+  public static final String DEF_UPDATE_CHILD = "UPDATE child SET first_name = ?, last_name = ?, birthday = ?, address = ?, fk_wing_id = ? WHERE child_id = ?";
+  public static final String DEF_UPDATE_WING = "UPDATE wing SET wing_name = ?, wing_description = ? WHERE wing_id = ?";
+  public static final String DEF_UPDATE_GROUP = "UPDATE group SET group_name = ?, group_description = ? WHERE group_id = ?";
+
 
 
   //FK add and delete

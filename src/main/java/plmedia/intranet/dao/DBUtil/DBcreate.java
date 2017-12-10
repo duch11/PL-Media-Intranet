@@ -23,7 +23,6 @@ public class DBcreate {
   Util util = new Util();
   BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-
   /**
    * Creates Parent object.
    * @param parent

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import org.springframework.stereotype.Repository;
 import plmedia.intranet.dao.DBUtil.DBcreate;
 import plmedia.intranet.dao.DBUtil.DBread;
+import plmedia.intranet.dao.DBUtil.DBupdate;
 import plmedia.intranet.model.Wing;
 
 /**
@@ -17,6 +18,7 @@ public class WingRepo implements IRepo<Wing>{
 
   DBcreate dbc = new DBcreate();
   DBread dbr = new DBread();
+  DBupdate dbu = new DBupdate();
 
   /**
    * Creates Wing object. Takes logic from DBcreate.
@@ -35,7 +37,7 @@ public class WingRepo implements IRepo<Wing>{
 
   @Override
   public int Update(Wing wing) {
-    return 0;
+    return dbu.updateWing(wing);
   }
 
   @Override
@@ -46,5 +48,13 @@ public class WingRepo implements IRepo<Wing>{
   @Override
   public ArrayList<Wing> ReadAll() {
     return dbr.readAllWings();
+  }
+
+  public Wing readWingByUserID(int id) {
+    return dbr.readWingByUserID(id);
+  }
+
+  public ArrayList<Wing> readWingIDsByUserID(int id) {
+    return dbr.readWingIDsByUserID(id);
   }
 }

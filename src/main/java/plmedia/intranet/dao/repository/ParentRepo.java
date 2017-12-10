@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import org.springframework.stereotype.Repository;
 import plmedia.intranet.dao.DBUtil.DBcreate;
 import plmedia.intranet.dao.DBUtil.DBread;
+import plmedia.intranet.dao.DBUtil.DBupdate;
 import plmedia.intranet.model.Parent;
 
 
@@ -17,6 +18,7 @@ public class ParentRepo<T> implements IRepo<Parent> {
 
   DBcreate dbc = new DBcreate();
   DBread dbr = new DBread();
+  DBupdate dbu = new DBupdate();
 
   @Override
   public int Create(Parent parent) {
@@ -28,10 +30,9 @@ public class ParentRepo<T> implements IRepo<Parent> {
     return dbr.readParentByID(id);
   }
 
-
   @Override
   public int Update(Parent parent) {
-    return 0;
+    return dbu.updateParent(parent);
   }
 
   @Override
@@ -47,5 +48,6 @@ public class ParentRepo<T> implements IRepo<Parent> {
   public Parent readParentByEmail(String userEmail) {
     return dbr.readParentByEmail(userEmail);
   }
+
 
 }

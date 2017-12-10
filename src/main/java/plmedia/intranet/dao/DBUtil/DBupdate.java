@@ -1,11 +1,13 @@
 package plmedia.intranet.dao.DBUtil;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import plmedia.intranet.dao.ConMan;
 import plmedia.intranet.dao.Statements;
 import plmedia.intranet.model.Allergen;
@@ -19,9 +21,102 @@ import plmedia.intranet.model.Wing;
 public class DBupdate {
 
   DBread dbr = new DBread();
+  BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
 
-  // FK updates
+  // Model updaters
+  public int updateEmployee(Employee employee) {
+    try(
+        PreparedStatement stmt = ConMan.prepStat(Statements.DEF_UPDATE_USER)
+    ) {
+      String employeePass = employee.getPassword();
+      String hashedPassword = passwordEncoder.encode(employeePass);
+
+      stmt.setString(1, hashedPassword);
+      stmt.setString(2, employee.getUserEmail());
+      stmt.setString(3, employee.getFirstName());
+      stmt.setString(4, employee.getLastName());
+      stmt.setInt(5, 1);
+
+      stmt.executeUpdate();
+      return 1;
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return 0;
+  }
+
+  public int updateParent(Parent parent) {
+    try(
+        PreparedStatement stmt = ConMan.prepStat(Statements.DEF_UPDATE_USER)
+    ) {
+      String parentPass = parent.getPassword();
+      String hashedPassword = passwordEncoder.encode(parentPass);
+
+      stmt.setString(1, hashedPassword);
+      stmt.setString(2, parent.getUserEmail());
+      stmt.setString(3, parent.getFirstName());
+      stmt.setString(4, parent.getLastName());
+      stmt.setInt(5, 1);
+
+      stmt.executeUpdate();
+      return 1;
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return 0;
+  }
+
+  public int updateChild(Child child) {
+    try (
+        PreparedStatement stmt = ConMan.prepStat(Statements.DEF_UPDATE_CHILD)
+    ) {
+
+      stmt.setString(1, child.getFirstName());
+      stmt.setString(2, child.getLastName());
+      stmt.setDate(3, (Date) child.getBirthday());
+      stmt.setString(4, child.getAddress());
+      stmt.setInt(5, child.getWingId());
+
+      stmt.executeUpdate();
+      return 1;
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return -1;
+  }
+
+  public int updateWing(Wing wing) {
+    try(
+        PreparedStatement stmt = ConMan.prepStat(Statements.DEF_UPDATE_WING)
+    ) {
+      stmt.setString(1, wing.getWingName());
+      stmt.setString(2, wing.getWingDescription());
+
+      stmt.executeUpdate();
+      return 1;
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return -1;
+  }
+
+  public int updateGroup(Group group) {
+    try(
+        PreparedStatement stmt = ConMan.prepStat(Statements.DEF_UPDATE_GROUP)
+    ) {
+      stmt.setString(1, group.getGroupName());
+      stmt.setString(2, group.getGroupDescription());
+
+      stmt.executeUpdate();
+      return 1;
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return -1;
+  }
+
+  // FK updaters
   public int updateChildToParent(Parent parent, ArrayList<Integer> newChildren) {
     try (
         PreparedStatement writeStmt = ConMan.prepStat(Statements.DEF_ADD_CHILD_TO_PARENT);
@@ -202,4 +297,5 @@ public class DBupdate {
     }
     return -1;
   }
+
 }

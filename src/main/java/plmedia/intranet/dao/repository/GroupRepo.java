@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import org.springframework.stereotype.Repository;
 import plmedia.intranet.dao.DBUtil.DBcreate;
 import plmedia.intranet.dao.DBUtil.DBread;
+import plmedia.intranet.dao.DBUtil.DBupdate;
 import plmedia.intranet.model.Group;
 
 /**
@@ -17,6 +18,7 @@ public class GroupRepo implements IRepo<Group> {
 
    DBcreate dbc = new DBcreate();
    DBread dbr = new DBread();
+   DBupdate dbu = new DBupdate();
 
   @Override
   public int Create(Group group) {
@@ -30,7 +32,7 @@ public class GroupRepo implements IRepo<Group> {
 
   @Override
   public int Update(Group group) {
-    return 0;
+    return dbu.updateGroup(group);
   }
 
   @Override
