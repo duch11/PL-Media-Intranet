@@ -36,12 +36,14 @@ public class Statements {
   public static final String DEF_GET_ALL_EMPLOYEES_BY_GROUP_ID = "SELECT * FROM user WHERE user_id = ANY (SELECT fk_employee_user_id FROM employee_user_group WHERE fk_group_id = ?)";
   public static final String DEF_GET_GROUP_BY_ID = "SELECT * FROM intranetdb.group WHERE group_id = ?";
   public static final String DEF_GET_ALL_GROUPS = "SELECT * FROM intranetdb.group";
-  public static final String DEF_GET_GROUP_BY_USER_ID = "SELECT * FROM intranetdb.group where group_id = (SELECT fk_group_id FROM employee_user_group WHERE fk_employee_user_id = ?)";
+  public static final String DEF_GET_GROUP_BY_USER_ID = "SELECT * FROM intranetdb.group WHERE group_id = (SELECT fk_group_id FROM employee_user_group WHERE fk_employee_user_id = ?)";
   public static final String DEF_GET_GROUPS_IDS_BY_USER_ID = "SELECT fk_group_id FROM employee_user_group WHERE fk_employee_user_id=?";
 
   // Wings
   public static final String DEF_GET_WING_BY_ID = "SELECT * FROM wing WHERE wing_id = ?";
   public static final String DEF_GET_ALL_WINGS = "SELECT * FROM wing";
+  public static final String DEF_GET_WING_BY_USER_ID = "SELECT * FROM intranetdb.wing WHERE wing_id = (SELECT fk_wing_id FROM employee_user_wing WHERE fk_employee_user_id = ?)";
+  public static final String DEF_GET_WING_IDS_BY_USER_ID = "SELECT fk_wing_id FROM employee_user_wing WHERE fk_employee_user_id = ?";
 
   // Allergen
   public static final String DEF_GET_ALLERGEN_BY_ID = "SELECT * FROM allergen WHERE allergen_id = ?";
@@ -60,11 +62,13 @@ public class Statements {
   public static final String DEF_ADD_PERMISSION_TO_USER = "INSERT INTO user_permission (fk_user_id, fk_permission_id) VALUES (?,?)";
   public static final String DEF_ADD_ALLERGEN_TO_CHILD = "INSERT INTO child_allergen (fk_child_id, fk_allergen_id) VALUES (?,?)";
   public static final String DEF_ADD_GROUP_TO_EMPLOYEE = "INSERT INTO employee_user_group (fk_employee_user_id, fk_group_id) VALUES (?,?)";
+  public static final String DEF_ADD_WING_TO_EMPLOYEE = "INSERT INTO employee_user_wing (fk_employee_user_id, fk_wing_id) VALUES (?,?)";
 
   public static final String DEF_DELETE_CHILD_FROM_PARENT = "DELETE FROM parent_user_child WHERE (fk_parent_user_id, fk_child_id) = (?,?)";
   public static final String DEF_DELETE_PERMISSION_FROM_USER = "DELETE FROM user_permission WHERE (fk_user_id, fk_permission_id) = (?,?)";
   public static final String DEF_DELETE_ALLERGEN_FROM_CHILD = "DELETE FROM child_allergen WHERE (fk_child_id, fk_allergen_id) = (?,?)";
   public static final String DEF_DELETE_GROUP_FROM_EMPLOYEE = "DELETE FROM employee_user_group WHERE (fk_employee_user_id, fk_group_id) = (?,?)";
+  public static final String DEF_DELETE_WING_FROM_EMPLOYEE = "DELETE FROM employee_user_wing WHERE (fk_user_id, fk_wing_id) = (?,?)";
 
   // Setters / Creates
   public static final String DEF_CREATE_PARENT_USER_SQL = "INSERT INTO user (password, user_email, first_name, last_name, type, enabled) VALUES(?,?,?,?,?,?)";

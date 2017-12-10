@@ -356,6 +356,42 @@ public class DBread {
     return null;
   }
 
+  public Wing readWingByUserID(int id) {
+    try (
+        PreparedStatement stmt = ConMan.prepStat(Statements.DEF_GET_WING_BY_USER_ID);
+    ) {
+      stmt.setInt(1, id);
+      ResultSet rs = stmt.executeQuery();
+      rs.first();
+      return new Wing(
+          rs.getInt(1),
+          rs.getString(2),
+          rs.getString(3));
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return null;
+  }
+
+  public ArrayList<Wing> readWingIDsByUserID(int id) {
+    try(
+        PreparedStatement stmt = ConMan.prepStat(Statements.DEF_GET_WING_IDS_BY_USER_ID)
+    ) {
+      ArrayList<Wing> wings = new ArrayList<>();
+      stmt.setInt(1, id);
+      ResultSet rs = stmt.executeQuery();
+      rs.first();
+      while (rs.next()) {
+        wings.add(readWingByID(rs.getInt("fk_wing_id")));
+      }
+
+      return wings;
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return null;
+  }
+
   // Group
 
   public Group readGroupByID(int id)  {
@@ -394,7 +430,7 @@ public class DBread {
     return null;
   }
 
-  public Group readGroupByUserID(int id){
+  public Group readGroupByUserID(int id) {
     try (
     PreparedStatement stmt = ConMan.prepStat(Statements.DEF_GET_GROUP_BY_USER_ID);
     ) {

@@ -14,6 +14,7 @@ import plmedia.intranet.model.Employee;
 import plmedia.intranet.model.Group;
 import plmedia.intranet.model.Parent;
 import plmedia.intranet.model.Permission;
+import plmedia.intranet.model.Wing;
 
 public class DBupdate {
 
@@ -144,6 +145,44 @@ public class DBupdate {
 
       toWrite.removeAll(orgGroup);
       toDelete.removeAll(newGroup);
+
+      for (Integer i : toWrite) {
+        writeStmt.setInt(1, employee.getUserId());
+        writeStmt.setInt(2, toWrite.get(i));
+        writeStmt.executeUpdate();
+      }
+
+      for (Integer i : toDelete) {
+        deleteStmt.setInt(1, employee.getUserId());
+        deleteStmt.setInt(2, toDelete.get(i));
+        deleteStmt.executeUpdate();
+      }
+
+      return 1;
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return -1;
+  }
+
+  public int updateEmployeeWing(Employee employee, ArrayList<Integer> newWing) {
+    try(
+        PreparedStatement writeStmt = ConMan.prepStat(Statements.DEF_ADD_WING_TO_EMPLOYEE);
+        PreparedStatement deleteStmt = ConMan.prepStat(Statements.DEF_DELETE_WING_FROM_EMPLOYEE)
+    ) {
+
+      ArrayList<Wing> temp = dbr.readWingIDsByUserID(employee.getUserId());
+      ArrayList<Integer> orgWing = new ArrayList<>();
+
+      for (Wing w: temp) {
+        orgWing.add(w.getWingID());
+      }
+
+      List<Integer> toWrite = new ArrayList<>(newWing);
+      List<Integer> toDelete = new ArrayList<>(orgWing);
+
+      toWrite.removeAll(orgWing);
+      toDelete.removeAll(newWing);
 
       for (Integer i : toWrite) {
         writeStmt.setInt(1, employee.getUserId());

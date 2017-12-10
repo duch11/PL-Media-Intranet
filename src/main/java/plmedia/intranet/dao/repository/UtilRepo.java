@@ -41,6 +41,11 @@ public class UtilRepo {
   public int updateEmployeeGroup(Employee employee, ArrayList<Integer> newGroup) {
     return dbu.updateEmployeeGroup(employee, newGroup);
   }
+
+  public int updateEmployeeWing(Employee employee, ArrayList<Integer> newWing) {
+    return dbu.updateEmployeeWing(employee, newWing);
+  }
+
 }
 
 
