@@ -17,6 +17,7 @@ public class Statements {
   public static final String DEF_GET_CHILD_BY_ID_SQL = "SELECT * FROM child WHERE child_id = ?";
   public static final String DEF_GET_CHILDREN_ID_BY_PARENT_ID_SQL = "SELECT fk_child_id FROM parent_user_child WHERE fk_parent_user_id=?";
   public static final String DEF_GET_ALL_EMAIL = "SELECT user_email FROM user";
+  public static final String DEF_GET_CHILDREN_ID_BY_WING_ID_SQL = "SELECT child_id FROM child WHERE fk_wing_id=?";
 
   // EMPLOYEE
   public static final String DEF_GET_EMPLOYEE_BY_ID_SQL = "SELECT * FROM user WHERE type=\"ROLE_EMP\" AND user_id= ? ";

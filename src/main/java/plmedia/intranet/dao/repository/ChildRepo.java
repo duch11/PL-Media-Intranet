@@ -36,10 +36,6 @@ public class ChildRepo implements IRepo<Child> {
     return dbr.readChildById(id);
   }
 
-
-  public ArrayList<Integer> ReadChildrenIDbyParentID(int id) {
-     return dbr.readChildrenIDByParentID(id);}
-
   @Override
   public int Update(Child child) {
     return dbu.updateChild(child);
@@ -54,4 +50,13 @@ public class ChildRepo implements IRepo<Child> {
   public ArrayList<Child> ReadAll() {
     return dbr.readAllChildren();
   }
+
+  public ArrayList<Integer> ReadChildrenIDbyParentID(int id) {
+    return dbr.readChildrenIDByParentID(id);
+  }
+
+  public ArrayList<Integer> readChildrenIDsByWingID(int id) {
+    return dbr.readChildrenIDsByWingID(id);
+  }
+  
 }
