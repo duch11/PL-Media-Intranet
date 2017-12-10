@@ -1,5 +1,6 @@
 package plmedia.intranet.dao.DBUtil;
 
+import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -31,8 +32,9 @@ public class DBupdate {
   // Model updaters
   public int updateParent(Parent parent) {
     try(
-        PreparedStatement stmt = ConMan.prepStat(Statements.DEF_UPDATE_USER)
+        Connection con = ConMan.getConnection();
     ) {
+      PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_UPDATE_USER);
       String parentPass = parent.getPassword();
       String hashedPassword = passwordEncoder.encode(parentPass);
 
@@ -52,8 +54,9 @@ public class DBupdate {
 
   public int updateEmployee(Employee employee) {
     try(
-        PreparedStatement stmt = ConMan.prepStat(Statements.DEF_UPDATE_USER)
+        Connection con = ConMan.getConnection();
     ) {
+      PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_UPDATE_USER);
       String employeePass = employee.getPassword();
       String hashedPassword = passwordEncoder.encode(employeePass);
 
@@ -73,9 +76,9 @@ public class DBupdate {
 
   public int updateChild(Child child) {
     try (
-        PreparedStatement stmt = ConMan.prepStat(Statements.DEF_UPDATE_CHILD)
+        Connection con = ConMan.getConnection();
     ) {
-
+      PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_UPDATE_CHILD);
       stmt.setString(1, child.getFirstName());
       stmt.setString(2, child.getLastName());
       stmt.setDate(3, (Date) child.getBirthday());
@@ -92,8 +95,9 @@ public class DBupdate {
 
   public int updateWing(Wing wing) {
     try(
-        PreparedStatement stmt = ConMan.prepStat(Statements.DEF_UPDATE_WING)
+        Connection con = ConMan.getConnection();
     ) {
+      PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_UPDATE_WING);
       stmt.setString(1, wing.getWingName());
       stmt.setString(2, wing.getWingDescription());
 
@@ -107,8 +111,9 @@ public class DBupdate {
 
   public int updateGroup(Group group) {
     try(
-        PreparedStatement stmt = ConMan.prepStat(Statements.DEF_UPDATE_GROUP)
+        Connection con = ConMan.getConnection();
     ) {
+      PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_UPDATE_GROUP);
       stmt.setString(1, group.getGroupName());
       stmt.setString(2, group.getGroupDescription());
 
@@ -123,10 +128,11 @@ public class DBupdate {
   // FK updaters
   public int updateChildToParent(Parent parent, ArrayList<Integer> newChildren) {
     try (
-        PreparedStatement writeStmt = ConMan.prepStat(Statements.DEF_ADD_CHILD_TO_PARENT);
-        PreparedStatement deleteStmt = ConMan.prepStat(Statements.DEF_DELETE_CHILD_FROM_PARENT);
-    ) {
 
+        Connection con = ConMan.getConnection();
+    ) {
+      PreparedStatement writeStmt = ConMan.prepStat(con, Statements.DEF_ADD_CHILD_TO_PARENT);
+      PreparedStatement deleteStmt = ConMan.prepStat(con, Statements.DEF_DELETE_CHILD_FROM_PARENT);
       ArrayList<Integer> orgChildren = dbr.readChildrenIDByParentID(parent.getUserId());
 
       List<Integer> toWrite = new ArrayList<>(newChildren);
@@ -155,9 +161,11 @@ public class DBupdate {
 
   public int updatePermissionByID(Employee employee, ArrayList<Integer> newPermission) {
     try (
-        PreparedStatement writeStmt = ConMan.prepStat(Statements.DEF_ADD_PERMISSION_TO_USER);
-        PreparedStatement deleteStmt = ConMan.prepStat(Statements.DEF_DELETE_PERMISSION_FROM_USER)
+
+        Connection con = ConMan.getConnection();
     ) {
+      PreparedStatement writeStmt = ConMan.prepStat(con, Statements.DEF_ADD_PERMISSION_TO_USER);
+      PreparedStatement deleteStmt = ConMan.prepStat(con, Statements.DEF_DELETE_PERMISSION_FROM_USER);
       /**Get original permissions and get their ID values*/
       ArrayList<Permission> temp = dbr.readPermissionsByUserID(employee.getUserId());
       ArrayList<Integer> orgPermission = new ArrayList<>();
@@ -192,9 +200,11 @@ public class DBupdate {
 
   public int updateChildAllergens(Child child, ArrayList<Integer> newAllergen) {
     try(
-        PreparedStatement writeStmt = ConMan.prepStat(Statements.DEF_ADD_ALLERGEN_TO_CHILD);
-        PreparedStatement deleteStmt = ConMan.prepStat(Statements.DEF_DELETE_ALLERGEN_FROM_CHILD)
+
+        Connection con = ConMan.getConnection();
     ) {
+      PreparedStatement writeStmt = ConMan.prepStat(con, Statements.DEF_ADD_ALLERGEN_TO_CHILD);
+      PreparedStatement deleteStmt = ConMan.prepStat(con, Statements.DEF_DELETE_ALLERGEN_FROM_CHILD);
       ArrayList<Allergen> temp = dbr.readAllergenByChildID(child.getChildId());
       ArrayList<Integer> orgAllergen = new ArrayList<>();
 
@@ -229,9 +239,11 @@ public class DBupdate {
 
   public int updateEmployeeGroup(Employee employee, ArrayList<Integer> newGroup) {
     try(
-        PreparedStatement writeStmt = ConMan.prepStat(Statements.DEF_ADD_GROUP_TO_EMPLOYEE);
-        PreparedStatement deleteStmt = ConMan.prepStat(Statements.DEF_DELETE_GROUP_FROM_EMPLOYEE)
+        Connection con = ConMan.getConnection();
+
     ) {
+      PreparedStatement writeStmt = ConMan.prepStat(con, Statements.DEF_ADD_GROUP_TO_EMPLOYEE);
+      PreparedStatement deleteStmt = ConMan.prepStat(con, Statements.DEF_DELETE_GROUP_FROM_EMPLOYEE);
       ArrayList<Group> temp = dbr.readGroupIDsByUserID(employee.getUserId());
       ArrayList<Integer> orgGroup = new ArrayList<>();
 
@@ -266,10 +278,11 @@ public class DBupdate {
 
   public int updateEmployeeWing(Employee employee, ArrayList<Integer> newWing) {
     try(
-        PreparedStatement writeStmt = ConMan.prepStat(Statements.DEF_ADD_WING_TO_EMPLOYEE);
-        PreparedStatement deleteStmt = ConMan.prepStat(Statements.DEF_DELETE_WING_FROM_EMPLOYEE)
-    ) {
+        Connection con = ConMan.getConnection();
 
+    ) {
+      PreparedStatement writeStmt = ConMan.prepStat(con, Statements.DEF_ADD_WING_TO_EMPLOYEE);
+      PreparedStatement deleteStmt = ConMan.prepStat(con, Statements.DEF_DELETE_WING_FROM_EMPLOYEE);
       ArrayList<Wing> temp = dbr.readWingIDsByUserID(employee.getUserId());
       ArrayList<Integer> orgWing = new ArrayList<>();
 

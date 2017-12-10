@@ -19,8 +19,8 @@ public class ConMan {
     return DriverManager.getConnection(CONN_STRING, USERNAME, PASSWORD);
   }
 
-  public static PreparedStatement prepStat(String SQL) throws SQLException {
-    PreparedStatement stmt = getConnection().prepareStatement(
+  public static PreparedStatement prepStat(Connection con, String SQL) throws SQLException {
+    PreparedStatement stmt = con.prepareStatement(
         SQL,
         ResultSet.TYPE_SCROLL_INSENSITIVE,
         ResultSet.CONCUR_READ_ONLY);

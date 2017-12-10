@@ -1,5 +1,6 @@
 package plmedia.intranet.dao.DBUtil;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -35,8 +36,9 @@ public class Util {
 
   public int checkPassword(int id, String password) {
     try(
-        PreparedStatement stmt = ConMan.prepStat(Statements.DEF_GET_PASSWORD_BY_USER_ID)
+        Connection con = ConMan.getConnection();
     ) {
+      PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_PASSWORD_BY_USER_ID);
       stmt.setInt(1, id);
       ResultSet rs = stmt.executeQuery();
       rs.first();

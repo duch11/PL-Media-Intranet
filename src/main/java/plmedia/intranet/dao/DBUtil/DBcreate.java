@@ -1,5 +1,6 @@
 package plmedia.intranet.dao.DBUtil;
 
+import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -30,8 +31,9 @@ public class DBcreate {
    */
   public int createParent(Parent parent) {
     try(
-        PreparedStatement stmt = ConMan.prepStat(Statements.DEF_CREATE_PARENT_USER_SQL);
+        Connection con = ConMan.getConnection();
     ) {
+      PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_CREATE_PARENT_USER_SQL);
 
       if (util.checkEmail(parent.getUserEmail()) != 10){
         String parentPass = parent.getPassword();
@@ -62,8 +64,9 @@ public class DBcreate {
    */
   public int createEmployee(Employee employee) {
     try(
-        PreparedStatement stmt = ConMan.prepStat(Statements.DEF_CREATE_EMPLOYEE_USER_SQL);
+        Connection con = ConMan.getConnection();
     ) {
+      PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_CREATE_EMPLOYEE_USER_SQL);
 
       if (util.checkEmail(employee.getUserEmail()) != 10){
         String employeePass = employee.getPassword();
@@ -96,9 +99,10 @@ public class DBcreate {
    */
   public int createChild(Child child) {
     try (
-        PreparedStatement stmt = ConMan.prepStat(Statements.DEF_CREATE_CHILD_SQL)
-    ) {
+        Connection con = ConMan.getConnection();
 
+    ) {
+      PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_CREATE_CHILD_SQL);
       stmt.setString(1, child.getFirstName());
       stmt.setString(2, child.getLastName());
       stmt.setDate(3, (Date) child.getBirthday());
@@ -123,10 +127,11 @@ public class DBcreate {
    */
   public int createWing(Wing wing) { // maybe needs check for already existing wing name.
     try(
-        PreparedStatement stmt = ConMan.prepStat(Statements.DEF_CREATE_WING_SQL)
+        Connection con = ConMan.getConnection();
     ) {
-       stmt.setString(1, wing.getWingName());
-       stmt.setString(2, wing.getWingDescription());
+      PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_CREATE_WING_SQL);
+      stmt.setString(1, wing.getWingName());
+      stmt.setString(2, wing.getWingDescription());
 
        stmt.executeUpdate();
       System.out.println("Wing" +" "+ wing.getWingName() +" "+ "created!");
@@ -144,9 +149,12 @@ public class DBcreate {
    */
   public int createGroup(Group group) {
     try(
-         PreparedStatement stmt = ConMan.prepStat(Statements.DEF_CREATE_GROUP_SQL)
+        Connection con = ConMan.getConnection();
+
     ) {
-        stmt.setString(1, group.getGroupName());
+      PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_CREATE_GROUP_SQL);
+
+      stmt.setString(1, group.getGroupName());
         stmt.setString(2, group.getGroupDescription());
         stmt.executeUpdate();
       System.out.println("Group" +" "+ group.getGroupName() +" "+ "created!");
@@ -164,8 +172,10 @@ public class DBcreate {
    */
   public int createAllergen(Allergen allergen) {
     try(
-        PreparedStatement stmt = ConMan.prepStat(Statements.DEF_CREATE_ALLERGEN_SQL)
+        Connection con = ConMan.getConnection();
+
     ) {
+      PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_CREATE_ALLERGEN_SQL);
       stmt.setString(1, allergen.getAllergenName());
       stmt.setString(2, allergen.getAllergenDescription());
       stmt.executeUpdate();

@@ -1,5 +1,6 @@
 package plmedia.intranet.dao.DBUtil;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,8 +20,9 @@ public class DBread {
   // Parents
   public Parent readParentByEmail(String userEmail) {
     try (
-        PreparedStatement stmt = ConMan.prepStat(Statements.DEF_GET_PARENT_BY_EMAIL_SQL);
+        Connection con = ConMan.getConnection();
     ) {
+      PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_PARENT_BY_EMAIL_SQL);
       stmt.setString(1, userEmail);
       ResultSet rs = stmt.executeQuery();
 
@@ -43,8 +45,9 @@ public class DBread {
 
   public Parent readParentByID(int id) {
     try (
-        PreparedStatement stmt = ConMan.prepStat(Statements.DEF_GET_PARENT_BY_ID_SQL);
+        Connection con = ConMan.getConnection();
     ) {
+      PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_PARENT_BY_ID_SQL);
       stmt.setInt(1, id);
       ResultSet rs = stmt.executeQuery();
 
@@ -69,8 +72,9 @@ public class DBread {
 
   public ArrayList<Parent> readAllParents() {
     try (
-        PreparedStatement stmt = ConMan.prepStat(Statements.DEF_GET_ALL_USERS_BY_TYPE_SQL);
+        Connection con = ConMan.getConnection();
     ) {
+      PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_ALL_USERS_BY_TYPE_SQL);
       stmt.setString(1, "ROLE_PAR");
       ResultSet rs = stmt.executeQuery();
 
@@ -99,8 +103,10 @@ public class DBread {
 
   public Employee readEmployeeByID(int id) {
     try (
-        PreparedStatement stmt = ConMan.prepStat(Statements.DEF_GET_EMPLOYEE_BY_ID_SQL);
+        Connection con = ConMan.getConnection();
+
     ) {
+      PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_EMPLOYEE_BY_ID_SQL);
       stmt.setInt(1, id);
       ResultSet rs = stmt.executeQuery();
       rs.first();
@@ -122,8 +128,10 @@ public class DBread {
 
   public ArrayList<Employee> readAllEmployees()  {
       try (
-          PreparedStatement stmt = ConMan.prepStat(Statements.DEF_GET_ALL_USERS_BY_TYPE_SQL);
+          Connection con = ConMan.getConnection();
+
       ) {
+        PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_ALL_USERS_BY_TYPE_SQL);
         stmt.setString(1, "ROLE_EMP");
         ResultSet rs = stmt.executeQuery();
         ArrayList<Employee> employees = new ArrayList<>();
@@ -149,8 +157,10 @@ public class DBread {
 
   public ArrayList<Employee> readAllEmployeesByGroup(int id)  {
       try (
-          PreparedStatement stmt = ConMan.prepStat(Statements.DEF_GET_ALL_EMPLOYEES_BY_GROUP_ID);
+          Connection con = ConMan.getConnection();
+
       ) {
+        PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_ALL_EMPLOYEES_BY_GROUP_ID);
         stmt.setInt(1, id);
         ResultSet rs = stmt.executeQuery();
         ArrayList<Employee> employees = new ArrayList<>();
@@ -179,9 +189,10 @@ public class DBread {
 
   public ArrayList<Integer> readChildrenIDByParentID(int id) {
     try (
+        Connection con = ConMan.getConnection();
 
-        PreparedStatement stmt = ConMan.prepStat(Statements.DEF_GET_CHILDREN_ID_BY_PARENT_ID_SQL)
     ) {
+      PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_CHILDREN_ID_BY_PARENT_ID_SQL);
       stmt.setInt(1, id);
       ResultSet rs = stmt.executeQuery();
       rs.first();
@@ -198,8 +209,10 @@ public class DBread {
 
   public Child readChildById(int id) {
     try (
-        PreparedStatement stmt = ConMan.prepStat(Statements.DEF_GET_CHILD_BY_ID_SQL);
+        Connection con = ConMan.getConnection();
+
     ) {
+      PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_CHILD_BY_ID_SQL);
       stmt.setInt(1, id);
       ResultSet rs = stmt.executeQuery();
       rs.first();
@@ -223,8 +236,9 @@ public class DBread {
 
   public ArrayList<Child> readAllChildren()  {
     try (
-        PreparedStatement stmt = ConMan.prepStat(Statements.DEF_GET_ALL_CHILDREN_SQL);
+        Connection con = ConMan.getConnection();
     ) {
+      PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_ALL_CHILDREN_SQL);
       ResultSet rs = stmt.executeQuery();
       ArrayList<Child> children = new ArrayList<>();
       while (rs.next()) {
@@ -251,9 +265,10 @@ public class DBread {
 
   public ArrayList<Child> readChildrenByWingID(int id) {
     try (
+        Connection con = ConMan.getConnection();
 
-        PreparedStatement stmt = ConMan.prepStat(Statements.DEF_GET_CHILDREN_BY_WING_ID_SQL)
     ) {
+      PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_CHILDREN_BY_WING_ID_SQL);
       stmt.setInt(1, id);
       ResultSet rs = stmt.executeQuery();
       rs.first();
@@ -285,9 +300,11 @@ public class DBread {
 
   public Permission readPermissionByID(int id) {
     try (
-        PreparedStatement stmt = ConMan.prepStat(Statements.DEF_GET_PERMISSIONS_BY_ID_SQL);
+        Connection con = ConMan.getConnection();
+
 
     ) {
+      PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_PERMISSIONS_BY_ID_SQL);
       stmt.setInt(1, id);
       ResultSet rs = stmt.executeQuery();
       rs.first();
@@ -324,8 +341,10 @@ public class DBread {
 
   public ArrayList<Permission> readPermissionsByUserID(int id) {
     try (
-        PreparedStatement stmt = ConMan.prepStat(Statements.DEF_GET_PERMISSION_ID_BY_USER_ID_SQL);
+        Connection con = ConMan.getConnection();
+
     ) {
+      PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_PERMISSION_ID_BY_USER_ID_SQL);
       stmt.setInt(1, id);
       ResultSet rs = stmt.executeQuery();
 
@@ -347,8 +366,10 @@ public class DBread {
 
   public Wing readWingByID(int id)  {
     try (
-        PreparedStatement stmt = ConMan.prepStat(Statements.DEF_GET_WING_BY_ID);
+        Connection con = ConMan.getConnection();
+
     ) {
+      PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_WING_BY_ID);
       stmt.setInt(1, id);
       ResultSet rs = stmt.executeQuery();
 
@@ -364,8 +385,10 @@ public class DBread {
 
   public ArrayList<Wing> readAllWings()  {
     try (
-        PreparedStatement stmt = ConMan.prepStat(Statements.DEF_GET_ALL_WINGS);
+        Connection con = ConMan.getConnection();
+
     ) {
+      PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_ALL_WINGS);
       ResultSet rs = stmt.executeQuery();
 
       ArrayList<Wing> wings = new ArrayList<>();
@@ -387,8 +410,10 @@ public class DBread {
 
   public Wing readWingByUserID(int id) {
     try (
-        PreparedStatement stmt = ConMan.prepStat(Statements.DEF_GET_WING_BY_USER_ID);
+        Connection con = ConMan.getConnection();
+
     ) {
+      PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_WING_BY_USER_ID);
       stmt.setInt(1, id);
       ResultSet rs = stmt.executeQuery();
       rs.first();
@@ -404,8 +429,9 @@ public class DBread {
 
   public ArrayList<Wing> readWingIDsByUserID(int id) {
     try(
-        PreparedStatement stmt = ConMan.prepStat(Statements.DEF_GET_WING_IDS_BY_USER_ID)
+        Connection con = ConMan.getConnection();
     ) {
+      PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_WING_IDS_BY_USER_ID);
       ArrayList<Wing> wings = new ArrayList<>();
       stmt.setInt(1, id);
       ResultSet rs = stmt.executeQuery();
@@ -425,8 +451,10 @@ public class DBread {
 
   public Group readGroupByID(int id)  {
     try (
-        PreparedStatement stmt = ConMan.prepStat(Statements.DEF_GET_GROUP_BY_ID);
+        Connection con = ConMan.getConnection();
+
     ) {
+      PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_GROUP_BY_ID);
       stmt.setInt(1, id);
       ResultSet rs = stmt.executeQuery();
       rs.first();
@@ -442,6 +470,7 @@ public class DBread {
 
   public ArrayList<Group> readAllGroups()  {
     try (
+
         ResultSet rs = ConMan.regStat(Statements.DEF_GET_ALL_GROUPS);
     ) {
 
@@ -461,8 +490,9 @@ public class DBread {
 
   public Group readGroupByUserID(int id) {
     try (
-    PreparedStatement stmt = ConMan.prepStat(Statements.DEF_GET_GROUP_BY_USER_ID);
+        Connection con = ConMan.getConnection();
     ) {
+      PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_GROUP_BY_USER_ID);
       stmt.setInt(1, id);
       ResultSet rs = stmt.executeQuery();
       rs.first();
@@ -478,8 +508,10 @@ public class DBread {
 
   public ArrayList<Group> readGroupIDsByUserID(int id) {
     try(
-        PreparedStatement stmt = ConMan.prepStat(Statements.DEF_GET_GROUPS_IDS_BY_USER_ID)
+        Connection con = ConMan.getConnection();
+
     ) {
+      PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_GROUPS_IDS_BY_USER_ID);
       ArrayList<Group> groups = new ArrayList<>();
       stmt.setInt(1, id);
       ResultSet rs = stmt.executeQuery();
@@ -499,8 +531,10 @@ public class DBread {
 
   public Allergen readAllergenByID(int id)  {
     try (
-        PreparedStatement stmt = ConMan.prepStat(Statements.DEF_GET_ALLERGEN_BY_ID);
+        Connection con = ConMan.getConnection();
     ) {
+      PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_ALLERGEN_BY_ID);
+
       stmt.setInt(1, id);
       ResultSet rs = stmt.executeQuery();
       rs.first();
@@ -537,8 +571,10 @@ public class DBread {
 
   public ArrayList<Allergen> readAllergenByChildID(int id){
     try (
-        PreparedStatement stmt = ConMan.prepStat(Statements.DEF_GET_ALLERGEN_BY_CHILD_ID);
+        Connection con = ConMan.getConnection();
     ) {
+      PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_ALLERGEN_BY_CHILD_ID);
+
       stmt.setInt(1, id);
       ResultSet rs = stmt.executeQuery();
       rs.first();
