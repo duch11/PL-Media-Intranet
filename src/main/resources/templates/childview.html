@@ -41,12 +41,12 @@ i højre og venstre side-->
         <tr>
           <th>Fornavn:</th>
           <td th:text="${child.getFirstName()}"/>
-          <td><a href="#" class="btn btn-edit pull-right" data-toggle="modal" data-target="#editName"><i class="fa fa-pencil"></i></a></td>
+          <td><a href="#" class="btn btn-edit pull-right" data-toggle="modal" data-target="#editFirstName"><i class="fa fa-pencil"></i></a></td>
         </tr>
         <tr>
           <th>Efternavn</th>
           <td th:text="${child.getLastName()}"/>
-          <td><a href="#" class="btn btn-edit pull-right" data-toggle="modal" data-target="#editName"><i class="fa fa-pencil"></i></a></td>
+          <td><a href="#" class="btn btn-edit pull-right" data-toggle="modal" data-target="#editLastName"><i class="fa fa-pencil"></i></a></td>
         </tr>
         <tr>
           <th>Fødselsdag:</th>
@@ -68,8 +68,6 @@ i højre og venstre side-->
         </table>
       <div class="modal">
       </div>
-
-
     </div>
   </div>
 
@@ -153,20 +151,25 @@ i højre og venstre side-->
 
 
 
-<!--Edit Name-->
+<!--Edit firstName-->
 
-<div id="editName" class="modal fade" role="dialog">
+<div id="editFirstName" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
     <!-- Modal content-->
     <div class="modal-content">
+      <form th:action="${childDetails} ? @{/parent/update/child} : @{/parent/update/child}" method="post">
       <div class="modal-header">
         <!--Kryds knap-->
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Name</h4>
+        <h4 class="modal-title">Fornavn</h4>
       </div>
       <div class="modal-body">
-        <input type="text"/>
+        <div class="form-group">
+          <label for="firstName">Fornavn:</label>
+          <input type="text" th:value="${child.getFirstName()}" name="firstName" required="true" id="firstName" class="form-control"/>
+        </div>
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
@@ -175,6 +178,32 @@ i højre og venstre side-->
   </div>
 </div>
 
+
+<!--Edit firstName-->
+
+<div id="editLastName" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <form th:action="${childDetails} ? @{/parent/update/child} : @{/parent/update/child}" method="post">
+        <div class="modal-header">
+          <!--Kryds knap-->
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Efternavn</h4>
+        </div>
+        <div class="modal-body">
+          <input type="text"/>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
+        </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- edit email-->
 
 <div id="editEmail" class="modal fade" role="dialog">
   <div class="modal-dialog">
@@ -198,11 +227,13 @@ i højre og venstre side-->
   </div>
 </div>
 
+
+!-- edit birthday -->
 <div id="editBirthday" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
 
-
+    <
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
@@ -220,6 +251,8 @@ i højre og venstre side-->
 </div>
 </div>
 
+
+<!-- edit address-->
 <div id="editAddress" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
@@ -243,6 +276,7 @@ i højre og venstre side-->
 </div>
 
 
+<!-- edit parents-->
 <div id="editParents" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
@@ -265,6 +299,8 @@ i højre og venstre side-->
   </div>
 </div>
 
+
+<!-- edit Wing-->
 <div id="editWing" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
@@ -287,6 +323,8 @@ i højre og venstre side-->
   </div>
 </div>
 
+
+<!-- edit naptime-->
 <div id="editNaptime" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
@@ -353,59 +391,11 @@ i højre og venstre side-->
   </div>
 </div>
 
-<div id="editPassword" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <!--Kryds knap-->
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Password</h4>
-      </div>
-      <div class="modal-body">
-        <input type="password"/>
-        <input type="password"/>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
-      </div>
-    </div>
-  </div>
-</div>
 
 
 
 
-<div id="editGroups" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Permissions</h4>
-      </div>
-      <div class="modal-body">
-        <div class="checkbox">
-          <label><input type="checkbox" value=""/>Adminss</label>
-        </div>
-        <div class="checkbox">
-          <label><input type="checkbox" value=""/>Employees</label>
-        </div>
-        <div class="checkbox">
-          <label><input type="checkbox" value=""/>Interns</label>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<!--Edit Permissions-->
+<!--Edit Allergens-->
 
 <div id="editAllergier" class="modal fade" role="dialog">
   <div class="modal-dialog">
