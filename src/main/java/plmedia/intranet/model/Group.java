@@ -22,6 +22,10 @@ public class Group {
     this.groupDescription = groupDescription;
   }
 
+  public Group() {
+
+  }
+
   public int getId() {
     return id;
   }

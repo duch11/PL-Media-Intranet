@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<!--Thymeleaf xlmns-->
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="fragments/head :: head">
+  <!--Denne her normaliserer vores html siders head sektion, så vi kun skal skrive det et sted-->
+  <!--Variabler der skal være til stede:
+      user
+  -->
+</head>
+<body>
+
+<!--Bootstrap container class er vigtig for at det virker, giver en lille margen ud til siderne
+i højre og venstre side-->
+<div class="container-fluid">
+
+  <div class="row">
+    <div th:replace="fragments/header :: header"/>
+  </div>
+
+  <div class="row">
+    <div th:replace="fragments/sidebars :: admin"/>
+    <div class="main">
+      <div class="row">
+        <div class="col-sm-4 col-sm-offset-3">
+          <h1 class="text-capitalize">Indstillinger</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-4 col-sm-offset-3">
+          <h3>Grupper:</h3>
+          <ul class="list-group">
+            <a th:each="group : ${employeeGroups}" th:attrappend="data-target=${group.getId()}" href="#" class="list-group-item" data-toggle="modal" data-target="#editGroup" th:text="${group.getGroupName()}">Gruppe navn</a>
+          </ul>
+        </div>
+        <div class="col-sm-4">
+          <h3>Stuer:</h3>
+          <ul class="list-group">
+            <a th:each="wing : ${allWings}" th:attrappend="data-target=${wing.getWingID()}" href="#" class="list-group-item" data-toggle="modal" data-target="#editWing" th:text="${wing.getWingName()}">Stue navn</a>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div th:each="group : ${employeeGroups}" th:attrappend="id=${group.getId()}" id="editGroup" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <form th:action="@{/admin/update/group}" method="post">
+        <div class="modal-header">
+          <!--Kryds knap-->
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 th:text="${group.getGroupName()}" class="modal-title"></h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="groupName">Navn:</label>
+            <input type="text" th:value="${group.getGroupName()}" name="groupName" required="true" id="groupName" class="form-control"/>
+          </div>
+          <div class="form-group">
+            <label for="groupDescription">Beskrivelse:</label>
+            <input type="text" th:value="${group.getGroupDescription()}" name="groupDescription" required="true" id="groupDescription" class="form-control"/>
+          </div>
+          <input type="hidden" th:value="${group.getId()}" name="ID"/>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success">Gem</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Annuller</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div th:each="wing : ${allWings}" th:attrappend="id=${wing.getWingID()}" id="editWing" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <form th:action="@{/admin/update/wing}" method="post">
+        <div class="modal-header">
+          <!--Kryds knap-->
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 th:text="${wing.getWingName()}" class="modal-title"></h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="wingName">Navn:</label>
+            <input type="text" th:value="${wing.getWingName()}" name="wingName" required="true" id="wingName" class="form-control"/>
+          </div>
+          <div class="form-group">
+            <label for="wingDescription">Beskrivelse:</label>
+            <input type="text" th:value="${wing.getWingDescription()}" name="wingDescription" required="true" id="wingDescription" class="form-control"/>
+          </div>
+          <input type="hidden" th:value="${wing.getWingID()}" name="ID"/>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success">Gem</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Annuller</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!--JAVASCRIPT (skal være til sidst for gode loading tider)-->
+<!-- BOOTSTRAP MaxCDN jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- BOOTSTRAP MaxCDN Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -29,6 +29,12 @@
       <a th:class="${parents} ? 'active' : (${parentDetails} ? 'semiActive')" href="/admin/parents">Forældre <i th:if="${parentDetails}" class="fa fa-user pull-right" aria-hidden="true"></i></a>
     </li>
   </ul>
+
+  <ul class="nav nav-sidebar">
+    <li>
+      <a th:class="${newWing} ? 'active'" href="/admin/settings">Indstillinger</a>
+    </li>
+  </ul>
 </div>
 
 <!-- PARENT SIDEBAR -->

@@ -43,7 +43,8 @@ p, a, div, h6, .getSerious {
 /*Square all the things!*/
 input.form-control, button.navbar-toggle,
 .btn, a.list-group-item, a.list-group-item.active,
-a.list-group-item:first-child, a.list-group-item:last-child, div.modal-content{
+a.list-group-item:first-child, a.list-group-item:last-child, div.modal-content,
+li.list-group-item:first-child, li.list-group-item:last-child{
   border-radius: 0;
 }
 

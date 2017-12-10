@@ -38,7 +38,6 @@ public class ChildRepo implements IRepo<Child> {
 
 
   public ArrayList<Integer> ReadChildrenIDbyParentID(int id) {
-    System.out.println("hej fra children");
      return dbr.readChildrenIDByParentID(id);}
 
   @Override
