@@ -99,7 +99,6 @@ private void showPanals(Model model, Principal principal) {
   public String childDetails(Model model, Principal principal, @RequestParam int child) {
     model.addAttribute("child", childRepo.Read(child));
     model.addAttribute("allergen", allergenRepo.readAllergenByChildID(child));
-
     model.addAttribute("wing", wingRepo.Read(childRepo.Read(child).getWingId()));
     showChildView(model,principal);
     return "childview";
@@ -129,7 +128,6 @@ private void showPanals(Model model, Principal principal) {
     return "redirect:/parent/details?child=" + ID;
   }
 
-
   public void updateLastName(String lastName, int ID){
     System.out.println(lastName + "  " + ID);
   }
@@ -137,10 +135,6 @@ private void showPanals(Model model, Principal principal) {
   /**
    * update birthday
    */
-
-
-
-
   @RequestMapping(value = {"/parent/update/child"}, method = RequestMethod.POST, params = {"birthday", "ID"})
   public String updateChildbirthday(@RequestParam java.sql.Date birthday, @RequestParam int ID) {
     updateBirthday(birthday, ID);
@@ -150,7 +144,6 @@ private void showPanals(Model model, Principal principal) {
     public void updateBirthday(java.sql.Date birthday , int ID){
       System.out.println(birthday + "  " + ID);
   }
-
 
   /**
    * update address
@@ -166,13 +159,5 @@ private void showPanals(Model model, Principal principal) {
     System.out.println(address + "  " + ID);
 
   }
-
-  /**
-   * update
-   */
-
-
-
-
 
 }
