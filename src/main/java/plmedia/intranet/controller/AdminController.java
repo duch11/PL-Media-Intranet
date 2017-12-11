@@ -145,7 +145,19 @@ public class AdminController {
   public String showAdminPanel(Model model, Principal principal) {
 
     /** ENG: Principal DK: "Grund-sikkerhedskonto" * */
-    model.addAttribute("currentUser", employeeRepo.readEmployeeByEmail(principal.getName()));
+    /*employeeRepo.readEmployeeByEmail(principal.getName());*/
+    Employee currentUser = new Employee();
+    for(Employee emp : employeeRepo.ReadAll()){
+      if(emp.getUserEmail().equals(principal.getName())){
+        currentUser = emp;
+      }
+    }
+
+    for(Permission perm : permissionRepo.readPermissionsByUserID(currentUser.getUserId())){
+      model.addAttribute(perm.getPermissionName().replaceAll(" ", "_"), true);
+    }
+
+    model.addAttribute("currentUser", currentUser);
     model.addAttribute("employeeGroups", groupRepo.ReadAll());
     model.addAttribute("allWings", wingRepo.ReadAll());
     return "adminpanel";

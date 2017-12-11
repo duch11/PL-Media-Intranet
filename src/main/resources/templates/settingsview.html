@@ -19,7 +19,8 @@ i højre og venstre side-->
 
   <div class="row">
     <div th:replace="fragments/sidebars :: admin"/>
-    <div class="main">
+    <h2 class="main col-sm-offset-3 getSerious" th:if="!${Edit_Settings}">Du har ikke adgang til indstillingerne, bed din administrator om lov.</h2>
+    <div class="main" th:if="${Edit_Settings}">
       <div class="row">
         <div class="col-sm-4 col-sm-offset-3">
           <h1 class="text-capitalize">Indstillinger</h1>

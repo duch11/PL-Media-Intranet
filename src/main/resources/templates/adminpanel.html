@@ -17,22 +17,21 @@
         <div class="col-sm-9 col-sm-offset-3 col-lg-8 col-lg-offset-3 main">
           <div class="row">
             <ul class="list-inline">
-              <li><h1 th:text="${currentGroup} ? ${currentGroup.getGroupName()} : (${parents} ? 'Forældre' : (${children} ? 'Børn' : (${allUsers} ? 'Personale')))">Admins/Ledere</h1></li>
+              <li><h1 th:text="${currentGroup} ? ${currentGroup.getGroupName()} : (${parents} and ${Read_all_parents} ? 'Forældre' : (${children} and ${Read_all_children} ? 'Børn' : (${allUsers} ? 'Personale')))">Admins/Ledere</h1></li>
               <li th:if="${currentGroup}"><h3 th:text="'(' + ${currentGroup.getGroupDescription()} + ')'"></h3></li>
+              <h2 class="getSerious" th:if="!${Read_all_parents} and !${Read_all_children} and !${currentGroup} and !${allUsers}">Du har ikke adgang dette, bed din administrator om lov.</h2>
             </ul>
-
-
           </div>
           <!--LIST of users/parents etc-->
           <div class="row">
             <div class="list-group" style="max-height: 400px; border-radius: 0">
-              <button th:if="${currentGroup} or ${allUsers}" class="btn btn-success btn-new" data-toggle="modal" data-target="#newEmp">Ny Medarbejder</button>
-              <button th:if="${parents}" class="btn btn-success btn-new" data-toggle="modal" data-target="#newPar">Ny Forældre</button>
-              <button th:if="${children}" class="btn btn-success btn-new" data-toggle="modal" data-target="#newChild">Nyt Barn</button>
+              <button th:if="${Create_employee} ? (${currentGroup} or ${allUsers})" class="btn btn-success btn-new" data-toggle="modal" data-target="#newEmp">Ny Medarbejder</button>
+              <button th:if="${Create_parent} ? ${parents}" class="btn btn-success btn-new" data-toggle="modal" data-target="#newPar">Ny Forældre</button>
+              <button th:if="${Create_child} ?${children}" class="btn btn-success btn-new" data-toggle="modal" data-target="#newChild">Nyt Barn</button>
               <!-- Generering af listen, baseret på hvad templaten bliver fodret med -->
               <a th:each="employee : ${employees}" href="/admin/details?employee=" th:text="${employee.getFirstName()}" th:attrappend="href=${employee.getUserId()}" class="list-group-item">Thymeleaf Employee</a>
-              <a th:each="parent : ${parents}"     href="/admin/details?parent=" th:text="${parent.getFirstName()}" th:attrappend="href=${parent.getUserId()}" class="list-group-item">Thymeleaf Parent</a>
-              <a th:each="child : ${children}"     href="/admin/details?child=" th:text="${child.getFirstName()}" th:attrappend="href=${child.getChildId()}" class="list-group-item">Thymeleaf Child</a>
+              <a th:if="${Read_all_parents}" th:each="parent : ${parents}"     href="/admin/details?parent=" th:text="${parent.getFirstName()}" th:attrappend="href=${parent.getUserId()}" class="list-group-item">Thymeleaf Parent</a>
+              <a th:if="${Read_all_children}" th:each="child : ${children}"     href="/admin/details?child=" th:text="${child.getFirstName()}" th:attrappend="href=${child.getChildId()}" class="list-group-item">Thymeleaf Child</a>
 
               <!--<a href="/admin/details?user=32122" class="list-group-item">
                 Kurt (Kan klikkes på)
