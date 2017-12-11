@@ -328,4 +328,43 @@ public class DBupdate {
     return -1;
   }
 
+  public int updateChildWing(Child child, ArrayList<Integer> newWing) {
+    try(
+
+        Connection con = ConMan.getConnection();
+    ) {
+      PreparedStatement writeStmt = ConMan.prepStat(con, Statements.DEF_ADD_WING_TO_CHILD);
+      PreparedStatement deleteStmt = ConMan.prepStat(con, Statements.DEF_DELETE_WING_FROM_CHILD);
+      ArrayList<Wing> temp = dbr.readWingIDsByChildID(child.getChildId());
+      ArrayList<Integer> orgWing = new ArrayList<>();
+
+      for (Wing w: temp) {
+        orgWing.add(w.getWingID());
+      }
+
+      List<Integer> toWrite = new ArrayList<>(newWing);
+      List<Integer> toDelete = new ArrayList<>(orgWing);
+
+      toWrite.removeAll(orgWing);
+      toDelete.removeAll(newWing);
+
+      for (Integer i : toWrite) {
+        writeStmt.setInt(1, child.getChildId());
+        writeStmt.setInt(2, toWrite.get(i));
+        writeStmt.executeUpdate();
+      }
+
+      for (Integer i: toDelete) {
+        deleteStmt.setInt(1, child.getChildId());
+        deleteStmt.setInt(2, toDelete.get(i));
+        deleteStmt.executeUpdate();
+      }
+
+      return 1;
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return -1;
+  }
+
 }

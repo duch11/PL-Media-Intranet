@@ -100,9 +100,11 @@ private void showPanals(Model model, Principal principal) {
     model.addAttribute("child", childRepo.Read(child));
     model.addAttribute("allergen", allergenRepo.readAllergenByChildID(child));
     model.addAttribute("wing", wingRepo.Read(childRepo.Read(child).getWingId()));
+    model.addAttribute("childDetails", true);
     showChildView(model,principal);
     return "childview";
   }
+
 
   /**
    * update
@@ -114,7 +116,7 @@ private void showPanals(Model model, Principal principal) {
   @RequestMapping(value = {"/parent/update/child"}, method = RequestMethod.POST, params = {"firstName", "ID"})
   public String updateChildFirstName(@RequestParam String firstName, @RequestParam int ID){
     updateFirstName(firstName,ID);
-    return "redirect:/parent/details?child=" + ID;
+    return "redirect:/parent/childview?child=" + ID;
   }
 
 
@@ -125,7 +127,7 @@ private void showPanals(Model model, Principal principal) {
   @RequestMapping(value = {"/parent/update/child"}, method = RequestMethod.POST, params = {"lastName", "ID"})
   public String updateChildLastName(@RequestParam String lastName, @RequestParam int ID){
     updateLastName(lastName,ID);
-    return "redirect:/parent/details?child=" + ID;
+    return "redirect:/parent/childview?child=" + ID;
   }
 
   public void updateLastName(String lastName, int ID){

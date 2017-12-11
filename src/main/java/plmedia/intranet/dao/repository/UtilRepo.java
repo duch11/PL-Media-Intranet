@@ -50,6 +50,10 @@ public class UtilRepo {
     return dbu.updateEmployeeWing(employee, newWing);
   }
 
+  public int updateChildWing(Child child, ArrayList<Integer> newWing) {
+    return dbu.updateChildWing(child, newWing);
+  }
+
   public String readHashedPassByUserID(int id) {
     return util.readHashedPassByUserID(id);
   }

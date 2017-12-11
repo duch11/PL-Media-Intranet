@@ -126,6 +126,32 @@ public class DBread {
     return null;
   }
 
+  public Employee readEmployeeByEmail(String userEmail) {
+    try (
+        Connection con = ConMan.getConnection();
+    ) {
+      PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_EMPLOYEE_BY_EMAIL_SQL);
+      stmt.setString(1, userEmail);
+      ResultSet rs = stmt.executeQuery();
+      int userID = rs.getInt("user_id");
+      rs.first();
+      ArrayList<Permission> permissions = readPermissionsByUserID((userID));
+      Group group = readGroupByUserID(userID);
+      return new Employee(
+          userID,
+          null,
+          rs.getString("user_email"),
+          rs.getString("first_name"),
+          rs.getString("last_name"),
+          group,
+          permissions);
+
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return null;
+  }
+
   public ArrayList<Employee> readAllEmployees()  {
       try (
           Connection con = ConMan.getConnection();
