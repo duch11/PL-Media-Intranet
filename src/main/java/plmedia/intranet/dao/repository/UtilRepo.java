@@ -50,6 +50,10 @@ public class UtilRepo {
     return dbu.updateEmployeeWing(employee, newWing);
   }
 
+  public String readHashedPassByUserID(int id) {
+    return util.readHashedPassByUserID(id);
+  }
+
 }
 
 

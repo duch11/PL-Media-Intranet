@@ -11,6 +11,7 @@ import java.util.List;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import plmedia.intranet.dao.ConMan;
 import plmedia.intranet.dao.Statements;
+import plmedia.intranet.dao.repository.UtilRepo;
 import plmedia.intranet.model.Allergen;
 import plmedia.intranet.model.Child;
 import plmedia.intranet.model.Employee;
@@ -26,6 +27,7 @@ import plmedia.intranet.model.Wing;
 public class DBupdate {
 
   DBread dbr = new DBread();
+  UtilRepo util = new UtilRepo();
   BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
 
@@ -36,9 +38,15 @@ public class DBupdate {
     ) {
       PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_UPDATE_USER);
       String parentPass = parent.getPassword();
-      String hashedPassword = passwordEncoder.encode(parentPass);
 
-      stmt.setString(1, hashedPassword);
+      if(!parent.getPassword().equals(null)) {
+        String hashedPassword = passwordEncoder.encode(parentPass);
+        stmt.setString(1, hashedPassword);
+      } else {
+
+      }
+
+
       stmt.setString(2, parent.getUserEmail());
       stmt.setString(3, parent.getFirstName());
       stmt.setString(4, parent.getLastName());
@@ -58,9 +66,13 @@ public class DBupdate {
     ) {
       PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_UPDATE_USER);
       String employeePass = employee.getPassword();
-      String hashedPassword = passwordEncoder.encode(employeePass);
 
-      stmt.setString(1, hashedPassword);
+      if(!employee.getPassword().equals(null)) {
+        String hashedPassword = passwordEncoder.encode(employeePass);
+        stmt.setString(1, hashedPassword);
+      } else {
+        stmt.setString(1, util.readHashedPassByUserID(employee.getUserId()));
+      }
       stmt.setString(2, employee.getUserEmail());
       stmt.setString(3, employee.getFirstName());
       stmt.setString(4, employee.getLastName());
