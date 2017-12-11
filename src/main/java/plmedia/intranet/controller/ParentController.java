@@ -47,7 +47,7 @@ private void showPanals(Model model, Principal principal) {
   }
 
   model.addAttribute("children",children);
-  model.addAttribute("test", principal.getName());
+  model.addAttribute("currentUser", parentRepo.readParentByEmail(principal.getName()));
   System.out.println();
 
 }

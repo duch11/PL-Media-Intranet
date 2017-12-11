@@ -145,7 +145,7 @@ public class AdminController {
   public String showAdminPanel(Model model, Principal principal) {
 
     /** ENG: Principal DK: "Grund-sikkerhedskonto" * */
-    model.addAttribute("test", principal.getName());
+    model.addAttribute("currentUser", employeeRepo.readEmployeeByEmail(principal.getName()));
     model.addAttribute("employeeGroups", groupRepo.ReadAll());
     model.addAttribute("allWings", wingRepo.ReadAll());
     return "adminpanel";
