@@ -195,7 +195,7 @@ public class DBread {
       PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_CHILDREN_ID_BY_PARENT_ID_SQL);
       stmt.setInt(1, id);
       ResultSet rs = stmt.executeQuery();
-      rs.first();
+      rs.beforeFirst();
       ArrayList<Integer> children = new ArrayList<>();
       while (rs.next()) {
         children.add(rs.getInt("fk_child_id"));
@@ -598,7 +598,7 @@ public class DBread {
 
       stmt.setInt(1, id);
       ResultSet rs = stmt.executeQuery();
-      rs.first();
+      rs.beforeFirst();
       ArrayList<Allergen> allergens = new ArrayList<>();
 
       while (rs.next()) {
