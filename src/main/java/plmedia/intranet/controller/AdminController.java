@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import plmedia.intranet.dao.repository.AllergenRepo;
 import plmedia.intranet.dao.repository.ChildRepo;
 import plmedia.intranet.dao.repository.EmployeeRepo;
 import plmedia.intranet.dao.repository.GroupRepo;
@@ -22,6 +23,9 @@ import plmedia.intranet.model.*;
 
 @Controller
 public class AdminController {
+
+  @Autowired
+  AllergenRepo allergenRepo;
 
   @Autowired
   ChildRepo childRepo;
@@ -214,6 +218,8 @@ public class AdminController {
   @RequestMapping(value = {"/admin/details"}, method = RequestMethod.GET, params = {"child"})
   public String childDetails(Model model, Principal principal, @RequestParam int child) {
     model.addAttribute("child", childRepo.Read(child));
+    model.addAttribute("wing", wingRepo.Read(childRepo.Read(child).getWingId()));
+    model.addAttribute("allergen", allergenRepo.readAllergenByChildID(child));
     showAdminPanel(model,principal);
     return "childview";
   }
@@ -225,8 +231,6 @@ public class AdminController {
   @RequestMapping(value = {"/admin/create/employee"}, method = RequestMethod.POST)
   public String createUser(@ModelAttribute Employee newEmployee){
 
-    System.out.println(newEmployee);
-
     employeeRepo.Create(newEmployee);
 
     return "redirect:/admin/employees";
@@ -234,21 +238,13 @@ public class AdminController {
 
   @RequestMapping(value = {"/admin/create/parent"}, method = RequestMethod.POST)
   public String createParent(@ModelAttribute Parent newParent){
-
-    System.out.println(newParent);
-
     parentRepo.Create(newParent);
-
     return "redirect:/admin/parents";
   }
 
   @RequestMapping(value = {"/admin/create/child"}, method = RequestMethod.POST)
   public String createChild(@ModelAttribute Child newChild){
-
-    System.out.println(newChild);
-
     childRepo.Create(newChild);
-
     return "redirect:/admin/children";
   }
 
@@ -294,7 +290,7 @@ public class AdminController {
   @RequestMapping(value = {"/admin/update/employee"}, method = RequestMethod.POST, params = {"groupID", "ID"})
   public String updateGroup(@RequestParam int groupID, @RequestParam int ID ){
     ArrayList<Integer> groupIdConversion = new ArrayList<>();
-    groupIdConversion.add(new Integer(groupID));
+    groupIdConversion.add(groupID);
     utilRepo.updateEmployeeGroup(employeeRepo.Read(ID), groupIdConversion);
     return "redirect:/admin/details?employee=" + ID;
   }
@@ -314,7 +310,7 @@ public class AdminController {
     return "redirect:/admin/details?parent=" + ID;
   }
 
-  public void updateName(String firstName, String lastName, int ID){
+  private void updateName(String firstName, String lastName, int ID){
     System.out.println(firstName + " " + lastName + " " + ID);
   }
 
@@ -334,7 +330,6 @@ public class AdminController {
     Parent parent = parentRepo.Read(ID);
     parent.setUserEmail(email);
     parentRepo.Update(parent);
-    System.out.println(parent.toString()+ " " + parentRepo.Update(parent));
     return "redirect:/admin/details?parent=" + ID;
   }
 
@@ -354,7 +349,7 @@ public class AdminController {
     return "redirect:/admin/details?employee=" + ID;
   }
 
-  public void updatePassword(String oldPass, String newPass, String newPassRepeat, int ID){
+  private void updatePassword(String oldPass, String newPass, String newPassRepeat, int ID){
     System.out.println(oldPass + " " + newPass + " " + newPassRepeat + " " + ID);
   }
 
