@@ -59,6 +59,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         /**Ved fejl kan det være at vi skal have en enabled coloumn i vores user table
          * Ellers virker det, og vi tjekker op mod user_email.
          * */
+        new BCryptPasswordEncoder();
+
         auth.jdbcAuthentication().dataSource(dataSource)
                 .passwordEncoder(new BCryptPasswordEncoder())
             .usersByUsernameQuery(

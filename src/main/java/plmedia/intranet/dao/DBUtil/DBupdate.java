@@ -42,7 +42,7 @@ public class DBupdate {
       stmt.setString(2, parent.getUserEmail());
       stmt.setString(3, parent.getFirstName());
       stmt.setString(4, parent.getLastName());
-      stmt.setInt(5, 1);
+      stmt.setInt(5, parent.getUserId());
 
       stmt.executeUpdate();
       return 1;
@@ -64,7 +64,7 @@ public class DBupdate {
       stmt.setString(2, employee.getUserEmail());
       stmt.setString(3, employee.getFirstName());
       stmt.setString(4, employee.getLastName());
-      stmt.setInt(5, 1);
+      stmt.setInt(5, employee.getUserId());
 
       stmt.executeUpdate();
       return 1;

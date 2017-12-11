@@ -323,19 +323,21 @@ public class AdminController {
    * */
   @RequestMapping(value = {"/admin/update/employee"}, method = RequestMethod.POST, params = {"email", "ID"})
   public String updateEmpEmail(@RequestParam String email, @RequestParam int ID){
-    updateEmail(email,ID);
+    Employee employee = employeeRepo.Read(ID);
+    employee.setUserEmail(email);
+    employeeRepo.Update(employee);
     return "redirect:/admin/details?employee=" + ID;
   }
 
   @RequestMapping(value = {"/admin/update/parent"}, method = RequestMethod.POST, params = {"email", "ID"})
   public String updateParEmail(@RequestParam String email, @RequestParam int ID){
-    updateEmail(email,ID);
+    Parent parent = parentRepo.Read(ID);
+    parent.setUserEmail(email);
+    parentRepo.Update(parent);
+    System.out.println(parent.toString()+ " " + parentRepo.Update(parent));
     return "redirect:/admin/details?parent=" + ID;
   }
 
-  public void updateEmail(String email, int ID){
-    System.out.println(email + " " + ID);
-  }
 
   /**
    * Update Password + utility method
