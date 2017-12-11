@@ -31,7 +31,7 @@ public class DBread {
 
       return new Parent(
           rs.getInt("user_id"),
-          rs.getString("password"),
+          null,
           rs.getString("user_email"),
           rs.getString("first_name"),
           rs.getString("last_name"),
@@ -56,7 +56,7 @@ public class DBread {
 
       return new Parent(
           rs.getInt("user_id"),
-          rs.getString("password"),
+          null,
           rs.getString("user_email"),
           rs.getString("first_name"),
           rs.getString("last_name"),
@@ -84,7 +84,7 @@ public class DBread {
         ArrayList<Permission> permissions = readPermissionsByUserID((rs.getInt("user_id")));
         parents.add(new Parent(
             rs.getInt("user_id"),
-            rs.getString("password"),
+            null,
             rs.getString("user_email"),
             rs.getString("first_name"),
             rs.getString("last_name"),
@@ -114,7 +114,7 @@ public class DBread {
       Group group = readGroupByUserID((rs.getInt("user_id")));
       return new Employee(
           rs.getInt("user_id"),
-          rs.getString("password"),
+          null,
           rs.getString("user_email"),
           rs.getString("first_name"),
           rs.getString("last_name"),
@@ -140,7 +140,7 @@ public class DBread {
           Group group = readGroupByUserID((rs.getInt("user_id")));
           employees.add(new Employee(
               rs.getInt("user_id"),
-              rs.getString("password"),
+              null,
               rs.getString("user_email"),
               rs.getString("first_name"),
               rs.getString("last_name"),
@@ -170,7 +170,7 @@ public class DBread {
           Group group = readGroupByUserID((rs.getInt("user_id")));
           employees.add(new Employee(
               rs.getInt("user_id"),
-              rs.getString("password"),
+              null,
               rs.getString("user_email"),
               rs.getString("first_name"),
               rs.getString("last_name"),
