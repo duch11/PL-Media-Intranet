@@ -339,19 +339,27 @@ public class AdminController {
    * */
   @RequestMapping(value = {"/admin/update/parent"}, method = RequestMethod.POST, params = {"oldPass", "newPass", "newPassRepeat", "ID"})
   public String updateParPassword(@RequestParam String oldPass,@RequestParam String newPass,@RequestParam String newPassRepeat, @RequestParam int ID) {
-    updatePassword(oldPass,newPass,newPassRepeat, ID);
+    Parent parent = parentRepo.Read(ID);
+
+    if(newPass.equals(newPassRepeat) && utilRepo.checkPassword(ID, oldPass) == 1){
+      parent.setPassword(newPass);
+      parentRepo.Update(parent);
+    }
+    
     return "redirect:/admin/details?parent=" + ID;
   }
 
   @RequestMapping(value = {"/admin/update/employee"}, method = RequestMethod.POST, params = {"oldPass", "newPass", "newPassRepeat", "ID"})
   public String updateEmpPassword(@RequestParam String oldPass,@RequestParam String newPass,@RequestParam String newPassRepeat, @RequestParam int ID) {
-    updatePassword(oldPass,newPass,newPassRepeat, ID);
+    Employee employee = employeeRepo.Read(ID);
+
+    if(newPass.equals(newPassRepeat) && utilRepo.checkPassword(ID, oldPass) == 1){
+      employee.setPassword(newPass);
+      employeeRepo.Update(employee);
+    }
     return "redirect:/admin/details?employee=" + ID;
   }
 
-  private void updatePassword(String oldPass, String newPass, String newPassRepeat, int ID){
-    System.out.println(oldPass + " " + newPass + " " + newPassRepeat + " " + ID);
-  }
 
 }
 

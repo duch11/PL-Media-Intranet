@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import plmedia.intranet.dao.ConMan;
 import plmedia.intranet.dao.Statements;
@@ -15,7 +16,8 @@ import plmedia.intranet.dao.Statements;
  */
 public class Util {
 
-  BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+  @Autowired
+  BCryptPasswordEncoder encoder;
 
 
   public int checkEmail(String email) {
@@ -61,7 +63,7 @@ public class Util {
       PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_PASSWORD_BY_USER_ID);
       stmt.setInt(1, id);
       ResultSet rs = stmt.executeQuery();
-      rs.beforeFirst();
+      rs.first();
       String pass = rs.getString("password");
       return pass;
 

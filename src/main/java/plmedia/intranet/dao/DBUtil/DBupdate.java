@@ -27,7 +27,7 @@ import plmedia.intranet.model.Wing;
 public class DBupdate {
 
   DBread dbr = new DBread();
-  UtilRepo util = new UtilRepo();
+  Util util = new Util();
   BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
 
@@ -67,7 +67,7 @@ public class DBupdate {
       PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_UPDATE_USER);
       String employeePass = employee.getPassword();
 
-      if(!employee.getPassword().equals(null)) {
+      if(!(employee.getPassword() == null)) {
         String hashedPassword = passwordEncoder.encode(employeePass);
         stmt.setString(1, hashedPassword);
       } else {
