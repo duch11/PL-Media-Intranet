@@ -16,8 +16,8 @@ import plmedia.intranet.dao.Statements;
  */
 public class Util {
 
-  @Autowired
-  BCryptPasswordEncoder encoder;
+
+  BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
 
   public int checkEmail(String email) {
@@ -45,7 +45,7 @@ public class Util {
       ResultSet rs = stmt.executeQuery();
       rs.first();
       String userDBPass = rs.getString("password");
-
+      System.out.println(rs.getString("password"));
       if(encoder.matches(password, userDBPass)) {
         return 1;
       }

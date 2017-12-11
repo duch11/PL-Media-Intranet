@@ -166,6 +166,16 @@ div.alert-error {
   color: white;
 }
 
+div.alert-warning {
+  background-color: #ffa800;
+  color: white;
+}
+
+div.alert-success {
+  background-color: #49d338;
+  color: white;
+}
+
 #inputEmail {
   margin-bottom: -2px;
 }

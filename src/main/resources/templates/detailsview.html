@@ -24,6 +24,15 @@
 
           <div class="row">
             <h1 th:text="${user.getFirstName()} + ' ' + ${user.getLastName()}" class="text-capitalize">Kurt Klausen</h1>
+            <div th:if="${status} == 1" class="alert alert-success">
+              Password opdateret
+            </div>
+            <div th:if="${status} == -1" class="alert alert-error">
+              Forkert password
+            </div>
+            <div th:if="${status} == -2" class="alert alert-warning">
+              Nyt password matchede ikke.
+            </div>
           </div>
 
           <div class="row">

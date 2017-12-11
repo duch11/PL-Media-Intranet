@@ -194,26 +194,32 @@ public class AdminController {
 
   @RequestMapping(value = {"/admin/details"}, method = RequestMethod.GET, params = {"employee"})
   public String empDetails(Model model,Principal principal, @RequestParam int employee) {
-
-
     model.addAttribute("user", employeeRepo.Read(employee));
     model.addAttribute("employeeDetails", true);
-
     model.addAttribute("generalPermissions", permissionRepo.readAllPermissions());
-
     showAdminPanel(model, principal);
-
     return "detailsview";
+  }
+
+  @RequestMapping(value = {"/admin/details"}, method = RequestMethod.GET, params = {"employee", "status"})
+  public String empDetails(Model model,Principal principal, @RequestParam int employee, @RequestParam int status) {
+    model.addAttribute("status", status);
+    return empDetails(model, principal, employee);
   }
 
   @RequestMapping(value = {"/admin/details"}, method = RequestMethod.GET, params = {"parent"})
   public String parentDetails(Model model, Principal principal, @RequestParam int parent) {
-
     model.addAttribute("user", parentRepo.Read(parent));
     model.addAttribute("parentDetails", true);
     showAdminPanel(model, principal);
     return "detailsview";
   }
+  @RequestMapping(value = {"/admin/details"}, method = RequestMethod.GET, params = {"parent", "status"})
+  public String parentDetails(Model model, Principal principal, @RequestParam int parent, @RequestParam int status) {
+    model.addAttribute("status", status);
+    return parentDetails(model, principal, parent);
+  }
+
 
   @RequestMapping(value = {"/admin/details"}, method = RequestMethod.GET, params = {"child"})
   public String childDetails(Model model, Principal principal, @RequestParam int child) {
@@ -340,24 +346,33 @@ public class AdminController {
   @RequestMapping(value = {"/admin/update/parent"}, method = RequestMethod.POST, params = {"oldPass", "newPass", "newPassRepeat", "ID"})
   public String updateParPassword(@RequestParam String oldPass,@RequestParam String newPass,@RequestParam String newPassRepeat, @RequestParam int ID) {
     Parent parent = parentRepo.Read(ID);
+    int checkPassStatus = utilRepo.checkPassword(ID, oldPass);
+    boolean newPassMatches = newPass.equals(newPassRepeat);
 
-    if(newPass.equals(newPassRepeat) && utilRepo.checkPassword(ID, oldPass) == 1){
+    if(newPassMatches && checkPassStatus == 1){
       parent.setPassword(newPass);
       parentRepo.Update(parent);
+      return "redirect:/admin/details?parent=" + ID + "&status=" + checkPassStatus;
+    } else if(!newPassMatches) {
+      return "redirect:/admin/details?parent=" + ID + "&status=-2";
     }
-    
-    return "redirect:/admin/details?parent=" + ID;
+    return "redirect:/admin/details?parent=" + ID + "&status=" + checkPassStatus;
   }
 
   @RequestMapping(value = {"/admin/update/employee"}, method = RequestMethod.POST, params = {"oldPass", "newPass", "newPassRepeat", "ID"})
   public String updateEmpPassword(@RequestParam String oldPass,@RequestParam String newPass,@RequestParam String newPassRepeat, @RequestParam int ID) {
     Employee employee = employeeRepo.Read(ID);
+    int checkPassStatus = utilRepo.checkPassword(ID, oldPass);
+    boolean newPassMatches = newPass.equals(newPassRepeat);
 
-    if(newPass.equals(newPassRepeat) && utilRepo.checkPassword(ID, oldPass) == 1){
+    if(newPassMatches && checkPassStatus == 1){
       employee.setPassword(newPass);
       employeeRepo.Update(employee);
+      return "redirect:/admin/details?employee=" + ID + "&status=" + checkPassStatus;
+    } else if(!newPassMatches) {
+      return "redirect:/admin/details?employee=" + ID + "&status=-2";
     }
-    return "redirect:/admin/details?employee=" + ID;
+    return "redirect:/admin/details?employee=" + ID + "&status=" + checkPassStatus;
   }
 
 
