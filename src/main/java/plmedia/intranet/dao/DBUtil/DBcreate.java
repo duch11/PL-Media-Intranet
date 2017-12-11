@@ -22,6 +22,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class DBcreate {
 
   Util util = new Util();
+  DBupdate dbu = new DBupdate();
   BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
   /**
@@ -107,7 +108,7 @@ public class DBcreate {
       stmt.setString(2, child.getLastName());
       stmt.setDate(3, (Date) child.getBirthday());
       stmt.setString(4, child.getAddress());
-      stmt.setInt(5, child.getWingId());
+
 
 
       stmt.executeUpdate();

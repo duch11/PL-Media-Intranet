@@ -56,4 +56,8 @@ public class EmployeeRepo implements IRepo<Employee> {
     return dbr.readAllEmployeesByGroup(id);
   }
 
+  public Employee readEmployeeByEmail(String userEmail) {
+    return readEmployeeByEmail(userEmail);
+  }
+
 }

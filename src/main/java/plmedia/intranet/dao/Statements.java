@@ -19,6 +19,8 @@ public class Statements {
   public static final String DEF_GET_ALL_EMAIL = "SELECT user_email FROM user";
   public static final String DEF_GET_CHILDREN_BY_WING_ID_SQL = "SELECT * FROM child WHERE fk_wing_id=?";
   public static final String DEF_GET_PASSWORD_BY_USER_ID = "SELECT password FROM user WHERE user_id = ?";
+  public static final String DEF_GET_EMPLOYEE_BY_EMAIL_SQL = "SELECT * FROM user WHERE type=\"ROLE_EMP\" AND user_email=?";
+
 
   // EMPLOYEE
   public static final String DEF_GET_EMPLOYEE_BY_ID_SQL = "SELECT * FROM user WHERE type=\"ROLE_EMP\" AND user_id= ? ";
@@ -67,7 +69,7 @@ public class Statements {
   public static final String DEF_ADD_ALLERGEN_TO_CHILD = "INSERT INTO child_allergen (fk_child_id, fk_allergen_id) VALUES (?,?)";
   public static final String DEF_ADD_GROUP_TO_EMPLOYEE = "INSERT INTO employee_user_group (fk_employee_user_id, fk_group_id) VALUES (?,?)";
   public static final String DEF_ADD_WING_TO_EMPLOYEE = "INSERT INTO employee_user_wing (fk_employee_user_id, fk_wing_id) VALUES (?,?)";
-
+  public static final String DEF_ADD_WING_TO_CHILD = "INSERT INTO child_wing (fk_child_id, fk_wing_id) VALUES (?,?)";
 
   public static final String DEF_DELETE_CHILD_FROM_PARENT = "DELETE FROM parent_user_child WHERE (fk_parent_user_id, fk_child_id) = (?,?)";
   public static final String DEF_DELETE_ALL_CHILD_FROM_PARENT = "DELETE FROM parent_user_child WHERE (fk_parent_user_id) = (?)";
@@ -86,13 +88,13 @@ public class Statements {
   public static final String DEF_DELETE_WING_FROM_EMPLOYEE = "DELETE FROM employee_user_wing WHERE (fk_user_id, fk_wing_id) = (?,?)";
   public static final String DEF_DELETE_ALL_WING_FROM_EMPLOYEE = "DELETE FROM employee_user_wing WHERE (fk_user_id) = (?)";
   public static final String DEF_DELETE_ALL_EMPLOYEE_FROM_WING = "DELETE FROM employee_user_wing WHERE (fk_wing_id) = (?)";
-
+  public static final String DEF_DELETE_WING_FROM_CHILD = "DELETE FROM child_wing WHERE (fk_child_id, fk_wing_id) = (?,?)";
 
 
   // Setters / Creates
   public static final String DEF_CREATE_PARENT_USER_SQL = "INSERT INTO user (password, user_email, first_name, last_name, type, enabled) VALUES(?,?,?,?,?,?)";
   public static final String DEF_CREATE_EMPLOYEE_USER_SQL = "INSERT INTO user (password, user_email, first_name, last_name, type, enabled) VALUES(?,?,?,?,?,?)";
-  public static final String DEF_CREATE_CHILD_SQL = "INSERT INTO child (first_name, last_name, birthday, address, fk_wing_id) VALUES(?,?,?,?,?)";
+  public static final String DEF_CREATE_CHILD_SQL = "INSERT INTO child (first_name, last_name, birthday, address) VALUES(?,?,?,?)";
   public static final String DEF_CREATE_WING_SQL = "INSERT INTO wing (wing_name, wing_description) VALUES (?,?)";
   public static final String DEF_CREATE_GROUP_SQL = "INSERT INTO group (group_name, group_description) VALUES (?,?)";
   public static final String DEF_CREATE_ALLERGEN_SQL = "INSERT INTO allergen (allergen_name, allergen_description) VALUES (?,?)";
