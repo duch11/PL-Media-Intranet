@@ -57,7 +57,7 @@ public class EmployeeRepo implements IRepo<Employee> {
   }
 
   public Employee readEmployeeByEmail(String userEmail) {
-    return readEmployeeByEmail(userEmail);
+    return dbr.readEmployeeByEmail(userEmail);
   }
 
 }

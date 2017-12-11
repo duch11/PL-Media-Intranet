@@ -2,7 +2,10 @@ package plmedia.intranet.controller;
 import java.security.Principal;
 import java.util.ArrayList;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -48,91 +51,10 @@ public class AdminController {
   @Autowired
   WingRepo wingRepo;
 
-  /*
-  ArrayList<Group> employeeGroups = new ArrayList<>();
-  ArrayList<Employee> employees = new ArrayList<>();
-  ArrayList<Employee> employeesSorted;
-
-  ArrayList<Parent> parents = new ArrayList<>();
-  ArrayList<Child> children = new ArrayList<>();
-  ArrayList<Permission> globalPermissions = new ArrayList<>();*/
+  Employee currentUser;
 
   public AdminController() {
-    /*java.sql.Date dato = new java.sql.Date(2);
-    globalPermissions.add(new Permission(1, "Kill hitler", "allows something"));
-    globalPermissions.add(new Permission(2, "Kill stalin", "allows something"));
-    globalPermissions.add(new Permission(3, "Kill bush", "allows something"));
-    globalPermissions.add(new Permission(4, "Kill spongebob", "allows something"));
 
-    employeeGroups.add(new Group(1,"Ledelsen", "Skal have mere i løn"));
-    employeeGroups.add(new Group(2,"Ansatte", "De er seje"));
-    employeeGroups.add(new Group(3,"Praktikanter", "Andrulle er sød"));
-
-
-    Employee hej = new Employee("123", "jonas.dk", "jonas", "Holm");
-    hej.setUserId(0);
-    ArrayList<Permission> perm = new ArrayList<>();
-    perm.add(globalPermissions.get(0));
-    perm.add(globalPermissions.get(1));
-    perm.add(globalPermissions.get(2));
-    perm.add(globalPermissions.get(3));
-    hej.setPermissions(perm);
-
-    Employee hej1 = new Employee("123", "faisal.dk", "faisal", "faisal");
-    hej1.setUserId(1);
-    ArrayList<Permission> perm1 = new ArrayList<>();
-    perm1.add(globalPermissions.get(0));
-    perm1.add(globalPermissions.get(1));
-    perm1.add(globalPermissions.get(2));
-    perm1.add(globalPermissions.get(3));
-    hej1.setPermissions(perm1);
-
-    Employee hej2 = new Employee("123", "ssa.dk", "Andreas", "Nissen");
-    hej2.setUserId(2);
-    ArrayList<Permission> perm2 = new ArrayList<>();
-    perm2.add(globalPermissions.get(0));
-    perm2.add(globalPermissions.get(2));
-    perm2.add(globalPermissions.get(3));
-    hej2.setPermissions(perm2);
-
-    Employee hej3 = new Employee("123", "pid.ss", "Toby", "Thomsen");
-    hej3.setUserId(3);
-    ArrayList<Permission> perm3 = new ArrayList<>();
-    perm3.add(globalPermissions.get(0));
-    perm3.add(globalPermissions.get(1));
-    perm3.add(globalPermissions.get(3));
-    hej3.setPermissions(perm3);
-
-    Employee hej4 = new Employee("123", "jggonas.dk", "Simon", "BOOIII");
-    hej4.setUserId(4);
-    ArrayList<Permission> perm4 = new ArrayList<>();
-    perm4.add(globalPermissions.get(1));
-    perm4.add(globalPermissions.get(2));
-    perm4.add(globalPermissions.get(3));
-    hej4.setPermissions(perm4);
-
-    hej.setGroup(employeeGroups.get(1));
-    hej1.setGroup(employeeGroups.get(0));
-    hej2.setGroup(employeeGroups.get(2));
-    hej3.setGroup(employeeGroups.get(1));
-    hej4.setGroup(employeeGroups.get(2));
-
-    employees.add(hej);
-    employees.add(hej1);
-    employees.add(hej2);
-    employees.add(hej3);
-    employees.add(hej4);
-
-
-    parents.add(new Parent(0,"123","jonas@sss.dk", "Sten","Hansen", perm1));
-    parents.add(new Parent(1, "123","jonas@sss.dk", "Argild","Gertsen",perm2));
-    parents.add(new Parent(2,"123","jonas@sss.dk", "Jullebejler","Kanstrup",perm3));
-
-    children.add(new Child("Alma","Sørensen", new java.sql.Date(2),"hejvej 123", 1));
-    children.add(new Child("Carlo","Grimladen", new java.sql.Date(2),"hejvej 123", 1));
-    children.add(new Child("Silas","Sørensen", new java.sql.Date(2),"hejvej 123", 1));
-    children.add(new Child("Rui","LactoseFri", new java.sql.Date(2),"hejvej 123", 1));
-  */
   }
 
 
@@ -144,14 +66,13 @@ public class AdminController {
 
   public String showAdminPanel(Model model, Principal principal) {
 
-    /** ENG: Principal DK: "Grund-sikkerhedskonto" * */
-    /*employeeRepo.readEmployeeByEmail(principal.getName());*/
-    Employee currentUser = new Employee();
-    for(Employee emp : employeeRepo.ReadAll()){
-      if(emp.getUserEmail().equals(principal.getName())){
-        currentUser = emp;
-      }
+    if(currentUser == null){
+      currentUser = employeeRepo.readEmployeeByEmail(principal.getName());
+    } else if (!currentUser.getUserEmail().equals(principal.getName())){
+      currentUser = employeeRepo.readEmployeeByEmail(principal.getName());
     }
+
+    /** ENG: Principal DK: "Grund-sikkerhedskonto" * */
 
     for(Permission perm : permissionRepo.readPermissionsByUserID(currentUser.getUserId())){
       model.addAttribute(perm.getPermissionName().replaceAll(" ", "_"), true);
@@ -162,6 +83,7 @@ public class AdminController {
     model.addAttribute("allWings", wingRepo.ReadAll());
     return "adminpanel";
   }
+
 
 
   @RequestMapping(value = {"/admin/employees", "/admin"}, method = RequestMethod.GET)
@@ -206,10 +128,30 @@ public class AdminController {
 
   @RequestMapping(value = {"/admin/details"}, method = RequestMethod.GET, params = {"employee"})
   public String empDetails(Model model,Principal principal, @RequestParam int employee) {
+    showAdminPanel(model, principal);
     model.addAttribute("user", employeeRepo.Read(employee));
     model.addAttribute("employeeDetails", true);
-    model.addAttribute("generalPermissions", permissionRepo.readAllPermissions());
-    showAdminPanel(model, principal);
+
+    //removes the permission option if it's the user itself
+    ArrayList<Permission> permissionsToSend = permissionRepo.readAllPermissions();
+    if(employee == currentUser.getUserId()){
+      ArrayList<Permission> substitutePermissions = new ArrayList<>();
+      substitutePermissions.add(permissionRepo.readPermissionByID(28));
+      substitutePermissions.add(permissionRepo.readPermissionByID(29));
+      for (int i = 0; i<2; i++){
+        int index = -1;
+        for (Permission p : permissionsToSend) {
+          if(p.getPermissionName().equals("Edit permissions") || p.getPermissionName().equals("Edit own permissions")){
+            index = permissionsToSend.indexOf(p);
+            break;
+          }
+        }
+        permissionsToSend.remove(index);
+      }
+      model.addAttribute("substitutePermissions", substitutePermissions);
+    }
+
+    model.addAttribute("generalPermissions", permissionsToSend);
     return "detailsview";
   }
 
@@ -318,27 +260,34 @@ public class AdminController {
    * */
   @RequestMapping(value = {"/admin/update/employee"}, method = RequestMethod.POST, params = {"firstName", "lastName", "ID"})
   public String updateEmpName(@RequestParam String firstName, @RequestParam String lastName, @RequestParam int ID){
-    updateName(firstName,lastName,ID);
+    Employee employee = employeeRepo.Read(ID);
+    employee.setFirstName(firstName);
+    employee.setLastName(lastName);
+    employeeRepo.Update(employee);
     return "redirect:/admin/details?employee=" + ID;
   }
 
   @RequestMapping(value = {"/admin/update/parent"}, method = RequestMethod.POST, params = {"firstName", "lastName", "ID"})
   public String updateParName(@RequestParam String firstName, @RequestParam String lastName, @RequestParam int ID){
-    updateName(firstName,lastName,ID);
+    Parent parent = parentRepo.Read(ID);
+    parent.setFirstName(firstName);
+    parent.setLastName(lastName);
+    parentRepo.Update(parent);
     return "redirect:/admin/details?parent=" + ID;
   }
 
-  private void updateName(String firstName, String lastName, int ID){
-    System.out.println(firstName + " " + lastName + " " + ID);
-  }
 
   /**
    * Update Email + utility method (for redirection between parent and user)
    * */
   @RequestMapping(value = {"/admin/update/employee"}, method = RequestMethod.POST, params = {"email", "ID"})
-  public String updateEmpEmail(@RequestParam String email, @RequestParam int ID){
+  public String updateEmpEmail(Principal principal, @RequestParam String email, @RequestParam int ID){
     Employee employee = employeeRepo.Read(ID);
     employee.setUserEmail(email);
+    if(currentUser.getUserEmail().equals(email)){
+
+      return "redirect:/admin/details?employee=" + ID;
+    }
     employeeRepo.Update(employee);
     return "redirect:/admin/details?employee=" + ID;
   }

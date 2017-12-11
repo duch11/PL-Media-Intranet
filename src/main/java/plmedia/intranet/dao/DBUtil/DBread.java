@@ -133,8 +133,8 @@ public class DBread {
       PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_EMPLOYEE_BY_EMAIL_SQL);
       stmt.setString(1, userEmail);
       ResultSet rs = stmt.executeQuery();
-      int userID = rs.getInt("user_id");
       rs.first();
+      int userID = rs.getInt("user_id");
       ArrayList<Permission> permissions = readPermissionsByUserID((userID));
       Group group = readGroupByUserID(userID);
       return new Employee(

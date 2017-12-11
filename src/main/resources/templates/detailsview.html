@@ -64,7 +64,7 @@
           </div>
 
           <div th:if="${employeeDetails}" class="row">
-            <h3>Permissions: <a href="#" class="btn btn-edit" data-toggle="modal" data-target="#editPermissions"><i class="fa fa-pencil"></i></a></h3>
+            <h3>Permissions: <a th:if="${substitutePermissions} ? ${Edit_own_permissions} : ${Edit_permissions}" href="#" class="btn btn-edit" data-toggle="modal" data-target="#editPermissions"><i class="fa fa-pencil"></i></a></h3>
 
             <ul class="list-group">
               <li th:each="permission : ${user.getPermissions()}" class="list-group-item">
@@ -212,7 +212,7 @@
 
     <!--Edit Permissions-->
 
-    <div th:if="${employeeDetails}" id="editPermissions" class="modal fade" role="dialog">
+    <div th:if="${employeeDetails} and ( ${substitutePermissions} ? ${Edit_own_permissions} : ${Edit_permissions})" id="editPermissions" class="modal fade" role="dialog">
       <div class="modal-dialog">
 
         <!-- Modal content-->
@@ -229,6 +229,7 @@
                   <span th:text="${generalPermission.getPermissionName()}">Redigere Børn</span>
                 </label>
               </div>
+              <input th:each="sPermission : ${substitutePermissions}" type="hidden"  name="permissionIDs" th:value="${sPermission.getPermissionID()}"/>
               <input type="hidden" name="permissionIDs" value=""/>
             </div>
             <div class="modal-footer">

@@ -31,6 +31,7 @@ public class HomeController {
      * Her er det vigtigt at type har enten værdien ROLE_EMP eller ROLE_PAR
      * */
     if(SecurityContextHolder.getContext().getAuthentication().getAuthorities().contains(new SimpleGrantedAuthority("ROLE_EMP"))){
+
       return "redirect:/admin";
     }
     return "redirect:/parents";
