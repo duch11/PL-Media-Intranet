@@ -448,6 +448,26 @@ public class DBread {
     return null;
   }
 
+  public ArrayList<Wing> readWingIDsByChildID(int id) {
+    try(
+        Connection con = ConMan.getConnection();
+    ) {
+      PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_WING_IDS_BY_CHILD_ID);
+      ArrayList<Wing> wings = new ArrayList<>();
+      stmt.setInt(1, id);
+      ResultSet rs = stmt.executeQuery();
+      rs.first();
+      while (rs.next()) {
+        wings.add(readWingByID(rs.getInt("fk_wing_id")));
+      }
+
+      return wings;
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return null;
+  }
+
   // Group
 
   public Group readGroupByID(int id)  {
