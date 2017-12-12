@@ -12,8 +12,10 @@ import plmedia.intranet.dao.repository.AllergenRepo;
 import plmedia.intranet.dao.repository.ChildRepo;
 import plmedia.intranet.dao.repository.ParentRepo;
 import plmedia.intranet.dao.repository.WingRepo;
+import plmedia.intranet.dao.repository.UtilRepo;
 import plmedia.intranet.model.Child;
 import plmedia.intranet.model.Parent;
+
 
 /**
  * @author Andreas Nissen
@@ -33,6 +35,9 @@ public class ParentController {
 
   @Autowired
   WingRepo wingRepo;
+
+  @Autowired
+  UtilRepo utilRepo;
 
   Parent currentParent;
 
@@ -116,7 +121,7 @@ private void showPanals(Model model, Principal principal) {
    */
 
   /**
-   * update first and last name
+   * update first and last name children
    */
   @RequestMapping(value = {"/parent/update/child"}, method = RequestMethod.POST, params = {"firstName", "ID"})
   public String updateChildFirstName(@RequestParam String firstName, @RequestParam int ID){
@@ -141,6 +146,56 @@ private void showPanals(Model model, Principal principal) {
     return "redirect:/parent/details?child=" + ID;
   }
 
+  /**
+   * update parent name
+   */
+
+  @RequestMapping(value = {"/parent/update/parent"}, method = RequestMethod.POST, params = {"firstName", "lastName"})
+  public String updateParName(@RequestParam String firstName, @RequestParam String lastName) {
+    Parent parent = parentRepo.Read();
+    parent.setFirstName(firstName);
+    parent.setLastName(lastName);
+    parentRepo.Update(parent);
+    return "redirect:/parent/?parent=" ;
+  }
+
+  /**
+   * update parent email
+   */
+
+  @RequestMapping(value = {"/parent/update/parent"}, method = RequestMethod.POST, params = {"email"})
+  public String updateParEmail(@RequestParam String email) {
+    Parent parent = parentRepo.Read(currentParent.getUserId());
+    parent.setUserEmail(email);
+    parentRepo.Update(parent);
+    return "redirect:/parent/?parent=";
+  }
+
+
+  /**
+   * update password
+   * @param oldPass
+   * @param newPass
+   * @param newPassRepeat
+   * @param ID
+   * @return
+   */
+
+  @RequestMapping(value = {"/parent/update/parent"}, method = RequestMethod.POST, params = {"oldPass", "newPass", "newPassRepeat"})
+  public String updateParPassword(@RequestParam String oldPass,@RequestParam String newPass,@RequestParam String newPassRepeat) {
+    Parent parent = parentRepo.Read(ID);
+    int checkPassStatus = utilRepo.checkPassword(ID, oldPass);
+    boolean newPassMatches = newPass.equals(newPassRepeat);
+
+    if(newPassMatches && checkPassStatus == 1){
+      parent.setPassword(newPass);
+      parentRepo.Update(parent);
+      return "redirect:/parent/?parent=" + "&status=" + checkPassStatus;
+    } else if(!newPassMatches) {
+      return "redirect:/parent/?parent="  + "&status=-2";
+    }
+    return "redirect:/parent/?parent="  + "&status=" + checkPassStatus;
+  }
 
 
   /**
