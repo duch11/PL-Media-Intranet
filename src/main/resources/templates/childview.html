@@ -60,8 +60,10 @@ i højre og venstre side-->
         </tr>
         <tr>
           <th>forældre:</th>
+          <div th:each="parent : ${childsParents}">
+          <td th:text="${parent.getFirstName()} + ' ' + ${parent.getLastName()}"/>
+          </div>
 
-          <td th:text="${child.getParents()}"/>
           <td><a href="#" class="btn btn-edit pull-right" data-toggle="modal" data-target="#editParents"><i class="fa fa-pencil"></i></a></td>
         </tr>
 
@@ -97,7 +99,7 @@ i højre og venstre side-->
      <table class="table-bordered">
       <ul class="list-inline">
         <h5> Allergener: <a href="#" class="btn btn-edit " data-toggle="modal" data-target="#editAllergier"><i class="fa fa-pencil"></i></a> </h5>
-        <li th:each="allergen : ${allergen}" class="list-group-item">
+        <li th:each="allergen : ${allergens}" class="list-group-item">
         <h6 th:text="${allergen.getAllergenName()}"></h6>
         </li>
 
