@@ -36,8 +36,7 @@ public class ParentController {
 
   Parent currentParent;
 
-  // lists
-  ArrayList<Parent> parents = new ArrayList<>();
+
 
 private void showPanals(Model model, Principal principal) {
 
@@ -53,8 +52,9 @@ private void showPanals(Model model, Principal principal) {
     currentParent = parentRepo.readParentByEmail(principal.getName());
   }
   model.addAttribute("children",children);
-  model.addAttribute("currentUser", parentRepo.readParentByEmail(principal.getName()));
-  System.out.println();
+  model.addAttribute("currentUser", currentParent);
+  model.addAttribute("user", currentParent);
+
 
 }
 
@@ -63,8 +63,12 @@ private void showPanals(Model model, Principal principal) {
 
     showPanals(model, principal);
 
-    return "parentview";
+    return "detailsview";
   }
+
+
+
+
 
 
 
@@ -72,20 +76,14 @@ private void showPanals(Model model, Principal principal) {
   public String parentView(Model model, Principal principal) {
 
 
-    model.addAttribute("children" , childRepo.ReadAll());
 
-
-    model.addAttribute("parents", parents);
     return showParentView(model, principal);
   }
 
-  @RequestMapping(value = {"/parent/details"}, method = RequestMethod.GET, params = {"parent"})
-  public String parentDetails(Model model, Principal principal, @RequestParam int parent) {
-
-    model.addAttribute("user", parentRepo.Read(parent));
-    model.addAttribute("parentDetails", true);
-    showParentView(model, principal);
-    return "parentview";
+  @RequestMapping(value = {"/parents"}, method = RequestMethod.GET, params = {"status"})
+  public String parentView(Model model,Principal principal, @RequestParam int status) {
+    model.addAttribute("status", status);
+    return showParentView(model, principal);
   }
 
 
@@ -97,7 +95,6 @@ private void showPanals(Model model, Principal principal) {
     showPanals(model, principal);
     return "childview";
   }
-
 
 
 
@@ -128,7 +125,7 @@ private void showPanals(Model model, Principal principal) {
     childRepo.Update(child);
 
 
-    return "redirect:/parent/details?child=" + ID;
+    return "redirect:/parent/children?child=" + ID;
   }
 
 
@@ -154,7 +151,7 @@ private void showPanals(Model model, Principal principal) {
     Child child = childRepo.Read(ID);
     child.setBirthday(birthday);
     childRepo.Update(child);
-    return "redirect:/parent/details?child=" + ID;
+    return "redirect:/parent/children?child=" + ID;
   }
 
 
@@ -166,7 +163,7 @@ private void showPanals(Model model, Principal principal) {
     Child child = childRepo.Read(ID);
     child.setAddress(address);
     childRepo.Update(child);
-    return "redirect:/parent/details?child=" + ID;
+    return "redirect:/parent/children?child=" + ID;
   }
 
 
