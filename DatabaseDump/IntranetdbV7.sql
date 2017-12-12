@@ -353,7 +353,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (322,'$2a$10$w2c1TdHiE/NJqpmnNIIRAufElt4ql0hOtJ8GZHTj9MXBeTgJXr6YC','jonas@holm.tech','Jonas','Holm','ROLE_EMP',1),(323,'$2a$10$0x6asl2FuP8jyjBQ8JpiEu5U5cU.v1mzqVbskpiKBcPHBDOKhOQoa','admin@test.dk','SuperAdmin','ADMIN','ROLE_EMP',1),(325,'$2a$10$wsnx/.FZx9Sy1Vl3y/lZE.70ceV/ebx1PWu2Nt92DD2yxUHjaJmX.','noob','Koden er 123','Koden er 123','ROLE_PAR',1),(326,'$2a$10$x3QYddcYaS0IVnlJnQJ/ruqnbbqV3DSfsZze/RSa.PdFZ2F0zz4FG','boon','Phillip','Lind','ROLE_PAR',1);
+INSERT INTO `user` VALUES (322,'$2a$10$w2c1TdHiE/NJqpmnNIIRAufElt4ql0hOtJ8GZHTj9MXBeTgJXr6YC','jonas@holm.tech','Jonas','Holm','ROLE_EMP',1),(323,'$2a$10$0x6asl2FuP8jyjBQ8JpiEu5U5cU.v1mzqVbskpiKBcPHBDOKhOQoa','admin@test.dk','SuperAdmin','ADMIN','ROLE_EMP',1),(325,'$2a$10$hyiPw3NGLD9pBITA5oq.LuW/n2DDk6/tuqj9kpUKdIF9nUVhdPE8G','parent@test.dk','Forældre','Med et efternavn','ROLE_PAR',1),(326,'$2a$10$x3QYddcYaS0IVnlJnQJ/ruqnbbqV3DSfsZze/RSa.PdFZ2F0zz4FG','boon','Phillip','Lind','ROLE_PAR',1);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -418,4 +418,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-12 10:59:38
+-- Dump completed on 2017-12-12 11:13:08
