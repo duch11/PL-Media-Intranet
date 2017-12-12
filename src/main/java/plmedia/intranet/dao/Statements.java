@@ -17,7 +17,7 @@ public class Statements {
   public static final String DEF_GET_CHILD_BY_ID_SQL = "SELECT * FROM child WHERE child_id = ?";
   public static final String DEF_GET_CHILDREN_ID_BY_PARENT_ID_SQL = "SELECT fk_child_id FROM parent_user_child WHERE fk_parent_user_id=?";
   public static final String DEF_GET_CHILDREN_BY_PARENT_ID_SQL = "SELECT * FROM child INNER JOIN parent_user_child ON child_id = fk_child_id WHERE fk_parent_user_id=?";
-  public static final String DEF_GET_NOT_CHILDREN_BY_PARENT_ID_SQL = "SELECT DISTINCT child_id, first_name, last_name, birthday, address FROM child INNER JOIN parent_user_child ON child.child_id = parent_user_child.fk_child_id WHERE fk_parent_user_id != ?";
+  public static final String DEF_GET_NOT_CHILDREN_BY_PARENT_ID_SQL = "SELECT * FROM child WHERE child_id NOT IN (SELECT fk_child_id FROM parent_user_child WHERE fk_parent_user_id=?)";
   public static final String DEF_GET_ALL_EMAIL = "SELECT user_email FROM user";
   public static final String DEF_GET_CHILDREN_BY_WING_ID_SQL = "SELECT * FROM child WHERE fk_wing_id=?";
   public static final String DEF_GET_PASSWORD_BY_USER_ID = "SELECT password FROM user WHERE user_id = ?";

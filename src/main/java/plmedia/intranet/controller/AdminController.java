@@ -173,7 +173,7 @@ public class AdminController {
   public String parentDetails(Model model, Principal principal, @RequestParam int parent) {
     model.addAttribute("user", parentRepo.Read(parent));
     model.addAttribute("parentsChildren", childRepo.readChildrenByParentID(parent));
-    model.addAttribute("allChildren", childRepo.ReadAll());
+    model.addAttribute("allChildren", childRepo.readNotChildrenByParentID(parent));
     model.addAttribute("parentDetails", true);
     showAdminPanel(model, principal);
     return "detailsview";
