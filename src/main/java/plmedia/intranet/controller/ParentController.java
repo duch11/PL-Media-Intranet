@@ -34,6 +34,8 @@ public class ParentController {
   @Autowired
   WingRepo wingRepo;
 
+  Parent currentParent;
+
   // lists
   ArrayList<Parent> parents = new ArrayList<>();
 
@@ -45,7 +47,11 @@ private void showPanals(Model model, Principal principal) {
           principal.getName()).getUserId())){
     children.add(childRepo.Read(i.intValue()));
   }
-
+  if(currentParent == null){
+    currentParent = parentRepo.readParentByEmail(principal.getName());
+  } else if (!currentParent.getUserEmail().equals(principal.getName())) {
+    currentParent = parentRepo.readParentByEmail(principal.getName());
+  }
   model.addAttribute("children",children);
   model.addAttribute("currentUser", parentRepo.readParentByEmail(principal.getName()));
   System.out.println();
@@ -96,11 +102,13 @@ private void showPanals(Model model, Principal principal) {
 
 
   @RequestMapping(value = {"/parents/children"}, method = RequestMethod.GET, params = {"child"})
-  public String childDetails(Model model, Principal principal, @RequestParam int child) {
+  public String childDetails(Model model, Principal principal, @RequestParam int child ) {
     model.addAttribute("child", childRepo.Read(child));
     model.addAttribute("allergen", allergenRepo.readAllergenByChildID(child));
     model.addAttribute("wing", wingRepo.Read(childRepo.Read(child).getWingId()));
     model.addAttribute("childDetails", true);
+
+
     showChildView(model,principal);
     return "childview";
   }

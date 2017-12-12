@@ -60,7 +60,8 @@ i højre og venstre side-->
         </tr>
         <tr>
           <th>forældre:</th>
-        <td th:text="${child.getParents()}"/>
+
+          <td th:text="${child.getParents()}"/>
           <td><a href="#" class="btn btn-edit pull-right" data-toggle="modal" data-target="#editParents"><i class="fa fa-pencil"></i></a></td>
         </tr>
 
@@ -154,7 +155,8 @@ i højre og venstre side-->
         <div class="form-group">
           <label for="firstName">Fornavn:</label>
           <input type="text" th:value="${child.getFirstName()}" name="firstName" required="true" id="firstName" class="form-control"/>
-      </div>
+          <input type="hidden" th:value="${user.getUserId()}" name="ID"/>
+        </div>
       </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-success">Gem</button>
