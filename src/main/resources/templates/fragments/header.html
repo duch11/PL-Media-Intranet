@@ -13,7 +13,7 @@
 
       <div class="collapse navbar-collapse" id="brugerInfo">
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="#" th:text="${currentUser.getUserEmail()}">UserEmailTest</a></li>
+          <li><a th:href="(${employeeGroups}) ? (@{/admin/details?employee=} + ${currentUser.getUserId()}) : @{/parents}" th:text="${currentUser.getUserEmail()}">UserEmailTest</a></li>
           <li>
             <form th:action="@{/logout}" class="navbar-form logout-btn" method="post">
               <button type="submit" class="btn btn-danger" value="Sign Out">Log ud</button>
