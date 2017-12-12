@@ -99,6 +99,27 @@ public class DBread {
     return null; // Error code?
   }
 
+  public ArrayList<Parent> readParentByChildID(int id) {
+    try (
+        Connection con = ConMan.getConnection();
+
+    ) {
+      PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_PARENT_ID_BY_CHILD_ID_SQL);
+      stmt.setInt(1, id);
+      ResultSet rs = stmt.executeQuery();
+      rs.beforeFirst();
+      ArrayList<Parent> parents = new ArrayList<>();
+      while (rs.next()) {
+        parents.add(readParentByID(rs.getInt("user_id")));
+      }
+
+      return parents;
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return null; // Error code?
+  }
+
   // Employees
 
   public Employee readEmployeeByID(int id) {
@@ -242,17 +263,21 @@ public class DBread {
       stmt.setInt(1, id);
       ResultSet rs = stmt.executeQuery();
       rs.first();
+      Wing wing = readWingByID(rs.getInt("child_id"));
+      ArrayList<Parent> parents = readParentByChildID(rs.getInt("child_id"));
+      ArrayList<Allergen> allergens = readAllergenByChildID(rs.getInt("child_id"));
+      int wingid = wing.getWingID();
+
       return new Child(
           rs.getInt("child_id"),
           rs.getString("first_name"),
           rs.getString("last_name"),
           rs.getDate("birthday"),
           rs.getString("address"),
-          rs.getInt("fk_wing_id"),
+          wingid,
           null,
-          null,
-          null,
-          null);
+          parents,
+          allergens);
 
     } catch (SQLException e) {
       e.printStackTrace();
@@ -267,19 +292,22 @@ public class DBread {
       PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_ALL_CHILDREN_SQL);
       ResultSet rs = stmt.executeQuery();
       ArrayList<Child> children = new ArrayList<>();
-      while (rs.next()) {
+      Wing wing = readWingByID(rs.getInt("child_id"));
+      ArrayList<Parent> parents = readParentByChildID(rs.getInt("child_id"));
+      ArrayList<Allergen> allergens = readAllergenByChildID(rs.getInt("child_id"));
+      int wingid = wing.getWingID();
 
+      while (rs.next()) {
         children.add(new Child(
             rs.getInt("child_id"),
             rs.getString("first_name"),
             rs.getString("last_name"),
             rs.getDate("birthday"),
             rs.getString("address"),
-            rs.getInt("fk_wing_id"),
+            wingid,
             null,
-            null,
-            null,
-            null));
+            parents,
+            allergens));
       }
       return children;
 
@@ -299,6 +327,10 @@ public class DBread {
       ResultSet rs = stmt.executeQuery();
       rs.first();
       ArrayList<Child> children = new ArrayList<>();
+      Wing wing = readWingByID(rs.getInt("child_id"));
+      ArrayList<Parent> parents = readParentByChildID(rs.getInt("child_id"));
+      ArrayList<Allergen> allergens = readAllergenByChildID(rs.getInt("child_id"));
+      int wingid = wing.getWingID();
 
       while (rs.next()) {
         children.add( new Child(
@@ -307,11 +339,10 @@ public class DBread {
             rs.getString("last_name"),
             rs.getDate("birthday"),
             rs.getString("address"),
-            rs.getInt("fk_wing_id"),
+            wingid,
             null,
-            null,
-            null,
-            null));
+            parents,
+            allergens));
       }
 
       return children;

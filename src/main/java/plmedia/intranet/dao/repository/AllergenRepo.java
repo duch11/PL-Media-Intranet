@@ -3,7 +3,9 @@ package plmedia.intranet.dao.repository;
 import java.util.ArrayList;
 import org.springframework.stereotype.Repository;
 import plmedia.intranet.dao.DBUtil.DBcreate;
+import plmedia.intranet.dao.DBUtil.DBdelete;
 import plmedia.intranet.dao.DBUtil.DBread;
+import plmedia.intranet.dao.DBUtil.DBupdate;
 import plmedia.intranet.model.Allergen;
 
 /**
@@ -16,6 +18,8 @@ public class AllergenRepo implements IRepo<Allergen> {
 
   DBcreate dbc = new DBcreate();
   DBread dbr = new DBread();
+  DBupdate dbu = new DBupdate();
+  DBdelete dbd = new DBdelete();
 
   @Override
   public int Create(Allergen allergen) {
@@ -29,12 +33,12 @@ public class AllergenRepo implements IRepo<Allergen> {
 
   @Override
   public int Update(Allergen allergen) {
-    return 0;
+    return dbu.updateAllergen(allergen);
   }
 
   @Override
   public int Delete(Allergen allergen) {
-    return 0;
+    return dbd.deleteAllergen(allergen);
   }
 
   @Override

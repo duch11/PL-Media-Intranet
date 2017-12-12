@@ -95,7 +95,6 @@ public class DBupdate {
       stmt.setString(2, child.getLastName());
       stmt.setDate(3, (Date) child.getBirthday());
       stmt.setString(4, child.getAddress());
-      stmt.setInt(5, child.getWingId());
 
       stmt.executeUpdate();
       return 1;
@@ -129,6 +128,23 @@ public class DBupdate {
       stmt.setString(1, group.getGroupName());
       stmt.setString(2, group.getGroupDescription());
       stmt.setInt(3, group.getId());
+
+      stmt.executeUpdate();
+      return 1;
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return -1;
+  }
+
+  public int updateAllergen(Allergen allergen) {
+    try(
+        Connection con = ConMan.getConnection();
+    ) {
+      PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_UPDATE_ALLERGEN);
+      stmt.setString(1, allergen.getAllergenName());
+      stmt.setString(2, allergen.getAllergenDescription());
+      stmt.setInt(3, allergen.getAllergenID());
 
       stmt.executeUpdate();
       return 1;
