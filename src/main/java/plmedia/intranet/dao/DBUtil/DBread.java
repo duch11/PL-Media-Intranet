@@ -676,6 +676,9 @@ public class DBread {
 
       stmt.setInt(1, id);
       ResultSet rs = stmt.executeQuery();
+      if (!rs.next()){ // checking if resultset is empty.
+        return new Allergen();
+      }
       rs.first();
       return new Allergen(
           rs.getInt(1),

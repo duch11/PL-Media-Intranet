@@ -21,6 +21,9 @@ public class Allergen {
     this.allergenDescription = allergenDescription;
   }
 
+  public Allergen() {
+  }
+
   public int getAllergenID() {
     return allergenID;
   }
