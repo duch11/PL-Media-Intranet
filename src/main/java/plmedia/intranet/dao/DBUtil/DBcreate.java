@@ -110,7 +110,6 @@ public class DBcreate {
       stmt.setString(4, child.getAddress());
 
 
-
       stmt.executeUpdate();
       System.out.println("Child" +" "+ child.getFirstName() +" "+ child.getLastName() +" "+ "created");
       return 1; // Error codes?

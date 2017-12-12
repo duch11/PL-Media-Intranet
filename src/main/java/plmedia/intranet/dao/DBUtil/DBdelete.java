@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import plmedia.intranet.dao.ConMan;
 import plmedia.intranet.dao.Statements;
+import plmedia.intranet.model.Allergen;
 import plmedia.intranet.model.Child;
 import plmedia.intranet.model.Employee;
 import plmedia.intranet.model.Group;
@@ -97,8 +98,20 @@ public class DBdelete {
         Connection con = ConMan.getConnection();
     ) {
       // Know if they can use the som "con" else make more "con"
-      PreparedStatement dWingStmt = ConMan.prepStat(con, Statements.DEF_UPDATE_WING);
+      PreparedStatement dWingStmt = ConMan.prepStat(con, Statements.DEF_DELETE_WING_BY_ID);
       PreparedStatement dWingEmpStmt = ConMan.prepStat(con, Statements.DEF_DELETE_ALL_EMPLOYEE_FROM_WING);
+      PreparedStatement dWingChildStmt = ConMan.prepStat(con , Statements.DEF_DELETE_WING_FROM_CHILD_WING);
+
+      dWingChildStmt.setInt(1, wing.getWingID());
+      dWingChildStmt.executeUpdate();
+
+      dWingEmpStmt.setInt(1, wing.getWingID());
+      dWingEmpStmt.executeUpdate();
+
+      dWingStmt.setInt(1, wing.getWingID());
+      dWingStmt.executeUpdate();
+
+      return 1;
     } catch (SQLException e) {
       e.printStackTrace();
     }
@@ -122,7 +135,26 @@ public class DBdelete {
     } catch (SQLException e) {
       e.printStackTrace();
     }
-    return 0;
+    return -1;
   }
 
+  public int deleteAllergen(Allergen allergen) {
+    try(
+        Connection con = ConMan.getConnection();
+    ) {
+      PreparedStatement dAllergenStmt = ConMan.prepStat(con, Statements.DEF_DELETE_ALLERGEN_BY_ID);
+      PreparedStatement dAllergenChildID = ConMan.prepStat(con, Statements.DEF_DELETE_ALL_CHILD_FROM_ALLERGEN);
+
+      dAllergenChildID.setInt(1, allergen.getAllergenID());
+      dAllergenChildID.executeUpdate();
+
+      dAllergenStmt.setInt(1, allergen.getAllergenID());
+      dAllergenStmt.executeUpdate();
+
+      return 1;
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return -1;
+  }
 }

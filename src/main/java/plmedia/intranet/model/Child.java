@@ -17,8 +17,6 @@ public class Child {
   private java.sql.Date birthday;
   private String address;
   private int wingId;
-  private ArrayList<String> nap;
-  private String trustedPickupPerson;
   private String otherInfo;
   private ArrayList<Parent> parents;
   private ArrayList<Allergen> allergens;
@@ -28,8 +26,7 @@ public class Child {
   }
 
   public Child(int childId, String firstName, String lastName, java.sql.Date birthday,
-      String address, int wingId, ArrayList<String> nap, String trustedPickupPerson,
-      String otherInfo, ArrayList<Parent> parents,
+      String address, int wingId, String otherInfo, ArrayList<Parent> parents,
       ArrayList<Allergen> allergens) {
     this.childId = childId;
     this.firstName = firstName;
@@ -37,34 +34,28 @@ public class Child {
     this.birthday = birthday;
     this.address = address;
     this.wingId = wingId;
-    this.nap = nap;
-    this.trustedPickupPerson = trustedPickupPerson;
     this.otherInfo = otherInfo;
     this.parents = parents;
     this.allergens = allergens;
   }
 
   public Child(int childId, String firstName, String lastName, java.sql.Date birthday,
-      String address, int wingId, ArrayList<String> nap, String trustedPickupPerson,
-      String otherInfo, ArrayList<Parent> parents) {
+      String address, int wingId, String otherInfo, ArrayList<Parent> parents) {
     this.childId = childId;
     this.firstName = firstName;
     this.lastName = lastName;
     this.birthday = birthday;
     this.address = address;
     this.wingId = wingId;
-    this.nap = nap;
-    this.trustedPickupPerson = trustedPickupPerson;
     this.otherInfo = otherInfo;
     this.parents = parents;
   }
 
-  public Child(String firstName, String lastName, java.sql.Date birthday, String address, int wingId) {
+  public Child(String firstName, String lastName, java.sql.Date birthday, String address) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.birthday = birthday;
     this.address = address;
-    this.wingId = wingId;
   }
 
   public String getFirstName() {
@@ -113,22 +104,6 @@ public class Child {
 
   public void setWingId(int wingId) {
     this.wingId = wingId;
-  }
-
-  public ArrayList<String> getNap() {
-    return nap;
-  }
-
-  public void setNap(ArrayList<String> nap) {
-    this.nap = nap;
-  }
-
-  public String getTrustedPickupPerson() {
-    return trustedPickupPerson;
-  }
-
-  public void setTrustedPickupPerson(String trustedPickupPerson) {
-    this.trustedPickupPerson = trustedPickupPerson;
   }
 
   public String getOtherInfo() {

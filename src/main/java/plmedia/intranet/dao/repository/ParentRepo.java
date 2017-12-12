@@ -51,5 +51,8 @@ public class ParentRepo<T> implements IRepo<Parent> {
     return dbr.readParentByEmail(userEmail);
   }
 
+  public ArrayList<Parent> readParentByChildID(int id) {
+    return dbr.readParentByChildID(id);
+  }
 
 }

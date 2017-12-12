@@ -3,6 +3,7 @@ package plmedia.intranet.dao.repository;
 import java.util.ArrayList;
 import org.springframework.stereotype.Repository;
 import plmedia.intranet.dao.DBUtil.DBcreate;
+import plmedia.intranet.dao.DBUtil.DBdelete;
 import plmedia.intranet.dao.DBUtil.DBread;
 import plmedia.intranet.dao.DBUtil.DBupdate;
 import plmedia.intranet.model.Wing;
@@ -19,10 +20,11 @@ public class WingRepo implements IRepo<Wing>{
   DBcreate dbc = new DBcreate();
   DBread dbr = new DBread();
   DBupdate dbu = new DBupdate();
+  DBdelete dbd = new DBdelete();
 
   /**
    * Creates Wing object. Takes logic from DBcreate.
-   * @param wing
+   * @param wing,
    * @return int
    */
   @Override
@@ -42,7 +44,7 @@ public class WingRepo implements IRepo<Wing>{
 
   @Override
   public int Delete(Wing wing) {
-    return 0;
+    return dbd.deleteWing(wing);
   }
 
   @Override
