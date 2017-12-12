@@ -497,6 +497,12 @@ public class DBread {
       stmt.setInt(1, id);
       ResultSet rs = stmt.executeQuery();
       rs.first();
+
+      if (!rs.next()){ // checking if resultset is empty.
+        return new Wing();
+      }
+
+      rs.first();
       return new Wing(
           rs.getInt(1),
           rs.getString(2),
