@@ -194,7 +194,6 @@ public class AdminController {
    * */
   @RequestMapping(value = {"/admin/create/employee"}, method = RequestMethod.POST)
   public String createUser(@ModelAttribute Employee newEmployee){
-
     employeeRepo.Create(newEmployee);
 
     return "redirect:/admin/employees";

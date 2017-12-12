@@ -82,6 +82,7 @@ public class DBcreate {
 
 
         stmt.executeUpdate();
+
         System.out.println("Employee user created");
         return 1; // Error codes?
       }
