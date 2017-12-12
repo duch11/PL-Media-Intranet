@@ -182,16 +182,16 @@ public class DBupdate {
       toWrite.removeAll(orgChildren);
       toDelete.removeAll(newChildren);
 
-      for (Integer i : toWrite) {
-        writeStmt.setInt(1, parent.getUserId());
-        writeStmt.setInt(2, toWrite.get(i));
-        writeStmt.executeUpdate();
-      }
-
       for (Integer i: toDelete) {
         deleteStmt.setInt(1,parent.getUserId());
-        deleteStmt.setInt(2, toDelete.get(i));
+        deleteStmt.setInt(2, i);
         deleteStmt.executeUpdate();
+      }
+
+      for (Integer i : toWrite) {
+        writeStmt.setInt(1, parent.getUserId());
+        writeStmt.setInt(2, i);
+        writeStmt.executeUpdate();
       }
 
       return 1;

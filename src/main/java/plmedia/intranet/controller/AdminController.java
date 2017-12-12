@@ -3,6 +3,7 @@ import java.security.Principal;
 import java.util.ArrayList;
 
 import java.util.List;
+import java.util.ListIterator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.context.SecurityContext;
@@ -62,8 +63,6 @@ public class AdminController {
    * Base method for showing adminpanel
   * makes renaming and adding "universal" actions more sensible
   */
-
-
   public String showAdminPanel(Model model, Principal principal) {
 
     if(currentUser == null){
@@ -99,7 +98,6 @@ public class AdminController {
     model.addAttribute("currentGroup", groupRepo.Read(groupID));
     model.addAttribute("employees", employeeRepo.readAllEmployeesByGroup(groupID));
     model.addAttribute("newEmployee", new Employee());
-
     return showAdminPanel(model, principal);
   }
 
@@ -129,30 +127,40 @@ public class AdminController {
   @RequestMapping(value = {"/admin/details"}, method = RequestMethod.GET, params = {"employee"})
   public String empDetails(Model model,Principal principal, @RequestParam int employee) {
     showAdminPanel(model, principal);
+
     model.addAttribute("user", employeeRepo.Read(employee));
     model.addAttribute("employeeDetails", true);
 
-    //removes the permission option if it's the user itself
     ArrayList<Permission> permissionsToSend = permissionRepo.readAllPermissions();
+    //removes the permission option if it's the user itself
     if(employee == currentUser.getUserId()){
-      ArrayList<Permission> substitutePermissions = new ArrayList<>();
-      substitutePermissions.add(permissionRepo.readPermissionByID(28));
-      substitutePermissions.add(permissionRepo.readPermissionByID(29));
-      for (int i = 0; i<2; i++){
-        int index = -1;
-        for (Permission p : permissionsToSend) {
-          if(p.getPermissionName().equals("Edit permissions") || p.getPermissionName().equals("Edit own permissions")){
-            index = permissionsToSend.indexOf(p);
-            break;
-          }
-        }
-        permissionsToSend.remove(index);
-      }
-      model.addAttribute("substitutePermissions", substitutePermissions);
+      permissionsToSend = buildHiddenPermissions(model, permissionsToSend);
     }
-
     model.addAttribute("generalPermissions", permissionsToSend);
     return "detailsview";
+  }
+
+  private ArrayList<Permission> buildHiddenPermissions(Model model, ArrayList<Permission> oldShownPermList){
+
+    List<Permission> newShownPermList = oldShownPermList;
+
+    ListIterator<Permission> permissionItterator = newShownPermList.listIterator();
+    while (permissionItterator.hasNext()) {
+      Permission item = permissionItterator.next();
+      if (item.getPermissionID() == 28 || item.getPermissionID() == 29) {
+        newShownPermList.remove(item);
+        permissionItterator = newShownPermList.listIterator();
+      }
+    }
+
+
+    //hardcoded hidden permissions
+    ArrayList<Permission> hiddenPermissions = new ArrayList<>();
+    hiddenPermissions.add(permissionRepo.readPermissionByID(28));
+    hiddenPermissions.add(permissionRepo.readPermissionByID(29));
+    model.addAttribute("substitutePermissions", hiddenPermissions);
+
+    return (ArrayList<Permission>) newShownPermList;
   }
 
   @RequestMapping(value = {"/admin/details"}, method = RequestMethod.GET, params = {"employee", "status"})
@@ -165,6 +173,7 @@ public class AdminController {
   public String parentDetails(Model model, Principal principal, @RequestParam int parent) {
     model.addAttribute("user", parentRepo.Read(parent));
     model.addAttribute("parentsChildren", childRepo.readChildrenByParentID(parent));
+    model.addAttribute("allChildren", childRepo.ReadAll());
     model.addAttribute("parentDetails", true);
     showAdminPanel(model, principal);
     return "detailsview";
@@ -338,6 +347,24 @@ public class AdminController {
       return "redirect:/admin/details?employee=" + ID + "&status=-2";
     }
     return "redirect:/admin/details?employee=" + ID + "&status=" + checkPassStatus;
+  }
+
+  @RequestMapping(value = {"/admin/update/employee/addchild"}, method = RequestMethod.POST, params = {"parentID", "childID"})
+  public String addChildToParent(@RequestParam int parentID, @RequestParam int childID){
+    Parent parent = parentRepo.Read(parentID);
+    ArrayList<Integer> childIDs = childRepo.ReadChildrenIDbyParentID(parentID);
+    childIDs.add(childID);
+    utilRepo.updateChildToParent(parent, childIDs);
+    return "redirect:/admin/details?parent=" + parentID;
+  }
+
+  @RequestMapping(value = {"/admin/update/employee/removechild"}, method = RequestMethod.POST, params = {"parentID", "childID"})
+  public String removeChildFromParent(@RequestParam int parentID, @RequestParam int childID){
+    Parent parent = parentRepo.Read(parentID);
+    ArrayList<Integer> childIDs = childRepo.ReadChildrenIDbyParentID(parentID);
+    childIDs.remove(new Integer(childID));
+    utilRepo.updateChildToParent(parent, childIDs);
+    return "redirect:/admin/details?parent=" + parentID;
   }
 
 

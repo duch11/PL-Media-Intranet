@@ -289,6 +289,41 @@ public class DBread {
     return null; // Error code?
   }
 
+  public ArrayList<Child> readNotChildrenByParentID(int parentId) {
+    try (
+        Connection con = ConMan.getConnection();
+
+    ) {
+      PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_NOT_CHILDREN_BY_PARENT_ID_SQL);
+      stmt.setInt(1, parentId);
+      ResultSet rs = stmt.executeQuery();
+      rs.beforeFirst();
+      ArrayList<Child> children = new ArrayList<>();
+      while (rs.next()) {
+
+        int childId = rs.getInt("child_id");
+        Wing wing = readWingByChildID(childId);
+        ArrayList<Parent> parents = readParentByChildID(childId);
+        ArrayList<Allergen> allergens = readAllergenByChildID(childId);
+        int wingid = wing.getWingID();
+        children.add(new Child(
+            childId,
+            rs.getString("first_name"),
+            rs.getString("last_name"),
+            rs.getDate("birthday"),
+            rs.getString("address"),
+            wingid,
+            null,
+            parents,
+            allergens));
+      }
+      return children;
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return null; // Error code?
+  }
+
   public Child readChildById(int id) {
     try (
         Connection con = ConMan.getConnection();
@@ -634,6 +669,9 @@ public class DBread {
       PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_GROUP_BY_USER_ID);
       stmt.setInt(1, id);
       ResultSet rs = stmt.executeQuery();
+      if (!rs.next()){ // checking if resultset is empty.
+        return new Group();
+      }
       rs.first();
       return new Group(
           rs.getInt(1),

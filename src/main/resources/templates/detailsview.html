@@ -53,23 +53,6 @@
                 <td>Hidden</td>
                 <td><a href="#" class="btn btn-edit pull-right" data-toggle="modal" data-target="#editPassword"><i class="fa fa-pencil"></i></a></td>
               </tr>
-              <tr th:if="${parentDetails}">
-                <th>Children:</th>
-
-                <td>
-                  <span th:each="child : ${parentsChildren}" th:text="${child.getFirstName()} + ' ' + ${child.getLastName()} + ', '"></span>
-                </td>
-                <td class="">
-                  <div class="pull-right">
-                    <a href="#" class="btn btn-edit" data-toggle="modal" data-target="#addChild">
-                      <i class="fa fa-plus"></i>
-                    </a>
-                    <a href="#" class="btn btn-edit" data-toggle="modal" data-target="#removeChild">
-                      <i class="fa fa-minus"></i>
-                    </a>
-                  </div>
-                </td>
-              </tr>
               <tr th:if="${employeeDetails}">
                 <th>Group:</th>
 
@@ -78,6 +61,23 @@
               </tr>
               </tbody>
             </table>
+
+            <div th:if="${parentDetails}">
+              <h3>Children:
+                <a href="#" class="btn btn-edit" data-toggle="modal" data-target="#addChild">
+                  <i class="fa fa-plus"></i>
+                </a>
+                <a href="#" class="btn btn-edit" data-toggle="modal" data-target="#removeChild">
+                  <i class="fa fa-minus"></i>
+                </a>
+              </h3>
+              <ul class="list-group">
+                <li th:each="child : ${parentsChildren}" class="list-group-item">
+                  <span th:text="${child.getFirstName()} + ' ' + ${child.getLastName()}"></span>
+                </li>
+              </ul>
+            </div>
+
           </div>
 
           <div th:if="${employeeDetails}" class="row">
@@ -203,18 +203,15 @@
           <form th:action="@{/admin/update/employee/addchild}" method="post">
             <div class="modal-header child-list">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">Add Child</h4>
+              <h4 class="modal-title">Tilføj barn til denne forældre</h4>
             </div>
             <div class="modal-body child-list">
               <ul>
-                <form th:each="child : ${parentsChildren}" th:action="@{/admin/update/employee/removechild}" class="child-list" method="post">
-                  <li class="list-group-item">
-                    <span th:text="${child.getFirstName()}">ChildName</span>
-                    <button type="submit" class="btn btn-success pull-right">TILFØJ</button>
-                    <input type="hidden" th:value="${user.getUserId()}" name="parentID"/>
-                    <input type="hidden" th:value="${child.getChildId()}" name="childID"/>
-                  </li>
-                </form>
+                <li th:each="child : ${allChildren}" class="list-group-item">
+                  <span th:text="${child.getFirstName()} + ' ' + ${child.getLastName()}">ChildName</span>
+                  <button type="submit" th:value="${child.getChildId()}" name="childID" class="btn btn-success pull-right">TILFØJ</button>
+                  <input type="hidden" th:value="${user.getUserId()}" name="parentID"/>
+                </li>
               </ul>
             </div>
             <div class="modal-footer child-list">
@@ -231,24 +228,24 @@
 
         <!-- Modal content-->
         <div class="modal-content">
-            <div class="modal-header">
+          <form th:action="@{/admin/update/employee/removechild}" method="post">
+            <div class="modal-header child-list">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
               <h4 class="modal-title">Remove Child</h4>
             </div>
-            <div class="modal-body">
+            <div class="modal-body child-list">
               <ul>
                 <li th:each="child : ${parentsChildren}" class="list-group-item">
-                  <form th:action="@{/admin/update/employee/removechild}" method="post">
-                    <p th:text="${child.getFirstName()}">ChildName</p>
-                    <input type="hidden" th:value="${user.getUserId()}" name="parentID"/>
-                    <input type="hidden" th:value="${child.getChildId()}" name="childID"/>
-                  </form>
+                  <span th:text="${child.getFirstName()} + ' ' + ${child.getLastName()}">ChildName</span>
+                  <button type="submit" th:value="${child.getChildId()}" name="childID" class="btn btn-danger pull-right">FJERN</button>
+                  <input type="hidden" th:value="${user.getUserId()}" name="parentID"/>
                 </li>
               </ul>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-danger" data-dismiss="modal">Annuller</button>
             </div>
+          </form>
         </div>
       </div>
     </div>
