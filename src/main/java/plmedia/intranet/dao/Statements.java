@@ -20,7 +20,7 @@ public class Statements {
   public static final String DEF_GET_CHILDREN_BY_WING_ID_SQL = "SELECT * FROM child WHERE fk_wing_id=?";
   public static final String DEF_GET_PASSWORD_BY_USER_ID = "SELECT password FROM user WHERE user_id = ?";
   public static final String DEF_GET_EMPLOYEE_BY_EMAIL_SQL = "SELECT * FROM user WHERE type=\"ROLE_EMP\" AND user_email=?";
-  public static final String DEF_GET_PARENT_ID_BY_CHILD_ID_SQL = "SELECT fk_parent_id FROM parent_user_child WHERE fk_child_id = ?";
+  public static final String DEF_GET_PARENT_ID_BY_CHILD_ID_SQL = "SELECT fk_parent_user_id FROM parent_user_child WHERE fk_child_id = ?";
 
   // EMPLOYEE
   public static final String DEF_GET_EMPLOYEE_BY_ID_SQL = "SELECT * FROM user WHERE type=\"ROLE_EMP\" AND user_id= ? ";

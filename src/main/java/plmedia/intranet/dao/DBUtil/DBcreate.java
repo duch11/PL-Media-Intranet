@@ -108,7 +108,7 @@ public class DBcreate {
       stmt.setString(2, child.getLastName());
       stmt.setDate(3, (Date) child.getBirthday());
       stmt.setString(4, child.getAddress());
-
+      stmt.setInt(5, child.getChildId());
 
       stmt.executeUpdate();
       System.out.println("Child" +" "+ child.getFirstName() +" "+ child.getLastName() +" "+ "created");

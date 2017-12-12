@@ -491,8 +491,8 @@ public class DBread {
   public Wing readWingByChildID(int id) {
     try (
         Connection con = ConMan.getConnection();
-
     ) {
+
       PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_WING_BY_child_ID);
       stmt.setInt(1, id);
       ResultSet rs = stmt.executeQuery();
