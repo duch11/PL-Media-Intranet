@@ -12,8 +12,10 @@ import plmedia.intranet.dao.repository.AllergenRepo;
 import plmedia.intranet.dao.repository.ChildRepo;
 import plmedia.intranet.dao.repository.ParentRepo;
 import plmedia.intranet.dao.repository.WingRepo;
+import plmedia.intranet.dao.repository.UtilRepo;
 import plmedia.intranet.model.Child;
 import plmedia.intranet.model.Parent;
+
 
 /**
  * @author Andreas Nissen
@@ -33,6 +35,9 @@ public class ParentController {
 
   @Autowired
   WingRepo wingRepo;
+
+  @Autowired
+  UtilRepo utilRepo;
 
   Parent currentParent;
 
@@ -101,8 +106,9 @@ private void showPanals(Model model, Principal principal) {
   @RequestMapping(value = {"/parents/children"}, method = RequestMethod.GET, params = {"child"})
   public String childDetails(Model model, Principal principal, @RequestParam int child ) {
     model.addAttribute("child", childRepo.Read(child));
-    model.addAttribute("allergen", allergenRepo.readAllergenByChildID(child));
+    model.addAttribute("allergens", allergenRepo.readAllergenByChildID(child));
     model.addAttribute("wing", wingRepo.Read(childRepo.Read(child).getWingId()));
+    model.addAttribute("childsParents" , parentRepo.readParentByChildID(child));
     model.addAttribute("childDetails", true);
 
 
@@ -115,8 +121,61 @@ private void showPanals(Model model, Principal principal) {
    * update
    */
 
+
   /**
-   * update first and last name
+   * update parent name
+   */
+
+  @RequestMapping(value = {"/parent/update/parent"}, method = RequestMethod.POST, params = {"firstName", "lastName"})
+  public String updateParName(@RequestParam String firstName, @RequestParam String lastName) {
+    Parent parent = parentRepo.Read(currentParent.getUserId());
+    parent.setFirstName(firstName);
+    parent.setLastName(lastName);
+    parentRepo.Update(parent);
+    return "redirect:/parent/?parent=" ;
+  }
+
+  /**
+   * update parent email
+   */
+
+  @RequestMapping(value = {"/parent/update/parent"}, method = RequestMethod.POST, params = {"email"})
+  public String updateParEmail(@RequestParam String email) {
+    Parent parent = parentRepo.Read(currentParent.getUserId());
+    parent.setUserEmail(email);
+    parentRepo.Update(parent);
+    return "redirect:/parent/?parent=";
+  }
+
+
+  /**
+   * update password
+   * @param oldPass
+   * @param newPass
+   * @param newPassRepeat
+   * @return
+   */
+
+  @RequestMapping(value = {"/parent/update/parent"}, method = RequestMethod.POST, params = {"oldPass", "newPass", "newPassRepeat"})
+  public String updateParPassword(@RequestParam String oldPass,@RequestParam String newPass,@RequestParam String newPassRepeat) {
+    Parent parent = parentRepo.Read(currentParent.getUserId());
+    int checkPassStatus = utilRepo.checkPassword(currentParent.getUserId(), oldPass);
+    boolean newPassMatches = newPass.equals(newPassRepeat);
+
+    if(newPassMatches && checkPassStatus == 1){
+      parent.setPassword(newPass);
+      parentRepo.Update(parent);
+      return "redirect:/parent/?parent=" + "&status=" + checkPassStatus;
+    } else if(!newPassMatches) {
+      return "redirect:/parent/?parent="  + "&status=-2";
+    }
+    return "redirect:/parent/?parent="  + "&status=" + checkPassStatus;
+  }
+
+
+
+  /**
+   * update first and last name children
    */
   @RequestMapping(value = {"/parent/update/child"}, method = RequestMethod.POST, params = {"firstName", "ID"})
   public String updateChildFirstName(@RequestParam String firstName, @RequestParam int ID){
@@ -140,6 +199,7 @@ private void showPanals(Model model, Principal principal) {
 
     return "redirect:/parent/details?child=" + ID;
   }
+
 
 
 
@@ -171,8 +231,8 @@ private void showPanals(Model model, Principal principal) {
    * update parents
    */
 
- // @RequestMapping(value = {"/parent/update/child"}, method = RequestMethod.POST, params = {"parents", "ID"})
- // public  String updateChildParents(@RequestParam )
+  // @RequestMapping(value = {"/parent/update/child"}, method = RequestMethod.POST, params = {"parents", "ID"})
+  // public  String updateChildParents(@RequestParam )
 
   /**
    * update allergens
