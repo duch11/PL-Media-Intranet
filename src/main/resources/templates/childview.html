@@ -309,42 +309,34 @@ i højre og venstre side-->
     <div class="modal-content">
       <div class="modal-header">
         <!--Kryds knap-->
+          <form th:action="${childDetails} ? @{/parent/update/child}" method="post">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Stue</h4>
         <div class="modal-body">
-          <input type="text"/>
+          <div class="form-group">
+          <select name="groupID" required="true" class="form-control">
+            <option th:each="wing : ${Wing}" th:value="${wing.getId()}" th:text="${wing.getWingName()}" th:selected="${child.getChildId()} == ${wing.getId()} ? 'selected'">
+              nope
+            </option>
+            <!-- de hardcodede options kan slettes when works-->
+            <option value="blå">Blå</option>
+            <option valie="grøn">Grøn</option>
+          </select>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
+            <input type="hidden" th:value="${child.getChildId()}" name="ID"/>
         </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-success">Gem</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Annuller</button>
       </div>
+      </form>
+    </div>
     </div>
   </div>
 </div>
 
 
 
-<div id="editInfo" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <!--Kryds knap-->
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Information</h4>
-        <div class="modal-body">
-          <input type="text"/>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 
 
 
@@ -379,6 +371,30 @@ i højre og venstre side-->
     </div>
   </div>
 </div>
+
+
+<div id="editInfo" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <!--Kryds knap-->
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Information</h4>
+        <div class="modal-body">
+          <input type="text"/>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <!--JAVASCRIPT (skal være til sidst for gode loading tider)-->
 <!-- BOOTSTRAP MaxCDN jQuery library -->
