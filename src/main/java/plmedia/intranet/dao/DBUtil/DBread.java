@@ -619,7 +619,7 @@ public class DBread {
       ArrayList<Group> groups = new ArrayList<>();
       stmt.setInt(1, id);
       ResultSet rs = stmt.executeQuery();
-      rs.first();
+      rs.beforeFirst();
       while (rs.next()) {
         groups.add(readGroupByID(rs.getInt("fk_group_id")));
       }

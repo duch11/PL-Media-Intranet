@@ -292,16 +292,16 @@ public class DBupdate {
       toWrite.removeAll(orgGroup);
       toDelete.removeAll(newGroup);
 
+      for (Integer i : toDelete) {
+        deleteStmt.setInt(1, employee.getUserId());
+        deleteStmt.setInt(2, i);
+        deleteStmt.executeUpdate();
+      }
+
       for (Integer i : toWrite) {
         writeStmt.setInt(1, employee.getUserId());
         writeStmt.setInt(2, i);
         writeStmt.executeUpdate();
-      }
-
-      for (Integer i : toDelete) {
-        deleteStmt.setInt(1, employee.getUserId());
-        deleteStmt.setInt(2, toDelete.get(i));
-        deleteStmt.executeUpdate();
       }
 
       return 1;
@@ -331,16 +331,16 @@ public class DBupdate {
       toWrite.removeAll(orgWing);
       toDelete.removeAll(newWing);
 
-      for (Integer i : toWrite) {
-        writeStmt.setInt(1, employee.getUserId());
-        writeStmt.setInt(2, toWrite.get(i));
-        writeStmt.executeUpdate();
-      }
-
       for (Integer i : toDelete) {
         deleteStmt.setInt(1, employee.getUserId());
         deleteStmt.setInt(2, toDelete.get(i));
         deleteStmt.executeUpdate();
+      }
+
+      for (Integer i : toWrite) {
+        writeStmt.setInt(1, employee.getUserId());
+        writeStmt.setInt(2, toWrite.get(i));
+        writeStmt.executeUpdate();
       }
 
       return 1;
@@ -352,7 +352,6 @@ public class DBupdate {
 
   public int updateChildWing(Child child, ArrayList<Integer> newWing) {
     try(
-
         Connection con = ConMan.getConnection();
     ) {
       PreparedStatement writeStmt = ConMan.prepStat(con, Statements.DEF_ADD_WING_TO_CHILD);
@@ -370,16 +369,16 @@ public class DBupdate {
       toWrite.removeAll(orgWing);
       toDelete.removeAll(newWing);
 
-      for (Integer i : toWrite) {
-        writeStmt.setInt(1, child.getChildId());
-        writeStmt.setInt(2, toWrite.get(i));
-        writeStmt.executeUpdate();
-      }
-
       for (Integer i: toDelete) {
         deleteStmt.setInt(1, child.getChildId());
         deleteStmt.setInt(2, toDelete.get(i));
         deleteStmt.executeUpdate();
+      }
+
+      for (Integer i : toWrite) {
+        writeStmt.setInt(1, child.getChildId());
+        writeStmt.setInt(2, toWrite.get(i));
+        writeStmt.executeUpdate();
       }
 
       return 1;
