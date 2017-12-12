@@ -37,27 +37,30 @@ public class DBupdate {
         Connection con = ConMan.getConnection();
     ) {
       PreparedStatement stmt;
-      String parentPass = parent.getPassword();
+      if (util.checkEmail(parent.getUserEmail()) != 10){
+        String parentPass = parent.getPassword();
 
-      if(parentPass != null) {
-        stmt = ConMan.prepStat(con, Statements.DEF_UPDATE_USER);
-        String hashedPassword = passwordEncoder.encode(parentPass);
-        stmt.setString(1, hashedPassword);
-        stmt.setString(2, parent.getUserEmail());
-        stmt.setString(3, parent.getFirstName());
-        stmt.setString(4, parent.getLastName());
-        stmt.setInt(5, parent.getUserId());
+        if(parentPass != null) {
+          stmt = ConMan.prepStat(con, Statements.DEF_UPDATE_USER);
+          String hashedPassword = passwordEncoder.encode(parentPass);
+          stmt.setString(1, hashedPassword);
+          stmt.setString(2, parent.getUserEmail());
+          stmt.setString(3, parent.getFirstName());
+          stmt.setString(4, parent.getLastName());
+          stmt.setInt(5, parent.getUserId());
 
-      } else {
-        stmt = ConMan.prepStat(con, Statements.DEF_UPDATE_USER_NOPASS);
-        stmt.setString(1, parent.getUserEmail());
-        stmt.setString(2, parent.getFirstName());
-        stmt.setString(3, parent.getLastName());
-        stmt.setInt(4, parent.getUserId());
+        } else {
+          stmt = ConMan.prepStat(con, Statements.DEF_UPDATE_USER_NOPASS);
+          stmt.setString(1, parent.getUserEmail());
+          stmt.setString(2, parent.getFirstName());
+          stmt.setString(3, parent.getLastName());
+          stmt.setInt(4, parent.getUserId());
+        }
+
+        stmt.executeUpdate();
+        return 1;
       }
 
-      stmt.executeUpdate();
-      return 1;
     } catch (SQLException e) {
       e.printStackTrace();
     }
@@ -70,20 +73,23 @@ public class DBupdate {
     ) {
       PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_UPDATE_USER);
       String employeePass = employee.getPassword();
+      if (util.checkEmail(employee.getUserEmail()) != 10){
+        if(!(employee.getPassword() == null)) {
+          String hashedPassword = passwordEncoder.encode(employeePass);
+          stmt.setString(1, hashedPassword);
+        } else {
+          stmt.setString(1, util.readHashedPassByUserID(employee.getUserId()));
+        }
+        stmt.setString(2, employee.getUserEmail());
+        stmt.setString(3, employee.getFirstName());
+        stmt.setString(4, employee.getLastName());
+        stmt.setInt(5, employee.getUserId());
+        stmt.executeUpdate();
+        System.out.println("Employee user created");
 
-      if(!(employee.getPassword() == null)) {
-        String hashedPassword = passwordEncoder.encode(employeePass);
-        stmt.setString(1, hashedPassword);
-      } else {
-        stmt.setString(1, util.readHashedPassByUserID(employee.getUserId()));
+        return 1;
       }
-      stmt.setString(2, employee.getUserEmail());
-      stmt.setString(3, employee.getFirstName());
-      stmt.setString(4, employee.getLastName());
-      stmt.setInt(5, employee.getUserId());
-
-      stmt.executeUpdate();
-      return 1;
+      System.out.println("Employee user NOT created");
     } catch (SQLException e) {
       e.printStackTrace();
     }
@@ -158,6 +164,7 @@ public class DBupdate {
     }
     return -1;
   }
+
 
   // FK updaters
   public int updateChildToParent(Parent parent, ArrayList<Integer> newChildren) {

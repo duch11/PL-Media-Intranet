@@ -19,114 +19,13 @@ i højre og venstre side-->
 
     <div th:replace="fragments/sidebars :: parent"/>
 
-    <!--USER/PARENT/CHILD LISTE-->
-    <div class="col-sm-9 col-sm-offset-3 col-lg-8 col-lg-offset-3 main" style="overflow-y: auto; max-height: 40em;">
-      <div class="list-group" style="max-height: 400px">
 
-
-
-        <div class="row">
-          <div class="col-sm-9 col-sm-offset-3 col-lg-8 col-lg-offset-3 main">
-            <table class="table">
-              <thead>
-              <h1>din information</h1>
-              <tr>
-                <th>Beskrivelse</th>
-                <th>Information</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr>
-                <th>Navn:</th>
-                <td>Phillip</td>
-                <td><a href="#" class="btn btn-edit pull-right" data-toggle="modal" data-target="#editName"><i class="fa fa-pencil"></i></a></td>
-              </tr>
-              <tr>
-                <th>Email:</th>
-                <td>phillip@lind.dk</td>
-                <td><a href="#" class="btn btn-edit pull-right" data-toggle="modal" data-target="#editEmail"><i class="fa fa-pencil"></i></a></td>
-              </tr>
-              <tr>
-                <th>Password:</th>
-                <td>[Hidden]</td>
-                <td><a href="#" class="btn btn-edit pull-right" data-toggle="modal" data-target="#editPassword"><i class="fa fa-pencil"></i></a></td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-
-
-
-        </div>
-    </div>
   </div>
 </div>
 
 
-<div id="editName" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <!--Kryds knap-->
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Name</h4>
-      </div>
-      <div class="modal-body">
-        <input type="text"/>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
-      </div>
-    </div>
-  </div>
-</div>
 
 
-<div id="editEmail" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <!--Kryds knap-->
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Email</h4>
-      </div>
-      <div class="modal-body">
-        <input type="text"/>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<div id="editPassword" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <!--Kryds knap-->
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Password</h4>
-      </div>
-      <div class="modal-body">
-        <input type="password"/>
-        <input type="password"/>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
-      </div>
-    </div>
-  </div>
-</div>
 
 <!--JAVASCRIPT (skal være til sidst for gode loading tider)-->
 <!-- BOOTSTRAP MaxCDN jQuery library -->
