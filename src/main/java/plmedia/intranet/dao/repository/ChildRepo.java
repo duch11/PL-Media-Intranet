@@ -60,5 +60,9 @@ public class ChildRepo implements IRepo<Child> {
   public ArrayList<Child> readChildrenByWingID(int id) {
     return dbr.readChildrenByWingID(id);
   }
+
+  public ArrayList<Child> readChildrenByParentID(int id){
+    return dbr.readChildrenByParentID(id);
+  }
   
 }

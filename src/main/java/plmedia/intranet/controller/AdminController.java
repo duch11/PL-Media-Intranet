@@ -164,6 +164,7 @@ public class AdminController {
   @RequestMapping(value = {"/admin/details"}, method = RequestMethod.GET, params = {"parent"})
   public String parentDetails(Model model, Principal principal, @RequestParam int parent) {
     model.addAttribute("user", parentRepo.Read(parent));
+    model.addAttribute("parentsChildren", childRepo.readChildrenByParentID(parent));
     model.addAttribute("parentDetails", true);
     showAdminPanel(model, principal);
     return "detailsview";

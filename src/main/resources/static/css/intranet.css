@@ -333,3 +333,30 @@ a.list-group-item.active:hover
   margin-top: 0;
 }
 
+.modal-body.child-list ul{
+  padding: 0;
+  margin: 0;
+}
+
+.modal-body.child-list ul li{
+  padding-left: 70px;
+  font-size: 1.6em;
+}
+
+form.child-list{
+  height: 40px;
+}
+
+
+.modal-body.child-list {
+  padding: 0;
+  margin: 0;
+}
+
+.modal-header {
+  border-bottom: transparent 0px;
+}
+.modal-footer {
+  border-top: transparent 0px;
+}
+
