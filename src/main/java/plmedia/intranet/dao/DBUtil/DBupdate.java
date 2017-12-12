@@ -95,6 +95,7 @@ public class DBupdate {
       stmt.setString(2, child.getLastName());
       stmt.setDate(3, (Date) child.getBirthday());
       stmt.setString(4, child.getAddress());
+      stmt.setInt(5, child.getChildId());
 
       stmt.executeUpdate();
       return 1;
