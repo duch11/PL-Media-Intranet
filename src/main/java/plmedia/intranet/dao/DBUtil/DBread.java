@@ -291,7 +291,7 @@ public class DBread {
     ) {
       PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_ALL_CHILDREN_SQL);
       ResultSet rs = stmt.executeQuery();
-      rs.first();
+      rs.beforeFirst();
       ArrayList<Child> children = new ArrayList<>();
 
       while (rs.next()) {
@@ -496,12 +496,10 @@ public class DBread {
       PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_WING_BY_child_ID);
       stmt.setInt(1, id);
       ResultSet rs = stmt.executeQuery();
-      rs.first();
 
       if (!rs.next()){ // checking if resultset is empty.
         return new Wing();
       }
-
       rs.first();
       return new Wing(
           rs.getInt(1),

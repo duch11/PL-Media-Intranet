@@ -80,7 +80,9 @@ i højre og venstre side-->
       <table class="table ">
         <tr>
           <th>Stue:</th>
-        <td th:text="${wing.getWingName()}"/>
+          <div th:if="${wing}">
+            <td th:text="${wing.getWingName()}"/>
+          </div>
         <td><a href="#" class="btn btn-edit pull-right" data-toggle="modal" data-target="#editWing"><i class="fa fa-pencil"></i></a></td>
         </tr>
       </table>

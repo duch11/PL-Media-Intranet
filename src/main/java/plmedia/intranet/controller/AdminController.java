@@ -177,8 +177,12 @@ public class AdminController {
 
   @RequestMapping(value = {"/admin/details"}, method = RequestMethod.GET, params = {"child"})
   public String childDetails(Model model, Principal principal, @RequestParam int child) {
-    model.addAttribute("child", childRepo.Read(child));
-    model.addAttribute("wing", wingRepo.Read(childRepo.Read(child).getWingId()));
+    Child childDetails = childRepo.Read(child);
+    model.addAttribute("child", childDetails);
+    System.out.println(childDetails.getWingId());
+    if(new Integer(childDetails.getWingId()) != 0){
+      model.addAttribute("wing", wingRepo.Read(childRepo.Read(child).getWingId()));
+    }
     model.addAttribute("allergen", allergenRepo.readAllergenByChildID(child));
     showAdminPanel(model,principal);
     return "childview";

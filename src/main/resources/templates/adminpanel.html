@@ -122,21 +122,6 @@
                 <label for="parentPassword">Adgangskode:</label>
                 <input type="password" class="form-control" id="parentPassword" name="password" th:field="*{password}"/>
               </div>
-
-
-              <div class="checkbox">
-                <div class="row">
-                  <div class="col-sm-4">
-                    <label><input type="checkbox" value="1" th:field="*{permissions}"/> Parent Permission 1</label>
-                  </div>
-                  <div class="col-sm-4">
-                    <label><input type="checkbox" value="2" th:field="*{permissions}"/> Parent Permission 2</label>
-                  </div>
-                  <div class="col-sm-4">
-                    <label><input type="checkbox" value="3" th:field="*{permissions}"/> Parent Permission 3</label>
-                  </div>
-                </div>
-              </div>
             </div>
             <div class="modal-footer">
               <button type="submit" class="btn btn-success">Gem</button>
@@ -177,9 +162,6 @@
                 <input type="date" class="form-control" id="birthday" name="birthday" th:field="*{birthday}"/>
               </div>
 
-              <select th:field="*{wingId}" name="wingId" required="true" class="form-control">
-                <option th:each="wing : ${allWings}" th:value="${wing.getWingID()}" th:text="${wing.getWingName()}"></option>
-              </select>
             </div>
             <div class="modal-footer">
               <button type="submit" class="btn btn-success">Gem</button>
