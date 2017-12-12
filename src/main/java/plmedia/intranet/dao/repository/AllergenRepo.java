@@ -7,6 +7,7 @@ import plmedia.intranet.dao.DBUtil.DBdelete;
 import plmedia.intranet.dao.DBUtil.DBread;
 import plmedia.intranet.dao.DBUtil.DBupdate;
 import plmedia.intranet.model.Allergen;
+import plmedia.intranet.model.Child;
 
 /**
  * A repository for Allergens. Takes in logic from DBUtil package.
@@ -48,5 +49,9 @@ public class AllergenRepo implements IRepo<Allergen> {
 
   public ArrayList<Allergen> readAllergenByChildID(int id){
     return dbr.readAllergenByChildID(id);
+  }
+
+  public int updateChildAllergens(Child child, ArrayList<Integer> newAllergen) {
+    return dbu.updateChildAllergens(child, newAllergen);
   }
 }
