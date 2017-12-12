@@ -36,21 +36,25 @@ public class DBupdate {
     try(
         Connection con = ConMan.getConnection();
     ) {
-      PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_UPDATE_USER);
+      PreparedStatement stmt;
       String parentPass = parent.getPassword();
 
-      if(!parent.getPassword().equals(null)) {
+      if(parentPass != null) {
+        stmt = ConMan.prepStat(con, Statements.DEF_UPDATE_USER);
         String hashedPassword = passwordEncoder.encode(parentPass);
         stmt.setString(1, hashedPassword);
+        stmt.setString(2, parent.getUserEmail());
+        stmt.setString(3, parent.getFirstName());
+        stmt.setString(4, parent.getLastName());
+        stmt.setInt(5, parent.getUserId());
+
       } else {
-
+        stmt = ConMan.prepStat(con, Statements.DEF_UPDATE_USER_NOPASS);
+        stmt.setString(1, parent.getUserEmail());
+        stmt.setString(2, parent.getFirstName());
+        stmt.setString(3, parent.getLastName());
+        stmt.setInt(4, parent.getUserId());
       }
-
-
-      stmt.setString(2, parent.getUserEmail());
-      stmt.setString(3, parent.getFirstName());
-      stmt.setString(4, parent.getLastName());
-      stmt.setInt(5, parent.getUserId());
 
       stmt.executeUpdate();
       return 1;
@@ -96,6 +100,7 @@ public class DBupdate {
       stmt.setDate(3, (Date) child.getBirthday());
       stmt.setString(4, child.getAddress());
       stmt.setInt(5, child.getWingId());
+      stmt.setInt(6, child.getChildId());
 
       stmt.executeUpdate();
       return 1;
