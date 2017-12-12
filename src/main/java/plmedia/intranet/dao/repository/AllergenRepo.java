@@ -54,4 +54,5 @@ public class AllergenRepo implements IRepo<Allergen> {
   public int updateChildAllergens(Child child, ArrayList<Integer> newAllergen) {
     return dbu.updateChildAllergens(child, newAllergen);
   }
+
 }

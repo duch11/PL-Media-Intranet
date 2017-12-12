@@ -186,7 +186,8 @@ public class DBupdate {
         deleteStmt.setInt(2, toDelete.get(i));
         deleteStmt.executeUpdate();
       }
-      System.out.println("");
+
+      return 1;
     } catch (SQLException e){
       e.printStackTrace();
     }
