@@ -145,7 +145,7 @@ i højre og venstre side-->
 
     <!-- Modal content-->
     <div class="modal-content">
-      <form th:action="${childDetails} ? @{/parent/update/child} : @{/parent/update/child}" method="post">
+      <form th:action="${childDetails} ? @{/parent/update/child}" method="post">
       <div class="modal-header">
         <!--Kryds knap-->
         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -155,8 +155,7 @@ i højre og venstre side-->
         <div class="form-group">
           <label for="firstName">Fornavn:</label>
           <input type="text" th:value="${child.getFirstName()}" name="firstName" required="true" id="firstName" class="form-control"/>
-          <input type="hidden" th:value="${user.getUserId()}" name="ID"/>
-        </div>
+          <input type="hidden" th:value="${child.getChildId()}" name="ID"/>
       </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-success">Gem</button>
@@ -172,7 +171,7 @@ i højre og venstre side-->
 
     <!-- Modal content-->
     <div class="modal-content">
-      <form th:action="${childDetails} ? @{/parent/update/child} : @{/parent/update/child}" method="post">
+      <form th:action="${childDetails} ? @{/parent/update/child}" method="post">
         <div class="modal-header">
           <!--Kryds knap-->
           <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -180,8 +179,9 @@ i højre og venstre side-->
         </div>
         <div class="modal-body">
           <div class="form-group">
-            <label for="firstName">Efternavn:</label>
+            <label for="lastName">Efternavn:</label>
             <input type="text" th:value="${child.getLastName()}" name="lastName" required="true" id="lastName" class="form-control"/>
+            <input type="hidden" th:value="${child.getChildId()}" name="ID"/>
           </div>
         </div>
         <div class="modal-footer">
@@ -203,19 +203,29 @@ i højre og venstre side-->
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
+        <form th:action="${childDetails} ? @{/parent/update/child}" method="post">
         <!--Kryds knap-->
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Fødselsdag</h4>
       <div class="modal-body">
-        <input type="text"/>
+        <div class="form-group">
+          <label for="birthday">Fødselsdag:</label>
+          <input type="text" th:value="${child.getBirthday()}" name="birthday" required="true" id="birthday" class="form-control"/>
+          <input type="hidden" th:value="${child.getChildId()}" name="ID"/>
+        </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-success">Gem</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Annuller</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
 </div>
-</div>
+
+
+
 
 
 <!-- edit address-->
@@ -228,18 +238,26 @@ i højre og venstre side-->
     <div class="modal-content">
       <div class="modal-header">
         <!--Kryds knap-->
+        <form th:action="${childDetails} ? @{/parent/update/child}" method="post">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Adresse</h4>
         <div class="modal-body">
-          <input type="text"/>
+          <div class="form-group">
+            <label for="address">Adresse:</label>
+            <input type="text" th:value="${child.getAddress()}" name="address" required="true" id="address" class="form-control"/>
+            <input type="hidden" th:value="${child.getChildId()}" name="ID"/>
+          </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
-        </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-success">Gem</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Annuller</button>
+          </div>
+        </form>
       </div>
     </div>
+    </div>
   </div>
-</div>
+
 
 
 <!-- edit parents-->
@@ -252,10 +270,21 @@ i højre og venstre side-->
     <div class="modal-content">
       <div class="modal-header">
         <!--Kryds knap-->
+        <form th:action="${childDetails} ? @{/parent/update/child}" method="post">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Forældre</h4>
         <div class="modal-body">
-          <input type="text"/>
+          <div class="form-group">
+            <label for="parents">Forældre:</label>
+            <input type="text" th:value="${child.getParents()}" name="parents" required="true" id="parents" class="form-control"/>
+            <input type="hidden" th:value="${child.getChildId()}" name="ID"/>
+          </div>
+        </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-success">Gem</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Annuller</button>
+          </div>
+        </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
@@ -263,7 +292,7 @@ i højre og venstre side-->
       </div>
     </div>
   </div>
-</div>
+
 
 
 <!-- edit Wing-->

@@ -49,7 +49,7 @@ private void showPanals(Model model, Principal principal) {
   }
   if(currentParent == null){
     currentParent = parentRepo.readParentByEmail(principal.getName());
-  } else if (!currentParent.getUserEmail().equals(principal.getName())) {
+  } else if (!currentParent.getUserEmail().equals(principal.getName())){
     currentParent = parentRepo.readParentByEmail(principal.getName());
   }
   model.addAttribute("children",children);
@@ -123,51 +123,65 @@ private void showPanals(Model model, Principal principal) {
    */
   @RequestMapping(value = {"/parent/update/child"}, method = RequestMethod.POST, params = {"firstName", "ID"})
   public String updateChildFirstName(@RequestParam String firstName, @RequestParam int ID){
-    updateFirstName(firstName,ID);
-    return "redirect:/parent/childview?child=" + ID;
+    Child child = childRepo.Read(ID);
+    child.setFirstName(firstName);
+    childRepo.Update(child);
+
+
+    return "redirect:/parent/details?child=" + ID;
   }
 
 
-  public void updateFirstName(String firstName, int ID){
-    System.out.println(firstName + "  " + ID);
-  }
+
+
 
   @RequestMapping(value = {"/parent/update/child"}, method = RequestMethod.POST, params = {"lastName", "ID"})
   public String updateChildLastName(@RequestParam String lastName, @RequestParam int ID){
-    updateLastName(lastName,ID);
-    return "redirect:/parent/childview?child=" + ID;
+    Child child = childRepo.Read(ID);
+    child.setLastName(lastName);
+    childRepo.Update(child);
+
+    return "redirect:/parent/details?child=" + ID;
   }
 
-  public void updateLastName(String lastName, int ID){
-    System.out.println(lastName + "  " + ID);
-  }
+
 
   /**
    * update birthday
    */
   @RequestMapping(value = {"/parent/update/child"}, method = RequestMethod.POST, params = {"birthday", "ID"})
   public String updateChildbirthday(@RequestParam java.sql.Date birthday, @RequestParam int ID) {
-    updateBirthday(birthday, ID);
+    Child child = childRepo.Read(ID);
+    child.setBirthday(birthday);
+    childRepo.Update(child);
     return "redirect:/parent/details?child=" + ID;
   }
 
-    public void updateBirthday(java.sql.Date birthday , int ID){
-      System.out.println(birthday + "  " + ID);
-  }
 
   /**
    * update address
    */
   @RequestMapping(value = {"/parent/update/child"}, method = RequestMethod.POST, params = {"address", "ID"})
   public String updateChildAddress(@RequestParam String address, @RequestParam int ID){
-    updateAddress(address,ID);
+    Child child = childRepo.Read(ID);
+    child.setAddress(address);
+    childRepo.Update(child);
     return "redirect:/parent/details?child=" + ID;
   }
 
 
-  public void updateAddress(String address, int ID) {
-    System.out.println(address + "  " + ID);
+  /**
+   * update parents
+   */
 
-  }
+ // @RequestMapping(value = {"/parent/update/child"}, method = RequestMethod.POST, params = {"parents", "ID"})
+ // public  String updateChildParents(@RequestParam )
+
+  /**
+   * update allergens
+   */
+
+
+
 
 }

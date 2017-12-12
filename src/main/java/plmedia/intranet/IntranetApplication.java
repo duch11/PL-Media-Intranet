@@ -13,9 +13,7 @@ public class IntranetApplication {
   public static void main(String[] args) {
 		SpringApplication.run(IntranetApplication.class, args);
 
-		UtilRepo u = new UtilRepo();
 
-		u.checkPassword(323, "123");
 
-  }
+}
 }
