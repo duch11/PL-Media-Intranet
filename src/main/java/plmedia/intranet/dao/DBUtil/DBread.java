@@ -52,7 +52,7 @@ public class DBread {
       ResultSet rs = stmt.executeQuery();
 
       rs.first();
-      ArrayList<Permission> permissions = readPermissionsByUserID((rs.getInt("user_id")));
+      ArrayList<Permission> permissions = readPermissionsByUserID(id);
 
       return new Parent(
           rs.getInt("user_id"),
@@ -110,7 +110,7 @@ public class DBread {
       rs.beforeFirst();
       ArrayList<Parent> parents = new ArrayList<>();
       while (rs.next()) {
-        parents.add(readParentByID(rs.getInt("user_id")));
+        parents.add(readParentByID(rs.getInt("fk_parent_user_id")));
       }
 
       return parents;
