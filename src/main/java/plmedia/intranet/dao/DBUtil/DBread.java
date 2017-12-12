@@ -291,15 +291,18 @@ public class DBread {
     ) {
       PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_ALL_CHILDREN_SQL);
       ResultSet rs = stmt.executeQuery();
+      rs.first();
       ArrayList<Child> children = new ArrayList<>();
-      Wing wing = readWingByID(rs.getInt("child_id"));
-      ArrayList<Parent> parents = readParentByChildID(rs.getInt("child_id"));
-      ArrayList<Allergen> allergens = readAllergenByChildID(rs.getInt("child_id"));
-      int wingid = wing.getWingID();
 
       while (rs.next()) {
+        int id = rs.getInt("child_id");
+        Wing wing = readWingByChildID(id);
+        ArrayList<Parent> parents = readParentByChildID(id);
+        ArrayList<Allergen> allergens = readAllergenByChildID(id);
+        int wingid = wing.getWingID();
+
         children.add(new Child(
-            rs.getInt("child_id"),
+            id,
             rs.getString("first_name"),
             rs.getString("last_name"),
             rs.getDate("birthday"),
@@ -327,14 +330,15 @@ public class DBread {
       ResultSet rs = stmt.executeQuery();
       rs.first();
       ArrayList<Child> children = new ArrayList<>();
-      Wing wing = readWingByID(rs.getInt("child_id"));
-      ArrayList<Parent> parents = readParentByChildID(rs.getInt("child_id"));
-      ArrayList<Allergen> allergens = readAllergenByChildID(rs.getInt("child_id"));
-      int wingid = wing.getWingID();
 
       while (rs.next()) {
-        children.add( new Child(
-            rs.getInt("child_id"),
+        Wing wing = readWingByChildID(id);
+        ArrayList<Parent> parents = readParentByChildID(id);
+        ArrayList<Allergen> allergens = readAllergenByChildID(id);
+        int wingid = wing.getWingID();
+
+        children.add(new Child(
+            id,
             rs.getString("first_name"),
             rs.getString("last_name"),
             rs.getDate("birthday"),
@@ -344,7 +348,6 @@ public class DBread {
             parents,
             allergens));
       }
-
       return children;
     } catch (SQLException e) {
       e.printStackTrace();
