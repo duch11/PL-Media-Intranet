@@ -132,8 +132,18 @@ public class Child {
 
 
   @Override
-  public String toString(){
-    return childId + ": " + firstName + " " + lastName + " - " + birthday;
+  public String toString() {
+    return "Child{" +
+        "childId=" + childId +
+        ", firstName='" + firstName + '\'' +
+        ", lastName='" + lastName + '\'' +
+        ", birthday=" + birthday +
+        ", address='" + address + '\'' +
+        ", wingId=" + wingId +
+        ", otherInfo='" + otherInfo + '\'' +
+        ", parents=" + parents +
+        ", allergens=" + allergens +
+        '}';
   }
 }
 
