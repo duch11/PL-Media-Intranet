@@ -263,9 +263,9 @@ public class DBread {
       stmt.setInt(1, id);
       ResultSet rs = stmt.executeQuery();
       rs.first();
-      Wing wing = readWingByID(rs.getInt("child_id"));
-      ArrayList<Parent> parents = readParentByChildID(rs.getInt("child_id"));
-      ArrayList<Allergen> allergens = readAllergenByChildID(rs.getInt("child_id"));
+      Wing wing = readWingByChildID(id);
+      ArrayList<Parent> parents = readParentByChildID(id);
+      ArrayList<Allergen> allergens = readAllergenByChildID(id);
       int wingid = wing.getWingID();
 
       return new Child(
@@ -472,6 +472,25 @@ public class DBread {
 
     ) {
       PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_WING_BY_USER_ID);
+      stmt.setInt(1, id);
+      ResultSet rs = stmt.executeQuery();
+      rs.first();
+      return new Wing(
+          rs.getInt(1),
+          rs.getString(2),
+          rs.getString(3));
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return null;
+  }
+
+  public Wing readWingByChildID(int id) {
+    try (
+        Connection con = ConMan.getConnection();
+
+    ) {
+      PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_WING_BY_child_ID);
       stmt.setInt(1, id);
       ResultSet rs = stmt.executeQuery();
       rs.first();

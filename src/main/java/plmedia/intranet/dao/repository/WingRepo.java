@@ -63,4 +63,7 @@ public class WingRepo implements IRepo<Wing>{
   public ArrayList<Wing> readWingIDsByChildID(int id) {
     return dbr.readWingIDsByChildID(id);
   }
+
+  public Wing readWingByChildID(int id){ return dbr.readWingByChildID(id); }
+
 }
