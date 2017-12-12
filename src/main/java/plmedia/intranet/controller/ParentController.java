@@ -15,6 +15,7 @@ import plmedia.intranet.dao.repository.WingRepo;
 import plmedia.intranet.dao.repository.UtilRepo;
 import plmedia.intranet.model.Child;
 import plmedia.intranet.model.Parent;
+import plmedia.intranet.model.Wing;
 
 
 /**
@@ -225,6 +226,20 @@ private void showPanals(Model model, Principal principal) {
     childRepo.Update(child);
     return "redirect:/parent/children?child=" + ID;
   }
+
+  /**
+   * update Wing
+   */
+
+  @RequestMapping(value = {"parent/update/child"}, method = RequestMethod.POST, params =  {"wingName", "ID"})
+  public String updateChildWing(@RequestParam String wingName, @RequestParam int ID){
+    Child child = childRepo.Read(ID);
+
+
+
+    return "redirect:/parent/children?child=" + ID;
+  }
+
 
 
   /**
