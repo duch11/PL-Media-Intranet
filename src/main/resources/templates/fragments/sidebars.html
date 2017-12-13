@@ -20,16 +20,17 @@
       <a th:attrappend="href=${group.getId()}" th:text="'- ' + ${group.getGroupName()}" href="/admin/employees?groupID=" >Thymeleaf Employee Group</a>
     </li>
   </ul>
-
+  <ul class="nav nav-sidebar">
+    <li>
+      <a th:class="${parents} ? 'active' : (${parentDetails} ? 'semiActive')" href="/admin/parents">Forældre <i th:if="${parentDetails}" class="fa fa-user pull-right" aria-hidden="true"></i></a>
+    </li>
+  </ul>
   <ul class="nav nav-sidebar">
     <li>
       <a th:class="${allChildren} ? 'active' : (${child} ? 'semiActive')" href="/admin/children">Børn <i th:if="${child}" class="fa fa-user pull-right" aria-hidden="true"></i></a>
     </li>
     <li th:each="childWing : ${allWings}" th:class="${currentWing} ? ( (${childWing.getWingID()} == ${currentWing.getWingID()}) ? 'active')">
       <a th:attrappend="href=${childWing.getWingID()}" th:text="'- ' + ${childWing.getWingName()}  + ' stue'" href="/admin/children?wingID=" >Thymeleaf Child Group</a>
-    </li>
-    <li>
-      <a th:class="${parents} ? 'active' : (${parentDetails} ? 'semiActive')" href="/admin/parents">Forældre <i th:if="${parentDetails}" class="fa fa-user pull-right" aria-hidden="true"></i></a>
     </li>
   </ul>
 </div>

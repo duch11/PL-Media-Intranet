@@ -14,7 +14,7 @@
 
         <div th:replace="fragments/sidebars :: admin"/>
 
-        <div class="col-sm-7 col-sm-offset-3 main">
+        <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
           <div class="row">
             <ul class="list-inline">
               <li><h1 th:text="${currentGroup} ? ${currentGroup.getGroupName()} : (${parents} and ${Read_all_parents} ? 'Forældre' : (${currentWing} ? ${currentWing.getWingName()} + ' stue' : (${children} and ${Read_all_children} ? 'Alle Børn' : (${allUsers} ? 'Personale'))))">Admins/Ledere</h1></li>
