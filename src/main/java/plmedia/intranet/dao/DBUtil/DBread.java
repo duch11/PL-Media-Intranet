@@ -20,7 +20,7 @@ public class DBread {
   // Parents
   public Parent readParentByEmail(String userEmail) {
     try (
-        Connection con = ConMan.getConnection();
+        Connection con = ConMan.getConnection()
     ) {
       PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_PARENT_BY_EMAIL_SQL);
       stmt.setString(1, userEmail);
@@ -45,7 +45,7 @@ public class DBread {
 
   public Parent readParentByID(int id) {
     try (
-        Connection con = ConMan.getConnection();
+        Connection con = ConMan.getConnection()
     ) {
       PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_PARENT_BY_ID_SQL);
       stmt.setInt(1, id);
@@ -72,7 +72,7 @@ public class DBread {
 
   public ArrayList<Parent> readAllParents() {
     try (
-        Connection con = ConMan.getConnection();
+        Connection con = ConMan.getConnection()
     ) {
       PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_ALL_USERS_BY_TYPE_SQL);
       stmt.setString(1, "ROLE_PAR");
@@ -101,7 +101,7 @@ public class DBread {
 
   public ArrayList<Parent> readParentByChildID(int id) {
     try (
-        Connection con = ConMan.getConnection();
+        Connection con = ConMan.getConnection()
 
     ) {
       PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_PARENT_ID_BY_CHILD_ID_SQL);
@@ -124,7 +124,7 @@ public class DBread {
 
   public Employee readEmployeeByID(int id) {
     try (
-        Connection con = ConMan.getConnection();
+        Connection con = ConMan.getConnection()
 
     ) {
       PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_EMPLOYEE_BY_ID_SQL);
@@ -149,7 +149,7 @@ public class DBread {
 
   public Employee readEmployeeByEmail(String userEmail) {
     try (
-        Connection con = ConMan.getConnection();
+        Connection con = ConMan.getConnection()
     ) {
       PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_EMPLOYEE_BY_EMAIL_SQL);
       stmt.setString(1, userEmail);
@@ -175,7 +175,7 @@ public class DBread {
 
   public ArrayList<Employee> readAllEmployees()  {
       try (
-          Connection con = ConMan.getConnection();
+          Connection con = ConMan.getConnection()
 
       ) {
         PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_ALL_USERS_BY_TYPE_SQL);
@@ -204,7 +204,7 @@ public class DBread {
 
   public ArrayList<Employee> readAllEmployeesByGroup(int id)  {
       try (
-          Connection con = ConMan.getConnection();
+          Connection con = ConMan.getConnection()
 
       ) {
         PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_ALL_EMPLOYEES_BY_GROUP_ID);
@@ -236,7 +236,7 @@ public class DBread {
 
   public ArrayList<Integer> readChildrenIDByParentID(int id) {
     try (
-        Connection con = ConMan.getConnection();
+        Connection con = ConMan.getConnection()
 
     ) {
       PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_CHILDREN_ID_BY_PARENT_ID_SQL);
@@ -256,7 +256,7 @@ public class DBread {
 
   public ArrayList<Child> readChildrenByParentID(int parentId) {
     try (
-        Connection con = ConMan.getConnection();
+        Connection con = ConMan.getConnection()
 
     ) {
       PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_CHILDREN_BY_PARENT_ID_SQL);
@@ -291,7 +291,7 @@ public class DBread {
 
   public ArrayList<Child> readNotChildrenByParentID(int parentId) {
     try (
-        Connection con = ConMan.getConnection();
+        Connection con = ConMan.getConnection()
 
     ) {
       PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_NOT_CHILDREN_BY_PARENT_ID_SQL);
@@ -326,7 +326,7 @@ public class DBread {
 
   public Child readChildById(int id) {
     try (
-        Connection con = ConMan.getConnection();
+        Connection con = ConMan.getConnection()
 
     ) {
       PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_CHILD_BY_ID_SQL);
@@ -357,7 +357,7 @@ public class DBread {
 
   public ArrayList<Child> readAllChildren()  {
     try (
-        Connection con = ConMan.getConnection();
+        Connection con = ConMan.getConnection()
     ) {
       PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_ALL_CHILDREN_SQL);
       ResultSet rs = stmt.executeQuery();
@@ -392,7 +392,7 @@ public class DBread {
 
   public ArrayList<Child> readChildrenByWingID(int id) {
     try (
-        Connection con = ConMan.getConnection();
+        Connection con = ConMan.getConnection()
 
     ) {
       PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_CHILDREN_BY_WING_ID_SQL);
@@ -430,8 +430,7 @@ public class DBread {
 
   public Permission readPermissionByID(int id) {
     try (
-        Connection con = ConMan.getConnection();
-
+        Connection con = ConMan.getConnection()
 
     ) {
       PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_PERMISSIONS_BY_ID_SQL);
@@ -452,7 +451,7 @@ public class DBread {
 
   public ArrayList<Permission> readAllPermissions() {
     try (
-        ResultSet rs = ConMan.regStat(Statements.DEF_GET_ALL_PERMISSIONS_SQL);
+        ResultSet rs = ConMan.regStat(Statements.DEF_GET_ALL_PERMISSIONS_SQL)
     ) {
       ArrayList<Permission> permissions = new ArrayList<>();
       while (rs.next()) {
@@ -471,7 +470,7 @@ public class DBread {
 
   public ArrayList<Permission> readPermissionsByUserID(int id) {
     try (
-        Connection con = ConMan.getConnection();
+        Connection con = ConMan.getConnection()
 
     ) {
       PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_PERMISSION_ID_BY_USER_ID_SQL);
@@ -496,7 +495,7 @@ public class DBread {
 
   public Wing readWingByID(int id)  {
     try (
-        Connection con = ConMan.getConnection();
+        Connection con = ConMan.getConnection()
 
     ) {
       PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_WING_BY_ID);
@@ -516,7 +515,7 @@ public class DBread {
 
   public ArrayList<Wing> readAllWings()  {
     try (
-        Connection con = ConMan.getConnection();
+        Connection con = ConMan.getConnection()
 
     ) {
       PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_ALL_WINGS);
@@ -541,7 +540,7 @@ public class DBread {
 
   public Wing readWingByUserID(int id) {
     try (
-        Connection con = ConMan.getConnection();
+        Connection con = ConMan.getConnection()
 
     ) {
       PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_WING_BY_USER_ID);
@@ -560,7 +559,7 @@ public class DBread {
 
   public Wing readWingByChildID(int id) {
     try (
-        Connection con = ConMan.getConnection();
+        Connection con = ConMan.getConnection()
     ) {
 
       PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_WING_BY_child_ID);
@@ -583,7 +582,7 @@ public class DBread {
 
   public ArrayList<Wing> readWingIDsByUserID(int id) {
     try(
-        Connection con = ConMan.getConnection();
+        Connection con = ConMan.getConnection()
     ) {
       PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_WING_IDS_BY_USER_ID);
       ArrayList<Wing> wings = new ArrayList<>();
@@ -603,7 +602,7 @@ public class DBread {
 
   public ArrayList<Wing> readWingIDsByChildID(int id) {
     try(
-        Connection con = ConMan.getConnection();
+        Connection con = ConMan.getConnection()
     ) {
       PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_WING_IDS_BY_CHILD_ID);
       ArrayList<Wing> wings = new ArrayList<>();
@@ -625,7 +624,7 @@ public class DBread {
 
   public Group readGroupByID(int id)  {
     try (
-        Connection con = ConMan.getConnection();
+        Connection con = ConMan.getConnection()
 
     ) {
       PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_GROUP_BY_ID);
@@ -645,7 +644,7 @@ public class DBread {
   public ArrayList<Group> readAllGroups()  {
     try (
 
-        ResultSet rs = ConMan.regStat(Statements.DEF_GET_ALL_GROUPS);
+        ResultSet rs = ConMan.regStat(Statements.DEF_GET_ALL_GROUPS)
     ) {
 
       ArrayList<Group> groups = new ArrayList<>();
@@ -664,7 +663,7 @@ public class DBread {
 
   public Group readGroupByUserID(int id) {
     try (
-        Connection con = ConMan.getConnection();
+        Connection con = ConMan.getConnection()
     ) {
       PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_GROUP_BY_USER_ID);
       stmt.setInt(1, id);
@@ -685,7 +684,7 @@ public class DBread {
 
   public ArrayList<Group> readGroupIDsByUserID(int id) {
     try(
-        Connection con = ConMan.getConnection();
+        Connection con = ConMan.getConnection()
 
     ) {
       PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_GROUPS_IDS_BY_USER_ID);
@@ -708,7 +707,7 @@ public class DBread {
 
   public Allergen readAllergenByID(int id)  {
     try (
-        Connection con = ConMan.getConnection();
+        Connection con = ConMan.getConnection()
     ) {
       PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_ALLERGEN_BY_ID);
 
@@ -731,7 +730,7 @@ public class DBread {
 
   public ArrayList<Allergen> readAllAllergens()  {
     try (
-        ResultSet rs = ConMan.regStat(Statements.DEF_GET_ALL_ALLERGENS);
+        ResultSet rs = ConMan.regStat(Statements.DEF_GET_ALL_ALLERGENS)
     ) {
 
       ArrayList<Allergen> allergens = new ArrayList<>();
@@ -751,7 +750,7 @@ public class DBread {
 
   public ArrayList<Allergen> readAllergenByChildID(int id){
     try (
-        Connection con = ConMan.getConnection();
+        Connection con = ConMan.getConnection()
     ) {
       PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_ALLERGEN_BY_CHILD_ID);
 
