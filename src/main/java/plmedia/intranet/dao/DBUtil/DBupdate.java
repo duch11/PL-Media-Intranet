@@ -36,30 +36,31 @@ public class DBupdate {
     try(
         Connection con = ConMan.getConnection()
     ) {
-      PreparedStatement stmt;
-      if (util.checkEmail(parent.getUserEmail()) != 10){
-        String parentPass = parent.getPassword();
+        PreparedStatement stmt;
 
-        if(parentPass != null) {
-          stmt = ConMan.prepStat(con, Statements.DEF_UPDATE_USER);
-          String hashedPassword = passwordEncoder.encode(parentPass);
-          stmt.setString(1, hashedPassword);
-          stmt.setString(2, parent.getUserEmail());
-          stmt.setString(3, parent.getFirstName());
-          stmt.setString(4, parent.getLastName());
-          stmt.setInt(5, parent.getUserId());
+        if (util.checkEmail(parent.getUserEmail()) == 10) {
+          String parentPass = parent.getPassword();
 
-        } else {
-          stmt = ConMan.prepStat(con, Statements.DEF_UPDATE_USER_NOPASS);
-          stmt.setString(1, parent.getUserEmail());
-          stmt.setString(2, parent.getFirstName());
-          stmt.setString(3, parent.getLastName());
-          stmt.setInt(4, parent.getUserId());
+          if (parentPass != null) {
+            stmt = ConMan.prepStat(con, Statements.DEF_UPDATE_USER);
+            String hashedPassword = passwordEncoder.encode(parentPass);
+            stmt.setString(1, hashedPassword);
+            stmt.setString(2, parent.getUserEmail());
+            stmt.setString(3, parent.getFirstName());
+            stmt.setString(4, parent.getLastName());
+            stmt.setInt(5, parent.getUserId());
+
+          } else {
+            stmt = ConMan.prepStat(con, Statements.DEF_UPDATE_USER_NOPASS);
+            stmt.setString(1, parent.getUserEmail());
+            stmt.setString(2, parent.getFirstName());
+            stmt.setString(3, parent.getLastName());
+            stmt.setInt(4, parent.getUserId());
+          }
+
+          stmt.executeUpdate();
+          return 1;
         }
-
-        stmt.executeUpdate();
-        return 1;
-      }
 
     } catch (SQLException e) {
       e.printStackTrace();

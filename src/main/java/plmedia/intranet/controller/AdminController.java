@@ -67,8 +67,8 @@ public class AdminController {
 
     if(currentUser == null){
       currentUser = employeeRepo.readEmployeeByEmail(principal.getName());
-    } else if (!currentUser.getUserEmail().equals(principal.getName())){
-      currentUser = employeeRepo.readEmployeeByEmail(principal.getName());
+    } else {
+      currentUser = employeeRepo.Read(currentUser.getUserId());
     }
 
     /** ENG: Principal DK: "Grund-sikkerhedskonto" * */

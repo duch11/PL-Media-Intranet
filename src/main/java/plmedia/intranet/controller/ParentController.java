@@ -45,18 +45,13 @@ public class ParentController {
 
 
 private void showPanals(Model model, Principal principal) {
-
-  ArrayList<Child> children = new ArrayList<>();
-  for(Integer i : childRepo.ReadChildrenIDbyParentID
-      (parentRepo.readParentByEmail(
-          principal.getName()).getUserId())){
-    children.add(childRepo.Read(i.intValue()));
-  }
   if(currentParent == null){
     currentParent = parentRepo.readParentByEmail(principal.getName());
-  } else if (!currentParent.getUserEmail().equals(principal.getName())){
-    currentParent = parentRepo.readParentByEmail(principal.getName());
+  } else {
+    currentParent = parentRepo.Read(currentParent.getUserId());
   }
+
+  ArrayList<Child> children = childRepo.readChildrenByParentID(currentParent.getUserId());
   model.addAttribute("children",children);
   model.addAttribute("currentUser", currentParent);
   model.addAttribute("user", currentParent);
@@ -65,6 +60,7 @@ private void showPanals(Model model, Principal principal) {
 }
 
   public String showParentView(Model model, Principal principal) {
+    System.out.println("showParentView");
 
 
     showPanals(model, principal);
@@ -72,17 +68,9 @@ private void showPanals(Model model, Principal principal) {
     return "detailsview";
   }
 
-
-
-
-
-
-
   @RequestMapping(value = {"/parents"}, method = RequestMethod.GET)
   public String parentView(Model model, Principal principal) {
-
-
-
+    System.out.println("parentView");
     return showParentView(model, principal);
   }
 
@@ -92,28 +80,20 @@ private void showPanals(Model model, Principal principal) {
     return showParentView(model, principal);
   }
 
-
-
-
-
   public String showChildView(Model model, Principal principal) {
 
     showPanals(model, principal);
     return "childview";
   }
 
-
-
   @RequestMapping(value = {"/parents/children"}, method = RequestMethod.GET, params = {"child"})
   public String childDetails(Model model, Principal principal, @RequestParam int child ) {
+    showChildView(model,principal);
     model.addAttribute("child", childRepo.Read(child));
     model.addAttribute("allergens", allergenRepo.readAllergenByChildID(child));
     model.addAttribute("wing", wingRepo.Read(childRepo.Read(child).getWingId()));
     model.addAttribute("childsParents" , parentRepo.readParentByChildID(child));
     model.addAttribute("childDetails", true);
-
-
-    showChildView(model,principal);
     return "childview";
   }
 
@@ -128,12 +108,12 @@ private void showPanals(Model model, Principal principal) {
    */
 
   @RequestMapping(value = {"/parent/update/parent"}, method = RequestMethod.POST, params = {"firstName", "lastName"})
-  public String updateParName(@RequestParam String firstName, @RequestParam String lastName) {
+  public String updateParName(@RequestParam String firstName, @RequestParam String lastName ) {
     Parent parent = parentRepo.Read(currentParent.getUserId());
     parent.setFirstName(firstName);
     parent.setLastName(lastName);
     parentRepo.Update(parent);
-    return "redirect:/parent/?parent=" ;
+    return "redirect:/parents";
   }
 
   /**
@@ -145,7 +125,7 @@ private void showPanals(Model model, Principal principal) {
     Parent parent = parentRepo.Read(currentParent.getUserId());
     parent.setUserEmail(email);
     parentRepo.Update(parent);
-    return "redirect:/parent/?parent=";
+    return "redirect:/parents/";
   }
 
 
@@ -183,14 +163,8 @@ private void showPanals(Model model, Principal principal) {
     Child child = childRepo.Read(ID);
     child.setFirstName(firstName);
     childRepo.Update(child);
-
-
     return "redirect:/parent/children?child=" + ID;
   }
-
-
-
-
 
   @RequestMapping(value = {"/parent/update/child"}, method = RequestMethod.POST, params = {"lastName", "ID"})
   public String updateChildLastName(@RequestParam String lastName, @RequestParam int ID){

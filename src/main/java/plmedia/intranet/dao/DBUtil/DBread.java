@@ -25,12 +25,16 @@ public class DBread {
       PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_PARENT_BY_EMAIL_SQL);
       stmt.setString(1, userEmail);
       ResultSet rs = stmt.executeQuery();
-
       rs.first();
-      ArrayList<Permission> permissions = readPermissionsByUserID((rs.getInt("user_id")));
+      int userID = rs.getInt("user_id");
+
+      System.out.println(userEmail);
+      System.out.println(userID);
+      ArrayList<Permission> permissions = readPermissionsByUserID((userID));
+      System.out.println(permissions);
 
       return new Parent(
-          rs.getInt("user_id"),
+          userID,
           null,
           rs.getString("user_email"),
           rs.getString("first_name"),
@@ -501,8 +505,11 @@ public class DBread {
       PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_WING_BY_ID);
       stmt.setInt(1, id);
       ResultSet rs = stmt.executeQuery();
-      rs.first();
 
+      if (!rs.next()){ // checking if resultset is empty.
+        return new Wing();
+      }
+      rs.first();
       return new Wing(
           rs.getInt(1),
           rs.getString(2),
