@@ -294,7 +294,7 @@ public class AdminController {
    * Update Email + utility method (for redirection between parent and user)
    * */
   @RequestMapping(value = {"/admin/update/employee"}, method = RequestMethod.POST, params = {"email", "ID"})
-  public String updateEmpEmail(Principal principal, @RequestParam String email, @RequestParam int ID){
+  public String updateEmpEmail(@RequestParam String email, @RequestParam int ID){
     Employee employee = employeeRepo.Read(ID);
     employee.setUserEmail(email);
     if(currentUser.getUserEmail().equals(email)){

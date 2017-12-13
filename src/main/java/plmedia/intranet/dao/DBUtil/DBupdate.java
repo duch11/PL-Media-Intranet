@@ -37,9 +37,8 @@ public class DBupdate {
         Connection con = ConMan.getConnection()
     ) {
         PreparedStatement stmt;
+        String parentPass = parent.getPassword();
 
-        if (util.checkEmail(parent.getUserEmail()) == 10) {
-          String parentPass = parent.getPassword();
 
           if (parentPass != null) {
             stmt = ConMan.prepStat(con, Statements.DEF_UPDATE_USER);
@@ -60,7 +59,7 @@ public class DBupdate {
 
           stmt.executeUpdate();
           return 1;
-        }
+
 
     } catch (SQLException e) {
       e.printStackTrace();
@@ -72,25 +71,28 @@ public class DBupdate {
     try(
         Connection con = ConMan.getConnection()
     ) {
-      PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_UPDATE_USER);
-      String employeePass = employee.getPassword();
-      if (util.checkEmail(employee.getUserEmail()) != 10){
-        if(!(employee.getPassword() == null)) {
+        PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_UPDATE_USER);
+        String employeePass = employee.getPassword();
+
+
+        if(employee.getPassword() != null) {
+          System.out.println("pass is not null");
           String hashedPassword = passwordEncoder.encode(employeePass);
           stmt.setString(1, hashedPassword);
         } else {
+          System.out.println("pass is null");
           stmt.setString(1, util.readHashedPassByUserID(employee.getUserId()));
         }
+
         stmt.setString(2, employee.getUserEmail());
         stmt.setString(3, employee.getFirstName());
         stmt.setString(4, employee.getLastName());
         stmt.setInt(5, employee.getUserId());
         stmt.executeUpdate();
-        System.out.println("Employee user created");
 
         return 1;
-      }
-      System.out.println("Employee user NOT created");
+
+
     } catch (SQLException e) {
       e.printStackTrace();
     }
@@ -263,13 +265,13 @@ public class DBupdate {
 
       for (Integer i : toWrite) {
         writeStmt.setInt(1, child.getChildId());
-        writeStmt.setInt(2, toWrite.get(i));
+        writeStmt.setInt(2, i);
         writeStmt.executeUpdate();
       }
 
       for (Integer i: toDelete) {
         deleteStmt.setInt(1, child.getChildId());
-        deleteStmt.setInt(2, toDelete.get(i));
+        deleteStmt.setInt(2, i);
         deleteStmt.executeUpdate();
       }
 

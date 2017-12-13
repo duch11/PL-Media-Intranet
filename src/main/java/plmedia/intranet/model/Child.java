@@ -130,6 +130,15 @@ public class Child {
     this.allergens = allergens;
   }
 
+  public boolean hasAllergen(Allergen allergen){
+    for (Allergen a : allergens){
+      if(a.getAllergenID() == allergen.getAllergenID()){
+        return true;
+      }
+    }
+    return false;
+  }
+
 
   @Override
   public String toString() {

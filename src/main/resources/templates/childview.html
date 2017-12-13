@@ -64,7 +64,7 @@ i højre og venstre side-->
           <td th:text="${parent.getFirstName()} + ' ' + ${parent.getLastName()}"/>
           </div>
 
-          <td><a href="#" class="btn btn-edit pull-right" data-toggle="modal" data-target="#editParents"><i class="fa fa-pencil"></i></a></td>
+          <td></td>
         </tr>
 
         </tbody>
@@ -86,7 +86,7 @@ i højre og venstre side-->
           <div th:if="${wing}">
             <td th:text="${wing.getWingName()}"/>
           </div>
-        <td><a href="#" class="btn btn-edit pull-right" data-toggle="modal" data-target="#editWing"><i class="fa fa-pencil"></i></a></td>
+        <td><a th:if="${employeeGroups}" href="#" class="btn btn-edit pull-right" data-toggle="modal" data-target="#editWing"><i class="fa fa-pencil"></i></a></td>
         </tr>
       </table>
     </div>
@@ -100,7 +100,7 @@ i højre og venstre side-->
       <ul class="list-inline">
         <h5> Allergener: <a href="#" class="btn btn-edit " data-toggle="modal" data-target="#editAllergier"><i class="fa fa-pencil"></i></a> </h5>
         <li th:each="allergen : ${allergens}" class="list-group-item">
-        <h6 th:text="${allergen.getAllergenName()}"></h6>
+          <h6 th:text="${allergen.getAllergenName()}"></h6>
         </li>
 
       </ul>
@@ -111,7 +111,7 @@ i højre og venstre side-->
 
 
 
-  <div class="row">
+  <!--<div class="row">
     <div class="col-sm-9 col-sm-offset-3 col-lg-8 col-lg-offset-3 main">
 
       <table class="table-bordered">
@@ -124,7 +124,7 @@ i højre og venstre side-->
         </ul>
       </table>
     </div>
-  </div>
+  </div>-->
 </div>
 
 
@@ -202,8 +202,6 @@ i højre og venstre side-->
 <div id="editBirthday" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
-
-
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
@@ -229,15 +227,9 @@ i højre og venstre side-->
 </div>
 
 
-
-
-
 <!-- edit address-->
 <div id="editAddress" class="modal fade" role="dialog">
   <div class="modal-dialog">
-
-
-
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
@@ -264,73 +256,35 @@ i højre og venstre side-->
 
 
 
-<!-- edit parents-->
-<div id="editParents" class="modal fade" role="dialog">
+<!-- edit Wing-->
+<div th:if="${currentGroup}" id="editWing" class="modal fade" role="dialog">
   <div class="modal-dialog">
-
-
-
     <!-- Modal content-->
     <div class="modal-content">
-      <div class="modal-header">
-        <!--Kryds knap-->
-        <form th:action="${childDetails} ? @{/parent/update/child}" method="post">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Forældre</h4>
+      <form th:action="@{/admin/update/child}" method="post">
+        <div class="modal-header">
+          <!--Kryds knap-->
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Stue</h4>
+        </div>
         <div class="modal-body">
           <div class="form-group">
-            <label for="parents">Forældre:</label>
-            <input type="text" th:value="${child.getParents()}" name="parents" required="true" id="parents" class="form-control"/>
-            <input type="hidden" th:value="${child.getChildId()}" name="ID"/>
+            <select name="groupID" required="true" class="form-control">
+              <option th:each="wing : ${Wing}" th:value="${wing.getId()}" th:text="${wing.getWingName()}" th:selected="${child.getChildId()} == ${wing.getId()} ? 'selected'">
+                nope
+              </option>
+              <!-- de hardcodede options kan slettes when works-->
+              <option value="blå">Blå</option>
+              <option valie="grøn">Grøn</option>
+            </select>
           </div>
-        </div>
-          <div class="modal-footer">
-            <button type="submit" class="btn btn-success">Gem</button>
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Annuller</button>
-          </div>
-        </form>
+          <input type="hidden" th:value="${child.getChildId()}" name="ID"/>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
+          <button type="submit" class="btn btn-success">Gem</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Annuller</button>
         </div>
-      </div>
-    </div>
-  </div>
-
-
-
-<!-- edit Wing-->
-<div id="editWing" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <!--Kryds knap-->
-          <form th:action="${childDetails} ? @{/parent/update/child}" method="post">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Stue</h4>
-        <div class="modal-body">
-          <div class="form-group">
-          <select name="groupID" required="true" class="form-control">
-            <option th:each="wing : ${Wing}" th:value="${wing.getId()}" th:text="${wing.getWingName()}" th:selected="${child.getChildId()} == ${wing.getId()} ? 'selected'">
-              nope
-            </option>
-            <!-- de hardcodede options kan slettes when works-->
-            <option value="blå">Blå</option>
-            <option valie="grøn">Grøn</option>
-          </select>
-        </div>
-            <input type="hidden" th:value="${child.getChildId()}" name="ID"/>
-        </div>
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-success">Gem</button>
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Annuller</button>
-      </div>
       </form>
-    </div>
     </div>
   </div>
 </div>
@@ -349,28 +303,25 @@ i højre og venstre side-->
 
     <!-- Modal content-->
     <div class="modal-content">
-      <form th:action="@{/parent/update/child}" method="post">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Allergier</h4>
-      </div>
-      <div class="modal-body">
+      <form th:action="@{/parent/update/child}" method="POST">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Allergier</h4>
+        </div>
+        <div class="modal-body">
 
-        <div th:each="allergen : ${allergens}" class="checkbox">
-          <label><input type="checkbox" value=""/>Nøddeallergi</label>
-        </div>
-        <div class="checkbox">
-          <label><input type="checkbox" value=""/>Parfumeallergi</label>
-        </div>
-        <div class="checkbox">
-          <label><input type="checkbox" value=""/>Lactoseintolerent</label>
+            <div th:each="allergen : ${allAllergens}" class="checkbox">
+              <label>
+                <input type="checkbox" name="allergens" th:value="${allergen.getAllergenID()}" th:checked="${child.hasAllergen(allergen)}"/>
+                  <span th:text="${allergen.getAllergenName()}">Allergi navn</span>
+              </label>
+            </div>
+            <input type="hidden" name="allergens" value=""/>
+            <input type="hidden" name="ID" th:value="${child.getChildId()}"/>
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-success">Gem</button>
           <button type="button" class="btn btn-danger" data-dismiss="modal">Annuller</button>
-
-
-          </div>
         </div>
       </form>
     </div>
