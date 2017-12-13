@@ -46,7 +46,7 @@ public class Statements {
   public static final String DEF_GET_ALL_WINGS = "SELECT * FROM wing";
   public static final String DEF_GET_WING_BY_USER_ID = "SELECT * FROM intranetdb.wing WHERE wing_id = (SELECT fk_wing_id FROM employee_user_wing WHERE fk_employee_user_id = ?)";
   public static final String DEF_GET_WING_IDS_BY_USER_ID = "SELECT fk_wing_id FROM employee_user_wing WHERE fk_employee_user_id = ?";
-  public static final String DEF_GET_WING_IDS_BY_CHILD_ID = "SELECT fk_wing_id FROM child WHERE fk_wing_id = ?";
+  public static final String DEF_GET_WING_IDS_BY_CHILD_ID = "SELECT fk_wing_id FROM child_wing WHERE fk_child_id = ?";
   public static final String DEF_GET_WING_BY_child_ID = "SELECT * FROM intranetdb.wing WHERE wing_id = (SELECT fk_wing_id FROM child_wing WHERE fk_child_id = ?)";
 
   // Allergen

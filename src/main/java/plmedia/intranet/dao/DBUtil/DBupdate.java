@@ -366,9 +366,13 @@ public class DBupdate {
     ) {
       PreparedStatement writeStmt = ConMan.prepStat(con, Statements.DEF_ADD_WING_TO_CHILD);
       PreparedStatement deleteStmt = ConMan.prepStat(con, Statements.DEF_DELETE_WING_FROM_CHILD);
-      ArrayList<Wing> temp = dbr.readWingIDsByChildID(child.getChildId());
+      int childID = child.getChildId();
+      System.out.println(childID);
+      ArrayList<Wing> temp = dbr.readWingIDsByChildID(childID);
+      System.out.println(temp);
       ArrayList<Integer> orgWing = new ArrayList<>();
 
+      System.out.println("hej" + temp);
       for (Wing w: temp) {
         orgWing.add(w.getWingID());
       }
@@ -381,13 +385,13 @@ public class DBupdate {
 
       for (Integer i: toDelete) {
         deleteStmt.setInt(1, child.getChildId());
-        deleteStmt.setInt(2, toDelete.get(i));
+        deleteStmt.setInt(2, i);
         deleteStmt.executeUpdate();
       }
 
       for (Integer i : toWrite) {
         writeStmt.setInt(1, child.getChildId());
-        writeStmt.setInt(2, toWrite.get(i));
+        writeStmt.setInt(2, i);
         writeStmt.executeUpdate();
       }
 

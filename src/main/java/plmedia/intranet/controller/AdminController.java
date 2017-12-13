@@ -187,13 +187,13 @@ public class AdminController {
 
   @RequestMapping(value = {"/admin/details"}, method = RequestMethod.GET, params = {"child"})
   public String childDetails(Model model, Principal principal, @RequestParam int child) {
-    Child childDetails = childRepo.Read(child);
-    model.addAttribute("child", childDetails);
-    System.out.println(childDetails.getWingId());
-    if(new Integer(childDetails.getWingId()) != 0){
-      model.addAttribute("wing", wingRepo.Read(childRepo.Read(child).getWingId()));
-    }
-    model.addAttribute("allergen", allergenRepo.readAllergenByChildID(child));
+    Child thisChild = childRepo.Read(child);
+    model.addAttribute("child", thisChild);
+    model.addAttribute("allergens", allergenRepo.readAllergenByChildID(child));
+    model.addAttribute("allAllergens", allergenRepo.ReadAll());
+    model.addAttribute("wing", wingRepo.Read(thisChild.getWingId()));
+    model.addAttribute("allWings", wingRepo.Read(thisChild.getWingId()));
+    model.addAttribute("childsParents" , parentRepo.readParentByChildID(child));
     showAdminPanel(model,principal);
     return "childview";
   }
@@ -365,6 +365,76 @@ public class AdminController {
     childIDs.remove(new Integer(childID));
     utilRepo.updateChildToParent(parent, childIDs);
     return "redirect:/admin/details?parent=" + parentID;
+  }
+
+
+  /** Update child */
+
+  @RequestMapping(value = {"/admin/update/child"}, method = RequestMethod.POST, params = {"firstName", "ID"})
+  public String updateChildFirstName(@RequestParam String firstName, @RequestParam int ID){
+    Child child = childRepo.Read(ID);
+    child.setFirstName(firstName);
+    childRepo.Update(child);
+    return "redirect:/admin/details?child=" + ID;
+  }
+
+  @RequestMapping(value = {"/admin/update/child"}, method = RequestMethod.POST, params = {"lastName", "ID"})
+  public String updateChildLastName(@RequestParam String lastName, @RequestParam int ID){
+    Child child = childRepo.Read(ID);
+    child.setLastName(lastName);
+    childRepo.Update(child);
+
+    return "redirect:/admin/details?child=" + ID;
+  }
+
+
+
+
+  /**
+   * update birthday
+   */
+  @RequestMapping(value = {"/admin/update/child"}, method = RequestMethod.POST, params = {"birthday", "ID"})
+  public String updateChildbirthday(@RequestParam java.sql.Date birthday, @RequestParam int ID) {
+    Child child = childRepo.Read(ID);
+    child.setBirthday(birthday);
+    childRepo.Update(child);
+    return "redirect:/admin/details?child=" + ID;
+  }
+
+
+  /**
+   * update address
+   */
+  @RequestMapping(value = {"/admin/update/child"}, method = RequestMethod.POST, params = {"address", "ID"})
+  public String updateChildAddress(@RequestParam String address, @RequestParam int ID){
+    Child child = childRepo.Read(ID);
+    child.setAddress(address);
+    childRepo.Update(child);
+    return "redirect:/admin/details?child=" + ID;
+  }
+
+  /**
+   * update Wing
+   */
+
+  @RequestMapping(value = {"admin/update/child"}, method = RequestMethod.POST, params =  {"allergens", "ID"})
+  public String updateChildAllergens(@RequestParam ArrayList<Integer> allergens, @RequestParam int ID){
+    /** Remove the null value if there's no need for it (to avoid less 'pretty' occurencess with null and all)*/
+    if(allergens.size() > 1){
+      allergens.remove(null);
+    }
+    allergenRepo.updateChildAllergens(childRepo.Read(ID), allergens);
+
+    return "redirect:/admin/details?child=" + ID;
+  }
+
+  @RequestMapping(value = {"admin/update/child"}, method = RequestMethod.POST, params =  {"wingID", "ID"})
+  public String updateChildWing(@RequestParam int wingID, @RequestParam int ID){
+    ArrayList<Integer> wingButWhyArray = new ArrayList<Integer>();
+    wingButWhyArray.add(new Integer(wingID));
+    utilRepo.updateChildWing(childRepo.Read(ID), wingButWhyArray);
+
+    return "redirect:/admin/details?child=" + ID;
   }
 
 

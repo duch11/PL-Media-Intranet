@@ -611,11 +611,13 @@ public class DBread {
     try(
         Connection con = ConMan.getConnection()
     ) {
+
       PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_WING_IDS_BY_CHILD_ID);
       ArrayList<Wing> wings = new ArrayList<>();
       stmt.setInt(1, id);
       ResultSet rs = stmt.executeQuery();
-      rs.first();
+      rs.beforeFirst();
+
       while (rs.next()) {
         wings.add(readWingByID(rs.getInt("fk_wing_id")));
       }
