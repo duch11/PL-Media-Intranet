@@ -32,7 +32,7 @@ public class DBcreate {
    */
   public int createParent(Parent parent) {
     try(
-        Connection con = ConMan.getConnection();
+        Connection con = ConMan.getConnection()
     ) {
       PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_CREATE_PARENT_USER_SQL);
 
@@ -65,7 +65,7 @@ public class DBcreate {
    */
   public int createEmployee(Employee employee) {
     try(
-        Connection con = ConMan.getConnection();
+        Connection con = ConMan.getConnection()
     ) {
       PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_CREATE_EMPLOYEE_USER_SQL);
 
@@ -101,7 +101,7 @@ public class DBcreate {
    */
   public int createChild(Child child) {
     try (
-        Connection con = ConMan.getConnection();
+        Connection con = ConMan.getConnection()
 
     ) {
       PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_CREATE_CHILD_SQL);
@@ -127,7 +127,7 @@ public class DBcreate {
    */
   public int createWing(Wing wing) { // maybe needs check for already existing wing name.
     try(
-        Connection con = ConMan.getConnection();
+        Connection con = ConMan.getConnection()
     ) {
       PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_CREATE_WING_SQL);
       stmt.setString(1, wing.getWingName());
@@ -149,7 +149,7 @@ public class DBcreate {
    */
   public int createGroup(Group group) {
     try(
-        Connection con = ConMan.getConnection();
+        Connection con = ConMan.getConnection()
 
     ) {
       PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_CREATE_GROUP_SQL);
@@ -172,7 +172,7 @@ public class DBcreate {
    */
   public int createAllergen(Allergen allergen) {
     try(
-        Connection con = ConMan.getConnection();
+        Connection con = ConMan.getConnection()
 
     ) {
       PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_CREATE_ALLERGEN_SQL);

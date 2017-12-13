@@ -16,7 +16,7 @@ public class DBdelete {
 
   public int deleteParent(Parent parent) {
     try(
-        Connection con = ConMan.getConnection();
+        Connection con = ConMan.getConnection()
     ) {
       // Know if they can use the som "con" else make more "con"
       PreparedStatement dParentStmt = ConMan.prepStat(con,Statements.DEF_DELETE_USER_BY_ID);
@@ -41,7 +41,7 @@ public class DBdelete {
 
   public int deleteEmployee(Employee employee) {
     try(
-        Connection con = ConMan.getConnection();
+        Connection con = ConMan.getConnection()
     ) {
       // Know if they can use the som "con" else make more "con"
       PreparedStatement dEmployeeStmt = ConMan.prepStat(con, Statements.DEF_DELETE_USER_BY_ID);
@@ -70,8 +70,8 @@ public class DBdelete {
 
   public int deleteChild(Child child) {
     try(
-        Connection con = ConMan.getConnection();
-     ) {
+        Connection con = ConMan.getConnection()
+    ) {
       // Know if they can use the som "con" else make more "con"
       PreparedStatement dChildStmt = ConMan.prepStat(con, Statements.DEF_DELETE_CHILD_BY_ID);
       PreparedStatement dChildParentStmt = ConMan.prepStat(con, Statements.DEF_DELETE_ALL_PARENT_FROM_CHILD);
@@ -95,7 +95,7 @@ public class DBdelete {
 
   public int deleteWing(Wing wing) {
     try(
-        Connection con = ConMan.getConnection();
+        Connection con = ConMan.getConnection()
     ) {
       // Know if they can use the som "con" else make more "con"
       PreparedStatement dWingStmt = ConMan.prepStat(con, Statements.DEF_DELETE_WING_BY_ID);
@@ -120,7 +120,7 @@ public class DBdelete {
 
   public int deleteGroup(Group group) {
     try(
-        Connection con = ConMan.getConnection();
+        Connection con = ConMan.getConnection()
     ) {
       // Know if they can use the som "con" else make more "con"
       PreparedStatement dGroupStmt = ConMan.prepStat(con, Statements.DEF_DELETE_GROUP_BY_ID);
@@ -140,7 +140,7 @@ public class DBdelete {
 
   public int deleteAllergen(Allergen allergen) {
     try(
-        Connection con = ConMan.getConnection();
+        Connection con = ConMan.getConnection()
     ) {
       PreparedStatement dAllergenStmt = ConMan.prepStat(con, Statements.DEF_DELETE_ALLERGEN_BY_ID);
       PreparedStatement dAllergenChildID = ConMan.prepStat(con, Statements.DEF_DELETE_ALL_CHILD_FROM_ALLERGEN);

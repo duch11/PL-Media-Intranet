@@ -22,7 +22,7 @@ public class Util {
 
   public int checkEmail(String email) {
     try(
-        ResultSet rs = ConMan.regStat(Statements.DEF_GET_ALL_EMAIL);
+        ResultSet rs = ConMan.regStat(Statements.DEF_GET_ALL_EMAIL)
     ){
       while(rs.next()) {
         if (rs.getString("user_email").equals(email)){
@@ -38,7 +38,7 @@ public class Util {
 
   public int checkPassword(int id, String password) {
     try(
-        Connection con = ConMan.getConnection();
+        Connection con = ConMan.getConnection()
     ) {
       PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_PASSWORD_BY_USER_ID);
       stmt.setInt(1, id);
@@ -58,7 +58,7 @@ public class Util {
 
   public String readHashedPassByUserID(int id) {
     try(
-        Connection con = ConMan.getConnection();
+        Connection con = ConMan.getConnection()
     ) {
       PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_PASSWORD_BY_USER_ID);
       stmt.setInt(1, id);
