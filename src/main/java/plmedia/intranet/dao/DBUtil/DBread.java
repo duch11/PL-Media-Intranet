@@ -402,7 +402,7 @@ public class DBread {
       PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_GET_CHILDREN_BY_WING_ID_SQL);
       stmt.setInt(1, id);
       ResultSet rs = stmt.executeQuery();
-      rs.first();
+      rs.beforeFirst();
       ArrayList<Child> children = new ArrayList<>();
 
       while (rs.next()) {
@@ -412,7 +412,7 @@ public class DBread {
         int wingid = wing.getWingID();
 
         children.add(new Child(
-            id,
+            rs.getInt("child_id"),
             rs.getString("first_name"),
             rs.getString("last_name"),
             rs.getDate("birthday"),

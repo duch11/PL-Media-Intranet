@@ -17,8 +17,9 @@
         <div class="col-sm-7 col-sm-offset-3 main">
           <div class="row">
             <ul class="list-inline">
-              <li><h1 th:text="${currentGroup} ? ${currentGroup.getGroupName()} : (${parents} and ${Read_all_parents} ? 'Forældre' : (${children} and ${Read_all_children} ? 'Børn' : (${allUsers} ? 'Personale')))">Admins/Ledere</h1></li>
+              <li><h1 th:text="${currentGroup} ? ${currentGroup.getGroupName()} : (${parents} and ${Read_all_parents} ? 'Forældre' : (${currentWing} ? ${currentWing.getWingName()} + ' stue' : (${children} and ${Read_all_children} ? 'Alle Børn' : (${allUsers} ? 'Personale'))))">Admins/Ledere</h1></li>
               <li th:if="${currentGroup}"><h3 th:text="'(' + ${currentGroup.getGroupDescription()} + ')'"></h3></li>
+              <li th:if="${currentWing}"><h3 th:text="'(' + ${currentWing.getWingDescription()} + ')'"></h3></li>
               <h2 class="getSerious" th:if="!${Read_all_parents} and !${Read_all_children} and !${currentGroup} and !${allUsers}">Du har ikke adgang dette, bed din administrator om lov.</h2>
             </ul>
           </div>

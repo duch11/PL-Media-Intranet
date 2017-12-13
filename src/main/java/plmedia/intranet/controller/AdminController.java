@@ -112,6 +112,16 @@ public class AdminController {
   public String adminPanelChildren(Model model, Principal principal) {
     model.addAttribute("children", childRepo.ReadAll());
     model.addAttribute("newChild", new Child());
+    model.addAttribute("allChildren", true);
+    return showAdminPanel(model, principal);
+  }
+
+  @RequestMapping(value = {"/admin/children"}, method = RequestMethod.GET, params = {"wingID"})
+  public String adminPanelChildren(Model model, Principal principal, @RequestParam int wingID) {
+    System.out.println("currentWing?");
+    model.addAttribute("currentWing", wingRepo.Read(wingID));
+    model.addAttribute("children", childRepo.readChildrenByWingID(wingID));
+    model.addAttribute("newChild", new Child());
     return showAdminPanel(model, principal);
   }
 

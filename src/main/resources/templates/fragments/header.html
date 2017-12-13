@@ -10,6 +10,9 @@
         </button>
         <a class="navbar-brand" href="/"><i class="fa fa-child"></i> Intranet - PL-Media</a>
       </div>
+      <ul class="nav navbar-nav">
+        <li><a th:if="${Edit_settings}" th:class="navbar" href="/admin/settings">Indstillinger</a></li>
+      </ul>
 
       <div class="collapse navbar-collapse" id="brugerInfo">
         <ul class="nav navbar-nav navbar-right">

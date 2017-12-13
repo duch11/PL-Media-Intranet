@@ -13,6 +13,12 @@ a.navbar-brand {
   line-height: 15px;
 }
 
+.navbar-inverse .navbar-nav> li > a {
+  min-height: 0px;
+  margin-bottom: 0px;
+  padding-bottom: 0;
+}
+
 a.list-group-item {
   font-size: 18px;
 }
