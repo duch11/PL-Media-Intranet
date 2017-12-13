@@ -59,6 +59,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         /**Ved fejl kan det være at vi skal have en enabled coloumn i vores user table
          * Ellers virker det, og vi tjekker op mod user_email.
          * */
+        auth.inMemoryAuthentication().withUser("phillip@plmedia.dk").password("123").roles("EMP");
         auth.jdbcAuthentication().dataSource(dataSource)
                 .passwordEncoder(new BCryptPasswordEncoder())
             .usersByUsernameQuery(
