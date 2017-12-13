@@ -349,12 +349,14 @@ i højre og venstre side-->
 
     <!-- Modal content-->
     <div class="modal-content">
+      <form th:action="@{/parent/update/child}" method="post">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Allergier</h4>
       </div>
       <div class="modal-body">
-        <div class="checkbox">
+
+        <div th:each="allergen : ${allergens}" class="checkbox">
           <label><input type="checkbox" value=""/>Nøddeallergi</label>
         </div>
         <div class="checkbox">
@@ -363,14 +365,18 @@ i højre og venstre side-->
         <div class="checkbox">
           <label><input type="checkbox" value=""/>Lactoseintolerent</label>
         </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success">Gem</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Annuller</button>
 
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
-      </div>
+
+          </div>
+        </div>
+      </form>
     </div>
   </div>
 </div>
+
 
 
 <div id="editInfo" class="modal fade" role="dialog">
