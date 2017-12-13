@@ -34,7 +34,7 @@ public class DBupdate {
   // Model updaters
   public int updateParent(Parent parent) {
     try(
-        Connection con = ConMan.getConnection();
+        Connection con = ConMan.getConnection()
     ) {
       PreparedStatement stmt;
       if (util.checkEmail(parent.getUserEmail()) != 10){
@@ -69,7 +69,7 @@ public class DBupdate {
 
   public int updateEmployee(Employee employee) {
     try(
-        Connection con = ConMan.getConnection();
+        Connection con = ConMan.getConnection()
     ) {
       PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_UPDATE_USER);
       String employeePass = employee.getPassword();
@@ -98,7 +98,7 @@ public class DBupdate {
 
   public int updateChild(Child child) {
     try (
-        Connection con = ConMan.getConnection();
+        Connection con = ConMan.getConnection()
     ) {
       PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_UPDATE_CHILD);
       stmt.setString(1, child.getFirstName());
@@ -117,7 +117,7 @@ public class DBupdate {
 
   public int updateWing(Wing wing) {
     try(
-        Connection con = ConMan.getConnection();
+        Connection con = ConMan.getConnection()
     ) {
       PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_UPDATE_WING);
       stmt.setString(1, wing.getWingName());
@@ -133,7 +133,7 @@ public class DBupdate {
 
   public int updateGroup(Group group) {
     try(
-        Connection con = ConMan.getConnection();
+        Connection con = ConMan.getConnection()
     ) {
       PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_UPDATE_GROUP);
       stmt.setString(1, group.getGroupName());
@@ -150,7 +150,7 @@ public class DBupdate {
 
   public int updateAllergen(Allergen allergen) {
     try(
-        Connection con = ConMan.getConnection();
+        Connection con = ConMan.getConnection()
     ) {
       PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_UPDATE_ALLERGEN);
       stmt.setString(1, allergen.getAllergenName());
@@ -170,7 +170,7 @@ public class DBupdate {
   public int updateChildToParent(Parent parent, ArrayList<Integer> newChildren) {
     try (
 
-        Connection con = ConMan.getConnection();
+        Connection con = ConMan.getConnection()
     ) {
       PreparedStatement writeStmt = ConMan.prepStat(con, Statements.DEF_ADD_CHILD_TO_PARENT);
       PreparedStatement deleteStmt = ConMan.prepStat(con, Statements.DEF_DELETE_CHILD_FROM_PARENT);
@@ -204,7 +204,7 @@ public class DBupdate {
   public int updatePermissionByID(Employee employee, ArrayList<Integer> newPermission) {
     try (
 
-        Connection con = ConMan.getConnection();
+        Connection con = ConMan.getConnection()
     ) {
       PreparedStatement writeStmt = ConMan.prepStat(con, Statements.DEF_ADD_PERMISSION_TO_USER);
       PreparedStatement deleteStmt = ConMan.prepStat(con, Statements.DEF_DELETE_PERMISSION_FROM_USER);
@@ -243,7 +243,7 @@ public class DBupdate {
   public int updateChildAllergens(Child child, ArrayList<Integer> newAllergen) {
     try(
 
-        Connection con = ConMan.getConnection();
+        Connection con = ConMan.getConnection()
     ) {
       PreparedStatement writeStmt = ConMan.prepStat(con, Statements.DEF_ADD_ALLERGEN_TO_CHILD);
       PreparedStatement deleteStmt = ConMan.prepStat(con, Statements.DEF_DELETE_ALLERGEN_FROM_CHILD);
@@ -281,7 +281,7 @@ public class DBupdate {
 
   public int updateEmployeeGroup(Employee employee, ArrayList<Integer> newGroup) {
     try(
-        Connection con = ConMan.getConnection();
+        Connection con = ConMan.getConnection()
 
     ) {
       PreparedStatement writeStmt = ConMan.prepStat(con, Statements.DEF_ADD_GROUP_TO_EMPLOYEE);
@@ -320,7 +320,7 @@ public class DBupdate {
 
   public int updateEmployeeWing(Employee employee, ArrayList<Integer> newWing) {
     try(
-        Connection con = ConMan.getConnection();
+        Connection con = ConMan.getConnection()
 
     ) {
       PreparedStatement writeStmt = ConMan.prepStat(con, Statements.DEF_ADD_WING_TO_EMPLOYEE);
@@ -359,7 +359,7 @@ public class DBupdate {
 
   public int updateChildWing(Child child, ArrayList<Integer> newWing) {
     try(
-        Connection con = ConMan.getConnection();
+        Connection con = ConMan.getConnection()
     ) {
       PreparedStatement writeStmt = ConMan.prepStat(con, Statements.DEF_ADD_WING_TO_CHILD);
       PreparedStatement deleteStmt = ConMan.prepStat(con, Statements.DEF_DELETE_WING_FROM_CHILD);
