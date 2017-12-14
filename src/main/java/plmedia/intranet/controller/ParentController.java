@@ -38,8 +38,6 @@ public class ParentController {
   @Autowired
   UtilRepo utilRepo;
 
-  Parent currentParent;
-
 private void showPanals(Model model, Principal principal) {
   if(currentParent == null){
     currentParent = parentRepo.readParentByEmail(principal.getName());

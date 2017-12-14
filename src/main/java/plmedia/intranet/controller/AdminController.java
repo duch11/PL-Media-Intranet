@@ -51,7 +51,7 @@ public class AdminController {
   @Autowired
   WingRepo wingRepo;
 
-  Employee currentUser;
+  //Employee currentUser;
 
   public AdminController() {
 
@@ -64,11 +64,7 @@ public class AdminController {
    */
   public String showAdminPanel(Model model, Principal principal) {
 
-    if(currentUser == null){
-      currentUser = employeeRepo.readEmployeeByEmail(principal.getName());
-    } else {
-      currentUser = employeeRepo.Read(currentUser.getUserId());
-    }
+    Employee currentUser = employeeRepo.readEmployeeByEmail(principal.getName());
 
     /**
      * ENG: Principal DK: "Grund-sikkerhedskonto"
@@ -137,7 +133,7 @@ public class AdminController {
   @RequestMapping(value = {"/admin/details"}, method = RequestMethod.GET, params = {"employee"})
   public String empDetails(Model model,Principal principal, @RequestParam int employee) {
     showAdminPanel(model, principal);
-
+    Employee currentUser = employeeRepo.readEmployeeByEmail(principal.getName());
     model.addAttribute("user", employeeRepo.Read(employee));
     model.addAttribute("employeeDetails", true);
 
@@ -299,19 +295,16 @@ public class AdminController {
     return "redirect:/admin/details?parent=" + ID;
   }
 
-
-  /**
+/*
+  *//**
    * Update Email + utility method (for redirection between parent and user)
-   */
+   *//*
   @RequestMapping(value = {"/admin/update/employee"}, method = RequestMethod.POST, params = {"email", "ID"})
-  public String updateEmpEmail(@RequestParam String email, @RequestParam int ID){
+  public String updateEmpEmail(Principal principal, @RequestParam String email, @RequestParam int ID){
     Employee employee = employeeRepo.Read(ID);
+    Employee currentUser = employeeRepo.readEmployeeByEmail(principal.getName());
     employee.setUserEmail(email);
-    if(currentUser.getUserEmail().equals(email)){
 
-      return "redirect:/admin/details?employee=" + ID;
-    }
-    employeeRepo.Update(employee);
     return "redirect:/admin/details?employee=" + ID;
   }
 
@@ -319,9 +312,9 @@ public class AdminController {
   public String updateParEmail(@RequestParam String email, @RequestParam int ID){
     Parent parent = parentRepo.Read(ID);
     parent.setUserEmail(email);
-    parentRepo.Update(parent);
     return "redirect:/admin/details?parent=" + ID;
   }
+  */
 
 
   /**

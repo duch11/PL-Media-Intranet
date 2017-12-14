@@ -8,6 +8,10 @@ a, .btn {
   font-size: 18px;
 }
 
+.equal-height-plz {
+  height: 56px;
+}
+
 a.navbar-brand {
   font-size: 30px;
   line-height: 15px;
