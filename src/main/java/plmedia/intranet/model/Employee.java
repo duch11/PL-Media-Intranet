@@ -32,4 +32,6 @@ public class Employee extends User {
   public void setGroup(Group group) {
     this.group = group;
   }
+
+
 }
