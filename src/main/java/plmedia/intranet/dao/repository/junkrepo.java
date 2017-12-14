@@ -2,15 +2,17 @@ package plmedia.intranet.dao.repository;
 
 import java.util.ArrayList;
 
-public interface IRepo<T> {
+public class ChildRepo implements IRepo<Child> {
 
-  public int Create(T t);
+  public int Create(Child child){ ... }
+    
+  public T Read(int id){ ... }
 
-  public T Read(int id);
+  public int Update(Child child){ ... }
 
-  public int Update(T t);
+  public int Delete(Child child){ ... }
 
-  public int Delete(T t);
-
-  public ArrayList<T> ReadAll();
+  public ArrayList<Child> ReadAll(){ ... }
 }
+
+
