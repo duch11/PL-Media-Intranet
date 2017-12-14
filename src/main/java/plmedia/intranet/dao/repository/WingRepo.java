@@ -13,7 +13,6 @@ import plmedia.intranet.model.Wing;
  * @author Simon le Févre Ryom
  * @author Tobias Thomsen
  */
-
 @Repository
 public class WingRepo implements IRepo<Wing>{
 

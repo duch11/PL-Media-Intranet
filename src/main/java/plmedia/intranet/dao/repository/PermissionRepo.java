@@ -8,6 +8,9 @@ import plmedia.intranet.dao.DBUtil.DBupdate;
 import plmedia.intranet.model.Employee;
 import plmedia.intranet.model.Permission;
 
+/**
+ * @author Simon le Févre Ryom
+ */
 @Repository
 public class PermissionRepo {
 
