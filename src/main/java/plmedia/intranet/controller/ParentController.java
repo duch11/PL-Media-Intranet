@@ -184,7 +184,7 @@ private void showPanals(Model model, Principal principal) {
   }
 
   /**
-   * update Wing
+   * update Allergen
    */
   @RequestMapping(value = {"parent/update/child"}, method = RequestMethod.POST, params =  {"allergens", "ID"})
   public String updateChildAllergens(@RequestParam ArrayList<Integer> allergens, @RequestParam int ID){

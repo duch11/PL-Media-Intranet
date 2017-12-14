@@ -12,7 +12,6 @@ import plmedia.intranet.model.Parent;
  * @author Tobias Thomsen
  * @author Simon le Févre Ryom
  */
-
 @Repository
 public class ParentRepo<T> implements IRepo<Parent> {
 
