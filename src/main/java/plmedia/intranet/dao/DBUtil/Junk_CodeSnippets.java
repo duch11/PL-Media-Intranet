@@ -10,9 +10,7 @@
   }
 
 
-      PreparedStatement stmt = ConMan.prepStat(con, Statements.SQL);
-
-
+      PreparedStatement stmt = ConMan.prepStat(con, Statements.DEF_FIND_USER_BY_NAME);
       stmt.setString(1, "name");
 
 
