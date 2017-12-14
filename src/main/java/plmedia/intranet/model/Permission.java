@@ -1,5 +1,8 @@
 package plmedia.intranet.model;
 
+/**
+ * @author Simon le Févre Ryom
+ */
 public class Permission {
 
   private int permissionID;

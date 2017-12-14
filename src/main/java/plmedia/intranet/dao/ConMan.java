@@ -13,9 +13,9 @@ import java.sql.Statement;
  * @author Simon le Févre Ryom
  */
 public class ConMan {
-  private static String USERNAME = "PLintra-dev";
+  private static String USERNAME = "PLintra_prod";
   private static String PASSWORD = "MoreMoneyToFaisal";
-  private static String CONN_STRING = "jdbc:mysql://localhost/intranetdb";
+  private static String CONN_STRING = "jdbc:mysql://intranetdb.cxek8jpy9hiy.eu-central-1.rds.amazonaws.com:3306/intranetdb";
 
   public static Connection getConnection() throws SQLException {
     return DriverManager.getConnection(CONN_STRING, USERNAME, PASSWORD);
