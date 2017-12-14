@@ -90,6 +90,7 @@ CREATE TABLE `child_allergen` (
 
 LOCK TABLES `child_allergen` WRITE;
 /*!40000 ALTER TABLE `child_allergen` DISABLE KEYS */;
+INSERT INTO `child_allergen` VALUES (4,10),(4,12),(5,7),(5,8),(6,6),(6,7),(6,8),(6,9),(6,10),(6,11),(6,12),(7,11),(8,9),(8,10),(8,12),(10,7),(10,12),(11,6),(11,7),(11,8),(11,9),(12,10),(12,11),(12,12),(13,8),(14,10),(14,11),(14,12),(15,9),(16,12);
 /*!40000 ALTER TABLE `child_allergen` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -117,6 +118,7 @@ CREATE TABLE `child_wing` (
 
 LOCK TABLES `child_wing` WRITE;
 /*!40000 ALTER TABLE `child_wing` DISABLE KEYS */;
+INSERT INTO `child_wing` VALUES (4,7),(5,6),(6,6),(7,6),(8,7),(9,5),(10,5),(11,4),(12,4),(13,5),(14,4),(15,7),(16,6);
 /*!40000 ALTER TABLE `child_wing` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -144,7 +146,7 @@ CREATE TABLE `employee_user_group` (
 
 LOCK TABLES `employee_user_group` WRITE;
 /*!40000 ALTER TABLE `employee_user_group` DISABLE KEYS */;
-INSERT INTO `employee_user_group` VALUES (327,3),(330,4),(331,5),(337,4),(338,5);
+INSERT INTO `employee_user_group` VALUES (330,4),(331,5),(337,4),(338,5),(350,3);
 /*!40000 ALTER TABLE `employee_user_group` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -248,7 +250,7 @@ CREATE TABLE `parent_user_child` (
 
 LOCK TABLES `parent_user_child` WRITE;
 /*!40000 ALTER TABLE `parent_user_child` DISABLE KEYS */;
-INSERT INTO `parent_user_child` VALUES (332,10),(333,4),(334,5),(335,5),(336,6),(339,7),(340,7);
+INSERT INTO `parent_user_child` VALUES (332,10),(333,4),(334,5),(335,5),(336,6),(339,7),(340,7),(341,8),(342,9),(343,11),(343,12),(344,11),(344,12),(345,13),(346,14),(347,15),(348,16),(349,16);
 /*!40000 ALTER TABLE `parent_user_child` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -293,7 +295,7 @@ CREATE TABLE `user` (
   `type` varchar(10) CHARACTER SET utf8 NOT NULL,
   `enabled` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=341 DEFAULT CHARSET=latin1 COMMENT='passwords are stored in SHA1 format.';
+) ENGINE=InnoDB AUTO_INCREMENT=351 DEFAULT CHARSET=latin1 COMMENT='passwords are stored in SHA1 format.';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -302,7 +304,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (327,'','phillip@plmedia.dk','Phillip','Nissen','ROLE_EMP',0),(330,'$2a$10$TIRU/yFRXKb3MIKoWwk.6er3H2km/OyVhXYyWGJCE1Zoohi8tq2hS','thebuther@plainfield.net','Ed','Gein','ROLE_EMP',1),(331,'$2a$10$lI7bkJOle6QK22lI2TcdUujhu1sHBU0f5o7LKOfPwikux8mveXA72','Cannibal@Milwaukee-post.net','Jeffrey','Dahmer','ROLE_EMP',1),(332,'$2a$10$c9qZykFU2d30jAOBFmCfne0zg3SRdIvL.qc0s/XQ0oWLZ7hy8ZFQS','joejack5@aol.com','Joe','Jackson','ROLE_PAR',1),(333,'$2a$10$UfdCvDmRQ6FNmaS30AgUzuSvbbqR1C9qMzlzlSLb/m.S455utQkte','john@Barrymore.com','John ','Barrymore','ROLE_PAR',1),(334,'$2a$10$Vr7BpkWJL3Y4rQoErWKIBudiJyInnus.AlaVVgXGA5gUmaeTqDH92','Jman@spears-holdnings.net','James','Spears','ROLE_PAR',1),(335,'$2a$10$khF.myu5Vt/XDqSJm3YiOuHhxpuzVjsFxKcBhK5cK4KvMhb/80FHG','Lynne@spears-holding.com','Lynne','Spears','ROLE_PAR',1),(336,'$2a$10$s.eSEMJWkcxD.5MKA8ekaOeIaZzL5qezX/UECfkpS.o5..4YH46Qi','pmallette@hotmail.com','Patricia','Mallette','ROLE_PAR',1),(337,'$2a$10$YrtrYt7tW7gvu1YuNnTOzejxoyggsROr3k3xctg.aap9zN.KFWDP6','rolf_miller@outlook.com','Ted','Bundy','ROLE_EMP',1),(338,'$2a$10$2URDxGd7.zG49SuvJ2VcjOK1q10vT8ha0IUv9Q82oyCPf4h7g017W','SugarZero@hotmail.com','Aileen','Wuornos','ROLE_EMP',1),(339,'$2a$10$rFK8JRC.9TNyEF/evmduleHS5cfDvtgj8Pa7.s2Z/qNn4ZJZSeU6e','AgentJ@MIB.com','Will','Smith','ROLE_PAR',1),(340,'$2a$10$QRRIh3Eh7eqBBlhx./fhDO6ObPVSZJ6MjTsYheuHluNVf//kruEKy',' pinkett@blm.com','Jada','Smith','ROLE_PAR',1);
+INSERT INTO `user` VALUES (327,'','phillip@plmedia.dk','Phillip','Nissen','ROLE_EMP',0),(330,'$2a$10$TIRU/yFRXKb3MIKoWwk.6er3H2km/OyVhXYyWGJCE1Zoohi8tq2hS','thebuther@plainfield.net','Ed','Gein','ROLE_EMP',1),(331,'$2a$10$lI7bkJOle6QK22lI2TcdUujhu1sHBU0f5o7LKOfPwikux8mveXA72','Cannibal@Milwaukee-post.net','Jeffrey','Dahmer','ROLE_EMP',1),(332,'$2a$10$c9qZykFU2d30jAOBFmCfne0zg3SRdIvL.qc0s/XQ0oWLZ7hy8ZFQS','joejack5@aol.com','Joe','Jackson','ROLE_PAR',1),(333,'$2a$10$UfdCvDmRQ6FNmaS30AgUzuSvbbqR1C9qMzlzlSLb/m.S455utQkte','john@Barrymore.com','John ','Barrymore','ROLE_PAR',1),(334,'$2a$10$Vr7BpkWJL3Y4rQoErWKIBudiJyInnus.AlaVVgXGA5gUmaeTqDH92','Jman@spears-holdnings.net','James','Spears','ROLE_PAR',1),(335,'$2a$10$khF.myu5Vt/XDqSJm3YiOuHhxpuzVjsFxKcBhK5cK4KvMhb/80FHG','Lynne@spears-holding.com','Lynne','Spears','ROLE_PAR',1),(336,'$2a$10$s.eSEMJWkcxD.5MKA8ekaOeIaZzL5qezX/UECfkpS.o5..4YH46Qi','pmallette@hotmail.com','Patricia','Mallette','ROLE_PAR',1),(337,'$2a$10$YrtrYt7tW7gvu1YuNnTOzejxoyggsROr3k3xctg.aap9zN.KFWDP6','rolf_miller@outlook.com','Ted','Bundy','ROLE_EMP',1),(338,'$2a$10$2URDxGd7.zG49SuvJ2VcjOK1q10vT8ha0IUv9Q82oyCPf4h7g017W','SugarZero@hotmail.com','Aileen','Wuornos','ROLE_EMP',1),(339,'$2a$10$rFK8JRC.9TNyEF/evmduleHS5cfDvtgj8Pa7.s2Z/qNn4ZJZSeU6e','AgentJ@MIB.com','Will','Smith','ROLE_PAR',1),(340,'$2a$10$QRRIh3Eh7eqBBlhx./fhDO6ObPVSZJ6MjTsYheuHluNVf//kruEKy',' pinkett@blm.com','Jada','Smith','ROLE_PAR',1),(341,'$2a$10$vRgs1wHsG21lu2Nz9GGmZuMvO4UnoSBWl07dPheJqcX61ri.a.GJe','kitkat@aol.com','Kit','Culkin','ROLE_PAR',1),(342,'$2a$10$j6CmOMhz4Gr1Cw6sjxwO1.BTvXSvLAMxrYvW2WZK00QCgn7upChYa','AirForceChlumsky@hotmaii.com','Frank','Chlumsky','ROLE_PAR',1),(343,'$2a$10$0otaAtb4HIqH1sAy8pPhLe2k8tTI9tiAey8hu3YCt.glFUj11T3vO','dolsen@outlook.com','Dave','Olsen','ROLE_PAR',1),(344,'$2a$10$SIx8xeGKY4ud7XTusCmeuuQh2MBfpvnfy0L1MBDANhprjfhUKlQ7q','JJones@hotmail.com','Jarnette','Jones','ROLE_PAR',1),(345,'$2a$10$For7yFYrcD9eU7XbHliWfe/9iDyl/Jv39BwwMsZs3hRyWL2HbddKK','ididthat@aol.com','Michael','White','ROLE_PAR',1),(346,'$2a$10$.O5OObda6wVRlwtONE2Qcuj.yD0ixZw85GUbqfc7Pk8luLYn18d0S','Lipnicki@gmail.com','Joseph','Lipnicki','ROLE_PAR',1),(347,'$2a$10$xjxCURXLieerTrDm1lAGWuCQqdLPW4xUVp8zIDgCvN8n3bcDL1B3q','Michael.Osment@gmail.com','Michael','Osment','ROLE_PAR',1),(348,'$2a$10$0aZ.q8/6NQcI1BMgnwLq7.wvroNKR6esN6.J3w1vh8GiV8eB8ChR6','BLloyd@hotmail.com','Bill','Lloyd','ROLE_PAR',1),(349,'$2a$10$FrOzNSX9JPWss1b//oAT7OqWHR4bFqyeSUN8WapAwB4j0lZ.khI8m','DarthMother@hotmail.com','Lisa','Riley','ROLE_PAR',1),(350,'$2a$10$13M5udThFPmp/Qc52MTN4uxcByfIOKtGPYs19ZvrSNmRQd6T1fmji','FearceLamb@Chesapeake.net','Hannibal','Lecter','ROLE_EMP',1);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -329,7 +331,7 @@ CREATE TABLE `user_permission` (
 
 LOCK TABLES `user_permission` WRITE;
 /*!40000 ALTER TABLE `user_permission` DISABLE KEYS */;
-INSERT INTO `user_permission` VALUES (327,7),(327,8),(327,9),(327,10),(327,11),(327,12),(327,13),(327,14),(327,15),(327,16),(327,17),(327,18),(327,19),(327,20),(327,21),(327,22),(327,23),(327,24),(327,25),(327,26),(327,27),(327,28),(327,29),(330,7),(330,8),(330,9),(330,10),(330,11),(330,12),(330,13),(330,14),(330,15),(330,16),(330,17),(330,18),(330,19),(330,20),(330,21),(330,22),(330,23),(330,24),(330,25),(330,26),(330,27),(330,28),(330,29),(331,27),(338,8);
+INSERT INTO `user_permission` VALUES (327,7),(327,8),(327,9),(327,10),(327,11),(327,12),(327,13),(327,14),(327,15),(327,16),(327,17),(327,18),(327,19),(327,20),(327,21),(327,22),(327,23),(327,24),(327,25),(327,26),(327,27),(327,28),(327,29),(330,7),(330,8),(330,9),(330,10),(330,11),(330,12),(330,13),(330,14),(330,15),(330,16),(330,17),(330,18),(330,19),(330,20),(330,21),(330,22),(330,23),(330,24),(330,25),(330,26),(330,27),(330,28),(330,29),(331,27),(338,8),(350,7),(350,8),(350,9),(350,10),(350,11),(350,12),(350,13),(350,14),(350,15),(350,16),(350,17),(350,18),(350,19),(350,20),(350,21),(350,22),(350,23),(350,24),(350,25),(350,26),(350,27),(350,28),(350,29);
 /*!40000 ALTER TABLE `user_permission` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -367,4 +369,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-13 17:10:31
+-- Dump completed on 2017-12-14  9:58:37
