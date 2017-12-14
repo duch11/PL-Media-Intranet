@@ -14,7 +14,6 @@ public class Parent extends User {
   private ArrayList<Child> children;
 
   public Parent() {
-
   }
 
   public Parent(int userId, String password, String userEmail, String firstName, String lastName, ArrayList<Permission> permissions) {

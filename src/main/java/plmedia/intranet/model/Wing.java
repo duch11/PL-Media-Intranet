@@ -5,7 +5,6 @@ import java.util.ArrayList;
 /**
  * @author Andreas Nissen
  * @author Simon le Févre Ryom
- *
  */
 
 public class Wing {
@@ -33,8 +32,6 @@ public class Wing {
     this.wingDescription = wingDescription;
   }
 
-
-
   public String getWingName() {
     return wingName;
   }
@@ -57,14 +54,5 @@ public class Wing {
 
   public void setWingDescription(String wingDescription) {
     this.wingDescription = wingDescription;
-  }
-
-  @Override
-  public String toString() {
-    return "Wing{" +
-        "wingID=" + wingID +
-        ", wingName='" + wingName + '\'' +
-        ", wingDescription='" + wingDescription + '\'' +
-        '}';
   }
 }

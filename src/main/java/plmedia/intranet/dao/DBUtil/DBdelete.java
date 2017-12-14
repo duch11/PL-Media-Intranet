@@ -12,13 +12,15 @@ import plmedia.intranet.model.Group;
 import plmedia.intranet.model.Parent;
 import plmedia.intranet.model.Wing;
 
+/**
+ * @author Simon le Févre Ryom
+ */
 public class DBdelete {
 
   public int deleteParent(Parent parent) {
     try(
         Connection con = ConMan.getConnection()
     ) {
-      // Know if they can use the som "con" else make more "con"
       PreparedStatement dParentStmt = ConMan.prepStat(con,Statements.DEF_DELETE_USER_BY_ID);
       PreparedStatement dParentToChildStmt = ConMan.prepStat(con, Statements.DEF_DELETE_ALL_CHILD_FROM_PARENT);
       PreparedStatement dParentPermissionsStmt = ConMan.prepStat(con, Statements.DEF_DELETE_ALL_PERMISSION_FROM_USER);
@@ -43,7 +45,6 @@ public class DBdelete {
     try(
         Connection con = ConMan.getConnection()
     ) {
-      // Know if they can use the som "con" else make more "con"
       PreparedStatement dEmployeeStmt = ConMan.prepStat(con, Statements.DEF_DELETE_USER_BY_ID);
       PreparedStatement dEmployeeWingStmt = ConMan.prepStat(con, Statements.DEF_DELETE_ALL_WING_FROM_EMPLOYEE);
       PreparedStatement dEmployeeGroupStmt = ConMan.prepStat(con, Statements.DEF_DELETE_ALL_GROUP_FROM_EMPLOYEE);
@@ -72,7 +73,6 @@ public class DBdelete {
     try(
         Connection con = ConMan.getConnection()
     ) {
-      // Know if they can use the som "con" else make more "con"
       PreparedStatement dChildStmt = ConMan.prepStat(con, Statements.DEF_DELETE_CHILD_BY_ID);
       PreparedStatement dChildParentStmt = ConMan.prepStat(con, Statements.DEF_DELETE_ALL_PARENT_FROM_CHILD);
       PreparedStatement dChildAllergenStmt = ConMan.prepStat(con, Statements.DEF_DELETE_ALL_ALLERGEN_FROM_CHILD);
@@ -97,7 +97,6 @@ public class DBdelete {
     try(
         Connection con = ConMan.getConnection()
     ) {
-      // Know if they can use the som "con" else make more "con"
       PreparedStatement dWingStmt = ConMan.prepStat(con, Statements.DEF_DELETE_WING_BY_ID);
       PreparedStatement dWingEmpStmt = ConMan.prepStat(con, Statements.DEF_DELETE_ALL_EMPLOYEE_FROM_WING);
       PreparedStatement dWingChildStmt = ConMan.prepStat(con , Statements.DEF_DELETE_WING_FROM_CHILD_WING);
@@ -122,7 +121,6 @@ public class DBdelete {
     try(
         Connection con = ConMan.getConnection()
     ) {
-      // Know if they can use the som "con" else make more "con"
       PreparedStatement dGroupStmt = ConMan.prepStat(con, Statements.DEF_DELETE_GROUP_BY_ID);
       PreparedStatement dGroupToEmp = ConMan.prepStat(con, Statements.DEF_DELETE_ALL_EMPLOYEE_FROM_GROUP);
       dGroupToEmp.setInt(1, group.getId());

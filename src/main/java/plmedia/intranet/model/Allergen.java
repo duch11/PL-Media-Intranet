@@ -16,11 +16,6 @@ public class Allergen {
     this.allergenDescription = allergenDescription;
   }
 
-  public Allergen(String allergenName, String allergenDescription) {
-    this.allergenName = allergenName;
-    this.allergenDescription = allergenDescription;
-  }
-
   public Allergen() {
   }
 

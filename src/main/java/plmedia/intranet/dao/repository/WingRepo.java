@@ -22,11 +22,6 @@ public class WingRepo implements IRepo<Wing>{
   DBupdate dbu = new DBupdate();
   DBdelete dbd = new DBdelete();
 
-  /**
-   * Creates Wing object. Takes logic from DBcreate.
-   * @param wing,
-   * @return int
-   */
   @Override
   public int Create(Wing wing) {
     return dbc.createWing(wing);

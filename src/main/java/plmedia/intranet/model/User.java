@@ -84,25 +84,4 @@ public abstract class User {
   public void setPermissions(ArrayList<Permission> permissions) {
     this.permissions = permissions;
   }
-
-  /**
-   * A check to see if the user has a certain permission
-   * */
-  public boolean hasPermission(Permission permission){
-    for (Permission thisPermission : permissions) {
-      if(permission.getPermissionID() == thisPermission.getPermissionID()){
-        return true;
-      }
-    }
-    return false;
-  }
-
-
-  // To test populating results
-  @Override
-  public String toString(){
-    return userId + ": " + firstName + " " + lastName + " has email: "+ userEmail + " and password: \"" + password + "\" with permissions: " + permissions;
-  }
-
-
 }

@@ -11,7 +11,6 @@ import plmedia.intranet.model.Permission;
 @Repository
 public class PermissionRepo {
 
-
   DBread dbr = new DBread();
   DBupdate dbu = new DBupdate();
 

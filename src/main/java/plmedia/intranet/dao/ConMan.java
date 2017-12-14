@@ -8,13 +8,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * @author Tobias Thomsen
+ * @author Simon le Févre Ryom
+ */
 public class ConMan {
   private static String USERNAME = "PLintra-dev";
   private static String PASSWORD = "MoreMoneyToFaisal";
   private static String CONN_STRING = "jdbc:mysql://localhost/intranetdb";
-  private static int count = 0;
   public static Connection getConnection() throws SQLException {
-    count++;
     return DriverManager.getConnection(CONN_STRING, USERNAME, PASSWORD);
   }
 
@@ -40,7 +42,6 @@ public class ConMan {
         ResultSet.CONCUR_READ_ONLY);
       return stmt.executeQuery(SQL);
   }
-
 
   public static void processException(SQLException e){
     System.err.println("Error message: " + e.getMessage());

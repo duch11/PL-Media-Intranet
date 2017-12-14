@@ -15,8 +15,6 @@ import plmedia.intranet.dao.repository.WingRepo;
 import plmedia.intranet.dao.repository.UtilRepo;
 import plmedia.intranet.model.Child;
 import plmedia.intranet.model.Parent;
-import plmedia.intranet.model.Wing;
-
 
 /**
  * @author Andreas Nissen
@@ -42,8 +40,6 @@ public class ParentController {
 
   Parent currentParent;
 
-
-
 private void showPanals(Model model, Principal principal) {
   if(currentParent == null){
     currentParent = parentRepo.readParentByEmail(principal.getName());
@@ -56,12 +52,10 @@ private void showPanals(Model model, Principal principal) {
   model.addAttribute("currentUser", currentParent);
   model.addAttribute("user", currentParent);
 
-
 }
 
   public String showParentView(Model model, Principal principal) {
     System.out.println("showParentView");
-
 
     showPanals(model, principal);
 
@@ -92,16 +86,9 @@ private void showPanals(Model model, Principal principal) {
     return "childview";
   }
 
-
-  /**
-   * update
-   */
-
-
   /**
    * update parent name
    */
-
   @RequestMapping(value = {"/parent/update/parent"}, method = RequestMethod.POST, params = {"firstName", "lastName"})
   public String updateParName(@RequestParam String firstName, @RequestParam String lastName ) {
     Parent parent = parentRepo.Read(currentParent.getUserId());
@@ -114,7 +101,6 @@ private void showPanals(Model model, Principal principal) {
   /**
    * update parent email
    */
-
   @RequestMapping(value = {"/parent/update/parent"}, method = RequestMethod.POST, params = {"email"})
   public String updateParEmail(@RequestParam String email) {
     Parent parent = parentRepo.Read(currentParent.getUserId());
@@ -137,7 +123,6 @@ private void showPanals(Model model, Principal principal) {
    * @param newPassRepeat
    * @return
    */
-
   @RequestMapping(value = {"/parent/update/parent"}, method = RequestMethod.POST, params = {"oldPass", "newPass", "newPassRepeat"})
   public String updateParPassword(@RequestParam String oldPass,@RequestParam String newPass,@RequestParam String newPassRepeat) {
     System.out.println(oldPass + newPass + newPassRepeat);
@@ -155,10 +140,8 @@ private void showPanals(Model model, Principal principal) {
     return "redirect:/parents/?status=" + checkPassStatus;
   }
 
-
-
   /**
-   * update first and last name children
+   * update first name children
    */
   @RequestMapping(value = {"/parent/update/child"}, method = RequestMethod.POST, params = {"firstName", "ID"})
   public String updateChildFirstName(@RequestParam String firstName, @RequestParam int ID){
@@ -168,6 +151,9 @@ private void showPanals(Model model, Principal principal) {
     return "redirect:/parents/children?child=" + ID;
   }
 
+  /**
+   * update last name children
+   */
   @RequestMapping(value = {"/parent/update/child"}, method = RequestMethod.POST, params = {"lastName", "ID"})
   public String updateChildLastName(@RequestParam String lastName, @RequestParam int ID){
     Child child = childRepo.Read(ID);
@@ -176,9 +162,6 @@ private void showPanals(Model model, Principal principal) {
 
     return "redirect:/parents/children?child=" + ID;
   }
-
-
-
 
   /**
    * update birthday
@@ -190,7 +173,6 @@ private void showPanals(Model model, Principal principal) {
     childRepo.Update(child);
     return "redirect:/parents/children?child=" + ID;
   }
-
 
   /**
    * update address
@@ -206,7 +188,6 @@ private void showPanals(Model model, Principal principal) {
   /**
    * update Wing
    */
-
   @RequestMapping(value = {"parent/update/child"}, method = RequestMethod.POST, params =  {"allergens", "ID"})
   public String updateChildAllergens(@RequestParam ArrayList<Integer> allergens, @RequestParam int ID){
     /** Remove the null value if there's no need for it (to avoid less 'pretty' occurencess with null and all)*/
@@ -215,25 +196,6 @@ private void showPanals(Model model, Principal principal) {
     }
     allergenRepo.updateChildAllergens(childRepo.Read(ID), allergens);
 
-
-
     return "redirect:/parents/children?child=" + ID;
   }
-
-
-
-  /**
-   * update parents
-   */
-
-  // @RequestMapping(value = {"/parent/update/child"}, method = RequestMethod.POST, params = {"parents", "ID"})
-  // public  String updateChildParents(@RequestParam )
-
-  /**
-   * update allergens
-   */
-
-
-
-
 }

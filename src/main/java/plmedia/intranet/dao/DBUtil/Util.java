@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import plmedia.intranet.dao.ConMan;
 import plmedia.intranet.dao.Statements;
@@ -16,9 +15,7 @@ import plmedia.intranet.dao.Statements;
  */
 public class Util {
 
-
   BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-
 
   public int checkEmail(String email) {
     try(
@@ -26,14 +23,13 @@ public class Util {
     ){
       while(rs.next()) {
         if (rs.getString("user_email").equals(email)){
-
           return 10;
         }
       }
     } catch (SQLException e){
       e.printStackTrace();
     }
-    return -1; // Error code?
+    return -1;
   }
 
   public int checkPassword(int id, String password) {
@@ -45,11 +41,9 @@ public class Util {
       ResultSet rs = stmt.executeQuery();
       rs.first();
       String userDBPass = rs.getString("password");
-      System.out.println(rs.getString("password"));
       if(encoder.matches(password, userDBPass)) {
         return 1;
       }
-
     } catch (SQLException e) {
       e.printStackTrace();
     }
@@ -66,7 +60,6 @@ public class Util {
       rs.first();
       String pass = rs.getString("password");
       return pass;
-
     } catch (SQLException e) {
       e.printStackTrace();
     }

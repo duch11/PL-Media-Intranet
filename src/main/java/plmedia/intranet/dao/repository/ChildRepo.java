@@ -14,7 +14,6 @@ import plmedia.intranet.model.Child;
  * @author Tobias Thomsen
  * @author Andreas Nissen
  */
-
 @Repository
 public class ChildRepo implements IRepo<Child> {
 

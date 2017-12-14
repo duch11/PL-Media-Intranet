@@ -1,6 +1,5 @@
 package plmedia.intranet.model;
 
-
 import java.util.ArrayList;
 
 /**
@@ -11,7 +10,6 @@ import java.util.ArrayList;
 
 public class Employee extends User {
 
-  private int wingID;
   private Group group;
 
   public Employee() {

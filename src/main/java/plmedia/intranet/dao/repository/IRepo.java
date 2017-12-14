@@ -10,13 +10,12 @@ import java.util.ArrayList;
 public interface IRepo<T> {
 
   /**
-   *
+   * @param t
    * @return
    */
   public int Create(T t);
 
   /**
-   *
    * @param id
    * @return
    */
@@ -33,7 +32,6 @@ public interface IRepo<T> {
    * @return
    */
   public int Delete(T t);
-
 
   /**
    * Reads all

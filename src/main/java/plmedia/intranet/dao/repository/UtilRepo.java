@@ -1,15 +1,12 @@
 package plmedia.intranet.dao.repository;
 
-import ch.qos.logback.core.db.dialect.DBUtil;
 import java.util.ArrayList;
 import org.springframework.stereotype.Repository;
 import plmedia.intranet.dao.DBUtil.DBupdate;
 import plmedia.intranet.dao.DBUtil.Util;
-import plmedia.intranet.dao.DBUtil.DBcreate;
 import plmedia.intranet.model.Child;
 import plmedia.intranet.model.Employee;
 import plmedia.intranet.model.Parent;
-import plmedia.intranet.model.Wing;
 
 /**
  * Repository for the Util class.

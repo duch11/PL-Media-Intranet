@@ -10,7 +10,6 @@ import java.util.Date;
 
 public class Child {
 
-
   private int childId;
   private String firstName;
   private String lastName;
@@ -20,7 +19,6 @@ public class Child {
   private String otherInfo;
   private ArrayList<Parent> parents;
   private ArrayList<Allergen> allergens;
-
 
   public Child() {
   }
@@ -137,22 +135,6 @@ public class Child {
       }
     }
     return false;
-  }
-
-
-  @Override
-  public String toString() {
-    return "Child{" +
-        "childId=" + childId +
-        ", firstName='" + firstName + '\'' +
-        ", lastName='" + lastName + '\'' +
-        ", birthday=" + birthday +
-        ", address='" + address + '\'' +
-        ", wingId=" + wingId +
-        ", otherInfo='" + otherInfo + '\'' +
-        ", parents=" + parents +
-        ", allergens=" + allergens +
-        '}';
   }
 }
 

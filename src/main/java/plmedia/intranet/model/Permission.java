@@ -26,9 +26,4 @@ public class Permission {
   public String getPermissionDescription() {
     return permissionDescription;
   }
-
-  @Override
-  public String toString(){
-    return permissionID + ": " + permissionName + " - " + permissionDescription;
-  }
 }

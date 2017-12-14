@@ -1,32 +1,23 @@
 package plmedia.intranet.dao.repository;
 
 import java.util.ArrayList;
-
 import org.springframework.stereotype.Repository;
 import plmedia.intranet.dao.DBUtil.*;
 import plmedia.intranet.model.Employee;
-
 
 /**
  * A repository for Employee objects.
  * @author Tobias Thomsen
  * @author Simon le Févre Ryom
  */
-
 @Repository
 public class EmployeeRepo implements IRepo<Employee> {
-
 
   DBcreate dbc = new DBcreate();
   DBread dbr = new DBread();
   DBupdate dbu = new DBupdate();
   DBdelete dbd = new DBdelete();
 
-  /**
-   * Creates Employee object. Takes logic from DBcreate.
-   * @param employee
-   * @return int
-   */
   @Override
   public int Create(Employee employee) {
     return dbc.createEmployee(employee);
@@ -59,5 +50,4 @@ public class EmployeeRepo implements IRepo<Employee> {
   public Employee readEmployeeByEmail(String userEmail) {
     return dbr.readEmployeeByEmail(userEmail);
   }
-
 }

@@ -5,7 +5,6 @@ package plmedia.intranet.model;
  * @author Jonas Ladefoged Holm
  */
 
-
 public class Group {
 
   private int id;
@@ -24,7 +23,6 @@ public class Group {
   }
 
   public Group() {
-
   }
 
   public int getId() {
@@ -49,14 +47,5 @@ public class Group {
 
   public void setGroupDescription(String groupDescription) {
     this.groupDescription = groupDescription;
-  }
-
-  @Override
-  public String toString() {
-    return "Group{" +
-        "id=" + id +
-        ", groupName='" + groupName + '\'' +
-        ", groupDescription='" + groupDescription + '\'' +
-        '}';
   }
 }

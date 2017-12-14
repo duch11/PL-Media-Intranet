@@ -8,7 +8,6 @@ import plmedia.intranet.dao.DBUtil.DBread;
 import plmedia.intranet.dao.DBUtil.DBupdate;
 import plmedia.intranet.model.Parent;
 
-
 /**
  * @author Tobias Thomsen
  * @author Simon le Févre Ryom

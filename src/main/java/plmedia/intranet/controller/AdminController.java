@@ -1,12 +1,10 @@
 package plmedia.intranet.controller;
+
 import java.security.Principal;
 import java.util.ArrayList;
-
 import java.util.List;
 import java.util.ListIterator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -21,9 +19,10 @@ import plmedia.intranet.dao.repository.WingRepo;
 import plmedia.intranet.model.*;
 
 /**
+ *
  * @author Jonas Holm
  * @author Andreas
- * */
+ */
 
 @Controller
 public class AdminController {
@@ -61,8 +60,8 @@ public class AdminController {
 
   /**
    * Base method for showing adminpanel
-  * makes renaming and adding "universal" actions more sensible
-  */
+   * makes renaming and adding "universal" actions more sensible
+   */
   public String showAdminPanel(Model model, Principal principal) {
 
     if(currentUser == null){
@@ -71,7 +70,9 @@ public class AdminController {
       currentUser = employeeRepo.Read(currentUser.getUserId());
     }
 
-    /** ENG: Principal DK: "Grund-sikkerhedskonto" * */
+    /**
+     * ENG: Principal DK: "Grund-sikkerhedskonto"
+     */
 
     for(Permission perm : permissionRepo.readPermissionsByUserID(currentUser.getUserId())){
       model.addAttribute(perm.getPermissionName().replaceAll(" ", "_"), true);
@@ -118,7 +119,6 @@ public class AdminController {
 
   @RequestMapping(value = {"/admin/children"}, method = RequestMethod.GET, params = {"wingID"})
   public String adminPanelChildren(Model model, Principal principal, @RequestParam int wingID) {
-    System.out.println("currentWing?");
     model.addAttribute("currentWing", wingRepo.Read(wingID));
     model.addAttribute("children", childRepo.readChildrenByWingID(wingID));
     model.addAttribute("newChild", new Child());
@@ -211,7 +211,7 @@ public class AdminController {
 
   /**
    * Create Methods
-   * */
+   */
   @RequestMapping(value = {"/admin/create/employee"}, method = RequestMethod.POST)
   public String createUser(@ModelAttribute Employee newEmployee){
     employeeRepo.Create(newEmployee);
@@ -233,7 +233,7 @@ public class AdminController {
 
   /**
    * Update methods from here on
-   * */
+   */
 
   @RequestMapping(value = {"/admin/update/group"}, method = RequestMethod.POST, params = {"groupName", "groupDescription", "ID"})
   public String updateGroupDetails(@RequestParam String groupName, @RequestParam String groupDescription, @RequestParam int ID) {
@@ -258,7 +258,7 @@ public class AdminController {
 
   /**
    * Employee only update methods
-   * */
+   */
   @RequestMapping(value = {"/admin/update/employee"}, method = RequestMethod.POST, params = {"permissionIDs", "ID"})
   public String updatePermission(@RequestParam ArrayList<Integer> permissionIDs, @RequestParam int ID ){
 
@@ -280,7 +280,7 @@ public class AdminController {
 
   /**
    * Update Name + utility method (for redirection between parent and user)
-   * */
+   */
   @RequestMapping(value = {"/admin/update/employee"}, method = RequestMethod.POST, params = {"firstName", "lastName", "ID"})
   public String updateEmpName(@RequestParam String firstName, @RequestParam String lastName, @RequestParam int ID){
     Employee employee = employeeRepo.Read(ID);
@@ -302,7 +302,7 @@ public class AdminController {
 
   /**
    * Update Email + utility method (for redirection between parent and user)
-   * */
+   */
   @RequestMapping(value = {"/admin/update/employee"}, method = RequestMethod.POST, params = {"email", "ID"})
   public String updateEmpEmail(@RequestParam String email, @RequestParam int ID){
     Employee employee = employeeRepo.Read(ID);
@@ -326,7 +326,7 @@ public class AdminController {
 
   /**
    * Update Password + utility method
-   * */
+   */
   @RequestMapping(value = {"/admin/update/parent"}, method = RequestMethod.POST, params = {"oldPass", "newPass", "newPassRepeat", "ID"})
   public String updateParPassword(@RequestParam String oldPass,@RequestParam String newPass,@RequestParam String newPassRepeat, @RequestParam int ID) {
     Parent parent = parentRepo.Read(ID);
@@ -378,7 +378,9 @@ public class AdminController {
   }
 
 
-  /** Update child */
+  /**
+   * Update child
+   */
 
   @RequestMapping(value = {"/admin/update/child"}, method = RequestMethod.POST, params = {"firstName", "ID"})
   public String updateChildFirstName(@RequestParam String firstName, @RequestParam int ID){

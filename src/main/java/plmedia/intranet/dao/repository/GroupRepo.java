@@ -13,7 +13,6 @@ import plmedia.intranet.model.Group;
  * @author Simon le Févre Ryom
  * @author Tobias Thomsen
  */
-
 @Repository
 public class GroupRepo implements IRepo<Group> {
 
@@ -45,14 +44,6 @@ public class GroupRepo implements IRepo<Group> {
   @Override
   public ArrayList<Group> ReadAll() {
     return dbr.readAllGroups();
-  }
-
-  public Group readGroupByUserID(int id){
-    return dbr.readGroupByUserID(id);
-  }
-
-  public ArrayList<Group> readGroupIDsByUserID(int id) {
-    return dbr.readGroupIDsByUserID(id);
   }
 }
 
