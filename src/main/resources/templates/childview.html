@@ -59,7 +59,7 @@ i højre og venstre side-->
           <td><a href="#" class="btn btn-edit pull-right" data-toggle="modal" data-target="#editAddress"><i class="fa fa-pencil"></i></a></td>
         </tr>
         <tr>
-          <th>forældre:</th>
+          <th>Forældre:</th>
           <div th:each="parent : ${childsParents}">
           <td th:text="${parent.getFirstName()} + ' ' + ${parent.getLastName()}"/>
           </div>
