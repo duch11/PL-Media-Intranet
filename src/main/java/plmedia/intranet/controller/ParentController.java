@@ -39,11 +39,7 @@ public class ParentController {
   UtilRepo utilRepo;
 
 private void showPanals(Model model, Principal principal) {
-  if(currentParent == null){
-    currentParent = parentRepo.readParentByEmail(principal.getName());
-  } else {
-    currentParent = parentRepo.Read(currentParent.getUserId());
-  }
+  Parent currentParent = parentRepo.readParentByEmail(principal.getName());
 
   ArrayList<Child> children = childRepo.readChildrenByParentID(currentParent.getUserId());
   model.addAttribute("children",children);
@@ -88,20 +84,24 @@ private void showPanals(Model model, Principal principal) {
    * update parent name
    */
   @RequestMapping(value = {"/parent/update/parent"}, method = RequestMethod.POST, params = {"firstName", "lastName"})
-  public String updateParName(@RequestParam String firstName, @RequestParam String lastName ) {
-    Parent parent = parentRepo.Read(currentParent.getUserId());
+  public String updateParName(Principal principal, @RequestParam String firstName, @RequestParam String lastName ) {
+    Parent parent = parentRepo.readParentByEmail(principal.getName());
     parent.setFirstName(firstName);
     parent.setLastName(lastName);
     parentRepo.Update(parent);
     return "redirect:/parents";
   }
+/*
 
-  /**
+  */
+/**
    * update parent email
-   */
+   *//*
+
   @RequestMapping(value = {"/parent/update/parent"}, method = RequestMethod.POST, params = {"email"})
   public String updateParEmail(@RequestParam String email) {
     Parent parent = parentRepo.Read(currentParent.getUserId());
+
     parent.setUserEmail(email);
 
     if(currentParent.getUserEmail().equals(email)){
@@ -112,6 +112,7 @@ private void showPanals(Model model, Principal principal) {
 
     return "redirect:/parents";
   }
+*/
 
 
   /**
@@ -122,12 +123,13 @@ private void showPanals(Model model, Principal principal) {
    * @return
    */
   @RequestMapping(value = {"/parent/update/parent"}, method = RequestMethod.POST, params = {"oldPass", "newPass", "newPassRepeat"})
-  public String updateParPassword(@RequestParam String oldPass,@RequestParam String newPass,@RequestParam String newPassRepeat) {
-    System.out.println(oldPass + newPass + newPassRepeat);
-    Parent parent = parentRepo.Read(currentParent.getUserId());
-    int checkPassStatus = utilRepo.checkPassword(currentParent.getUserId(), oldPass);
+  public String updateParPassword(Principal principal, @RequestParam String oldPass,@RequestParam String newPass,@RequestParam String newPassRepeat) {
+    Parent parent = parentRepo.readParentByEmail(principal.getName());
+
+    int checkPassStatus = utilRepo.checkPassword(parent.getUserId(), oldPass);
     Boolean newPassMatches = newPass.equals(newPassRepeat);
-    System.out.println(newPassMatches.toString() + checkPassStatus);
+
+
     if(newPassMatches && checkPassStatus == 1){
       parent.setPassword(newPass);
       parentRepo.Update(parent);

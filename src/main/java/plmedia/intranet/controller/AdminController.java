@@ -322,6 +322,7 @@ public class AdminController {
    */
   @RequestMapping(value = {"/admin/update/parent"}, method = RequestMethod.POST, params = {"oldPass", "newPass", "newPassRepeat", "ID"})
   public String updateParPassword(@RequestParam String oldPass,@RequestParam String newPass,@RequestParam String newPassRepeat, @RequestParam int ID) {
+
     Parent parent = parentRepo.Read(ID);
     int checkPassStatus = utilRepo.checkPassword(ID, oldPass);
     boolean newPassMatches = newPass.equals(newPassRepeat);
