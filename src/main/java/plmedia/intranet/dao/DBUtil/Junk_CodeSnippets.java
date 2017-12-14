@@ -16,7 +16,8 @@
 
       ResultSet rs = stmt.executeQuery();
 
- rs.getInt("id)
- rs.getString("name")
- rs.getString("birthday")
- rs.getString("nickname")
+System.out.println(
+ "ID: " + rs.getInt("id) +
+ "Name: " + rs.getString("name") +
+ "Birthday: " + rs.getString("name") + 
+ "Nickname: " + rs.getString("nickname"));
